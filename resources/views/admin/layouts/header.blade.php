@@ -1123,6 +1123,7 @@
                                 <a class="btn btn-sm btn-light-info fw-bold" href="apps/subscriptions/view.html"> مراحل تنفيذ المشاريع</a>
                                 <a class="btn btn-sm btn-light-info fw-bold" href="apps/subscriptions/view.html">   </a>
                                 <a class="btn btn-sm btn-light-info fw-bold" href="apps/subscriptions/view.html">   </a>
+                                <a class="btn btn-sm btn-light-info fw-bold" href="apps/subscriptions/view.html">   </a>
                             </div>
                         </div>
                         <!--end::Wrapper-->
