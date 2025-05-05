@@ -1121,6 +1121,7 @@
                                 <a class="btn btn-sm btn-light-primary fw-bold" href="apps/ecommerce/catalog/products.html">عرض المقاولين</a>
                                 <a class="btn btn-sm btn-light-danger fw-bold" href="apps/file-manager/folders.html"> إدارة عروض أسعار المقاولين</a>
                                 <a class="btn btn-sm btn-light-info fw-bold" href="apps/subscriptions/view.html"> مراحل تنفيذ المشاريع</a>
+                                <a class="btn btn-sm btn-light-info fw-bold" href="apps/subscriptions/view.html">   </a>
                             </div>
                         </div>
                         <!--end::Wrapper-->
