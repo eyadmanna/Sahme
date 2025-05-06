@@ -1077,7 +1077,7 @@
                 <!--begin::Header tab content-->
                 <div class="tab-content" data-kt-scroll="true" data-kt-scroll-activate="{default: true, lg: false}" data-kt-scroll-height="auto" data-kt-scroll-offset="70px">
                     <!--begin::Tab panel-->
-                    <div class="tab-pane fade active show" id="kt_header_navs_tab_1">                        
+                    <div class="tab-pane fade active show" id="kt_header_navs_tab_1">
                         <!--begin::Wrapper-->
                         <div class="d-flex flex-column flex-lg-row flex-lg-stack flex-wrap gap-2 px-4 px-lg-0">
                             <div class="d-flex flex-column flex-lg-row gap-2">
@@ -1122,6 +1122,10 @@
                                 <a class="btn btn-sm btn-light-danger fw-bold" href="apps/file-manager/folders.html"> إدارة عروض أسعار المقاولين</a>
                                 <a class="btn btn-sm btn-light-info fw-bold" href="apps/subscriptions/view.html"> مراحل تنفيذ المشاريع</a>
                                 <a class="btn btn-sm btn-light-info fw-bold" href="apps/subscriptions/view.html">   </a>
+                                <a class="btn btn-sm btn-light-info fw-bold" href="apps/subscriptions/view.html">   </a>
+                                <a class="btn btn-sm btn-light-info fw-bold" href="apps/subscriptions/view.html">   </a>
+                                <a class="btn btn-sm btn-light-info fw-bold" href="apps/subscriptions/view.html">   </a>
+                                <a class="btn btn-sm btn-light-info fw-bold" href="apps/subscriptions/view.html">   </a>
                             </div>
                         </div>
                         <!--end::Wrapper-->
@@ -1133,7 +1137,7 @@
                        <div class="header-menu flex-column align-items-stretch flex-lg-row">
                         <!--begin::Menu-->
                         <div class="menu menu-rounded menu-column menu-lg-row menu-root-here-bg-desktop menu-active-bg menu-title-gray-700 menu-state-primary menu-arrow-gray-500 fw-semibold align-items-stretch flex-grow-1 px-2 px-lg-0" id="#kt_header_menu" data-kt-menu="true">
-                            
+
                             <!--begin:Menu item-->
                             <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
                                 <!--begin:Menu link-->
@@ -1183,7 +1187,7 @@
                     <!--end::Menu wrapper-->
                     </div>
                     <!--end::Tab panel-->
-                    
+
                     <!--begin::Tab panel-->
                     <div class="tab-pane fade" id="kt_header_navs_tab_6">
                         <!--begin::Wrapper-->
