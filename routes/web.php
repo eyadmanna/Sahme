@@ -39,7 +39,10 @@ Route::group(
         Route::get('/users/getUsers', [UsersController::class, 'getUsers'])->name('users.getUsers');
         Route::post('/users/addUsers', [UsersController::class, 'store'])->name('users.store');
         Route::get('/roles', [RoleController::class,'index'])->name('roles.index');
-        Route::get('/view-roles/{id}', [RoleController::class,'show'])->name('roles.show');
+        Route::get('/view-roles/{id}', [RoleController::class,'show'])->name('role.show');
+        Route::post('/store-roles', [RoleController::class,'store'])->name('roles.store');
+        Route::get('/edit-roles/{id}', [RoleController::class,'edit'])->name('roles.edit');
+        Route::post('/update-roles/{id}', [RoleController::class,'update'])->name('roles.update');
 
 
     });

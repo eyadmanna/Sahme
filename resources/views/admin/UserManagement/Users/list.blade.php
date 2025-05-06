@@ -389,6 +389,7 @@
     </div>
     <!--end::Container-->
 @endsection
-@include("admin.layouts.scripts")
-@include("admin.UserManagement.Partial.list_js")
+@section('js')
+    @include("admin.UserManagement.Partial.list_js")
+@endsection
 
