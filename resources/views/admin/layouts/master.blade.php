@@ -573,7 +573,6 @@ License: For each use you must have a valid license purchased only from above li
                                 </div>
                                 <!--end::Notice-->
                             </div>
-                            
                             <!--end::Timeline details-->
                         </div>
                         <!--end::Timeline content-->
