@@ -11,10 +11,14 @@ use Yajra\DataTables\Facades\DataTables;
 class UsersController extends Controller
 {
     //
-
+    public function __construct()
+    {
+        $this->middleware('can:user view');
+    }
 
     public function index()
     {
+
         $users = User::paginate(10);
         $roles = Role::query()->get();
         return view('admin.UserManagement.Users.list', compact('users','roles'));
