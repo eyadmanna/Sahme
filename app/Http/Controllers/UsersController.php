@@ -15,7 +15,6 @@ class UsersController extends Controller
     {
         $this->middleware('can:user view');
     }
-
     public function index()
     {
 
@@ -31,26 +30,30 @@ class UsersController extends Controller
             $validated = $request->validate([
                 'user_name' => 'required|string|max:255',
                 'user_email' => 'required|email|unique:users,email',
+                'mobile_number' => 'required|unique:users',
                 'user_role' => 'required|exists:roles,id',
                 'avatar' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             ]);
 
             // Handle avatar upload
             if ($request->hasFile('avatar')) {
-                $avatarPath = $request->file('avatar')->store('avatars', 'public');
+                $file = $request->file('avatar');
+
+                $filename = time() . '_' . $file->getClientOriginalName();
+
+                $file->move(public_path('uploads/usersImage'), $filename);
             } else {
-                $avatarPath = null;
+                $filename = null;
             }
-
             // Create user
-            $user = User::create([
-                'name' => $validated['user_name'],
-                'email' => $validated['user_email'],
-                'password' => Hash::make('defaultpassword'),
-                'avatar' => $avatarPath,
-            ]);
+            $user = new User();
+            $user->name = $request->user_name;
+            $user->email = $request->user_email;
+            $user->mobile_number = $request->mobile_number;
+            $user->avatar = $filename;
+            $user->password = Hash::make('default-password');
+            $user->save();
 
-            // Attach role
             $role = Role::find($validated['user_role']);
             $user->roles()->attach($role);
 
@@ -68,7 +71,7 @@ class UsersController extends Controller
         } catch (\Exception $e) {
             // Return general error
             return response()->json([
-                'message' => 'Something went wrong.',
+                'message' => $e->getMessage(),
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -78,6 +81,10 @@ class UsersController extends Controller
     public function edit(User $user)
     {
         return view('admin.users.edit', compact('user'));
+    }
+    public function view(Request $request , $id){
+        $data['user'] = User::query()->find($id);
+        return view('admin.UserManagement.Users.view',$data);
     }
 
     public function update(Request $request, User $user)
@@ -96,37 +103,43 @@ class UsersController extends Controller
         $users = User::query()->orderBy('id', 'desc');
 
         return DataTables::of($users)
-            ->addColumn('id', function ($user) {
-                return '<div class="form-check form-check-sm form-check-custom form-check-solid">
-                                    <input class="form-check-input" type="checkbox" value="1" />
-                                </div>';
-            })
             ->addColumn('name', function ($user) {
-                $imgUrl = asset('assets/media/avatars/300-6.jpg'); // أو $user->image إن كنت تحفظ الصورة من قاعدة البيانات
-                $profileUrl = url('apps/user-management/users/view'); // أو يمكن ربطه بـ route()
+                $imgUrl = asset('assets/media/avatars/300-6.jpg'); // Or use $user->image if dynamic
+                $profileUrl = url('users/view/' . $user->id); // Proper profile link
+                $avatar = $user->avatar ? asset('uploads/usersImage/' . $user->avatar) : $imgUrl;
 
-                return '<div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
+                return '
+        <div class="d-flex align-items-center">
+            <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
                 <a href="'.$profileUrl.'">
                     <div class="symbol-label">
-                        <img src="'.$imgUrl.'" alt="'.$user->name.'" class="w-100" />
+                        <img src="'.$avatar.'" alt="'.e($user->name).'" class="w-100">
                     </div>
                 </a>
             </div>
-                             <div class="d-flex flex-column">
+            <div class="d-flex flex-column">
                 <a href="'.$profileUrl.'" class="text-gray-800 text-hover-primary mb-1">'.$user->name.'</a>
-                <span>'.$user->email.'</span>
+                <span class="text-muted">'.$user->email.'</span>
             </div>
-                        ';
+        </div>
+    ';
+            })
+            ->addColumn('mobile_number', function ($user) {
+                return '<span>'.$user->mobile_number.'</span>';
             })
             ->addColumn('role', function ($user) {
                 return '<td>'.$user->roles->pluck('name')->join(', ') ?? '-'.'</td>';
             })
             ->addColumn('last_login_at', function ($user) {
-                $date = $user->last_login_at ? $user->last_login_at->format('Y-m-d H:i') : '-';
+                $date = $user->last_login_at ? $user->last_login_at->format('Y-m-d') : '-';
                 return '<div class="badge badge-light fw-bold">' . $date . '</div>';
             })
             ->addColumn('two_step', function ($user) {
                 return $user->two_step_enabled ? 'Enabled' : 'Disabled';
+            })
+            ->addColumn('created_at', function ($user) {
+                $date = $user->created_at ? $user->created_at->format('Y-m-d') : '-';
+                return '<div class="badge badge-light fw-bold">' . $date . '</div>';
             })
             ->addColumn('actions', function ($user) {
                 $options = '<div class="text-end"><a href="#" class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">'.trans('admin.Actions') .'
@@ -135,7 +148,7 @@ class UsersController extends Controller
                                 <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
                                     <!--begin::Menu item-->
                                     <div class="menu-item px-3">
-                                        <a href="apps/user-management/users/view.html" class="menu-link px-3">'.trans('admin.Edit').'</a>
+                                        <a  href="' . url("/users/view/{$user->id}") . '" class="menu-link px-3">' . trans('admin.View User') . '</a>
                                     </div>
                                     <!--end::Menu item-->
                                     <!--begin::Menu item-->
@@ -149,7 +162,7 @@ class UsersController extends Controller
 
                 return $options;
             })
-            ->rawColumns(['id','name','role','last_login_at','two_step','actions'])
+            ->rawColumns(['name','mobile_number','role','last_login_at','created_at','two_step','actions'])
             ->make(true);
     }
 }

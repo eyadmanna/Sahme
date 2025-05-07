@@ -13,17 +13,17 @@
                 <ul class="breadcrumb breadcrumb-dot fw-semibold text-gray-600 fs-7">
                     <!--begin::Item-->
                     <li class="breadcrumb-item text-gray-600">
-                        <a href="index.html" class="text-gray-600 text-hover-primary">Home</a>
+                        <a href="index.html" class="text-gray-600 text-hover-primary">@lang('admin.Home')</a>
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-gray-600">@lang('admin.User Management')</li>
+                    <li class="breadcrumb-item text-gray-600">@lang('admin.System settings')</li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-gray-600">Roles</li>
+                    <li class="breadcrumb-item text-gray-600">@lang('admin.User and Permission Management')</li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-gray-500">@lang('admin.Roles List')</li>
+                    <li class="breadcrumb-item text-gray-600">@lang('admin.Roles List')</li>
                     <!--end::Item-->
                 </ul>
                 <!--end::Breadcrumb-->
@@ -63,19 +63,19 @@
                                     @if ($index <= 2)
                                         <div class="d-flex flex-column text-gray-600">
                                             <div class="d-flex align-items-center py-2">
-                                                <span class="bullet bg-primary me-3"></span>{{$permission->name}}
+                                                <span class="bullet bg-primary me-3"></span>{{ __('permission.'.$permission->name) }}
                                             </div>
                                         </div>
                                     @else
                                         <div class="d-none permission-item d-more">
-                                            <span class="bullet bg-primary me-3"></span>{{$permission->name}}
+                                            <span class="bullet bg-primary me-3"></span>{{ __('permission.').$permission->name}}
                                         </div>
                                     @endif
                                 @endforeach
                                 @if($role->permissions->count() > 3)
                                 <div class='d-flex align-items-center py-2'>
                                     <span class='bullet bg-primary me-3'></span>
-                                    <em>@lang('admin.and') {{ $role->permissions->count() - 3 }}</em>
+                                    <em>@lang('admin.and') {{ $role->permissions->count() - 3 }}@lang('admin.Other')</em>
                                 </div>
                                 @endif
 

@@ -37,7 +37,7 @@
                                 <a class="nav-link" data-bs-toggle="tab" href="#kt_header_navs_tab_4">إدارة المقاولين</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#kt_header_navs_tab_5">إعدادات النظام</a>
+                                <a class="nav-link" data-bs-toggle="tab" href="#kt_header_navs_tab_5">@lang('admin.System settings')</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tab" href="#kt_header_navs_tab_6">التقارير </a>
@@ -1142,7 +1142,7 @@
                             <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
                                 <!--begin:Menu link-->
                                 <span class="menu-link py-3">
-                                                        <span class="btn btn-sm btn-light-info fw-bold">إدارة المستخدمين والصلاحيات</span>
+                                                        <span class="btn btn-sm btn-light-info fw-bold">@lang('admin.User and Permission Management')</span>
                                                         <span class="menu-arrow d-lg-none"></span>
                                                     </span>
                                 <!--end:Menu link-->
