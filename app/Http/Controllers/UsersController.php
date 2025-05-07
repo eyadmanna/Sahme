@@ -15,6 +15,7 @@ class UsersController extends Controller
     {
         $this->middleware('can:user view');
     }
+  
     public function index()
     {
 
