@@ -20,6 +20,7 @@ return [
     'Forgot Password ?' => 'نسيت كلمة المرور',
     'Total users with this role:' => 'إجمالي المستخدمين الذين لديهم هذا الدور:',
     'and' => 'و',
+    'more...' => 'أكثر...',
     'OK' => 'حسناً',
     'View Role' => 'عرض الدور',
     'Edit Role' => 'تعديل الدور',
@@ -34,6 +35,7 @@ return [
     'Allows a full access to the system' => 'يسمح بالوصول الكامل إلى النظام',
     'Select all' => 'حدد الكل',
     'Enter a role name' => 'أدخل اسم الدور',
+    'View Role Details' => 'عرض تفاصيل الدور',
 
     /*UserManagement*/
     "User Management" => "إدارة المستخدمين",
@@ -63,6 +65,13 @@ return [
     "Yes, cancel it!"  => "نعم، قم بإلغائه!",
     "No, return"  => "لا، العودة",
     "Add New Role"  => "إضافة دور جديد",
+    "Role name is required"  => "اسم الدور مطلوب",
+    "Your form has not been cancelled!."  => "لم يتم إلغاء النموذج الخاص بك!.",
+    "Unexpected error: "  => "خطأ غير متوقع:",
+    "Update Role"  => "تعديل الدور",
+    "Users Assigned"  => "المستخدمون المعينون",
+    "Search Users"  => "بحث عن المستخدمين",
+    "ID"  => "ID",
 
     /*message*/
     'Email address is required' => 'عنوان البريد الإلكتروني مطلوب',
