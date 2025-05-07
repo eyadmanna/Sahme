@@ -142,12 +142,6 @@
                                     </div>
                                     <!--begin::Details item-->
                                     <!--begin::Details item-->
-                                    <div class="fw-bold mt-5">Address</div>
-                                    <div class="text-gray-600">101 Collin Street,
-                                        <br />Melbourne 3000 VIC
-                                        <br />Australia</div>
-                                    <!--begin::Details item-->
-                                    <!--begin::Details item-->
                                     <div class="fw-bold mt-5">Last Login</div>
                                     <div class="text-gray-600">20 Dec 2024, 10:10 pm</div>
                                     <!--begin::Details item-->
