@@ -72,6 +72,16 @@ return [
     "Users Assigned"  => "المستخدمون المعينون",
     "Search Users"  => "بحث عن المستخدمين",
     "ID"  => "ID",
+    "Something went wrong."  => "حدث خطأ ما",
+    "Are you sure you would like to close?"  => "هل انت متاكد انك تريد الاغلاق",
+    "Yes, close it!"  => "نعم اغلق",
+    "Other"  => "   أخرى",
+    "View User Details"  => "عرض تفاصيل المستخدم",
+    "Mobile number"  => "رقم الجوال",
+    "Mobile number  is required"  => "رقم الجوال مطلوب",
+    "Update User Details"  => "تحديث تفاصيل المستخدم",
+    "Details"  => "تفاصيل",
+    "Account ID"  => "معرف الحساب",
 
     /*message*/
     'Email address is required' => 'عنوان البريد الإلكتروني مطلوب',
@@ -85,6 +95,10 @@ return [
     'Please fix the errors in the form.' => 'يرجى تصحيح الأخطاء الموجودة في النموذج.',
     'Invalid email address' => 'عنوان البريد الإلكتروني غير صالح',
     'Full Name Filed is required' => 'الاسم الكامل مطلوب',
+
+    /*top bar*/
+    'System settings' => 'إعدادات النظام',
+    'User and Permission Management' => 'إدارة المستخدمين والصلاحيات',
 
 
 

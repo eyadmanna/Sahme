@@ -42,12 +42,12 @@
                     e.preventDefault();
 
                     Swal.fire({
-                        text: "Are you sure you would like to close?",
+                        text: "@lang('admin.Are you sure you would like to close?')",
                         icon: "warning",
                         showCancelButton: true,
                         buttonsStyling: false,
-                        confirmButtonText: "Yes, close it!",
-                        cancelButtonText: "No, return",
+                        confirmButtonText: "@lang('admin.Yes, close it!')",
+                        cancelButtonText: "@lang('admin.No, return')",
                         customClass: {
                             confirmButton: "btn btn-primary",
                             cancelButton: "btn btn-active-light"
@@ -197,7 +197,7 @@
                                     text: "@lang('admin.Sorry, looks like there are some errors detected, please try again.')",
                                     icon: "error",
                                     buttonsStyling: false,
-                                    confirmButtonText: "Ok, got it!",
+                                    confirmButtonText: "@lang('admin.OK')",
                                     customClass: {
                                         confirmButton: "btn btn-primary"
                                     }
@@ -252,7 +252,7 @@
                             'role_name': {
                                 validators: {
                                     notEmpty: {
-                                        message: 'Role name is required'
+                                        message: '@lang('admin.Role name is required')'
                                     }
                                 }
                             },
@@ -275,12 +275,12 @@
                     e.preventDefault();
 
                     Swal.fire({
-                        text: "Are you sure you would like to close?",
+                        text: "@lang('admin.Are you sure you would like to close?')",
                         icon: "warning",
                         showCancelButton: true,
                         buttonsStyling: false,
-                        confirmButtonText: "Yes, close it!",
-                        cancelButtonText: "No, return",
+                        confirmButtonText: "@lang('admin.Yes, close it!')",
+                        cancelButtonText: "@lang('admin.No, return')",
                         customClass: {
                             confirmButton: "btn btn-primary",
                             cancelButton: "btn btn-active-light"
@@ -298,12 +298,12 @@
                     e.preventDefault();
 
                     Swal.fire({
-                        text: "Are you sure you would like to cancel?",
+                        text: "@lang('admin.Are you sure you would like to cancel?')",
                         icon: "warning",
                         showCancelButton: true,
                         buttonsStyling: false,
-                        confirmButtonText: "Yes, cancel it!",
-                        cancelButtonText: "No, return",
+                        confirmButtonText: "@lang('admin.Yes, cancel it!')",
+                        cancelButtonText: "@lang('admin.No, return')",
                         customClass: {
                             confirmButton: "btn btn-primary",
                             cancelButton: "btn btn-active-light"
@@ -314,10 +314,10 @@
                             modal.hide(); // Hide modal
                         } else if (result.dismiss === 'cancel') {
                             Swal.fire({
-                                text: "Your form has not been cancelled!.",
+                                text: "@lang('admin.Your form has not been cancelled!.')",
                                 icon: "error",
                                 buttonsStyling: false,
-                                confirmButtonText: "Ok, got it!",
+                                confirmButtonText: "@lang('admin.OK')",
                                 customClass: {
                                     confirmButton: "btn btn-primary",
                                 }
@@ -398,7 +398,7 @@
                                                 });
                                             } else {
                                                 Swal.fire({
-                                                    text: data.message || "Something went wrong.",
+                                                    text: data.message || "@lang('admin.Something went wrong.')",
                                                     icon: "error",
                                                     buttonsStyling: false,
                                                     confirmButtonText: "@lang('admin.OK')",
@@ -429,10 +429,10 @@
                             } else {
                                 // Show popup warning. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                                 Swal.fire({
-                                    text: "Sorry, looks like there are some errors detected, please try again.",
+                                    text: "@lang('admin.Sorry, looks like there are some errors detected, please try again.')",
                                     icon: "error",
                                     buttonsStyling: false,
-                                    confirmButtonText: "Ok, got it!",
+                                    confirmButtonText: "@lang('admin.OK')",
                                     customClass: {
                                         confirmButton: "btn btn-primary"
                                     }

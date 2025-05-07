@@ -7,28 +7,28 @@
             serverSide: true,
             ajax: "{{ route('users.getUsers') }}",
             columns: [
-                { data: 'id', name: 'id' },
-                { data: 'name', name: 'name' },
+                { data: 'name', name: 'name' }, // 👈 This matches the column
+                { data: 'mobile_number', name: 'mobile_number' },
                 { data: 'role', name: 'role', defaultContent: '-' },
                 { data: 'last_login_at', name: 'last_login_at', defaultContent: '-' },
                 { data: 'two_step', name: 'two_step', defaultContent: '-' },
                 { data: 'created_at', name: 'created_at' },
                 { data: 'actions', name: 'actions', orderable: false, searchable: false }
             ],
-            searching: false,
-            order: [[0, 'desc']],
             createdRow: function (row, data, dataIndex) {
-                // Add class to the second cell (name column)
-                $('td', row).eq(1).addClass('d-flex align-items-center');
+                $('td', row).each(function (index) {
+                    // استثنِ العمود الثاني (name) وأضف class لباقي الأعمدة
+                    if (index !== 0) {
+                        $(this).attr('class', 'text-center');
+                    }
+                });
             },
             drawCallback: function () {
-                // 🔁 Re-initialize dropdown menu after each table draw
                 if (typeof KTMenu !== 'undefined') {
-                    KTMenu.createInstances(); // Metronic's JS function
+                    KTMenu.createInstances();
                 }
             }
         });
-
 // Class definition
         var KTUsersAddUser = function () {
             // Shared variables
@@ -57,6 +57,11 @@
                                         regexp: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                                         message: '@lang('admin.Invalid email address')',
                                     }
+                                }
+                            },
+                            'mobile_number': {
+                                validators: {
+                                    notEmpty: { message: '@lang('admin.Mobile number  is required')' },
                                 }
                             },
                         },
@@ -102,7 +107,7 @@
                                     fetch('{{ route('users.store') }}', {
                                         method: 'POST',
                                         headers: {
-                                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
                                         },
                                         body: formData
                                     })
@@ -140,7 +145,7 @@
                                                 });
                                             } else {
                                                 Swal.fire({
-                                                    text: data.message || "Something went wrong.",
+                                                    text: data.message || "@lang('admin.Something went wrong.')",
                                                     icon: "error",
                                                     buttonsStyling: false,
                                                     confirmButtonText: "@lang('admin.OK')",
@@ -155,7 +160,7 @@
                                             submitButton.disabled = false;
 
                                             Swal.fire({
-                                                text: "Unexpected error: " + error.message,
+                                                text: "@lang('admin.Unexpected error: ')" + error.message,
                                                 icon: "error",
                                                 buttonsStyling: false,
                                                 confirmButtonText: "@lang('admin.OK')",
@@ -205,10 +210,10 @@
                             modal.hide();
                         } else if (result.dismiss === 'cancel') {
                             Swal.fire({
-                                text: "Your form has not been cancelled!.",
+                                text: "@lang('admin.Your form has not been cancelled!.')",
                                 icon: "error",
                                 buttonsStyling: false,
-                                confirmButtonText: "Ok, got it!",
+                                confirmButtonText: "@lang('OK')",
                                 customClass: {
                                     confirmButton: "btn btn-primary",
                                 }
@@ -223,12 +228,12 @@
                     e.preventDefault();
 
                     Swal.fire({
-                        text: "Are you sure you would like to cancel?",
+                        text: "@lang('admin.Are you sure you would like to cancel?')",
                         icon: "warning",
                         showCancelButton: true,
                         buttonsStyling: false,
-                        confirmButtonText: "Yes, cancel it!",
-                        cancelButtonText: "No, return",
+                        confirmButtonText: "@lang('admin.Yes, cancel it!')",
+                        cancelButtonText: "@lang('admin.No, return')",
                         customClass: {
                             confirmButton: "btn btn-primary",
                             cancelButton: "btn btn-active-light"
@@ -239,10 +244,10 @@
                             modal.hide();
                         } else if (result.dismiss === 'cancel') {
                             Swal.fire({
-                                text: "Your form has not been cancelled!.",
+                                text: "@lang('admin.Your form has not been cancelled!.')",
                                 icon: "error",
                                 buttonsStyling: false,
-                                confirmButtonText: "Ok, got it!",
+                                confirmButtonText: "@lang('admin.OK')",
                                 customClass: {
                                     confirmButton: "btn btn-primary",
                                 }
