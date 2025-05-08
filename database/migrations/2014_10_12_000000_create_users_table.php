@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('avatar')->nullable(); // Add avatar column
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes(); // adds deleted_at
+
         });
     }
 

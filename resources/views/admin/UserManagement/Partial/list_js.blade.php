@@ -29,6 +29,15 @@
                 }
             }
         });
+        let searchTimeout;
+        $('[data-kt-user-table-filter="search"]').on('keyup', function () {
+            clearTimeout(searchTimeout);
+            let input = this;
+
+            searchTimeout = setTimeout(function () {
+                table.search(input.value).draw();
+            }, 300); // delay in milliseconds
+        });
 // Class definition
         var KTUsersAddUser = function () {
             // Shared variables
@@ -129,6 +138,8 @@
                                                 }).then(function (result) {
                                                     if (result.isConfirmed) {
                                                         form.reset();
+                                                        modal.hide(); // Hide the modal if needed
+                                                        table.ajax.reload(); //  Reload the DataTable
                                                     }
                                                 });
                                             } else if (response.status === 422) {
@@ -265,9 +276,80 @@
             };
         }();
 
+        $(document).on('click', '[data-kt-users-table-filter="delete_row"]', function (e) {
+            e.preventDefault();
+
+
+            const parent = $(this).closest('tr');
+            const userName = parent.find('.user-name').text().trim();
+            const userId = $(this).data('user-id');
+
+            Swal.fire({
+                text: "@lang('admin.Are you sure you want to delete') " + userName + "?",
+                icon: "warning",
+                showCancelButton: true,
+                buttonsStyling: false,
+                confirmButtonText: "@lang('admin.Yes, delete!')",
+                cancelButtonText: "@lang('admin.No, cancel')",
+                customClass: {
+                    confirmButton: "btn fw-bold btn-danger",
+                    cancelButton: "btn fw-bold btn-active-light-primary"
+                }
+            }).then(function (result) {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: `{{ url('/users/delete/') }}/${userId}`,
+                        type: 'DELETE',
+                        data: {
+                            _token: $('meta[name="csrf-token"]').attr('content') // CSRF token
+                        },
+                        success: function (response) {
+                            Swal.fire({
+                                text: userName + " @lang('admin.has been deleted.')",
+                                icon: "success",
+                                buttonsStyling: false,
+                                confirmButtonText: "@lang('admin.OK')",
+                                customClass: {
+                                    confirmButton: "btn fw-bold btn-primary",
+                                }
+                            }).then(() => {
+                                $('#kt_table_users').DataTable().ajax.reload(null, false);
+                            });
+                        },
+                        error: function (xhr) {
+                            let message = "@lang('admin.Error deleting user. Please try again.')";
+                            if (xhr.responseJSON && xhr.responseJSON.message) {
+                                message = xhr.responseJSON.message;
+                            }
+                            Swal.fire({
+                                text: message,
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "@lang('admin.OK')",
+                                customClass: {
+                                    confirmButton: "btn fw-bold btn-primary",
+                                }
+                            });
+                        }
+                    });
+                } else if (result.dismiss === 'cancel') {
+                    Swal.fire({
+                        text: userName + "@lang('admin.was not deleted.')",
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "@lang('admin.OK')",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary"
+                        }
+                    });
+                }
+            });
+        });
+
 // On document ready
         KTUtil.onDOMContentLoaded(function () {
             KTUsersAddUser.init();
+
         });
     });
 

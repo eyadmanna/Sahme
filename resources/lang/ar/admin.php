@@ -82,6 +82,16 @@ return [
     "Update User Details"  => "تحديث تفاصيل المستخدم",
     "Details"  => "تفاصيل",
     "Account ID"  => "معرف الحساب",
+    "Update Avatar"  => "تحديث الصورة",
+    "Are you sure you want to delete"  => "هل أنت متأكد أنك تريد الحذف؟",
+    "Yes, delete!"  => "نعم احذف!",
+    "No, cancel"  => "لا، إلغاء",
+    "You have deleted"  => "لقد حذفت  ",
+    "was not deleted."  => " لم يتم حذفه. ",
+    "has been deleted."  => "لقد تم حذفه.",
+    "Error deleting user. Please try again."  => "حدث خطأ أثناء حذف المستخدم. يُرجى المحاولة مرة أخرى.",
+    "User deleted successfully."  => "تم حذف المستخدم بنجاح.",
+    "You cannot delete your own account."  => "لا يمكنك حذف حسابك الخاص.",
 
     /*message*/
     'Email address is required' => 'عنوان البريد الإلكتروني مطلوب',

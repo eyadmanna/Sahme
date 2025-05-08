@@ -13,6 +13,15 @@ return [
     'Land edit' => 'تعديل أرض',
     'Projects view' => 'عرض مشروع',
     'Projects create' => 'أضافة مشروع',
+    'Land Section View' => 'عرض قسم الأرض',
+    'Projects Section View' => 'عرض قسم المشاريع',
+    'Engineering Section View' => 'عرض القسم الهندسي',
+    'Engineering Partner Management' => 'إدارة الشركاء الهندسيين',
+    'Contractor management' => 'إدارة المقاولين',
+    'Reports' => 'التقارير',
+    'Contractor Section View' => 'عرض قسم المقاولين',
+    'Settings Section View' => 'عرض قسم الإعدادات',
+    'Reports Section View' => 'عرض قسم التقارير',
 
 ];
 

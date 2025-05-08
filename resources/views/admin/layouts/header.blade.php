@@ -24,12 +24,20 @@
                     <div class="header-tabs overflow-auto mx-4 ms-lg-10 mb-5 mb-lg-0" id="kt_header_tabs" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_header_navs_wrapper', lg: '#kt_brand_tabs'}">
                         <!--begin::Header tabs-->
                         <ul class="nav flex-nowrap text-nowrap">
+                            @can('Land Section View')
                             <li class="nav-item">
-                                <a class="nav-link active" data-bs-toggle="tab" href="#kt_header_navs_tab_1">إدارة الأراضي</a>
+                                <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}"
+                                   data-bs-toggle="tab"
+                                   href="#kt_header_navs_tab_1"
+                                   aria-selected="{{ request()->routeIs('dashboard') ? 'true' : 'false' }}"
+                                   role="tab">إدارة الأراضي</a>
                             </li>
+                            @endcan
+                            @can('Projects Section View')
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tab" href="#kt_header_navs_tab_2">إدارة المشاريع</a>
                             </li>
+                            @endcan
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tab" href="#kt_header_navs_tab_3">إدارة الشركاء الهندسيين</a>
                             </li>
@@ -37,7 +45,11 @@
                                 <a class="nav-link" data-bs-toggle="tab" href="#kt_header_navs_tab_4">إدارة المقاولين</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#kt_header_navs_tab_5">@lang('admin.System settings')</a>
+                                <a class="nav-link {{ request()->routeIs('users.index', 'roles.index','users.view') ? 'active' : '' }}"
+                                   data-bs-toggle="tab"
+                                   href="#kt_header_navs_tab_5"
+                                   aria-selected="{{ request()->routeIs('users.index', 'roles.index','users.view') ? 'true' : 'false' }}"
+                                   role="tab">@lang('admin.System settings')</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tab" href="#kt_header_navs_tab_6">التقارير </a>
@@ -1077,7 +1089,8 @@
                 <!--begin::Header tab content-->
                 <div class="tab-content" data-kt-scroll="true" data-kt-scroll-activate="{default: true, lg: false}" data-kt-scroll-height="auto" data-kt-scroll-offset="70px">
                     <!--begin::Tab panel-->
-                    <div class="tab-pane fade active show" id="kt_header_navs_tab_1">
+                    @can('Land Section View')
+                    <div class="tab-pane fade {{ request()->routeIs('dashboard') ? 'show active' : '' }}" id="kt_header_navs_tab_1">
                         <!--begin::Wrapper-->
                         <div class="d-flex flex-column flex-lg-row flex-lg-stack flex-wrap gap-2 px-4 px-lg-0">
                             <div class="d-flex flex-column flex-lg-row gap-2">
@@ -1088,6 +1101,7 @@
                         </div>
                         <!--end::Wrapper-->
                     </div>
+                    @endcan()
                     <!--end::Tab panel-->
                     <!--begin::Tab panel-->
                     <div class="tab-pane fade" id="kt_header_navs_tab_2">
@@ -1127,7 +1141,7 @@
                     </div>
                     <!--end::Tab panel-->
                     <!--begin::Tab panel-->
-                    <div class="tab-pane fade" id="kt_header_navs_tab_5">
+                    <div class="tab-pane fade {{ request()->routeIs('users.index', 'roles.index','users.view') ? 'show active' : '' }}" id="kt_header_navs_tab_5">
                        <!--begin::Menu wrapper-->
                        <div class="header-menu flex-column align-items-stretch flex-lg-row">
                         <!--begin::Menu-->

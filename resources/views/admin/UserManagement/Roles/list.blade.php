@@ -1,4 +1,32 @@
 @extends('admin.layouts.master')
+<style>
+    .permission-group-header {
+        background-color: #f9f9f9;
+        border-top: 2px solid #0d6efd;
+        border-bottom: 1px solid #dee2e6;
+        padding: 10px 15px;
+        border-radius: 8px 8px 0 0;
+    }
+
+    .permission-group-table {
+        border: 1px solid #dee2e6;
+        border-top: none;
+        margin-bottom: 25px;
+        border-radius: 0 0 8px 8px;
+        background-color: #fff;
+    }
+
+    .permission-chunk td {
+        padding: 10px 15px;
+    }
+
+    .permission-group-wrapper {
+        box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+        border-radius: 8px;
+        margin-bottom: 24px; /* Add this line */
+    }
+</style>
+
 @section('content')
     <!--begin::Toolbar-->
     <div class="toolbar py-3 py-lg-6" id="kt_toolbar">
@@ -331,37 +359,57 @@
                                                 <!--begin::Table row-->
                                                 <!--begin::Permission Group Table-->
                                                 @foreach($groupedPermissions as $group => $permissions)
-                                                    <!-- Group Header with Check All -->
-                                                    <tr>
-                                                        <td colspan="3" class="fw-bold text-primary fs-6">
-                                                            <div class="d-flex justify-content-between align-items-center">
-                                                                <span>{{ __('permission.'.$group) ?: 'Ungrouped' }}</span>
-                                                                <label class="form-check form-check-sm form-check-custom form-check-solid">
-                                                                    <input type="checkbox" class="form-check-input check-all-group" data-group="{{ Str::slug($group) }}">
-                                                                    <span class="form-check-label">@lang('admin.Select all')</span>
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    @foreach($permissions->chunk(3) as $chunk)
-                                                        <tr>
-                                                            @foreach($chunk as $permission)
-                                                                <td style="width: 33.33%;" class="text-gray-800">
+                                                    @php
+                                                        $firstPermission = $permissions->first();
+                                                        $remainingPermissions = $permissions->slice(1);
+                                                    @endphp
+
+                                                    <tr><td colspan="3" class="p-0">
+                                                            <div class="permission-group-wrapper">
+                                                                <div class="permission-group-header d-flex justify-content-between align-items-center">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <span class="fw-bold text-primary">{{ __('permission.'.$group) ?: 'Ungrouped' }}</span>
+                                                                        @if($firstPermission)
+                                                                            <label class="form-check form-check-sm form-check-custom form-check-solid ms-4">
+                                                                                <input class="form-check-input permission-checkbox"
+                                                                                       type="checkbox"
+                                                                                       name="permissions[]"
+                                                                                       value="{{ $firstPermission->name }}"
+                                                                                    {{ in_array($firstPermission->name, $rolePermissions ?? []) ? 'checked' : '' }}>
+                                                                                <span class="form-check-label">{{ __('permission.'.$firstPermission->name) }}</span>
+                                                                            </label>
+                                                                        @endif
+                                                                    </div>
+
                                                                     <label class="form-check form-check-sm form-check-custom form-check-solid">
-                                                                        <input class="form-check-input permission-checkbox group-{{ Str::slug($group) }}"
-                                                                               type="checkbox"
-                                                                               name="permissions[]"
-                                                                               value="{{ $permission->name }}"
-                                                                            {{ in_array($permission->name, $rolePermissions ?? []) ? 'checked' : '' }}>
-                                                                        <span class="form-check-label">{{ __('permission.'.$permission->name) }}</span>
+                                                                        <input type="checkbox" class="form-check-input check-all-group" data-group="{{ Str::slug($group) }}">
+                                                                        <span class="form-check-label">@lang('admin.Select all')</span>
                                                                     </label>
-                                                                </td>
-                                                            @endforeach
-                                                            @for($i = $chunk->count(); $i < 3; $i++)
-                                                                <td style="width: 33.33%;"></td>
-                                                            @endfor
-                                                        </tr>
-                                                    @endforeach
+                                                                </div>
+
+                                                                <table class="table table-bordered permission-group-table mb-0">
+                                                                    @foreach($remainingPermissions->chunk(3) as $chunk)
+                                                                        <tr class="permission-chunk">
+                                                                            @foreach($chunk as $permission)
+                                                                                <td class="text-gray-800">
+                                                                                    <label class="form-check form-check-sm form-check-custom form-check-solid">
+                                                                                        <input class="form-check-input permission-checkbox group-{{ Str::slug($group) }}"
+                                                                                               type="checkbox"
+                                                                                               name="permissions[]"
+                                                                                               value="{{ $permission->name }}"
+                                                                                            {{ in_array($permission->name, $rolePermissions ?? []) ? 'checked' : '' }}>
+                                                                                        <span class="form-check-label">{{ __('permission.'.$permission->name) }}</span>
+                                                                                    </label>
+                                                                                </td>
+                                                                            @endforeach
+                                                                            @for($i = $chunk->count(); $i < 3; $i++)
+                                                                                <td></td>
+                                                                            @endfor
+                                                                        </tr>
+                                                                    @endforeach
+                                                                </table>
+                                                            </div>
+                                                        </td></tr>
                                                 @endforeach
                                                 <!--end::Permission Group Table-->
                                                 <!--end::Table row-->

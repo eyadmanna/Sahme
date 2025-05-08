@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Role;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -15,7 +17,7 @@ class UsersController extends Controller
     {
         $this->middleware('can:user view');
     }
-  
+
     public function index()
     {
 
@@ -85,19 +87,83 @@ class UsersController extends Controller
     }
     public function view(Request $request , $id){
         $data['user'] = User::query()->find($id);
+        $data['roles'] = Role::query()->get();
+
         return view('admin.UserManagement.Users.view',$data);
     }
 
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
-        $user->update($request->all());
-        return redirect()->route('users.index')->with('success', 'User updated.');
+        try {
+            $validated = $request->validate([
+                'user_name' => 'required|string|max:255',
+                'user_email' => [
+                    'required',
+                    'email',
+                    Rule::unique('users', 'email')->ignore($id),
+                ],
+                'mobile_number' => [
+                    'required',
+                    Rule::unique('users', 'mobile_number')->ignore($id),
+                ],
+                'user_role' => 'required|exists:roles,id',
+                'avatar' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            ]);
+
+            $user = User::findOrFail($id);
+
+            // Handle avatar upload
+            if ($request->hasFile('avatar')) {
+                $file = $request->file('avatar');
+                $filename = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('uploads/usersImage'), $filename);
+                $user->avatar = $filename;
+            }
+
+            // Update user fields
+            $user->name = $request->user_name;
+            $user->email = $request->user_email;
+            $user->mobile_number = $request->mobile_number;
+            $user->save();
+
+            // Update role
+            $user->roles()->sync([$validated['user_role']]);
+
+            return response()->json([
+                'message' => 'User updated successfully!',
+                'user' => $user
+            ], 200);
+
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json([
+                'message' => 'Validation failed.',
+                'errors' => $e->errors()
+            ], 422);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => $e->getMessage(),
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
-    public function destroy(User $user)
+    public function destroy($id)
     {
+        // Prevent user from deleting themselves
+        if (Auth::id() == $id) {
+            return response()->json([
+                'success' => false,
+                'message' => trans('admin.You cannot delete your own account.')
+            ], 403);
+        }
+
+        $user = User::findOrFail($id);
         $user->delete();
-        return redirect()->route('users.index')->with('success', 'User deleted.');
+
+        return response()->json([
+            'success' => true,
+            'message' =>  trans('admin.User deleted successfully.')
+        ]);
     }
     public function getUsers(Request $request)
     {
@@ -119,11 +185,17 @@ class UsersController extends Controller
                 </a>
             </div>
             <div class="d-flex flex-column">
-                <a href="'.$profileUrl.'" class="text-gray-800 text-hover-primary mb-1">'.$user->name.'</a>
+                <a href="'.$profileUrl.'" class="text-gray-800 text-hover-primary mb-1 user-name">'.$user->name.'</a>
                 <span class="text-muted">'.$user->email.'</span>
             </div>
         </div>
     ';
+            })
+            ->filterColumn('name', function($query, $keyword) {
+                $query->where(function($q) use ($keyword) {
+                    $q->where('name', 'like', "%{$keyword}%")
+                        ->orWhere('email', 'like', "%{$keyword}%");
+                });
             })
             ->addColumn('mobile_number', function ($user) {
                 return '<span>'.$user->mobile_number.'</span>';
@@ -154,7 +226,7 @@ class UsersController extends Controller
                                     <!--end::Menu item-->
                                     <!--begin::Menu item-->
                                     <div class="menu-item px-3">
-                                        <a href="#" class="menu-link px-3" data-kt-users-table-filter="delete_row">'.trans('admin.Delete').'</a>
+                                        <a href="#" class="menu-link px-3" data-kt-users-table-filter="delete_row" data-user-id="'.$user->id.'">'.trans('admin.Delete').'</a>
                                     </div>
                                     <!--end::Menu item-->
                                 </div></div>
