@@ -15,14 +15,16 @@ class UsersController extends Controller
     //
     public function __construct()
     {
-        $this->middleware('can:user view');
+        $this->middleware('can:users view');
+        $this->middleware('can:user create')->only('store');
+        $this->middleware('can:user view')->only('view');
+        $this->middleware('can:user edit')->only('update');
     }
 
-    public function index()
-    {
-
+    public function index(){
         $users = User::paginate(10);
         $roles = Role::query()->get();
+
         return view('admin.UserManagement.Users.list', compact('users','roles'));
     }
 
@@ -158,7 +160,12 @@ class UsersController extends Controller
         }
 
         $user = User::findOrFail($id);
-        $user->delete();
+        if ($user->status == 1)
+            $user->status = 0;
+        else
+            $user->status = 1;
+
+        $user->save();
 
         return response()->json([
             'success' => true,
@@ -169,6 +176,15 @@ class UsersController extends Controller
     {
         $users = User::query()->orderBy('id', 'desc');
 
+        if ($request->filled('mobile_number')) {
+            $users->where('mobile_number', 'like', '%' . $request->mobile_number . '%');
+        }
+
+        if ($request->filled('role')) {
+            $users->whereHas('roles', function ($query) use ($request) {
+                $query->where('id', $request->role); // or use 'name' if your select value is role name
+            });
+        }
         return DataTables::of($users)
             ->addColumn('name', function ($user) {
                 $imgUrl = asset('assets/media/avatars/300-6.jpg'); // Or use $user->image if dynamic
@@ -215,25 +231,33 @@ class UsersController extends Controller
                 return '<div class="badge badge-light fw-bold">' . $date . '</div>';
             })
             ->addColumn('actions', function ($user) {
-                $options = '<div class="text-end"><a href="#" class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">'.trans('admin.Actions') .'
-                                    <i class="ki-duotone ki-down fs-5 ms-1"></i></a>
-                                <!--begin::Menu-->
-                                <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item px-3">
-                                        <a  href="' . url("/users/view/{$user->id}") . '" class="menu-link px-3">' . trans('admin.View User') . '</a>
-                                    </div>
-                                    <!--end::Menu item-->
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item px-3">
-                                        <a href="#" class="menu-link px-3" data-kt-users-table-filter="delete_row" data-user-id="'.$user->id.'">'.trans('admin.Delete').'</a>
-                                    </div>
-                                    <!--end::Menu item-->
-                                </div></div>
-                                <!--end::Menu-->
-                             ';
+                $actions = '<div class="text-end">
+                            <a href="#" class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">'
+                                        . trans('admin.Actions') . '
+                                <i class="ki-duotone ki-down fs-5 ms-1"></i>
+                            </a>
+                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">';
 
-                return $options;
+                                    if (auth()->user()->can('user view')) {
+                                        $actions .= '<div class="menu-item px-3">
+                                                        <a href="' . url("/users/view/{$user->id}") . '" class="menu-link px-3">'
+                                                        . trans('admin.View User') .
+                                                        '</a>
+                                                     </div>';
+                                    }
+
+                                    if (auth()->user()->can('user delete')) {
+                                        $buttonText = $user->status == 1 ? trans('admin.Delete') : trans('admin.Activation');
+
+                                        $actions .= '<div class="menu-item px-3">
+                                                        <a href="#" class="menu-link px-3" data-kt-users-table-filter="delete_row" data-user-status="' . $user->status . '" data-user-id="' . $user->id . '">' .
+                                                            $buttonText .
+                                                            '</a>
+                                                     </div>';
+                                    }
+                                    $actions .= '</div></div>';
+
+                return $actions;
             })
             ->rawColumns(['name','mobile_number','role','last_login_at','created_at','two_step','actions'])
             ->make(true);

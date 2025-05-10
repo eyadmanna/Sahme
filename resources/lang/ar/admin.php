@@ -28,7 +28,7 @@ return [
     'Repeat Password' => 'كرر كلمة المرور',
     'Permissions' => 'الأذونات',
     'Roles List' => 'قائمة الأدوار',
-    'Add a Role' => 'أضف دورًا',
+    'Add a Role' => 'أضف دور',
     'Role name' => 'أسم الدور',
     'Role Permissions' => 'أذونات الدور',
     'Administrator Access' => 'وصول المسؤول',
@@ -92,6 +92,11 @@ return [
     "Error deleting user. Please try again."  => "حدث خطأ أثناء حذف المستخدم. يُرجى المحاولة مرة أخرى.",
     "User deleted successfully."  => "تم حذف المستخدم بنجاح.",
     "You cannot delete your own account."  => "لا يمكنك حذف حسابك الخاص.",
+    "Edit customer details"  => "تعديل تفاصيل العميل",
+    "Activation"  => "تفعيل",
+    "Are you sure you want to reactivate?"  => "هل أنت متأكد أنك تريد اعادة التفعيل؟",
+    "Search"  => "بحث",
+    "Reset"  => "إعادة ضبط",
 
     /*message*/
     'Email address is required' => 'عنوان البريد الإلكتروني مطلوب',
@@ -105,6 +110,9 @@ return [
     'Please fix the errors in the form.' => 'يرجى تصحيح الأخطاء الموجودة في النموذج.',
     'Invalid email address' => 'عنوان البريد الإلكتروني غير صالح',
     'Full Name Filed is required' => 'الاسم الكامل مطلوب',
+    'The value is not a valid email address' => 'القيمة ليست عنوان بريد إلكتروني صالحًا',
+    'You have successfully logged in!' => 'لقد تم تسجيل الدخول بنجاح!',
+    'Sorry, the email or password is incorrect, please try again.' => 'عذراً، البريد الإلكتروني أو كلمة المرور غير صحيحة، يرجى المحاولة مرة أخرى.',
 
     /*top bar*/
     'System settings' => 'إعدادات النظام',

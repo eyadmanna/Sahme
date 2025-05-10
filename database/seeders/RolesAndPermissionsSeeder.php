@@ -39,6 +39,7 @@ class RolesAndPermissionsSeeder extends Seeder
             ],
             'Settings' => [
                 'Settings Section View',
+                'users view',
                 'user view',
                 'user create',
                 'user edit',

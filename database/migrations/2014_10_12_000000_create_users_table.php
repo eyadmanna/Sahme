@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('mobile_number')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('status')->default(1)->comment('1 is active , 0 is inactive');
             $table->string('avatar')->nullable(); // Add avatar column
             $table->rememberToken();
             $table->timestamps();

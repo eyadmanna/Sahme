@@ -964,9 +964,9 @@
                                 <!--end::Avatar-->
                                 <!--begin::Username-->
                                 <div class="d-flex flex-column">
-                                    <div class="fw-bold d-flex align-items-center fs-5">Max Smith
+                                    <div class="fw-bold d-flex align-items-center fs-5">{{auth()->user()->name}}
                                         <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Pro</span></div>
-                                    <a href="#" class="fw-semibold text-muted text-hover-primary fs-7">max@kt.com</a>
+                                    <a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{auth()->user()->email}}</a>
                                 </div>
                                 <!--end::Username-->
                             </div>
@@ -1157,7 +1157,7 @@
                                 <!--end:Menu link-->
                                 <!--begin:Menu sub-->
                                 <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown px-lg-2 py-lg-4 w-lg-250px">
-                                    @can('user view')
+                                    @can('users view')
                                     <!--begin:Menu link-->
                                     <div class="menu-item">
                                         <!--begin:Menu link-->

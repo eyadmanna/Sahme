@@ -119,9 +119,11 @@
                                     <span class="ms-2 rotate-180">
 													<i class="ki-duotone ki-down fs-3"></i>
 												</span></div>
-                                <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Edit customer details">
+                                @can('user edit')
+                                <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="@lang('admin.Edit customer details')">
 													<a href="#" class="btn btn-sm btn-light-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_update_details">@lang('admin.Edit')</a>
 												</span>
+                                @endcan
                             </div>
                             <!--end::Details toggle-->
                             <div class="separator"></div>
@@ -137,10 +139,6 @@
                                     <div class="text-gray-600">
                                         <a href="#" class="text-gray-600 text-hover-primary">{{$user->email}}</a>
                                     </div>
-                                    <!--begin::Details item-->
-                                    <!--begin::Details item-->
-                                    <div class="fw-bold mt-5">Last Login</div>
-                                    <div class="text-gray-600">20 Dec 2024, 10:10 pm</div>
                                     <!--begin::Details item-->
                                 </div>
                             </div>
@@ -207,7 +205,7 @@
                                 <!--begin::Item-->
                                 <div class="d-flex flex-stack">
                                     <div class="d-flex">
-                                        <img src="assets/media/svg/brand-logos/github.svg" class="w-30px me-6" alt="" />
+                                        <img src="{{asset('assets/media/svg/brand-logos/github.svg')}}" class="w-30px me-6" alt="" />
                                         <div class="d-flex flex-column">
                                             <a href="#" class="fs-5 text-gray-900 text-hover-primary fw-bold">Github</a>
                                             <div class="fs-6 fw-semibold text-muted">Keep eye on on your Repositories</div>
@@ -231,7 +229,7 @@
                                 <!--begin::Item-->
                                 <div class="d-flex flex-stack">
                                     <div class="d-flex">
-                                        <img src="assets/media/svg/brand-logos/slack-icon.svg" class="w-30px me-6" alt="" />
+                                        <img src="{{asset('assets/media/svg/brand-logos/slack-icon.svg')}}" class="w-30px me-6" alt="" />
                                         <div class="d-flex flex-column">
                                             <a href="#" class="fs-5 text-gray-900 text-hover-primary fw-bold">Slack</a>
                                             <div class="fs-6 fw-semibold text-muted">Integrate Projects Discussions</div>
@@ -1985,69 +1983,6 @@
                                 <!--begin::Card header-->
                                 <div class="card-header border-0">
                                     <!--begin::Card title-->
-                                    <div class="card-title">
-                                        <h2>Profile</h2>
-                                    </div>
-                                    <!--end::Card title-->
-                                </div>
-                                <!--end::Card header-->
-                                <!--begin::Card body-->
-                                <div class="card-body pt-0 pb-5">
-                                    <!--begin::Table wrapper-->
-                                    <div class="table-responsive">
-                                        <!--begin::Table-->
-                                        <table class="table align-middle table-row-dashed gy-5" id="kt_table_users_login_session">
-                                            <tbody class="fs-6 fw-semibold text-gray-600">
-                                            <tr>
-                                                <td>Email</td>
-                                                <td>smith@kpmg.com</td>
-                                                <td class="text-end">
-                                                    <button type="button" class="btn btn-icon btn-active-light-primary w-30px h-30px ms-auto" data-bs-toggle="modal" data-bs-target="#kt_modal_update_email">
-                                                        <i class="ki-duotone ki-pencil fs-3">
-                                                            <span class="path1"></span>
-                                                            <span class="path2"></span>
-                                                        </i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Password</td>
-                                                <td>******</td>
-                                                <td class="text-end">
-                                                    <button type="button" class="btn btn-icon btn-active-light-primary w-30px h-30px ms-auto" data-bs-toggle="modal" data-bs-target="#kt_modal_update_password">
-                                                        <i class="ki-duotone ki-pencil fs-3">
-                                                            <span class="path1"></span>
-                                                            <span class="path2"></span>
-                                                        </i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Role</td>
-                                                <td>Administrator</td>
-                                                <td class="text-end">
-                                                    <button type="button" class="btn btn-icon btn-active-light-primary w-30px h-30px ms-auto" data-bs-toggle="modal" data-bs-target="#kt_modal_update_role">
-                                                        <i class="ki-duotone ki-pencil fs-3">
-                                                            <span class="path1"></span>
-                                                            <span class="path2"></span>
-                                                        </i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                        <!--end::Table-->
-                                    </div>
-                                    <!--end::Table wrapper-->
-                                </div>
-                                <!--end::Card body-->
-                            </div>
-                            <!--end::Card-->
-                            <!--begin::Card-->
-                            <div class="card pt-4 mb-6 mb-xl-9">
-                                <!--begin::Card header-->
-                                <div class="card-header border-0">
-                                    <!--begin::Card title-->
                                     <div class="card-title flex-column">
                                         <h2 class="mb-1">Two Step Authentication</h2>
                                         <div class="fs-6 fw-semibold text-muted">Keep your account extra secure with a second authentication step.</div>
@@ -2657,7 +2592,7 @@
 																	</span>
                                                     <!--end::Cancel-->
                                                     <!--begin::Remove-->
-                                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
+                                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="@lang('admin.Remove avatar')">
 																		<i class="ki-duotone ki-cross fs-2">
 																			<span class="path1"></span>
 																			<span class="path2"></span>
@@ -2747,12 +2682,12 @@
                             <!--begin::Modal footer-->
                             <div class="modal-footer flex-center">
                                 <!--begin::Button-->
-                                <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">Discard</button>
+                                <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">@lang('admin.Discard')</button>
                                 <!--end::Button-->
                                 <!--begin::Button-->
                                 <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
-                                    <span class="indicator-label">Submit</span>
-                                    <span class="indicator-progress">Please wait...
+                                    <span class="indicator-label">@lang('admin.Submit')</span>
+                                    <span class="indicator-progress">@lang('admin.Please wait...')
 													<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                 </button>
                                 <!--end::Button-->

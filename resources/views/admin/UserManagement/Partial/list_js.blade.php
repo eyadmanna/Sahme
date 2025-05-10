@@ -2,10 +2,18 @@
     "use strict";
 
     $(document).ready(function () {
+        $('#role').select2({
+        });
         let table = $("#kt_table_users").DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('users.getUsers') }}",
+            ajax: {
+                url: "{{ route('users.getUsers') }}",
+                data: function (d) {
+                    d.mobile_number = $('#mobile_number').val();
+                    d.role = $('#role').val();
+                }
+            },
             columns: [
                 { data: 'name', name: 'name' }, // 👈 This matches the column
                 { data: 'mobile_number', name: 'mobile_number' },
@@ -37,6 +45,13 @@
             searchTimeout = setTimeout(function () {
                 table.search(input.value).draw();
             }, 300); // delay in milliseconds
+        });
+        $('.search_btn').on('click', function () {
+            table.draw(); // redraw the table with the filter values
+        });
+        $('.reset_search').on('click', function () {
+            $('#filters')[0].reset(); // clear form fields
+            table.draw(); // refresh table
         });
 // Class definition
         var KTUsersAddUser = function () {
@@ -210,7 +225,7 @@
                         showCancelButton: true,
                         buttonsStyling: false,
                         confirmButtonText: "@lang('admin.Yes, cancel it!')",
-                        cancelButtonText: "No, return",
+                        cancelButtonText: "@lang('admin.No, return')",
                         customClass: {
                             confirmButton: "btn btn-primary",
                             cancelButton: "btn btn-active-light"
@@ -233,39 +248,6 @@
                     });
                 });
 
-                // Close button handler
-                const closeButton = element.querySelector('[data-kt-users-modal-action="close"]');
-                closeButton.addEventListener('click', e => {
-                    e.preventDefault();
-
-                    Swal.fire({
-                        text: "@lang('admin.Are you sure you would like to cancel?')",
-                        icon: "warning",
-                        showCancelButton: true,
-                        buttonsStyling: false,
-                        confirmButtonText: "@lang('admin.Yes, cancel it!')",
-                        cancelButtonText: "@lang('admin.No, return')",
-                        customClass: {
-                            confirmButton: "btn btn-primary",
-                            cancelButton: "btn btn-active-light"
-                        }
-                    }).then(function (result) {
-                        if (result.value) {
-                            form.reset(); // Reset form
-                            modal.hide();
-                        } else if (result.dismiss === 'cancel') {
-                            Swal.fire({
-                                text: "@lang('admin.Your form has not been cancelled!.')",
-                                icon: "error",
-                                buttonsStyling: false,
-                                confirmButtonText: "@lang('admin.OK')",
-                                customClass: {
-                                    confirmButton: "btn btn-primary",
-                                }
-                            });
-                        }
-                    });
-                });
             }
 
             return {
@@ -283,9 +265,13 @@
             const parent = $(this).closest('tr');
             const userName = parent.find('.user-name').text().trim();
             const userId = $(this).data('user-id');
+            const userStatus = $(this).data('user-status');
 
+            const confirmText = userStatus == 1
+                ? "{{ __('admin.Are you sure you want to delete') }}"
+                : "{{ __('admin.Are you sure you want to reactivate?') }}";
             Swal.fire({
-                text: "@lang('admin.Are you sure you want to delete') " + userName + "?",
+                text: confirmText + ' ' + userName + '?',
                 icon: "warning",
                 showCancelButton: true,
                 buttonsStyling: false,

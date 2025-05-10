@@ -59,11 +59,11 @@
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
                             <!--begin::Filter-->
-                            <button type="button" class="btn btn-light-primary me-3" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                            <button type="button" class="btn btn-light-primary me-3" data-bs-toggle="collapse" href="#kt_user_view_details">
                                 <i class="ki-duotone ki-filter fs-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
-                                </i>Filter</button>
+                                </i></button>
                             <!--begin::Menu 1-->
                             <div class="menu menu-sub menu-sub-dropdown w-300px w-md-325px" data-kt-menu="true">
                                 <!--begin::Header-->
@@ -109,10 +109,12 @@
                             </div>
                             <!--end::Menu 1-->
                             <!--end::Filter-->
+                            @can('user create')
                             <!--begin::Add user-->
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
                                 <i class="ki-duotone ki-plus fs-2"></i>@lang('admin.Add User')</button>
                             <!--end::Add user-->
+                            @endcan
                         </div>
                         <!--end::Toolbar-->
                         <!--begin::Group actions-->
@@ -260,7 +262,7 @@
                                             <!--end::Scroll-->
                                             <!--begin::Actions-->
                                             <div class="text-center pt-10">
-                                                <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal" aria-label="Close">@lang('admin.Discard')</button>
+                                                <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">@lang('admin.Discard')</button>
                                                 <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
                                                     <span class="indicator-label">@lang('admin.Submit')</span>
                                                     <span class="indicator-progress">@lang('admin.Please wait...')
@@ -282,6 +284,38 @@
                     <!--end::Card toolbar-->
                 </div>
                 <!--end::Card header-->
+                <div id="kt_user_view_details" class="collapse mb-5">
+                    <div class="py-5 px-10">
+                        <form class="kt-form kt-form--label-right form-control" id="filters" method="GET" autocomplete="off">
+
+                            <div class="form-group row">
+                                <div class="col-form-label col-lg-3 col-sm-6">
+                                    <label class="form-control-label">@lang('admin.Mobile number')</label>
+                                    <input type="number" class="form-control" id="mobile_number" name="mobile_number">
+                                </div>
+
+                                <div class="col-form-label col-lg-3 col-sm-6">
+                                    <label class="form-control-label selectpicker">@lang('admin.Role name')</label>
+                                    <select class="form-select" id="role" name="role">
+                                        <option value="">@lang('admin.Add a Role')</option>
+                                    @foreach($roles as $role)
+                                            <option value="{{$role->id}}">{{$role->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-form-label col-lg-2 col-sm-6">
+                                    <a href="javascript:void(0)" style="width: 100%" class="btn btn-info search_btn"><i class="la la-search"></i> @lang('admin.Search')</a>
+                                </div>
+                                <div class="col-form-label col-lg-2 col-sm-6">
+                                    <a href="javascript:void(0)" style="width: 100%" class="btn btn-secondary reset_search"><i class="la la-recycle"></i> @lang('admin.Reset')</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
                 <!--begin::Card body-->
                 <div class="card-body py-4">
                     <!--begin::Table-->
