@@ -72,7 +72,7 @@
                                 submitButton.disabled = false;
                                 const formData = new FormData(form); // Handles file uploads too
                                 const user_Id = user_id.value; // Get role_id from the hidden input
-                                const url = `/users/update/${user_Id}`; // Build the correct URL
+                                const url = `{{url("/")}}/users/update/${user_Id}`; // Build the correct URL
                                 // Show popup confirmation
 
                                     fetch(url, {
