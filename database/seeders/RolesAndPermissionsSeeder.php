@@ -44,6 +44,11 @@ class RolesAndPermissionsSeeder extends Seeder
                 'user create',
                 'user edit',
                 'user delete',
+                'roles view',
+                'roles view',
+                'role view',
+                'role create',
+                'role edit',
             ],
             'Reports' => [
                 'Reports Section View'

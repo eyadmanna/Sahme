@@ -112,8 +112,12 @@
                             <!--end::Card body-->
                             <!--begin::Card footer-->
                             <div class="card-footer flex-wrap pt-0">
+                                @can('role view')
                                 <a href="{{url('view-roles/'.$role->id)}}" class="btn btn-light btn-active-primary my-1 me-2">@lang('admin.View Role')</a>
+                                @endcan
+                                @can('role edit')
                                 <button type="button" data-role-id="{{ $role->id }}" class="btn btn-light btn-active-light-primary my-1 edit-role-btn" data-bs-toggle="modal" data-bs-target="#kt_modal_update_role">@lang('admin.Edit Role')</button>
+                                @endcan
                             </div>
                             <!--end::Card footer-->
                         </div>
@@ -122,6 +126,7 @@
                     <!--end::Col-->
                 @endforeach
                     <!--begin::Add new card-->
+                    @can('role create')
                     <div class="ol-md-4">
                         <!--begin::Card-->
                         <div class="card h-md-100">
@@ -143,6 +148,7 @@
                         <!--begin::Card-->
                     </div>
                     <!--begin::Add new card-->
+                    @endcan
             </div>
             <!--end::Row-->
             <!--begin::Modals-->

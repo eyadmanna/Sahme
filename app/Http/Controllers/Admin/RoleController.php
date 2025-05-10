@@ -11,6 +11,13 @@ use Illuminate\Validation\Rule;
 
 class RoleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:roles view');
+        $this->middleware('can:role view')->only('show');
+        $this->middleware('can:role create')->only('store');
+        $this->middleware('can:role edit')->only('update');
+    }
     /**
      * Display a listing of the resource.
      */

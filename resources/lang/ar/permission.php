@@ -23,6 +23,10 @@ return [
     'Contractor Section View' => 'عرض قسم المقاولين',
     'Settings Section View' => 'عرض قسم الإعدادات',
     'Reports Section View' => 'عرض قسم التقارير',
+    'roles view' => 'عرض الأدوار',
+    'role view' => 'عرض الدور',
+    'role create' => 'أضافة الدور',
+    'role edit' => 'تعديل الدور',
 
 ];
 

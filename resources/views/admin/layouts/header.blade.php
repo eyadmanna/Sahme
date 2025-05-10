@@ -1174,6 +1174,7 @@
                                     <!--end:Menu link-->
                                     @endcan
                                     <!--begin:Menu link-->
+                                    @can('roles view')
                                     <div class="menu-item">
                                         <!--begin:Menu link-->
                                         <a class="menu-link py-3" href="{{route('roles.index')}}">
@@ -1187,6 +1188,7 @@
                                         </a>
                                     </div>
                                     <!--end:Menu link-->
+                                    @endcan
                                 </div>
                                 <!--end:Menu sub-->
                             </div>
