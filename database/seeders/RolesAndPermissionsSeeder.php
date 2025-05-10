@@ -19,42 +19,50 @@ class RolesAndPermissionsSeeder extends Seeder
         // Reset cached roles and permissions
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
-        Permission::firstOrCreate(
-            ['name' => 'user view', 'guard_name' => 'web'],
-            ['group' => 'Settings']
-        );
-        Permission::firstOrCreate(
-            ['name' => 'user create', 'guard_name' => 'web'],
-            ['group' => 'Settings']
-        );
-        Permission::firstOrCreate(
-            ['name' => 'user edit', 'guard_name' => 'web'],
-            ['group' => 'Settings']
-        );
-        Permission::firstOrCreate(
-            ['name' => 'user delete', 'guard_name' => 'web'],
-            ['group' => 'Settings']
-        );
-        Permission::firstOrCreate(
-            ['name' => 'Land view', 'guard_name' => 'web'],
-            ['group' => 'Land management']
-        );
-        Permission::firstOrCreate(
-            ['name' => 'Land create', 'guard_name' => 'web'],
-            ['group' => 'Land management']
-        );
-        Permission::firstOrCreate(
-            ['name' => 'Land edit', 'guard_name' => 'web'],
-            ['group' => 'Land management']
-        );
-        Permission::firstOrCreate(
-            ['name' => 'Projects view', 'guard_name' => 'web'],
-            ['group' => 'Projects management']
-        );
-        Permission::firstOrCreate(
-            ['name' => 'Projects create', 'guard_name' => 'web'],
-            ['group' => 'Projects management']
-        );
+        $permissions = [
+            'Land management' => [
+                'Land Section View',
+                'Land view',
+                'Land create',
+                'Land edit',
+            ],
+            'Projects management' => [
+                'Projects Section View',
+                'Projects view',
+                'Projects create',
+            ],
+            'Engineering Partner Management' => [
+                'Engineering Section View'
+            ],
+            'Contractor management' => [
+                'Contractor Section View'
+            ],
+            'Settings' => [
+                'Settings Section View',
+                'users view',
+                'user view',
+                'user create',
+                'user edit',
+                'user delete',
+                'roles view',
+                'roles view',
+                'role view',
+                'role create',
+                'role edit',
+            ],
+            'Reports' => [
+                'Reports Section View'
+            ]
+        ];
+
+        foreach ($permissions as $group => $actions) {
+            foreach ($actions as $name) {
+                Permission::firstOrCreate(
+                    ['name' => $name, 'guard_name' => 'web'],
+                    ['group' => $group]
+                );
+            }
+        }
 
 
 

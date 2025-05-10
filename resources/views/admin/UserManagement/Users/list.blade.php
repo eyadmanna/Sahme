@@ -17,10 +17,10 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-gray-600">@lang('admin.User Management')</li>
+                    <li class="breadcrumb-item text-gray-600">@lang('admin.System settings')</li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-gray-600">@lang('admin.Users')</li>
+                    <li class="breadcrumb-item text-gray-600">@lang('admin.User and Permission Management')</li>
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="breadcrumb-item text-gray-500">@lang('admin.Users List')</li>
@@ -59,11 +59,11 @@
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
                             <!--begin::Filter-->
-                            <button type="button" class="btn btn-light-primary me-3" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                            <button type="button" class="btn btn-light-primary me-3" data-bs-toggle="collapse" href="#kt_user_view_details">
                                 <i class="ki-duotone ki-filter fs-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
-                                </i>Filter</button>
+                                </i></button>
                             <!--begin::Menu 1-->
                             <div class="menu menu-sub menu-sub-dropdown w-300px w-md-325px" data-kt-menu="true">
                                 <!--begin::Header-->
@@ -109,17 +109,12 @@
                             </div>
                             <!--end::Menu 1-->
                             <!--end::Filter-->
-                            <!--begin::Export-->
-                            <button type="button" class="btn btn-light-primary me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_export_users">
-                                <i class="ki-duotone ki-exit-up fs-2">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                </i>Export</button>
-                            <!--end::Export-->
+                            @can('user create')
                             <!--begin::Add user-->
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
                                 <i class="ki-duotone ki-plus fs-2"></i>@lang('admin.Add User')</button>
                             <!--end::Add user-->
+                            @endcan
                         </div>
                         <!--end::Toolbar-->
                         <!--begin::Group actions-->
@@ -129,84 +124,6 @@
                             <button type="button" class="btn btn-danger" data-kt-user-table-select="delete_selected">Delete Selected</button>
                         </div>
                         <!--end::Group actions-->
-                        <!--begin::Modal - Adjust Balance-->
-                        <div class="modal fade" id="kt_modal_export_users" tabindex="-1" aria-hidden="true">
-                            <!--begin::Modal dialog-->
-                            <div class="modal-dialog modal-dialog-centered mw-650px">
-                                <!--begin::Modal content-->
-                                <div class="modal-content">
-                                    <!--begin::Modal header-->
-                                    <div class="modal-header">
-                                        <!--begin::Modal title-->
-                                        <h2 class="fw-bold">Export Users</h2>
-                                        <!--end::Modal title-->
-                                        <!--begin::Close-->
-                                        <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
-                                            <i class="ki-duotone ki-cross fs-1">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                            </i>
-                                        </div>
-                                        <!--end::Close-->
-                                    </div>
-                                    <!--end::Modal header-->
-                                    <!--begin::Modal body-->
-                                    <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                                        <!--begin::Form-->
-                                        <form id="kt_modal_export_users_form" class="form" action="#">
-                                            <!--begin::Input group-->
-                                            <div class="fv-row mb-10">
-                                                <!--begin::Label-->
-                                                <label class="fs-6 fw-semibold form-label mb-2">Select Roles:</label>
-                                                <!--end::Label-->
-                                                <!--begin::Input-->
-                                                <select name="role" data-control="select2" data-placeholder="Select a role" data-hide-search="true" class="form-select form-select-solid fw-bold">
-                                                    <option></option>
-                                                    <option value="Administrator">Administrator</option>
-                                                    <option value="Analyst">Analyst</option>
-                                                    <option value="Developer">Developer</option>
-                                                    <option value="Support">Support</option>
-                                                    <option value="Trial">Trial</option>
-                                                </select>
-                                                <!--end::Input-->
-                                            </div>
-                                            <!--end::Input group-->
-                                            <!--begin::Input group-->
-                                            <div class="fv-row mb-10">
-                                                <!--begin::Label-->
-                                                <label class="required fs-6 fw-semibold form-label mb-2">Select Export Format:</label>
-                                                <!--end::Label-->
-                                                <!--begin::Input-->
-                                                <select name="format" data-control="select2" data-placeholder="Select a format" data-hide-search="true" class="form-select form-select-solid fw-bold">
-                                                    <option></option>
-                                                    <option value="excel">Excel</option>
-                                                    <option value="pdf">PDF</option>
-                                                    <option value="cvs">CVS</option>
-                                                    <option value="zip">ZIP</option>
-                                                </select>
-                                                <!--end::Input-->
-                                            </div>
-                                            <!--end::Input group-->
-                                            <!--begin::Actions-->
-                                            <div class="text-center">
-                                                <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">Discard</button>
-                                                <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
-                                                    <span class="indicator-label">Submit</span>
-                                                    <span class="indicator-progress">Please wait...
-																	<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                                </button>
-                                            </div>
-                                            <!--end::Actions-->
-                                        </form>
-                                        <!--end::Form-->
-                                    </div>
-                                    <!--end::Modal body-->
-                                </div>
-                                <!--end::Modal content-->
-                            </div>
-                            <!--end::Modal dialog-->
-                        </div>
-                        <!--end::Modal - New Card-->
                         <!--begin::Modal - Add task-->
                         <div class="modal fade" id="kt_modal_add_user" tabindex="-1" aria-hidden="true">
                             <!--begin::Modal dialog-->
@@ -345,7 +262,7 @@
                                             <!--end::Scroll-->
                                             <!--begin::Actions-->
                                             <div class="text-center pt-10">
-                                                <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal" aria-label="Close">@lang('admin.Discard')</button>
+                                                <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">@lang('admin.Discard')</button>
                                                 <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
                                                     <span class="indicator-label">@lang('admin.Submit')</span>
                                                     <span class="indicator-progress">@lang('admin.Please wait...')
@@ -367,6 +284,38 @@
                     <!--end::Card toolbar-->
                 </div>
                 <!--end::Card header-->
+                <div id="kt_user_view_details" class="collapse mb-5">
+                    <div class="py-5 px-10">
+                        <form class="kt-form kt-form--label-right form-control" id="filters" method="GET" autocomplete="off">
+
+                            <div class="form-group row">
+                                <div class="col-form-label col-lg-3 col-sm-6">
+                                    <label class="form-control-label">@lang('admin.Mobile number')</label>
+                                    <input type="number" class="form-control" id="mobile_number" name="mobile_number">
+                                </div>
+
+                                <div class="col-form-label col-lg-3 col-sm-6">
+                                    <label class="form-control-label selectpicker">@lang('admin.Role name')</label>
+                                    <select class="form-select" id="role" name="role">
+                                        <option value="">@lang('admin.Add a Role')</option>
+                                    @foreach($roles as $role)
+                                            <option value="{{$role->id}}">{{$role->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-form-label col-lg-2 col-sm-6">
+                                    <a href="javascript:void(0)" style="width: 100%" class="btn btn-info search_btn"><i class="la la-search"></i> @lang('admin.Search')</a>
+                                </div>
+                                <div class="col-form-label col-lg-2 col-sm-6">
+                                    <a href="javascript:void(0)" style="width: 100%" class="btn btn-secondary reset_search"><i class="la la-recycle"></i> @lang('admin.Reset')</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
                 <!--begin::Card body-->
                 <div class="card-body py-4">
                     <!--begin::Table-->

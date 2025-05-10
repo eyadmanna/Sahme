@@ -354,7 +354,6 @@
                                     const formData = new FormData(form); // Handles file uploads too
                                     const roleId = role_id.value; // Get role_id from the hidden input
                                     const url = `/update-roles/${roleId}`; // Build the correct URL
-                                    // Show popup confirmation
 
                                     fetch(url, {
                                         method: 'POST',

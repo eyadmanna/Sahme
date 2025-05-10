@@ -2,10 +2,18 @@
     "use strict";
 
     $(document).ready(function () {
+        $('#role').select2({
+        });
         let table = $("#kt_table_users").DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('users.getUsers') }}",
+            ajax: {
+                url: "{{ route('users.getUsers') }}",
+                data: function (d) {
+                    d.mobile_number = $('#mobile_number').val();
+                    d.role = $('#role').val();
+                }
+            },
             columns: [
                 { data: 'name', name: 'name' }, // 👈 This matches the column
                 { data: 'mobile_number', name: 'mobile_number' },
@@ -28,6 +36,22 @@
                     KTMenu.createInstances();
                 }
             }
+        });
+        let searchTimeout;
+        $('[data-kt-user-table-filter="search"]').on('keyup', function () {
+            clearTimeout(searchTimeout);
+            let input = this;
+
+            searchTimeout = setTimeout(function () {
+                table.search(input.value).draw();
+            }, 300); // delay in milliseconds
+        });
+        $('.search_btn').on('click', function () {
+            table.draw(); // redraw the table with the filter values
+        });
+        $('.reset_search').on('click', function () {
+            $('#filters')[0].reset(); // clear form fields
+            table.draw(); // refresh table
         });
 // Class definition
         var KTUsersAddUser = function () {
@@ -129,6 +153,8 @@
                                                 }).then(function (result) {
                                                     if (result.isConfirmed) {
                                                         form.reset();
+                                                        modal.hide(); // Hide the modal if needed
+                                                        table.ajax.reload(); //  Reload the DataTable
                                                     }
                                                 });
                                             } else if (response.status === 422) {
@@ -199,7 +225,7 @@
                         showCancelButton: true,
                         buttonsStyling: false,
                         confirmButtonText: "@lang('admin.Yes, cancel it!')",
-                        cancelButtonText: "No, return",
+                        cancelButtonText: "@lang('admin.No, return')",
                         customClass: {
                             confirmButton: "btn btn-primary",
                             cancelButton: "btn btn-active-light"
@@ -222,39 +248,6 @@
                     });
                 });
 
-                // Close button handler
-                const closeButton = element.querySelector('[data-kt-users-modal-action="close"]');
-                closeButton.addEventListener('click', e => {
-                    e.preventDefault();
-
-                    Swal.fire({
-                        text: "@lang('admin.Are you sure you would like to cancel?')",
-                        icon: "warning",
-                        showCancelButton: true,
-                        buttonsStyling: false,
-                        confirmButtonText: "@lang('admin.Yes, cancel it!')",
-                        cancelButtonText: "@lang('admin.No, return')",
-                        customClass: {
-                            confirmButton: "btn btn-primary",
-                            cancelButton: "btn btn-active-light"
-                        }
-                    }).then(function (result) {
-                        if (result.value) {
-                            form.reset(); // Reset form
-                            modal.hide();
-                        } else if (result.dismiss === 'cancel') {
-                            Swal.fire({
-                                text: "@lang('admin.Your form has not been cancelled!.')",
-                                icon: "error",
-                                buttonsStyling: false,
-                                confirmButtonText: "@lang('admin.OK')",
-                                customClass: {
-                                    confirmButton: "btn btn-primary",
-                                }
-                            });
-                        }
-                    });
-                });
             }
 
             return {
@@ -265,9 +258,84 @@
             };
         }();
 
+        $(document).on('click', '[data-kt-users-table-filter="delete_row"]', function (e) {
+            e.preventDefault();
+
+
+            const parent = $(this).closest('tr');
+            const userName = parent.find('.user-name').text().trim();
+            const userId = $(this).data('user-id');
+            const userStatus = $(this).data('user-status');
+
+            const confirmText = userStatus == 1
+                ? "{{ __('admin.Are you sure you want to delete') }}"
+                : "{{ __('admin.Are you sure you want to reactivate?') }}";
+            Swal.fire({
+                text: confirmText + ' ' + userName + '?',
+                icon: "warning",
+                showCancelButton: true,
+                buttonsStyling: false,
+                confirmButtonText: "@lang('admin.Yes, delete!')",
+                cancelButtonText: "@lang('admin.No, cancel')",
+                customClass: {
+                    confirmButton: "btn fw-bold btn-danger",
+                    cancelButton: "btn fw-bold btn-active-light-primary"
+                }
+            }).then(function (result) {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: `{{ url('/users/delete/') }}/${userId}`,
+                        type: 'DELETE',
+                        data: {
+                            _token: $('meta[name="csrf-token"]').attr('content') // CSRF token
+                        },
+                        success: function (response) {
+                            Swal.fire({
+                                text: userName + " @lang('admin.has been deleted.')",
+                                icon: "success",
+                                buttonsStyling: false,
+                                confirmButtonText: "@lang('admin.OK')",
+                                customClass: {
+                                    confirmButton: "btn fw-bold btn-primary",
+                                }
+                            }).then(() => {
+                                $('#kt_table_users').DataTable().ajax.reload(null, false);
+                            });
+                        },
+                        error: function (xhr) {
+                            let message = "@lang('admin.Error deleting user. Please try again.')";
+                            if (xhr.responseJSON && xhr.responseJSON.message) {
+                                message = xhr.responseJSON.message;
+                            }
+                            Swal.fire({
+                                text: message,
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "@lang('admin.OK')",
+                                customClass: {
+                                    confirmButton: "btn fw-bold btn-primary",
+                                }
+                            });
+                        }
+                    });
+                } else if (result.dismiss === 'cancel') {
+                    Swal.fire({
+                        text: userName + "@lang('admin.was not deleted.')",
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "@lang('admin.OK')",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary"
+                        }
+                    });
+                }
+            });
+        });
+
 // On document ready
         KTUtil.onDOMContentLoaded(function () {
             KTUsersAddUser.init();
+
         });
     });
 
