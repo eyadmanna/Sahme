@@ -13,7 +13,7 @@ class CreateContractorsTable extends Migration
             $table->string('company_name', 100);
             $table->string('phone', 20)->nullable();
             $table->string('mobile', 20)->nullable();
-            $table->integer('governerate_cd')->nullable();
+            $table->integer('province_cd')->nullable();
             $table->integer('city_cd')->nullable();
             $table->integer('district_cd')->nullable();
             $table->string('address', 200)->nullable();

@@ -13,7 +13,7 @@ class CreateInvestorsTable extends Migration
             $table->string('full_name', 100);
             $table->string('phone', 20)->nullable();
             $table->string('mobile', 20);
-            $table->integer('governerate_cd');
+            $table->integer('province_cd');
             $table->integer('city_cd');
             $table->integer('district_cd')->nullable();
             $table->text('address')->nullable();

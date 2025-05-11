@@ -13,7 +13,7 @@ class CreateEngineeringPartnersTable extends Migration
             $table->string('company_name', 100);
             $table->string('phone', 20)->nullable();
             $table->string('mobile', 20);
-            $table->integer('governerate_cd');
+            $table->integer('province_cd');
             $table->integer('city_cd');
             $table->integer('district_cd')->nullable();
             $table->string('address', 200)->nullable();
