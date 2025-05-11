@@ -4,6 +4,7 @@ namespace App\Http\Controllers\EngineeringPartner\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\EngineeringPartner;
+use App\Models\Lookups;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +13,11 @@ class RegisterController extends Controller
 {
     public function showRegisterForm()
     {
-        return view('engineering_partner.auth.register');
+        $data["provinces"] = Lookups::query()->where([
+            "s_key" => "province"
+        ])->whereNot("parent_id", 0)->where("status", 1)->get();
+
+        return view('engineering_partner.auth.register',compact('data'));
     }
 
     public function register(Request $request)

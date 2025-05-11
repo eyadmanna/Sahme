@@ -2,7 +2,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EngineeringPartner\Auth\LoginController;
 use App\Http\Controllers\EngineeringPartner\Auth\RegisterController;
+use App\Http\Controllers\EngineeringPartner\LookupsController;
 
+Route::post('lookups/get_children_by_parent', [LookupsController::class, 'get_children_by_parent'])->name('get_children_by_parent');
 
 Route::prefix('engineering')->name('engineering.')->group(function () {
     Route::middleware('guest:engineering')->group(function () {

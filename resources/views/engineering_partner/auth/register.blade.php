@@ -20,10 +20,10 @@
     <!--end::Fonts-->
     <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
     @if(App::getLocale() == 'ar')
-        <link href="{{asset('assets/css/style.bundle.rtl.css')}}" rel="stylesheet" type="text/css" />
+         <link href="{{asset('assets/css/style.bundle.rtl.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('assets/plugins/global/plugins.bundle.rtl.css')}}" rel="stylesheet" type="text/css" />
     @else
-        <link href="{{asset('assets/plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
+         <link href="{{asset('assets/plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('assets/css/style.bundle.css')}}" rel="stylesheet" type="text/css" />
     @endif
     <!--end::Global Stylesheets Bundle-->
@@ -89,6 +89,42 @@
                         <div class="fv-row mb-8">
                             <!--begin::Email-->
                             <input type="text" placeholder="@lang('engineering.Mobile')" name="mobile" autocomplete="off" class="form-control bg-transparent" />
+                            <!--end::Email-->
+                        </div>
+                        <!--begin::Input group-->
+                        <!--begin::Input group=-->
+                        <div class="fv-row mb-8 " >
+                            <!--begin::Email-->
+
+                            <select class="form-select location_province"  name="province_cd" data-control="select2" data-placeholder="Select an option">
+                                <option value="" selected>@lang('lang.Select')..</option>
+                                @foreach ($data['provinces'] as $val)
+                                    <option value="{{ $val->id }}">
+                                        {{ $val->{'name_' . app()->getLocale()} }}</option>
+                                @endforeach
+                            </select>
+                            <!--end::Email-->
+                        </div>
+                        <!--begin::Input group-->
+                        <!--begin::Input group=-->
+                        <div class="fv-row mb-8" id="cities_block">
+                            <!--begin::Email-->
+                            <select class="form-select location_city" id="location_cities"  name="city_cd" data-control="select2" data-placeholder="Select an option">
+                                <option value="" selected>@lang('lang.Select')..</option>
+
+                            </select>
+
+                            <!--end::Email-->
+                        </div>
+                        <!--begin::Input group-->
+                        <!--begin::Input group=-->
+                        <div class="fv-row mb-8" id="areas_block">
+                            <!--begin::Email-->
+                            <select class="form-select" id="location_areas"  name="district_cd" data-control="select2" data-placeholder="Select an option">
+                                <option value="" selected>@lang('lang.Select')..</option>
+
+                            </select>
+
                             <!--end::Email-->
                         </div>
                         <!--begin::Input group-->
@@ -187,11 +223,13 @@
 <!--begin::Global Javascript Bundle(mandatory for all pages)-->
 <script src="{{asset('assets/plugins/global/plugins.bundle.js')}}"></script>
 <script src="{{asset('assets/js/scripts.bundle.js')}}"></script>
+<script src="{{asset('assets/js/bootstrap-select.min.js')}}"></script>
 <!--end::Global Javascript Bundle-->
 <!--begin::Custom Javascript(used for this page only)-->
 @include('auth.Partial.register')
 <!--end::Custom Javascript-->
 <!--end::Javascript-->
 </body>
+
 <!--end::Body-->
 </html>
