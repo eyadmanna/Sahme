@@ -19,17 +19,17 @@
                             validators: {
                                 regexp: {
                                     regexp: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                                    message: 'The value is not a valid email address',
+                                    message: '@lang('admin.The value is not a valid email address')',
                                 },
                                 notEmpty: {
-                                    message: 'Email address is required'
+                                    message: '@lang('admin.Email address is required')'
                                 }
                             }
                         },
                         'password': {
                             validators: {
                                 notEmpty: {
-                                    message: 'The password is required'
+                                    message: '@lang('admin.The password is required')'
                                 }
                             }
                         }
@@ -72,10 +72,10 @@
 
                             // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                             Swal.fire({
-                                text: "You have successfully logged in!",
+                                text: "@lang('admin.You have successfully logged in!')",
                                 icon: "success",
                                 buttonsStyling: false,
-                                confirmButtonText: "Ok, got it!",
+                                confirmButtonText: "@lang('admin.OK')",
                                 customClass: {
                                     confirmButton: "btn btn-primary"
                                 },
@@ -99,10 +99,10 @@
                     } else {
                         // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                         Swal.fire({
-                            text: "Sorry, looks like there are some errors detected, please try again.",
+                            text: "@lang('admin.Sorry, looks like there are some errors detected, please try again.')",
                             icon: "error",
                             buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
+                            confirmButtonText: "@lang('admin.OK')",
                             customClass: {
                                 confirmButton: "btn btn-primary"
                             }
@@ -134,10 +134,10 @@
 
                                 // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                                 Swal.fire({
-                                    text: "You have successfully logged in!",
+                                    text: "@lang('admin.You have successfully logged in!')",
                                     icon: "success",
                                     buttonsStyling: false,
-                                    confirmButtonText: "Ok, got it!",
+                                    confirmButtonText: "@lang('admin.OK')",
                                     customClass: {
                                         confirmButton: "btn btn-primary"
                                     }
@@ -151,10 +151,10 @@
                             } else {
                                 // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                                 Swal.fire({
-                                    text: "Sorry, the email or password is incorrect, please try again.",
+                                    text: "@lang('admin.Sorry, the email or password is incorrect, please try again.')",
                                     icon: "error",
                                     buttonsStyling: false,
-                                    confirmButtonText: "Ok, got it!",
+                                    confirmButtonText: "@lang('admin.OK')",
                                     customClass: {
                                         confirmButton: "btn btn-primary"
                                     }
@@ -201,10 +201,10 @@
                     } else {
                         // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                         Swal.fire({
-                            text: "Sorry, looks like there are some errors detected, please try again.",
+                            text: "@lang('admin.Sorry, looks like there are some errors detected, please try again.')",
                             icon: "error",
                             buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
+                            confirmButtonText: "@lang('admin.OK')",
                             customClass: {
                                 confirmButton: "btn btn-primary"
                             }

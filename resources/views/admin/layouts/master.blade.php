@@ -3457,7 +3457,7 @@ License: For each use you must have a valid license purchased only from above li
                                         <!--end::Checkbox-->
                                         <!--begin::Avatar-->
                                         <div class="symbol symbol-35px symbol-circle">
-                                            <img alt="Pic" src="{{asset('assets/media/avatars/300-6.jpgF')}}" />
+                                            <img alt="Pic" src="{{asset('assets/media/avatars/300-6.jpg')}}" />
                                         </div>
                                         <!--end::Avatar-->
                                         <!--begin::Details-->

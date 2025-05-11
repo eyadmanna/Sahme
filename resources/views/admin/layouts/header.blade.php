@@ -24,12 +24,20 @@
                     <div class="header-tabs overflow-auto mx-4 ms-lg-10 mb-5 mb-lg-0" id="kt_header_tabs" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_header_navs_wrapper', lg: '#kt_brand_tabs'}">
                         <!--begin::Header tabs-->
                         <ul class="nav flex-nowrap text-nowrap">
+                            @can('Land Section View')
                             <li class="nav-item">
-                                <a class="nav-link active" data-bs-toggle="tab" href="#kt_header_navs_tab_1">إدارة الأراضي</a>
+                                <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}"
+                                   data-bs-toggle="tab"
+                                   href="#kt_header_navs_tab_1"
+                                   aria-selected="{{ request()->routeIs('dashboard') ? 'true' : 'false' }}"
+                                   role="tab">إدارة الأراضي</a>
                             </li>
+                            @endcan
+                            @can('Projects Section View')
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tab" href="#kt_header_navs_tab_2">إدارة المشاريع</a>
                             </li>
+                            @endcan
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tab" href="#kt_header_navs_tab_3">إدارة الشركاء الهندسيين</a>
                             </li>
@@ -37,7 +45,11 @@
                                 <a class="nav-link" data-bs-toggle="tab" href="#kt_header_navs_tab_4">إدارة المقاولين</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#kt_header_navs_tab_5">إعدادات النظام</a>
+                                <a class="nav-link {{ request()->routeIs('users.index', 'roles.index','users.view') ? 'active' : '' }}"
+                                   data-bs-toggle="tab"
+                                   href="#kt_header_navs_tab_5"
+                                   aria-selected="{{ request()->routeIs('users.index', 'roles.index','users.view') ? 'true' : 'false' }}"
+                                   role="tab">@lang('admin.System settings')</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tab" href="#kt_header_navs_tab_6">التقارير </a>
@@ -952,9 +964,9 @@
                                 <!--end::Avatar-->
                                 <!--begin::Username-->
                                 <div class="d-flex flex-column">
-                                    <div class="fw-bold d-flex align-items-center fs-5">Max Smith
+                                    <div class="fw-bold d-flex align-items-center fs-5">{{auth()->user()->name}}
                                         <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Pro</span></div>
-                                    <a href="#" class="fw-semibold text-muted text-hover-primary fs-7">max@kt.com</a>
+                                    <a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{auth()->user()->email}}</a>
                                 </div>
                                 <!--end::Username-->
                             </div>
@@ -1077,7 +1089,8 @@
                 <!--begin::Header tab content-->
                 <div class="tab-content" data-kt-scroll="true" data-kt-scroll-activate="{default: true, lg: false}" data-kt-scroll-height="auto" data-kt-scroll-offset="70px">
                     <!--begin::Tab panel-->
-                    <div class="tab-pane fade active show" id="kt_header_navs_tab_1">                        
+                    @can('Land Section View')
+                    <div class="tab-pane fade {{ request()->routeIs('dashboard') ? 'show active' : '' }}" id="kt_header_navs_tab_1">
                         <!--begin::Wrapper-->
                         <div class="d-flex flex-column flex-lg-row flex-lg-stack flex-wrap gap-2 px-4 px-lg-0">
                             <div class="d-flex flex-column flex-lg-row gap-2">
@@ -1088,6 +1101,7 @@
                         </div>
                         <!--end::Wrapper-->
                     </div>
+                    @endcan()
                     <!--end::Tab panel-->
                     <!--begin::Tab panel-->
                     <div class="tab-pane fade" id="kt_header_navs_tab_2">
@@ -1128,22 +1142,23 @@
                     </div>
                     <!--end::Tab panel-->
                     <!--begin::Tab panel-->
-                    <div class="tab-pane fade" id="kt_header_navs_tab_5">
+                    <div class="tab-pane fade {{ request()->routeIs('users.index', 'roles.index','users.view') ? 'show active' : '' }}" id="kt_header_navs_tab_5">
                        <!--begin::Menu wrapper-->
                        <div class="header-menu flex-column align-items-stretch flex-lg-row">
                         <!--begin::Menu-->
                         <div class="menu menu-rounded menu-column menu-lg-row menu-root-here-bg-desktop menu-active-bg menu-title-gray-700 menu-state-primary menu-arrow-gray-500 fw-semibold align-items-stretch flex-grow-1 px-2 px-lg-0" id="#kt_header_menu" data-kt-menu="true">
-                            
+
                             <!--begin:Menu item-->
                             <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
                                 <!--begin:Menu link-->
                                 <span class="menu-link py-3">
-                                                        <span class="btn btn-sm btn-light-info fw-bold">إدارة المستخدمين والصلاحيات</span>
+                                                        <span class="btn btn-sm btn-light-info fw-bold">@lang('admin.User and Permission Management')</span>
                                                         <span class="menu-arrow d-lg-none"></span>
                                                     </span>
                                 <!--end:Menu link-->
                                 <!--begin:Menu sub-->
                                 <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown px-lg-2 py-lg-4 w-lg-250px">
+                                    @can('users view')
                                     <!--begin:Menu link-->
                                     <div class="menu-item">
                                         <!--begin:Menu link-->
@@ -1158,8 +1173,9 @@
                                         </a>
                                     </div>
                                     <!--end:Menu link-->
-
+                                    @endcan
                                     <!--begin:Menu link-->
+                                    @can('roles view')
                                     <div class="menu-item">
                                         <!--begin:Menu link-->
                                         <a class="menu-link py-3" href="{{route('roles.index')}}">
@@ -1173,6 +1189,7 @@
                                         </a>
                                     </div>
                                     <!--end:Menu link-->
+                                    @endcan
                                 </div>
                                 <!--end:Menu sub-->
                             </div>
@@ -1183,7 +1200,7 @@
                     <!--end::Menu wrapper-->
                     </div>
                     <!--end::Tab panel-->
-                    
+
                     <!--begin::Tab panel-->
                     <div class="tab-pane fade" id="kt_header_navs_tab_6">
                         <!--begin::Wrapper-->

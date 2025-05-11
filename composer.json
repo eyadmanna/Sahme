@@ -11,6 +11,7 @@
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "mcamara/laravel-localization": "^2.0",
+        "spatie/laravel-backup": "^8.8",
         "spatie/laravel-permission": "^6.17",
         "yajra/laravel-datatables-oracle": "^10.11"
     },
@@ -63,7 +64,9 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
-        }
+        },
+        "disable-tls": false,
+        "secure-http": true
     },
     "minimum-stability": "stable",
     "prefer-stable": true
