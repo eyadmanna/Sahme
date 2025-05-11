@@ -20,8 +20,13 @@ class CreateInvestorsTable extends Migration
             $table->integer('status_cd');
             $table->string('email', 100)->nullable();
             $table->timestamp('email_verified_at')->nullable();
+            $table->timestamp('mobile_verified_at')->nullable();
             $table->string('password', 255)->nullable();
             $table->string('avatar', 255)->nullable();
+            $table->string('otp_code')->nullable();
+            $table->timestamp('otp_code_expires_at')->nullable();
+            $table->tinyInteger('is_authapp_enabled')->default(0)->comment('Use Authenticator App: 0 Disabled, 1 Enabled');
+            $table->string('authapp_secret')->nullable()->comment('Secret of Authenticator App');
             $table->string('remember_token', 100)->nullable();
             $table->timestamps();
             $table->softDeletes();

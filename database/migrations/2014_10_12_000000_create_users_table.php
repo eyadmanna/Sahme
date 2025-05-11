@@ -17,9 +17,14 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('mobile_number')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->timestamp('mobile_verified_at')->nullable();
             $table->string('password');
             $table->string('status')->default(1)->comment('1 is active , 0 is inactive');
             $table->string('avatar')->nullable(); // Add avatar column
+            $table->string('otp_code')->nullable();
+            $table->timestamp('otp_code_expires_at')->nullable();
+            $table->tinyInteger('is_authapp_enabled')->default(0)->comment('Use Authenticator App: 0 Disabled, 1 Enabled');
+            $table->string('authapp_secret')->nullable()->comment('Secret of Authenticator App');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes(); // adds deleted_at
