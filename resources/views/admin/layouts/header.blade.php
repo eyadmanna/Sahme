@@ -1061,7 +1061,7 @@
                             <a href="{{ route('logout') }}" class="menu-link px-5"
                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="ki-outline ki-logout fs-2 me-2"></i>
-                                Sign Out
+                                @lang('admin.Sign Out')
                             </a>
 
                             <!-- الفورم المخفي لتنفيذ POST -->

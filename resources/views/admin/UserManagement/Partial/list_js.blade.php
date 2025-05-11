@@ -23,6 +23,9 @@
                 { data: 'created_at', name: 'created_at' },
                 { data: 'actions', name: 'actions', orderable: false, searchable: false }
             ],
+            language: {
+                "url": "{{url('/')}}/assets/Arabic.json"
+            },
             createdRow: function (row, data, dataIndex) {
                 $('td', row).each(function (index) {
                     // استثنِ العمود الثاني (name) وأضف class لباقي الأعمدة

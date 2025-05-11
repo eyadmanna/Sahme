@@ -36,6 +36,7 @@ return [
     'Select all' => 'حدد الكل',
     'Enter a role name' => 'أدخل اسم الدور',
     'View Role Details' => 'عرض تفاصيل الدور',
+    'Sign Out' => 'تسجيل الخروج',
 
     /*UserManagement*/
     "User Management" => "إدارة المستخدمين",

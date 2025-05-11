@@ -19,7 +19,7 @@ class UsersSeeder extends Seeder
             ['email' => 'admin@gmail.com'],
             [
                 'name' => 'Admin',
-                'password' => Hash::make('Mohammed123'),
+                'password' => Hash::make('password'),
                 'mobile_number' => '0597750487'
             ]
         );
