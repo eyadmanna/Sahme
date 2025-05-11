@@ -11,7 +11,7 @@ class CreateLandsTable extends Migration
         Schema::create('lands', function (Blueprint $table) {
             $table->id();
             $table->foreignId('investor_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->integer('governerate_cd');
+            $table->integer('province_cd');
             $table->integer('city_cd')->nullable();
             $table->integer('district_cd')->nullable();
             $table->text('address')->nullable();
