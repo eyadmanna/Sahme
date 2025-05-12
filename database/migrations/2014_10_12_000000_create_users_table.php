@@ -20,6 +20,7 @@ return new class extends Migration
             $table->timestamp('mobile_verified_at')->nullable();
             $table->string('password');
             $table->string('status')->default(1)->comment('1 is active , 0 is inactive');
+            $table->timestamp('last_login')->nullable();
             $table->string('avatar')->nullable(); // Add avatar column
             $table->string('otp_code')->nullable();
             $table->timestamp('otp_code_expires_at')->nullable();

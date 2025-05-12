@@ -56,7 +56,7 @@ class UsersController extends Controller
             $user->email = $request->user_email;
             $user->mobile_number = $request->mobile_number;
             $user->avatar = $filename;
-            $user->password = Hash::make('default-password');
+            $user->password = Hash::make('password');
             $user->save();
 
             $role = Role::find($validated['user_role']);
@@ -220,7 +220,7 @@ class UsersController extends Controller
                 return '<td>'.$user->roles->pluck('name')->join(', ') ?? '-'.'</td>';
             })
             ->addColumn('last_login_at', function ($user) {
-                $date = $user->last_login_at ? $user->last_login_at->format('Y-m-d') : '-';
+                $date = $user->last_login ? $user->last_login->format('Y-m-d H:i') : '-';
                 return '<div class="badge badge-light fw-bold">' . $date . '</div>';
             })
             ->addColumn('two_step', function ($user) {

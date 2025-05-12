@@ -375,7 +375,7 @@
                                                     buttonsStyling: false,
                                                     confirmButtonText: "@lang('admin.OK')",
                                                     customClass: {
-                                                        confirmButton: "btn btn-primary"
+                                                        confirmButton: "btn btn-primary",
                                                     }
                                                 }).then(function (result) {
                                                     if (result.isConfirmed) {
