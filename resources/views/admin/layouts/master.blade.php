@@ -18,9 +18,6 @@ License: For each use you must have a valid license purchased only from above li
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://keenthemes.com/metronic" />
-    <meta property="og:site_name" content="Metronic by Keenthemes" />
-    <link rel="canonical" href="http://preview.keenthemes.comindex.html" />
     <link rel="shortcut icon" href="{{asset('assets/media/logos/favicon.ico')}}" />
     <!--begin::Fonts(mandatory for all pages)-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
@@ -39,6 +36,18 @@ License: For each use you must have a valid license purchased only from above li
     @endif
     <!--end::Global Stylesheets Bundle-->
     <script>// Frame-busting to prevent site from being loaded within a frame without permission (click-jacking) if (window.top != window.self) { window.top.location.replace(window.self.location.href); }</script>
+    <style>
+        .select2-container--bootstrap5[dir="rtl"] .select2-dropdown {
+            text-align: right;
+            direction: rtl;
+        }
+
+        .select2-container--bootstrap5[dir="rtl"] .select2-results__options {
+            text-align: right;
+        }
+
+    </style>
+
 </head>
 <!--end::Head-->
 <!--begin::Body-->

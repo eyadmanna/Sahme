@@ -28,11 +28,10 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-
-        // Save last_login time
-        $user = auth()->user();
-        $user->last_login = now();
-        $user->save();
+        // Check if email is verified
+        if (!Auth::user()->hasVerifiedEmail()) {
+            return redirect()->route('verification.notice');
+        }
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }

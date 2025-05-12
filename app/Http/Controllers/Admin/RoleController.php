@@ -13,6 +13,7 @@ class RoleController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('can:Settings Section View');
         $this->middleware('can:roles view');
         $this->middleware('can:role view')->only('show');
         $this->middleware('can:role create')->only('store');

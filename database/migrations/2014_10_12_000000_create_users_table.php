@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('status')->default(1)->comment('1 is active , 0 is inactive');
             $table->timestamp('last_login')->nullable();
             $table->string('avatar')->nullable(); // Add avatar column
+            $table->string('two_factor_code')->nullable();
+            $table->dateTime('two_factor_expires_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes(); // adds deleted_at

@@ -6,7 +6,7 @@ return [
     'Avatar' => 'الصورة',
     'Full Name' => 'الأسم الكامل',
     'Email' => 'الإيميل',
-    'Password' => 'كلمة السر',
+    'Password' => 'كلمة المرور',
     'Role' => 'الأدوار',
     'Or with email' => 'او باستخدام البريد الإلكتروني',
     'I Accept the' => 'أنا أقبل',
@@ -28,6 +28,7 @@ return [
     'Repeat Password' => 'كرر كلمة المرور',
     'Permissions' => 'الأذونات',
     'Roles List' => 'قائمة الأدوار',
+    'Roles' => 'كل الأدوار',
     'Add a Role' => 'أضف دور',
     'Role name' => 'أسم الدور',
     'Role Permissions' => 'أذونات الدور',
@@ -37,6 +38,11 @@ return [
     'Enter a role name' => 'أدخل اسم الدور',
     'View Role Details' => 'عرض تفاصيل الدور',
     'Sign Out' => 'تسجيل الخروج',
+    'My Profile' => 'ملفي الشخصي',
+    'Verify your email' => 'تحقق من بريدك الإلكتروني',
+    'Did’t receive an email?' => 'لم تستلم بريدًا إلكترونيًا؟',
+    'Resend Verification Email' => 'إعادة إرسال بريد إلكتروني للتحقق',
+    'Show lands' => 'عرض الأراضي',
 
     /*UserManagement*/
     "User Management" => "إدارة المستخدمين",
@@ -99,8 +105,31 @@ return [
     "Search"  => "بحث",
     "Reset"  => "إعادة ضبط",
 
+    /*Land management*/
+    'Land management' => 'إدارة الأراضي',
+    'Add land' => 'أضافة أرض',
+    'Adding land for investment' => 'أضافة أرض للاستثمار',
+    'Search for land' => 'بحث عن الارض',
+    'Investor name' => 'أسم المستثمر',
+    'Add a new investor' => 'أضافة مستثمر جديد',
+    'The condition' => 'الحالة',
+    'Registration Date' => 'تاريخ التسجيل',
+    'Governorate' => 'المحافظة',
+    'City' => 'المدينة',
+    'Area' => 'الحى',
+    'Address in detail' => 'العنوان بالتفصيل',
+    'Land area' => 'مساحة الأرض',
+    'Part number' => 'رقم القطعة',
+    'Voucher number' => 'رقم القسيمة',
+    'Type of land ownership' => 'نوع ملكية الأرض',
+
+    /*profile page*/
+    'Profile Details' => 'تفاصيل الملف الشخصي',
+    'Phone number must be active' => 'يجب أن يكون رقم الهاتف نشطًا',
+    'Verified' => 'تم التحقق منه',
+    'Edit Profile' => 'تعديل الملف الشخصي',
     /*message*/
-    'Email address is required' => 'عنوان البريد الإلكتروني مطلوب',
+    'Email address is required' => 'حقل الإيميل مطلوب',
     'The password is required' => 'كلمة المرور مطلوبة',
     'Please enter a valid password' => 'الرجاء إدخال كلمة مرور صالحة',
     'Password confirmation is required' => 'مطلوب تأكيد كلمة المرور',
@@ -119,6 +148,8 @@ return [
     'System settings' => 'إعدادات النظام',
     'User and Permission Management' => 'إدارة المستخدمين والصلاحيات',
 
+    /*footer */
+    'TAQAT - All Rights Reserved' => 'طاقات - جميع الحقوق محفوظة'
 
 
 ];

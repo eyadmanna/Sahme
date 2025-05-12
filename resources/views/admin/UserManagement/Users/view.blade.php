@@ -2546,7 +2546,8 @@
                                 <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_update_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_update_user_header" data-kt-scroll-wrappers="#kt_modal_update_user_scroll" data-kt-scroll-offset="300px">
                                     <!--begin::User form-->
                                     <form id="kt_modal_update_user_form" class="form"  method="POST" enctype="multipart/form-data">
-                                        <input type="hidden" id="edit_user_id" name="user_id" value="{{$user->id}}">
+
+                                    <input type="hidden" id="edit_user_id" name="user_id" value="{{$user->id}}">
                                         <!--begin::Input group-->
                                         <div class="mb-7">
                                             <!--begin::Label-->
@@ -3251,7 +3252,7 @@
                                 <!--end::Label-->
                                 <!--begin::QR code-->
                                 <div class="d-flex flex-center" data-kt-add-auth-action="qr-code">
-                                    <img src="assets/media/misc/qr.png" alt="Scan this QR code" />
+                                    <img src="{{asset('assets/media/misc/qr.png')}}" alt="Scan this QR code" />
                                 </div>
                                 <!--end::QR code-->
                                 <!--begin::Text code-->

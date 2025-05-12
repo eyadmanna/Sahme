@@ -26,11 +26,11 @@
                         <ul class="nav flex-nowrap text-nowrap">
                             @can('Land Section View')
                             <li class="nav-item">
-                                <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}"
+                                <a class="nav-link {{ request()->routeIs('dashboard', 'lands.index') ? 'active' : '' }}"
                                    data-bs-toggle="tab"
                                    href="#kt_header_navs_tab_1"
-                                   aria-selected="{{ request()->routeIs('dashboard') ? 'true' : 'false' }}"
-                                   role="tab">إدارة الأراضي</a>
+                                   aria-selected="{{ request()->routeIs('dashboard', 'lands.index') ? 'true' : 'false' }}"
+                                   role="tab">@lang('admin.Land management')</a>
                             </li>
                             @endcan
                             @can('Projects Section View')
@@ -44,6 +44,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tab" href="#kt_header_navs_tab_4">إدارة المقاولين</a>
                             </li>
+                            @can('Settings Section View')
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('users.index', 'roles.index','users.view') ? 'active' : '' }}"
                                    data-bs-toggle="tab"
@@ -51,6 +52,7 @@
                                    aria-selected="{{ request()->routeIs('users.index', 'roles.index','users.view') ? 'true' : 'false' }}"
                                    role="tab">@lang('admin.System settings')</a>
                             </li>
+                            @endcan()
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tab" href="#kt_header_navs_tab_6">التقارير </a>
                             </li>
@@ -947,7 +949,7 @@
                         <!--end::Name-->
                         <!--begin::Symbol-->
                         <div class="symbol symbol-30px symbol-md-40px">
-                            <img src="{{asset('assets/media/avatars/300-1.jpg')}}" alt="image" />
+                            <img src="{{auth()->user()->avatar ? asset('uploads/usersImage/' . auth()->user()->avatar) : asset('assets/media/avatars/300-1.jpg')}}" alt="image" />
                         </div>
                         <!--end::Symbol-->
                     </div>
@@ -959,13 +961,13 @@
                             <div class="menu-content d-flex align-items-center px-3">
                                 <!--begin::Avatar-->
                                 <div class="symbol symbol-50px me-5">
-                                    <img alt="Logo" src="{{asset('assets/media/avatars/300-1.jpg')}}" />
+                                    <img alt="Logo" src="{{auth()->user()->avatar ? asset('uploads/usersImage/' . auth()->user()->avatar) : asset('assets/media/avatars/300-1.jpg')}}" />
                                 </div>
                                 <!--end::Avatar-->
                                 <!--begin::Username-->
                                 <div class="d-flex flex-column">
                                     <div class="fw-bold d-flex align-items-center fs-5">{{auth()->user()->name}}
-                                        <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Pro</span></div>
+                                    </div>
                                     <a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{auth()->user()->email}}</a>
                                 </div>
                                 <!--end::Username-->
@@ -977,7 +979,7 @@
                         <!--end::Menu separator-->
                         <!--begin::Menu item-->
                         <div class="menu-item px-5">
-                            <a href="account/overview.html" class="menu-link px-5">My Profile</a>
+                            <a href="{{route('profile.view')}}" class="menu-link px-5">@lang('admin.My Profile')</a>
                         </div>
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
@@ -988,63 +990,6 @@
 														<span class="badge badge-light-danger badge-circle fw-bold fs-7">3</span>
 													</span>
                             </a>
-                        </div>
-                        <!--end::Menu item-->
-                        <!--begin::Menu item-->
-                        <div class="menu-item px-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="left-start" data-kt-menu-offset="-15px, 0">
-                            <a href="#" class="menu-link px-5">
-                                <span class="menu-title">My Subscription</span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <!--begin::Menu sub-->
-                            <div class="menu-sub menu-sub-dropdown w-175px py-4">
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="account/referrals.html" class="menu-link px-5">Referrals</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="account/billing.html" class="menu-link px-5">Billing</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="account/statements.html" class="menu-link px-5">Payments</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="account/statements.html" class="menu-link d-flex flex-stack px-5">Statements
-                                        <span class="ms-2 lh-0" data-bs-toggle="tooltip" title="View your statements">
-															<i class="ki-duotone ki-information-5 fs-5">
-																<span class="path1"></span>
-																<span class="path2"></span>
-																<span class="path3"></span>
-															</i>
-														</span></a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu separator-->
-                                <div class="separator my-2"></div>
-                                <!--end::Menu separator-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <div class="menu-content px-3">
-                                        <label class="form-check form-switch form-check-custom form-check-solid">
-                                            <input class="form-check-input w-30px h-20px" type="checkbox" value="1" checked="checked" name="notifications" />
-                                            <span class="form-check-label text-muted fs-7">Notifications</span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <!--end::Menu item-->
-                            </div>
-                            <!--end::Menu sub-->
-                        </div>
-                        <!--end::Menu item-->
-                        <!--begin::Menu item-->
-                        <div class="menu-item px-5">
-                            <a href="account/statements.html" class="menu-link px-5">My Statements</a>
                         </div>
                         <!--end::Menu item-->
                         <!--begin::Menu separator-->
@@ -1090,11 +1035,11 @@
                 <div class="tab-content" data-kt-scroll="true" data-kt-scroll-activate="{default: true, lg: false}" data-kt-scroll-height="auto" data-kt-scroll-offset="70px">
                     <!--begin::Tab panel-->
                     @can('Land Section View')
-                    <div class="tab-pane fade {{ request()->routeIs('dashboard') ? 'show active' : '' }}" id="kt_header_navs_tab_1">
+                    <div class="tab-pane fade {{ request()->routeIs('dashboard','lands.index','lands.add') ? 'show active' : '' }}" id="kt_header_navs_tab_1">
                         <!--begin::Wrapper-->
                         <div class="d-flex flex-column flex-lg-row flex-lg-stack flex-wrap gap-2 px-4 px-lg-0">
                             <div class="d-flex flex-column flex-lg-row gap-2">
-                                <a class="btn btn-sm btn-light-primary fw-bold" href="apps/ecommerce/catalog/products.html">عرض الأراضي</a>
+                                <a class="btn btn-sm btn-light-primary fw-bold" href="{{route('lands.index')}}">@lang('admin.Show lands')</a>
                                 <a class="btn btn-sm btn-light-warning fw-bold" href="apps/subscriptions/view.html">الشركاء القانونيين </a>
                                 <a class="btn btn-sm btn-light-info fw-bold" href="apps/subscriptions/view.html">المثمنين العقاريين  </a>
                             </div>
@@ -1146,7 +1091,7 @@
                        <div class="header-menu flex-column align-items-stretch flex-lg-row">
                         <!--begin::Menu-->
                         <div class="menu menu-rounded menu-column menu-lg-row menu-root-here-bg-desktop menu-active-bg menu-title-gray-700 menu-state-primary menu-arrow-gray-500 fw-semibold align-items-stretch flex-grow-1 px-2 px-lg-0" id="#kt_header_menu" data-kt-menu="true">
-
+                            @if (Auth::user()->can('roles view') || Auth::user()->can('users view'))
                             <!--begin:Menu item-->
                             <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
                                 <!--begin:Menu link-->
@@ -1193,6 +1138,7 @@
                                 <!--end:Menu sub-->
                             </div>
                             <!--end:Menu item-->
+                            @endif
                         </div>
                         <!--end::Menu-->
                     </div>

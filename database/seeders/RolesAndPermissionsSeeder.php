@@ -73,9 +73,6 @@ class RolesAndPermissionsSeeder extends Seeder
         $editorRole = Role::firstOrCreate(['name' => 'المثمن العقاري']);
         $editorRole->syncPermissions(['user view', 'user create']);
 
-        $viewerRole = Role::firstOrCreate(['name' => 'مستثمر']);
-        $viewerRole->syncPermissions(['user view']);
-
         $user = User::find(1);
         if ($user) {
             $user->assignRole('admin');

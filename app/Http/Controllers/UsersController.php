@@ -15,6 +15,7 @@ class UsersController extends Controller
     //
     public function __construct()
     {
+        $this->middleware('can:Settings Section View');
         $this->middleware('can:users view');
         $this->middleware('can:user create')->only('store');
         $this->middleware('can:user view')->only('view');
@@ -61,6 +62,7 @@ class UsersController extends Controller
 
             $role = Role::find($validated['user_role']);
             $user->roles()->attach($role);
+            $user->sendEmailVerificationNotification();
 
             // Return JSON success response
             return response()->json([
@@ -188,7 +190,7 @@ class UsersController extends Controller
         return DataTables::of($users)
             ->addColumn('name', function ($user) {
                 $imgUrl = asset('assets/media/avatars/300-6.jpg'); // Or use $user->image if dynamic
-                $profileUrl = url('users/view/' . $user->id); // Proper profile link
+                $profileUrl = url('users/view/' . $user->id); // Proper Profile link
                 $avatar = $user->avatar ? asset('uploads/usersImage/' . $user->avatar) : $imgUrl;
 
                 return '

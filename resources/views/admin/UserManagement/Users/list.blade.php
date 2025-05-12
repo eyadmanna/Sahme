@@ -296,8 +296,8 @@
 
                                 <div class="col-form-label col-lg-3 col-sm-6">
                                     <label class="form-control-label selectpicker">@lang('admin.Role name')</label>
-                                    <select class="form-select" id="role" name="role">
-                                        <option value="">@lang('admin.Add a Role')</option>
+                                    <select id="role" class="form-select" data-control="select2" data-placeholder="@lang('admin.Roles')">
+                                        <option value=""></option>
                                     @foreach($roles as $role)
                                             <option value="{{$role->id}}">{{$role->name}}</option>
                                         @endforeach
