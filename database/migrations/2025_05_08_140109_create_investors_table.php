@@ -17,6 +17,8 @@ class CreateInvestorsTable extends Migration
             $table->integer('city_cd');
             $table->integer('district_cd')->nullable();
             $table->text('address')->nullable();
+            $table->decimal('yearly_income', 15, 2);
+            $table->boolean('terms_accepted')->default(false)->comment('الموافقة على الشروط والأحكام');
             $table->integer('status_cd');
             $table->string('email', 100)->nullable();
             $table->timestamp('email_verified_at')->nullable();

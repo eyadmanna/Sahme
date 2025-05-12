@@ -26,7 +26,7 @@ class CreateEngineeringPartnersTable extends Migration
             $table->text('liecence')->nullable();
             $table->text('tax_record')->nullable();
             $table->text('previous_projects')->nullable();
-            $table->integer('status_cd');
+            $table->string('engineering_partner_status', 100)->default('pending');
             $table->text('rejection_reason')->nullable();
             $table->foreignId('approved_by')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('set null');
             $table->timestamp('approval_date')->nullable();
