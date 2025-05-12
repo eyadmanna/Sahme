@@ -33,6 +33,11 @@ class AuthenticatedSessionController extends Controller
             return redirect()->route('verification.notice');
         }
 
+        // Save last_login time
+        $user = auth()->user();
+        $user->last_login = now();
+        $user->save();
+
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 

@@ -43,6 +43,7 @@ return [
     'Did’t receive an email?' => 'لم تستلم بريدًا إلكترونيًا؟',
     'Resend Verification Email' => 'إعادة إرسال بريد إلكتروني للتحقق',
     'Show lands' => 'عرض الأراضي',
+    'Sign Out' => 'تسجيل الخروج',
 
     /*UserManagement*/
     "User Management" => "إدارة المستخدمين",
