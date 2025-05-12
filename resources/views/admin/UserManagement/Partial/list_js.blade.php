@@ -2,8 +2,6 @@
     "use strict";
 
     $(document).ready(function () {
-        $('#role').select2({
-        });
         let table = $("#kt_table_users").DataTable({
             processing: true,
             serverSide: true,
@@ -23,6 +21,9 @@
                 { data: 'created_at', name: 'created_at' },
                 { data: 'actions', name: 'actions', orderable: false, searchable: false }
             ],
+            language: {
+                "url": "{{url('/')}}/assets/Arabic.json"
+            },
             createdRow: function (row, data, dataIndex) {
                 $('td', row).each(function (index) {
                     // استثنِ العمود الثاني (name) وأضف class لباقي الأعمدة
@@ -50,9 +51,11 @@
             table.draw(); // redraw the table with the filter values
         });
         $('.reset_search').on('click', function () {
-            $('#filters')[0].reset(); // clear form fields
-            table.draw(); // refresh table
-        });
+                $('#filters')[0].reset(); // clear form fields
+            // Reset the Select2 value manually
+            $('#role').val(null).trigger('change'); // Reset and update UI
+                table.draw(); // refresh table
+            });
 // Class definition
         var KTUsersAddUser = function () {
             // Shared variables

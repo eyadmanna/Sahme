@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\LandsController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\TwoFactorController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -31,8 +33,8 @@ Route::group(
         return view('admin.dashboard');
     })->middleware(['auth', 'verified'])->name('dashboard');
 
-    Route::middleware('auth')->group(function () {
-        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::middleware( 'auth', 'verified')->group(function () {
+        Route::get('/MyProfile', [ProfileController::class, 'view'])->name('profile.view');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
         Route::get('/users/list', [UsersController::class, 'index'])->name('users.index');
@@ -48,7 +50,13 @@ Route::group(
         Route::post('/update-roles/{id}', [RoleController::class,'update'])->name('roles.update');
 
 
+        Route::get('/lands/list', [LandsController::class, 'index'])->name('lands.index');
+        Route::get('/lands/add-land', [LandsController::class, 'add'])->name('lands.add');
+
+
     });
+
+
 
 
     require __DIR__.'/auth.php';

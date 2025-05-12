@@ -8,6 +8,7 @@
         var submitButton;
         var validator;
 
+
         // Handle form
         var handleValidation = function (e) {
             // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
@@ -44,7 +45,23 @@
                     }
                 }
             );
+            // بعد تهيئة الـ validator
+            form.querySelectorAll('input').forEach(function (input) {
+                input.addEventListener('input', function () {
+                    validator.validate().then(function (status) {
+                        if (status === 'Valid') {
+                            submitButton.disabled = false;
+                        } else {
+                            submitButton.disabled = true;
+                        }
+                    });
+                });
+            });
+
+            submitButton.disabled = true;
         }
+
+
 
         var handleSubmitDemo = function (e) {
             // Handle form submit
@@ -132,16 +149,6 @@
                             if (response) {
                                 form.reset();
 
-                                // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
-                                Swal.fire({
-                                    text: "@lang('admin.You have successfully logged in!')",
-                                    icon: "success",
-                                    buttonsStyling: false,
-                                    confirmButtonText: "@lang('admin.OK')",
-                                    customClass: {
-                                        confirmButton: "btn btn-primary"
-                                    }
-                                });
 
                                 const redirectUrl = form.getAttribute('data-kt-redirect-url');
 

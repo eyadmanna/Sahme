@@ -74,13 +74,13 @@
                         <!--begin::Input group=-->
                         <div class="fv-row mb-8">
                             <!--begin::Email-->
-                            <input type="text" placeholder="Email" name="email" autocomplete="off" class="form-control bg-transparent" />
+                            <input type="text" placeholder="@lang('admin.Email')" name="email" autocomplete="off" class="form-control bg-transparent" />
                             <!--end::Email-->
                         </div>
                         <!--end::Input group=-->
                         <div class="fv-row mb-3">
                             <!--begin::Password-->
-                            <input type="password" placeholder="Password" name="password" autocomplete="off" class="form-control bg-transparent" />
+                            <input type="password" placeholder="@lang('admin.Password')" name="password" autocomplete="off" class="form-control bg-transparent" />
                             <!--end::Password-->
                         </div>
                         <!--end::Input group=-->
@@ -94,7 +94,7 @@
                         <!--end::Wrapper-->
                         <!--begin::Submit button-->
                         <div class="d-grid mb-10">
-                            <button type="submit" id="kt_sign_in_submit" class="btn btn-primary">
+                            <button  type="submit" id="kt_sign_in_submit" class="btn btn-primary">
                                 <!--begin::Indicator label-->
                                 <span class="indicator-label">@lang('admin.Sign in')</span>
                                 <!--end::Indicator label-->
@@ -113,16 +113,6 @@
                     <!--end::Form-->
                 </div>
                 <!--end::Wrapper-->
-                <!--begin::Footer-->
-                <div class="d-flex flex-stack px-lg-10">
-                    <!--begin::Links-->
-                    <div class="d-flex fw-semibold text-primary fs-base gap-5">
-                        <a href="" target="_blank">@lang('admin.Terms')</a>
-                        <a href="" target="_blank">@lang('admin.Contact Us')</a>
-                    </div>
-                    <!--end::Links-->
-                </div>
-                <!--end::Footer-->
             </div>
             <!--end::Card-->
         </div>

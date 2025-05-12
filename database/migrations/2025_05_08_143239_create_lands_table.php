@@ -21,6 +21,8 @@ class CreateLandsTable extends Migration
             $table->integer('ownership_type_cd')->nullable();
             $table->text('borders')->nullable();
             $table->text('services')->nullable();
+            $table->string('long',200)->nullable();
+            $table->string('lat',200)->nullable();
             $table->decimal('price', 15, 2);
             $table->foreignId('valuator_id')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('set null');
             $table->integer('valuation_status_cd')->nullable();

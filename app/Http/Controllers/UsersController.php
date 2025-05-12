@@ -15,6 +15,7 @@ class UsersController extends Controller
     //
     public function __construct()
     {
+        $this->middleware('can:Settings Section View');
         $this->middleware('can:users view');
         $this->middleware('can:user create')->only('store');
         $this->middleware('can:user view')->only('view');
@@ -56,11 +57,12 @@ class UsersController extends Controller
             $user->email = $request->user_email;
             $user->mobile_number = $request->mobile_number;
             $user->avatar = $filename;
-            $user->password = Hash::make('default-password');
+            $user->password = Hash::make('password');
             $user->save();
 
             $role = Role::find($validated['user_role']);
             $user->roles()->attach($role);
+            $user->sendEmailVerificationNotification();
 
             // Return JSON success response
             return response()->json([
@@ -188,7 +190,7 @@ class UsersController extends Controller
         return DataTables::of($users)
             ->addColumn('name', function ($user) {
                 $imgUrl = asset('assets/media/avatars/300-6.jpg'); // Or use $user->image if dynamic
-                $profileUrl = url('users/view/' . $user->id); // Proper profile link
+                $profileUrl = url('users/view/' . $user->id); // Proper Profile link
                 $avatar = $user->avatar ? asset('uploads/usersImage/' . $user->avatar) : $imgUrl;
 
                 return '
@@ -220,7 +222,7 @@ class UsersController extends Controller
                 return '<td>'.$user->roles->pluck('name')->join(', ') ?? '-'.'</td>';
             })
             ->addColumn('last_login_at', function ($user) {
-                $date = $user->last_login_at ? $user->last_login_at->format('Y-m-d') : '-';
+                $date = $user->last_login ? $user->last_login->format('Y-m-d H:i') : '-';
                 return '<div class="badge badge-light fw-bold">' . $date . '</div>';
             })
             ->addColumn('two_step', function ($user) {
