@@ -12,16 +12,15 @@ use Illuminate\Queue\SerializesModels;
 class TwoFactorCodeMail extends Mailable
 {
     use Queueable, SerializesModels;
-    public $code;
+
+    public $user;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($code)
+    public function __construct($user)
     {
-        //
-        $this->code = $code;
-
+        $this->user = $user;
     }
 
     /**
@@ -30,7 +29,7 @@ class TwoFactorCodeMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Two Factor Code Mail',
+            subject: 'Two Factor Authentication Code',
         );
     }
 
@@ -39,8 +38,12 @@ class TwoFactorCodeMail extends Mailable
      */
     public function content(): Content
     {
-        return $this->subject('Your 2FA Code')
-            ->view('twofactor.emails');
+        return new Content(
+            view: 'twofactor.emails',
+            with: [
+                'code' => $this->user->two_factor_code,
+            ]
+        );
     }
 
     /**
