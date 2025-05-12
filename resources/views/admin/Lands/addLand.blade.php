@@ -165,6 +165,17 @@
             <!--end::Card-->
             <!--begin::Card-->
             <div class="card card-flush mt-5">
+                <!--begin::Card header-->
+                <div class="card-header pt-8">
+                    <!--begin::Col-->
+                    <div class="col-md-4">
+                        <div class="d-flex align-items-center gap-2">
+                            <h3>@lang('admin.Land details')</h3>
+                        </div>
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Card header-->
                 <!--begin::Card body-->
                 <div class="card-body">
                     <!--begin::Form-->
@@ -174,7 +185,7 @@
                             <div class="d-flex">
                                 <!-- عنصر 1 -->
                                 <div class="col-md-3 d-flex flex-column flex-md-row align-items-start align-items-md-center gap-2">
-                                    <h6 class="mb-0">@lang('admin.Governorate'):</h6>
+                                    <h6 class="mb-0 required">@lang('admin.Governorate'):</h6>
                                     <select class="form-select w-150px">
                                         <option>Option 1</option>
                                         <option>Option 2</option>
@@ -183,7 +194,7 @@
 
                                 <!-- عنصر 2 -->
                                 <div class="col-md-3 d-flex flex-column flex-md-row align-items-start align-items-md-center gap-2">
-                                    <h6 class="mb-0">@lang('admin.City'):</h6>
+                                    <h6 class="mb-0 required">@lang('admin.City'):</h6>
                                     <select class="form-select w-150px">
                                         <option>Option 1</option>
                                         <option>Option 2</option>
@@ -192,7 +203,7 @@
 
                                 <!-- عنصر 3 -->
                                 <div class="col-md-3 d-flex flex-column flex-md-row align-items-start align-items-md-center gap-2">
-                                    <h6 class="mb-0">@lang('admin.Area'):</h6>
+                                    <h6 class="mb-0 required">@lang('admin.Area'):</h6>
                                     <select class="form-select w-150px">
                                         <option>Option 1</option>
                                         <option>Option 2</option>
@@ -201,8 +212,8 @@
 
                                 <!-- عنصر 4 -->
                                 <div class="col-md-3 d-flex flex-column flex-md-row align-items-start align-items-md-center gap-2">
-                                    <h6 class="mb-0">@lang('admin.Address in detail'):</h6>
-                                    <textarea></textarea>
+                                    <h6 class="mb-0 required">@lang('admin.Address in detail'):</h6>
+                                    <textarea class="form-control"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -239,6 +250,44 @@
                                 </select>
                             </div>
                             <!--end::Col-->
+
+                            <!-- يمكنك إضافة أعمدة أخرى حسب الحاجة بنفس النمط -->
+                        </div>
+                        <!--end::Input group-->
+
+                        <!--begin::Input group-->
+                        <div class="fv-row row mb-15">
+                            <!--begin::Col-->
+                            <div class="col-md-4 d-flex  align-items-center mb-5">
+                                <h5 class="mb-0 required">@lang('admin.Border')</h5>
+                                <textarea class="form-control"></textarea>
+
+                            </div>
+                            <!--end::Col-->
+
+                            <!--begin::Col-->
+                            <div class="col-md-4 d-flex align-items-center mb-5">
+                                <h5 class="mb-0 required">@lang('admin.Available services') </h5>
+                                <textarea class="form-control"></textarea>
+                            </div>
+                            <!--end::Col-->
+                            <!--begin::Col-->
+                            <div class="col-md-3 d-flex align-items-center mb-5">
+                                <h5 class="mb-0 required">@lang('admin.Asking price')</h5>
+                                <input type="number" class="form-control">
+                            </div>
+                            <div class="col-md-1 d-flex align-items-center mb-5">
+                                <!--begin::Select-->
+                                <select class="form-control form-select" data-mce-placeholder="@lang('admin.Select currency')">
+                                    <option value="" disabled selected>@lang('admin.Select currency')</option>
+                                    <!-- Add other options here -->
+                                    <option value="usd">USD</option>
+                                    <option value="eur">EUR</option>
+                                </select>
+                                <!--end::Select-->
+                            </div>
+
+
 
                             <!-- يمكنك إضافة أعمدة أخرى حسب الحاجة بنفس النمط -->
                         </div>

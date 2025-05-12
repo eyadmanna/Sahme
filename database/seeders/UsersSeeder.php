@@ -20,7 +20,8 @@ class UsersSeeder extends Seeder
             [
                 'name' => 'Admin',
                 'password' => Hash::make('password'),
-                'mobile_number' => '0597750487'
+                'mobile_number' => '0597750487',
+                'email_verified_at' => now()
             ]
         );
     }

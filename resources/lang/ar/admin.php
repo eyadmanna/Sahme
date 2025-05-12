@@ -122,6 +122,11 @@ return [
     'Part number' => 'رقم القطعة',
     'Voucher number' => 'رقم القسيمة',
     'Type of land ownership' => 'نوع ملكية الأرض',
+    'Land details' => 'تفاصيل الأرض',
+    'Border' => 'الحدود',
+    'Available services' => 'الخدمات المتوفرة',
+    'Asking price' => 'السعر المطلوب',
+    'Select currency' => 'اختر العملة',
 
     /*profile page*/
     'Profile Details' => 'تفاصيل الملف الشخصي',
