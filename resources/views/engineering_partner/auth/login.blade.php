@@ -63,7 +63,7 @@
                 <!--begin::Wrapper-->
                 <div class="d-flex flex-center flex-column flex-column-fluid px-lg-10 pb-15 pb-lg-20">
                     <!--begin::Form-->
-                    <form class="form w-100" method="POST" action="{{ route('engineering.login') }}" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="{{ route('dashboard') }}">
+                    <form class="form w-100" method="POST" action="{{ route('engineering.login') }}" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="{{ route('engineering.dashboard') }}">
                         <!--begin::Heading-->
                         <div class="text-center mb-11">
                             <!--begin::Title-->
@@ -139,7 +139,7 @@
 <script src="{{asset('assets/js/scripts.bundle.js')}}"></script>
 <!--end::Global Javascript Bundle-->
 <!--begin::Custom Javascript(used for this page only)-->
-@include('auth.Partial.login_js')
+@include('engineering_partner.auth.Partial.login_js')
 <!--end::Custom Javascript-->
 <!--end::Javascript-->
 </body>

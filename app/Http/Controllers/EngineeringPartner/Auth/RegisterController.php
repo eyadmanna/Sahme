@@ -22,23 +22,66 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
-        $validated = $request->validate([
+         $request->validate([
             'company_name' => 'required|string|max:255',
-            'email' => 'required|string|email|unique:engineering_partners',
-            'mobile' => 'required|string|min:8|max:20|unique:engineering_partners,mobile',
+            'mobile' => 'required|string|max:15',
+            'province_cd' => 'required',
+            'city_cd' => 'required',
+            'district_cd' => 'required',
+            'address' => 'required|string|max:255',
+            'experience_years' => 'required|integer|min:0',
+            'commercial_registration_number' => 'required|string|max:255',
+            'specializations' => 'required|string|max:255',
+            'tax_number' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'company_profile' => 'required|file|mimes:jpeg,jpg,png,pdf|max:10240',
+            'commercial_registration' => 'required|file|mimes:jpeg,jpg,png,pdf|max:10240',
+            'liecence' => 'required|file|mimes:jpeg,jpg,png,pdf|max:10240',
+            'tax_record' => 'required|file|mimes:jpeg,jpg,png,pdf|max:10240',
+            'previous_projects' => 'required|file|mimes:jpeg,jpg,png,pdf|max:10240',
             'password' => 'required|string|min:8|confirmed',
-            'toc' => 'accepted',
         ]);
+
+        $uploadFields = [
+            'company_profile' => 'company',
+            'commercial_registration' => 'commercial',
+            'liecence' => 'liecence',
+            'tax_record' => 'tax',
+            'previous_projects' => 'projects',
+        ];
+
+        $paths = [];
+
+        foreach ($uploadFields as $field => $prefix) {
+            if ($request->hasFile($field)) {
+                $file = $request->file($field);
+                $fileName = time() . '_' . $prefix . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path("uploads/{$field}"), $fileName);
+                $paths[$field] = "uploads/{$field}/" . $fileName;
+            }
+        }
 
         $partner = EngineeringPartner::create([
-            'company_name' => $validated['company_name'],
-            'email' => $validated['email'],
-            'mobile' => $validated['mobile'],
-            'password' => Hash::make($validated['password']),
+            'company_name' => $request->company_name,
+            'mobile' => $request->mobile,
+            'province_cd' => $request->province_cd,
+            'city_cd' => $request->city_cd,
+            'district_cd' => $request->district_cd,
+            'address' => $request->address,
+            'experience_years' => $request->experience_years,
+            'commercial_registration_number' => $request->commercial_registration_number,
+            'specializations' => $request->specializations,
+            'tax_number' => $request->tax_number,
+            'email' => $request->email,
+            'company_profile' => $paths['company_profile'] ?? null,
+            'commercial_registration' => $paths['commercial_registration'] ?? null,
+            'liecence' => $paths['liecence'] ?? null,
+            'tax_record' => $paths['tax_record'] ?? null,
+            'previous_projects' => $paths['previous_projects'] ?? null,
+            'status_cd' => 16,
+            'password' => Hash::make($request->password),
         ]);
-
         Auth::guard('engineering')->login($partner);
-
-        return redirect()->route('engineering.dashboard');
+         return redirect()->route('engineering.dashboard')->with('success', 'تم التسجيل بنجاح!');
     }
 }

@@ -69,7 +69,7 @@
                 <!--begin::Wrapper-->
                 <div class="d-flex flex-center flex-column flex-column-fluid px-lg-10 pb-15 pb-lg-20">
                     <!--begin::Form-->
-                    <form method="POST" class="form w-100" novalidate="novalidate" id="kt_sign_up_form" data-kt-redirect-url="{{ route('dashboard') }}" action="{{ route('engineering.register') }}">
+                    <form method="POST" class="form w-100" novalidate="novalidate" id="kt_sign_up_form" data-kt-redirect-url="{{ route('engineering.dashboard') }}" action="{{ route('engineering.register') }}">
                         @csrf
                         <!--begin::Heading-->
                         <div class="text-center mb-11">
@@ -91,12 +91,11 @@
                             <input type="text" placeholder="@lang('engineering.Mobile')" name="mobile" autocomplete="off" class="form-control bg-transparent" />
                             <!--end::Email-->
                         </div>
-                        <!--begin::Input group-->
-                        <!--begin::Input group=-->
+
                         <div class="fv-row mb-8 " >
                             <!--begin::Email-->
 
-                            <select class="form-select location_province"  name="province_cd" data-control="select2" data-placeholder="Select an option">
+                            <select class="form-select location_province"  name="province_cd" data-control="select2" data-placeholder="@lang('engineering.select_province')">
                                 <option value="" selected>@lang('lang.Select')..</option>
                                 @foreach ($data['provinces'] as $val)
                                     <option value="{{ $val->id }}">
@@ -105,36 +104,76 @@
                             </select>
                             <!--end::Email-->
                         </div>
-                        <!--begin::Input group-->
-                        <!--begin::Input group=-->
+
                         <div class="fv-row mb-8" id="cities_block">
                             <!--begin::Email-->
-                            <select class="form-select location_city" id="location_cities"  name="city_cd" data-control="select2" data-placeholder="Select an option">
+                            <select class="form-select location_city" id="location_cities"  name="city_cd" data-control="select2" data-placeholder="@lang('engineering.select_city')">
                                 <option value="" selected>@lang('lang.Select')..</option>
 
                             </select>
 
                             <!--end::Email-->
                         </div>
-                        <!--begin::Input group-->
-                        <!--begin::Input group=-->
+
                         <div class="fv-row mb-8" id="areas_block">
                             <!--begin::Email-->
-                            <select class="form-select" id="location_areas"  name="district_cd" data-control="select2" data-placeholder="Select an option">
+                            <select class="form-select" id="location_areas"  name="district_cd" data-control="select2" data-placeholder="@lang('engineering.select_district')">
                                 <option value="" selected>@lang('lang.Select')..</option>
 
                             </select>
 
                             <!--end::Email-->
                         </div>
-                        <!--begin::Input group-->
-                        <!--begin::Input group=-->
+                        <div class="fv-row mb-8">
+                            <!--begin::Email-->
+                            <input type="text" placeholder="@lang('engineering.Address')" name="address" autocomplete="off" class="form-control bg-transparent" />
+                            <!--end::Email-->
+                        </div>
+                        <div class="fv-row mb-8">
+                            <!--begin::Email-->
+                            <input type="text" placeholder="@lang('engineering.experience_years')" name="experience_years" autocomplete="off" class="form-control bg-transparent" />
+                            <!--end::Email-->
+                        </div>
+                        <div class="fv-row mb-8">
+
+                            <input type="text" placeholder="@lang('engineering.commercial_registration_number')" name="commercial_registration_number" autocomplete="off" class="form-control bg-transparent" />
+
+                        </div>
+                        <div class="fv-row mb-8">
+
+                            <input type="text" placeholder="@lang('engineering.specializations')" name="specializations" autocomplete="off" class="form-control bg-transparent" />
+
+                        </div>
+                        <div class="fv-row mb-8">
+                            <!--begin::Email-->
+                            <input type="text" placeholder="@lang('engineering.tax_number')" name="tax_number" autocomplete="off" class="form-control bg-transparent" />
+                            <!--end::Email-->
+                        </div>
                         <div class="fv-row mb-8">
                             <!--begin::Email-->
                             <input type="text" placeholder="@lang('admin.Email')" name="email" autocomplete="off" class="form-control bg-transparent" />
                             <!--end::Email-->
                         </div>
-                        <!--begin::Input group-->
+                        <div class="fv-row mb-8">
+                            <label for="company_profile" class="required form-label">@lang('engineering.company_profile')</label>
+                            <input type="file"  name="company_profile" id="company_profile" autocomplete="off" class="form-control bg-transparent" />
+                         </div>
+                        <div class="fv-row mb-8">
+                            <label for="commercial_registration" class="required form-label">@lang('engineering.commercial_registration')</label>
+                            <input type="file"  name="commercial_registration" id="commercial_registration" autocomplete="off" class="form-control bg-transparent" />
+                         </div>
+                        <div class="fv-row mb-8">
+                            <label for="liecence" class="required form-label">@lang('engineering.liecence')</label>
+                            <input type="file"  name="liecence" id="liecence" autocomplete="off" class="form-control bg-transparent" />
+                        </div>
+                        <div class="fv-row mb-8">
+                            <label for="tax_record" class="required form-label">@lang('engineering.tax_record')</label>
+                            <input type="file"  name="tax_record" id="tax_record" autocomplete="off" class="form-control bg-transparent" />
+                        </div>
+                        <div class="fv-row mb-8">
+                            <label for="previous_projects" class="required form-label">@lang('engineering.previous_projects')</label>
+                            <input type="file"  name="previous_projects" id="previous_projects" autocomplete="off" class="form-control bg-transparent" />
+                        </div>
                         <div class="fv-row mb-8" data-kt-password-meter="true">
                             <!--begin::Wrapper-->
                             <div class="mb-1">
@@ -161,8 +200,7 @@
                             <div class="text-muted">@lang('admin.Use 8 or more characters with a mix of letters, numbers & symbols.')</div>
                             <!--end::Hint-->
                         </div>
-                        <!--end::Input group=-->
-                        <!--end::Input group=-->
+
                         <div class="fv-row mb-8">
                             <!--begin::Repeat Password-->
                             <input placeholder="@lang('admin.Repeat Password')" name="password_confirmation" type="password" autocomplete="off" class="form-control bg-transparent" />
@@ -193,7 +231,7 @@
                         <!--end::Submit button-->
                         <!--begin::Sign up-->
                         <div class="text-gray-500 text-center fw-semibold fs-6">@lang('admin.Already have an Account?')
-                            <a href="{{route('login')}}" class="link-primary fw-semibold">@lang('admin.Sign in')</a></div>
+                            <a href="{{route('engineering.login')}}" class="link-primary fw-semibold">@lang('admin.Sign in')</a></div>
                         <!--end::Sign up-->
                     </form>
                     <!--end::Form-->
@@ -223,10 +261,9 @@
 <!--begin::Global Javascript Bundle(mandatory for all pages)-->
 <script src="{{asset('assets/plugins/global/plugins.bundle.js')}}"></script>
 <script src="{{asset('assets/js/scripts.bundle.js')}}"></script>
-<script src="{{asset('assets/js/bootstrap-select.min.js')}}"></script>
-<!--end::Global Javascript Bundle-->
+ <!--end::Global Javascript Bundle-->
 <!--begin::Custom Javascript(used for this page only)-->
-@include('auth.Partial.register')
+@include('engineering_partner.auth.Partial.register')
 <!--end::Custom Javascript-->
 <!--end::Javascript-->
 </body>
