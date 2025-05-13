@@ -26,8 +26,6 @@ return new class extends Migration
             $table->timestamp('otp_code_expires_at')->nullable();
             $table->tinyInteger('is_authapp_enabled')->default(0)->comment('Use Authenticator App: 0 Disabled, 1 Enabled');
             $table->string('authapp_secret')->nullable()->comment('Secret of Authenticator App');
-            $table->string('two_factor_code')->nullable();
-            $table->dateTime('two_factor_expires_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes(); // adds deleted_at
