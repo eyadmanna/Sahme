@@ -12,4 +12,8 @@ class Lookups extends Model
     protected $table = "lookups";
     protected $primaryKey = "id";
     protected $guarded = [];
+    public function children()
+    {
+        return $this->hasMany(Lookups::class, "parent_id", "id")->where("status",1);
+        }
 }
