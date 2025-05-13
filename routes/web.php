@@ -50,6 +50,9 @@ Route::group(
         Route::post('/update-roles/{id}', [RoleController::class,'update'])->name('roles.update');
 
 
+        Route::get('/admin/investor-details', [App\Http\Controllers\Admin\InvestorsController::class, 'getInvestorDetails'])->name('admin.getInvestorDetails');
+
+
         Route::get('/lands/list', [LandsController::class, 'index'])->name('lands.index');
         Route::get('/lands/add-land', [LandsController::class, 'add'])->name('lands.add');
 
