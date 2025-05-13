@@ -135,7 +135,6 @@ class LookupsSeeder extends Seeder
                 'name_ar' => 'معتمد',
                 'name_en' => 'Approved',
             ],
-
             [
                 'is_managed' => 0,
                 'master_key' => 'engineering_partner_status',
@@ -143,6 +142,19 @@ class LookupsSeeder extends Seeder
                 'name_ar' => 'مرفوض',
                 'name_en' => 'Rejected',
             ],
+            [
+                'is_managed' => 1,
+                'master_key' => 'ownership_type_cd',
+                'name_ar' => 'نوع الملكية',
+                'name_en' => 'Ownership Type',
+            ],
+            [
+                'is_managed' => 1,
+                'master_key' => 'ownership_type_cd',
+                'name_ar' => 'طابو',
+                'name_en' => 'Taboo',
+            ],
+            
             
         ];
 

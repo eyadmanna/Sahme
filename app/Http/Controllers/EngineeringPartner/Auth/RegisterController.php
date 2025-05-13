@@ -14,7 +14,7 @@ class RegisterController extends Controller
     public function showRegisterForm()
     {
         $data["provinces"] = Lookups::query()->where([
-            "s_key" => "province"
+            "master_key" => "province"
         ])->whereNot("parent_id", 0)->where("status", 1)->get();
 
         return view('engineering_partner.auth.register',compact('data'));
