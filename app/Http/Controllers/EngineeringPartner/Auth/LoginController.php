@@ -21,19 +21,31 @@ class LoginController extends Controller
         ]);
 
         $credentials = $request->only('email', 'password');
-        $credentials['status_cd'] = 16; // تأكد المستخدم مفعل
+        $credentials['status_cd'] = 16;
 
         if (Auth::guard('engineering')->attempt($credentials)) {
             $request->session()->regenerate();
-             return redirect()->route('engineering.dashboard');
-        }
 
-        return back()->withErrors([
-            'email' => 'بيانات الدخول غير صحيحة أو لم يتم تفعيل الحساب.',
-        ]);
+
+                return response()->json([
+                    'status' => 'success',
+                    'redirect' => route('engineering.dashboard'),
+                    'message' => 'تم تسجيل الدخول بنجاح'
+                ]);
+
+
+         }
+
+         $errorMessage = 'بيانات الدخول غير صحيحة أو لم يتم تفعيل الحساب.';
+
+
+            return response()->json([
+                'status' => 'error',
+                'message' => $errorMessage
+            ], 422);
+
+
     }
-
-
     public function logout(Request $request)
     {
         Auth::guard('engineering')->logout();

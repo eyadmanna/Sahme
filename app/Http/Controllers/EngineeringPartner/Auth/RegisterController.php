@@ -78,8 +78,7 @@ class RegisterController extends Controller
             'liecence' => $paths['liecence'] ?? null,
             'tax_record' => $paths['tax_record'] ?? null,
             'previous_projects' => $paths['previous_projects'] ?? null,
-            'status_cd' => 16,
-            'password' => Hash::make($request->password),
+             'password' => Hash::make($request->password),
         ]);
         Auth::guard('engineering')->login($partner);
          return redirect()->route('engineering.dashboard')->with('success', 'تم التسجيل بنجاح!');
