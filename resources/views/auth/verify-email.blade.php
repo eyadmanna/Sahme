@@ -104,9 +104,9 @@ License: For each use you must have a valid license purchased only from above li
                             @csrf
 
                             <div>
-                                <x-primary-button>
+                                <button class="btn">
                                     @lang('admin.Resend Verification Email')
-                                </x-primary-button>
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -116,7 +116,7 @@ License: For each use you must have a valid license purchased only from above li
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
-                            <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            <button type="submit" class="btn underline text-sm text-gray-600 accent-red-400">
                                 @lang('admin.Sign Out')
                             </button>
                         </form>
