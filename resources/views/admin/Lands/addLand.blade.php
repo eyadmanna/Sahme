@@ -47,36 +47,10 @@
                         <!--begin::Input-->
                         <select name="language" aria-label="Select a Language" data-control="select2" data-placeholder="@lang('admin.Investor name')" class="form-select mb-2">
                             <option></option>
-                            <option value="en-gb">English UK - British English</option>
-                            <option value="es">Español - Spanish</option>
-                            <option value="fil">Filipino</option>
-                            <option value="fr">Français - French</option>
-                            <option value="ro">Română - Romanian</option>
-                            <option value="sk">Slovenčina - Slovak</option>
-                            <option value="fi">Suomi - Finnish</option>
-                            <option value="sv">Svenska - Swedish</option>
-                            <option value="vi">Tiếng Việt - Vietnamese</option>
-                            <option value="tr">Türkçe - Turkish</option>
-                            <option value="el">Ελληνικά - Greek</option>
-                            <option value="bg">Български език - Bulgarian</option>
-                            <option value="ru">Русский - Russian</option>
-                            <option value="sr">Српски - Serbian</option>
-                            <option value="uk">Українська мова - Ukrainian</option>
-                            <option value="he">עִבְרִית - Hebrew</option>
-                            <option value="ur">اردو - Urdu (beta)</option>
-                            <option value="ar">العربية - Arabic</option>
-                            <option value="fa">فارسی - Persian</option>
-                            <option value="mr">मराठी - Marathi</option>
-                            <option value="hi">हिन्दी - Hindi</option>
-                            <option value="bn">বাংলা - Bangla</option>
-                            <option value="gu">ગુજરાતી - Gujarati</option>
-                            <option value="ta">தமிழ் - Tamil</option>
-                            <option value="kn">ಕನ್ನಡ - Kannada</option>
-                            <option value="th">ภาษาไทย - Thai</option>
-                            <option value="ko">한국어 - Korean</option>
-                            <option value="ja">日本語 - Japanese</option>
-                            <option value="zh-cn">简体中文 - Simplified Chinese</option>
-                            <option value="zh-tw">繁體中文 - Traditional Chinese</option>
+                            @foreach($investors as $investor)
+                                <option value="{{$investor->id}}">{{$investor->full_name}}</option>
+
+                            @endforeach
                         </select>
                         <!--end::Input-->
                             <!--begin::Add Button-->
@@ -93,70 +67,11 @@
                 <div class="card-body">
                     <!--begin::Form-->
                     <form class="form" id="kt_add_land">
-                        <!--begin::Input group-->
-                        <div class="fv-row row mb-15">
-                            <!--begin::Col-->
-                            <div class="col-md-3 d-flex  align-items-center mb-5">
-                                <h5 class="mb-0">@lang('admin.Mobile number') :</h5>
-                                <label class="ms-2 fs-6 fw-semibold mb-0">05977545454</label>
-
-                            </div>
-                            <!--end::Col-->
-
-                            <!--begin::Col-->
-                            <div class="col-md-3 d-flex  align-items-center mb-5">
-                                <h5 class="mb-0">@lang('admin.Email') :</h5>
-                                <label class="ms-2 fs-6 fw-semibold mb-0">admn@gmail.com</label>
-                            </div>
-                            <!--end::Col-->
-                            <!--begin::Col-->
-                            <div class="col-md-3 d-flex align-items-center mb-5">
-                                <h5 class="mb-0">@lang('admin.The condition') :</h5>
-                                <label class="ms-2 fs-6 fw-semibold mb-0">admn@gmail.com</label>
-                            </div>
-                            <!--end::Col-->
-                            <!--begin::Col-->
-                            <div class="col-md-3 d-flex align-items-center mb-5">
-                                <h5 class="mb-0">@lang('admin.Registration Date') :</h5>
-                                <label class="ms-2 fs-6 fw-semibold mb-0">3153153</label>
-                            </div>
-                            <!--end::Col-->
-
-                            <!-- يمكنك إضافة أعمدة أخرى حسب الحاجة بنفس النمط -->
+                        <!-- Investor details will be loaded here -->
+                        <div id="investor_details" style="display: none;">
+                            <!-- content will be injected here by AJAX -->
                         </div>
-                        <!--end::Input group-->
-                        <!--begin::Input group-->
-                        <div class="fv-row row mb-15">
-                            <!--begin::Col-->
-                            <div class="col-md-3 d-flex  align-items-center mb-5">
-                                <h5 class="mb-0">@lang('admin.Mobile number') :</h5>
-                                <label class="ms-2 fs-6 fw-semibold mb-0">05977545454</label>
 
-                            </div>
-                            <!--end::Col-->
-
-                            <!--begin::Col-->
-                            <div class="col-md-3 d-flex  align-items-center mb-5">
-                                <h5 class="mb-0">@lang('admin.Email') :</h5>
-                                <label class="ms-2 fs-6 fw-semibold mb-0">admn@gmail.com</label>
-                            </div>
-                            <!--end::Col-->
-                            <!--begin::Col-->
-                            <div class="col-md-3 d-flex align-items-center mb-5">
-                                <h5 class="mb-0">@lang('admin.The condition') :</h5>
-                                <label class="ms-2 fs-6 fw-semibold mb-0">admn@gmail.com</label>
-                            </div>
-                            <!--end::Col-->
-                            <!--begin::Col-->
-                            <div class="col-md-3 d-flex align-items-center mb-5">
-                                <h5 class="mb-0">@lang('admin.Registration Date') :</h5>
-                                <label class="ms-2 fs-6 fw-semibold mb-0">3153153</label>
-                            </div>
-                            <!--end::Col-->
-
-                            <!-- يمكنك إضافة أعمدة أخرى حسب الحاجة بنفس النمط -->
-                        </div>
-                        <!--end::Input group-->
                     </form>
                     <!--end::Form-->
                 </div>
@@ -321,6 +236,6 @@
     <!--end::Container-->
 @endsection
 @section('js')
-    @include("admin.Lands.Partial.land_list_js")
+    @include("admin.Lands.Partial.addLand_js")
 @endsection
 
