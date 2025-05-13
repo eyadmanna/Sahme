@@ -1,16 +1,12 @@
 <script>
     "use strict";
 
-    // Class definition
     var KTSigninGeneral = function () {
-        // Elements
         var form;
         var submitButton;
         var validator;
 
-        // Handle form
-        var handleValidation = function (e) {
-            // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
+        var handleValidation = function () {
             validator = FormValidation.formValidation(
                 form,
                 {
@@ -19,17 +15,17 @@
                             validators: {
                                 regexp: {
                                     regexp: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                                    message: '@lang('admin.The value is not a valid email address')',
+                                    message: '@lang("admin.The value is not a valid email address")',
                                 },
                                 notEmpty: {
-                                    message: '@lang('admin.Email address is required')'
+                                    message: '@lang("admin.Email address is required")'
                                 }
                             }
                         },
                         'password': {
                             validators: {
                                 notEmpty: {
-                                    message: '@lang('admin.The password is required')'
+                                    message: '@lang("admin.The password is required")'
                                 }
                             }
                         }
@@ -38,168 +34,108 @@
                         trigger: new FormValidation.plugins.Trigger(),
                         bootstrap: new FormValidation.plugins.Bootstrap5({
                             rowSelector: '.fv-row',
-                            eleInvalidClass: '',  // comment to enable invalid state icons
-                            eleValidClass: '' // comment to enable valid state icons
+                            eleInvalidClass: '',
+                            eleValidClass: ''
                         })
                     }
                 }
             );
-        }
 
-        var handleSubmitDemo = function (e) {
-            // Handle form submit
-            submitButton.addEventListener('click', function (e) {
-                // Prevent button default action
-                e.preventDefault();
-
-                // Validate form
-                validator.validate().then(function (status) {
-                    if (status == 'Valid') {
-                        // Show loading indication
-                        submitButton.setAttribute('data-kt-indicator', 'on');
-
-                        // Disable button to avoid multiple click
-                        submitButton.disabled = true;
-
-
-                        // Simulate ajax request
-                        setTimeout(function () {
-                            // Hide loading indication
-                            submitButton.removeAttribute('data-kt-indicator');
-
-                            // Enable button
-                            submitButton.disabled = false;
-
-                            // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
-                            Swal.fire({
-                                text: "@lang('admin.You have successfully logged in!')",
-                                icon: "success",
-                                buttonsStyling: false,
-                                confirmButtonText: "@lang('admin.OK')",
-                                customClass: {
-                                    confirmButton: "btn btn-primary"
-                                },
-                                didOpen: () => {
-                                    document.querySelector('.swal2-popup').dir = 'rtl';
-                                }
-                            }).then(function (result) {
-                                if (result.isConfirmed) {
-                                    form.querySelector('[name="email"]').value = "";
-                                    form.querySelector('[name="password"]').value = "";
-
-                                    //form.submit(); // submit form
-                                    var redirectUrl = form.getAttribute('data-kt-redirect-url');
-                                    if (redirectUrl) {
-                                        location.href = redirectUrl;
-                                    }
-                                }
-                            });
-                        }, 2000);
-
-                    } else {
-                        // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
-                        Swal.fire({
-                            text: "@lang('admin.Sorry, looks like there are some errors detected, please try again.')",
-                            icon: "error",
-                            buttonsStyling: false,
-                            confirmButtonText: "@lang('admin.OK')",
-                            customClass: {
-                                confirmButton: "btn btn-primary"
-                            }
-                        });
-                    }
+            form.querySelectorAll('input').forEach(function (input) {
+                input.addEventListener('input', function () {
+                    validator.validate().then(function (status) {
+                        submitButton.disabled = (status !== 'Valid');
+                    });
                 });
             });
-        }
 
-        var handleSubmitAjax = function (e) {
-            // Handle form submit
+            submitButton.disabled = true;
+        };
+
+        var handleSubmitAjax = function () {
             submitButton.addEventListener('click', function (e) {
-                // Prevent button default action
                 e.preventDefault();
 
-                // Validate form
                 validator.validate().then(function (status) {
-                    if (status == 'Valid') {
-                        // Show loading indication
+                    if (status === 'Valid') {
                         submitButton.setAttribute('data-kt-indicator', 'on');
-
-                        // Disable button to avoid multiple click
                         submitButton.disabled = true;
 
-                        // Check axios library docs: https://axios-http.com/docs/intro
-                        axios.post(submitButton.closest('form').getAttribute('action'), new FormData(form)).then(function (response) {
-                            if (response) {
+                        let formData = new FormData(form);
+
+                        $.ajax({
+                            url: $(form).attr('action'),
+                            method: 'POST',
+                            data: formData,
+                            contentType: false,
+                            processData: false,
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            success: function (response) {
                                 form.reset();
 
-                                // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                                 Swal.fire({
-                                    text: "@lang('admin.You have successfully logged in!')",
+                                    text: response.message || "@lang('admin.You have successfully logged in!')",
                                     icon: "success",
                                     buttonsStyling: false,
                                     confirmButtonText: "@lang('admin.OK')",
                                     customClass: {
                                         confirmButton: "btn btn-primary"
+                                    },
+                                    didOpen: () => {
+                                        document.querySelector('.swal2-popup').dir = 'rtl';
+                                    }
+                                }).then(function (result) {
+                                    if (result.isConfirmed) {
+                                        // استخدم redirect من الريسونس مباشرة
+                                        if (response.redirect) {
+                                            window.location.href = response.redirect;
+                                        } else {
+                                            var fallbackUrl = form.getAttribute('data-kt-redirect-url');
+                                            if (fallbackUrl) {
+                                                window.location.href = fallbackUrl;
+                                            }
+                                        }
                                     }
                                 });
+                            },
+                            error: function (xhr) {
+                                if (xhr.status === 422) {
+                                    let message = xhr.responseJSON.message || '';
+                                    let errors = xhr.responseJSON.errors || {};
+                                    let errorMessages = message ? message + '<br>' : '';
 
-                                const redirectUrl = form.getAttribute('data-kt-redirect-url');
+                                    $.each(errors, function (key, messages) {
+                                        errorMessages += messages[0] + '<br>';
+                                    });
 
-                                if (redirectUrl) {
-                                    location.href = redirectUrl;
+                                    Swal.fire({
+                                        html: errorMessages,
+                                        icon: "error",
+                                        confirmButtonText: "@lang('admin.OK')",
+                                        customClass: {
+                                            confirmButton: "btn btn-primary"
+                                        }
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        text: "@lang('admin.Sorry, an error occurred. Please try again.')",
+                                        icon: "error",
+                                        confirmButtonText: "@lang('admin.OK')",
+                                        customClass: {
+                                            confirmButton: "btn btn-primary"
+                                        }
+                                    });
                                 }
-                            } else {
-                                // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
-                                Swal.fire({
-                                    text: "@lang('admin.Sorry, the email or password is incorrect, please try again.')",
-                                    icon: "error",
-                                    buttonsStyling: false,
-                                    confirmButtonText: "@lang('admin.OK')",
-                                    customClass: {
-                                        confirmButton: "btn btn-primary"
-                                    }
-                                });
+                            },
+
+                            complete: function () {
+                                submitButton.removeAttribute('data-kt-indicator');
+                                submitButton.disabled = false;
                             }
-                        }).catch(function (error) {
-                            if (error.response && error.response.status === 422) {
-                                // Laravel validation error
-                                const errors = error.response.data.errors;
-                                let errorMessages = '';
-
-                                for (const key in errors) {
-                                    if (errors.hasOwnProperty(key)) {
-                                        errorMessages += `${errors[key][0]}<br>`;
-                                    }
-                                }
-
-                                Swal.fire({
-                                    html: errorMessages,
-                                    icon: "error",
-                                    confirmButtonText: "@lang('admin.OK')",
-                                    customClass: {
-                                        confirmButton: "btn btn-primary"
-                                    }
-                                });
-                            } else {
-                                // General error
-                                Swal.fire({
-                                    text: "@lang('admin.Sorry, an error occurred. Please try again.')",
-                                    icon: "error",
-                                    confirmButtonText: "@lang('admin.OK')",
-                                    customClass: {
-                                        confirmButton: "btn btn-primary"
-                                    }
-                                });
-                            }
-                        }).then(() => {
-                            // Hide loading indication
-                            submitButton.removeAttribute('data-kt-indicator');
-
-                            // Enable button
-                            submitButton.disabled = false;
                         });
                     } else {
-                        // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                         Swal.fire({
                             text: "@lang('admin.Sorry, looks like there are some errors detected, please try again.')",
                             icon: "error",
@@ -212,38 +148,32 @@
                     }
                 });
             });
-        }
+        };
 
-        var isValidUrl = function(url) {
+        var isValidUrl = function (url) {
             try {
                 new URL(url);
                 return true;
             } catch (e) {
                 return false;
             }
-        }
+        };
 
-        // Public functions
         return {
-            // Initialization
             init: function () {
                 form = document.querySelector('#kt_sign_in_form');
                 submitButton = document.querySelector('#kt_sign_in_submit');
 
                 handleValidation();
 
-                if (isValidUrl(submitButton.closest('form').getAttribute('action'))) {
-                    handleSubmitAjax(); // use for ajax submit
-                } else {
-                    handleSubmitDemo(); // used for demo purposes only
+                if (isValidUrl(form.getAttribute('action'))) {
+                    handleSubmitAjax();
                 }
             }
         };
     }();
 
-    // On document ready
     KTUtil.onDOMContentLoaded(function () {
         KTSigninGeneral.init();
     });
-
 </script>
