@@ -37,7 +37,7 @@
     <div id="kt_content_container_land" class="d-flex flex-column-fluid align-items-start container-xxl">
         <!--begin::Post-->
         <div class="content flex-row-fluid" id="kt_content">
-            <form method="post" action="{{ route('lands.store') }}" class="form" id="kt_add_land">
+            <form method="post" action="" class="form" id="kt_add_land">
                 @csrf
                 @include('admin.Lands.components.data_land')
                 <!--begin::Actions-->
