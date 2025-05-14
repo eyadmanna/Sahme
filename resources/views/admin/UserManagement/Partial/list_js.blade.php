@@ -56,6 +56,8 @@
             $('#role').val(null).trigger('change'); // Reset and update UI
                 table.draw(); // refresh table
             });
+
+
 // Class definition
         var KTUsersAddUser = function () {
             // Shared variables
@@ -120,10 +122,6 @@
                                 // Disable button to avoid multiple click
                                 submitButton.disabled = true;
 
-                                // Simulate form submission. For more info check the plugin's official documentation: https://sweetalert2.github.io/
-                                setTimeout(function () {
-                                    // Remove loading indication
-                                    submitButton.removeAttribute('data-kt-indicator');
 
                                     // Enable button
                                     submitButton.disabled = false;
@@ -189,7 +187,7 @@
                                             submitButton.disabled = false;
 
                                             Swal.fire({
-                                                text: "@lang('admin.Unexpected error: ')" + error.message,
+                                                text: "@lang('admin.Unexpected error: ')",
                                                 icon: "error",
                                                 buttonsStyling: false,
                                                 confirmButtonText: "@lang('admin.OK')",
@@ -198,9 +196,6 @@
                                                 }
                                             });
                                         });
-
-                                    //form.submit(); // Submit form
-                                }, 2000);
                             } else {
                                 // Show popup warning. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                                 Swal.fire({

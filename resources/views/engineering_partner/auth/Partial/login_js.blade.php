@@ -86,7 +86,6 @@
                                 if (result.isConfirmed) {
                                     form.querySelector('[name="email"]').value = "";
                                     form.querySelector('[name="password"]').value = "";
-
                                     //form.submit(); // submit form
                                     var redirectUrl = form.getAttribute('data-kt-redirect-url');
                                     if (redirectUrl) {

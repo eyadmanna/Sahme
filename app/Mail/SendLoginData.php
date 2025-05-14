@@ -9,18 +9,20 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class TwoFactorCodeMail extends Mailable
+class SendLoginData extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $user;
+    public $plainPassword;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($user)
+    public function __construct($user, $plainPassword)
     {
         $this->user = $user;
+        $this->plainPassword = $plainPassword;
     }
 
     /**
@@ -29,7 +31,7 @@ class TwoFactorCodeMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Two Factor Authentication Code',
+            subject: 'بيانات الدخول الخاصة بك',
         );
     }
 
@@ -39,17 +41,12 @@ class TwoFactorCodeMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'twofactor.emails',
-            with: [
-                'code' => $this->user->two_factor_code,
-            ]
+            view: 'emails.send-login-data',
         );
     }
 
     /**
      * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
      */
     public function attachments(): array
     {

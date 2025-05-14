@@ -10,6 +10,6 @@ class TwoFactorController extends Controller
     //
     public function index()
     {
-        return view('twofactor.email_template');
+        return view('emails.email_template');
     }
 }

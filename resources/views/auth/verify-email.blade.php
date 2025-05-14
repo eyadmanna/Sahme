@@ -63,8 +63,8 @@ License: For each use you must have a valid license purchased only from above li
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
     <!--end::Fonts-->
     <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
-    <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/css/style.bundle.css')}}" rel="stylesheet" type="text/css" />
     <!--end::Global Stylesheets Bundle-->
     <script>// Frame-busting to prevent site from being loaded within a frame without permission (click-jacking) if (window.top != window.self) { window.top.location.replace(window.self.location.href); }</script>
 </head>
@@ -78,7 +78,7 @@ License: For each use you must have a valid license purchased only from above li
 <!--begin::Root-->
 <div class="d-flex flex-column flex-root">
     <!--begin::Page bg image-->
-    <style>body { background-image: url('assets/media/auth/bg5.jpg'); } [data-bs-theme="dark"] body { background-image: url('assets/media/auth/bg5-dark.jpg'); }</style>
+    <style>body { background-image: url('{{asset('assets/media/auth/bg5.jpg')}}'); } [data-bs-theme="dark"] body { background-image: url('{{asset('assets/media/auth/bg5-dark.jpg')}}'); }</style>
     <!--end::Page bg image-->
     <!--begin::Authentication - Signup Welcome Message -->
     <div class="d-flex flex-column flex-center flex-column-fluid">
@@ -141,8 +141,8 @@ License: For each use you must have a valid license purchased only from above li
 <!--begin::Javascript-->
 <script>var hostUrl = "assets/";</script>
 <!--begin::Global Javascript Bundle(mandatory for all pages)-->
-<script src="assets/plugins/global/plugins.bundle.js"></script>
-<script src="assets/js/scripts.bundle.js"></script>
+<script src="{{asset('assets/plugins/global/plugins.bundle.js')}}"></script>
+<script src="{{asset('assets/js/scripts.bundle.js')}}"></script>
 <!--end::Global Javascript Bundle-->
 <!--end::Javascript-->
 </body>
