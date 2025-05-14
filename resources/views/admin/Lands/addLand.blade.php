@@ -86,6 +86,12 @@
                     </div>
                     <div class="card-body">
                         <div class="row g-4 mb-15">
+                            <div class="col-md-8">
+                                <label class="form-label required">@lang('admin.Description of the land')</label>
+                               <input class="form-control" id="land_description" name="land_description" type="text">
+                            </div>
+                        </div>
+                        <div class="row g-4 mb-15">
                             <div class="col-md-3">
                                 <label class="form-label required">@lang('admin.Province')</label>
                                 <select id="province_cd" class="form-select location_province" data-control="select2" name="province_cd">

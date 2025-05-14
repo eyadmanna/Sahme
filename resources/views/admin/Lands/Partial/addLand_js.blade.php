@@ -38,6 +38,7 @@
                     {
                         fields: {
                             investor_id: { validators: { notEmpty: { message: '{{ __("admin.Full Name Filed is required") }}' } } },
+                            land_description: { validators: { notEmpty: { message: '{{ __("admin.Description land filed is required") }}' } } },
                             province_cd: { validators: { notEmpty: { message: '{{ __("admin.Province Filed is required") }}' } } },
                             city_cd: { validators: { notEmpty: { message: '{{ __("admin.City Filed is required") }}' } } },
                             address: { validators: { notEmpty: { message: '{{ __("admin.Address Filed is required") }}' } } },

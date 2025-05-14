@@ -149,8 +149,16 @@ return [
     'Asking price is required' => 'حقل السعر مطلوب',
     'Land area is required' => 'حقل مساحة الأرض مطلوب',
     'Engineering partner evaluation' => 'تقييم الشريك الهندسي',
-    'Evaluation of the legal partner' => 'تقييم الشريك القانوني',
+    'Evaluation of the legal partner' => 'اعتماد الملكية القانونية',
     'Engineering partner accreditation' => 'اعتماد الشريك الهندسي',
+    'Description of the land' => 'وصف الأرض',
+    'Description land filed is required' => 'حقل وصف الارض مطلوب',
+    'Land adoption' => 'اعتماد الأرض',
+    'Refusal to approve the land' => 'رفض اعتماد الأرض',
+    'Credentials' => 'بيانات الاعتماد',
+    'Land ownership certification files' => 'ملفات اعتماد ملكية الإرض',
+    'Drop files here or click to upload.' => 'قم بإسقاط الملفات هنا أو انقر للتحميل.',
+    'Land ownership approval notes' => 'ملاحظات اعتماد ملكية الأرض',
 
     /*profile page*/
     'Profile Details' => 'تفاصيل الملف الشخصي',

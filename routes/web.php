@@ -64,6 +64,10 @@ Route::group(
         Route::get('/lands/add-land', [LandsController::class, 'add'])->name('lands.add');
         Route::post('/lands/store-land', [LandsController::class,'store'])->name('lands.store');
         Route::get('/lands/view-land/{id}', [LandsController::class,'view'])->name('lands.view');
+        Route::get('/lands/approval-legal-ownership/{id}', [LandsController::class,'approval_legal_ownership'])->name('lands.approval_legal_ownership');
+        Route::post('/lands/approval-legal-ownership/{id}', [LandsController::class,'approval_legal_ownership'])->name('lands.approval_legal_ownership');
+        Route::post('/lands/upload-legal-attachment/{id}', [LandsController::class, 'upload_legal_attachment'])->name('lands.upload_legal_attachment');
+        Route::post('/lands/delete-attachment', [LandsController::class, 'delete_attachment'])->name('lands.delete_attachment');
 
 
     });
