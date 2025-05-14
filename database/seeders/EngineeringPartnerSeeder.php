@@ -1,8 +1,12 @@
 <?php
 
+namespace Database\Seeders;
+
+use App\Models\EngineeringPartner;
+use App\Models\Lookups;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Lookups;
 
 class EngineeringPartnerSeeder extends Seeder
 {
