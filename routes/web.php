@@ -33,16 +33,20 @@ Route::group(
         return view('admin.dashboard');
     })->middleware(['auth', 'verified'])->name('dashboard');
 
-    Route::middleware( 'auth', 'verified')->group(function () {
+    Route::middleware( 'auth')->group(function () {
         Route::get('/MyProfile', [ProfileController::class, 'view'])->name('profile.view');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
         Route::get('/users/list', [UsersController::class, 'index'])->name('users.index');
         Route::get('/users/getUsers', [UsersController::class, 'getUsers'])->name('users.getUsers');
         Route::post('/users/addUsers', [UsersController::class, 'store'])->name('users.store');
         Route::get('/users/view/{id}', [UsersController::class, 'view'])->name('users.view');
         Route::post('/users/update/{id}', [UsersController::class, 'update'])->name('users.update');
         Route::delete('/users/delete/{id}', [UsersController::class, 'destroy'])->name('users.destroy');
+
+
         Route::get('/roles', [RoleController::class,'index'])->name('roles.index');
         Route::get('/view-roles/{id}', [RoleController::class,'show'])->name('role.show');
         Route::post('/store-roles', [RoleController::class,'store'])->name('roles.store');
@@ -50,11 +54,16 @@ Route::group(
         Route::post('/update-roles/{id}', [RoleController::class,'update'])->name('roles.update');
 
 
+
+
         Route::get('/admin/investor-details', [App\Http\Controllers\Admin\InvestorsController::class, 'getInvestorDetails'])->name('admin.getInvestorDetails');
 
 
         Route::get('/lands/list', [LandsController::class, 'index'])->name('lands.index');
+        Route::get('/lands/getLands', [LandsController::class, 'getLands'])->name('lands.getLands');
         Route::get('/lands/add-land', [LandsController::class, 'add'])->name('lands.add');
+        Route::post('/lands/store-land', [LandsController::class,'store'])->name('lands.store');
+        Route::get('/lands/view-land/{id}', [LandsController::class,'view'])->name('lands.view');
 
 
     });

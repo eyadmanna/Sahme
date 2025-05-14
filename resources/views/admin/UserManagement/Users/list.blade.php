@@ -230,6 +230,18 @@
                                                 </div>
                                                 <!--end::Input group-->
                                                 <!--begin::Input group-->
+                                                <div class="fv-row mb-7">
+                                                    <!--begin::Checkbox-->
+                                                    <div class="form-check mt-3">
+                                                        <input checked class="form-check-input" type="checkbox" value="1" id="send_login_data" name="send_login_data">
+                                                        <label class="form-check-label" for="send_login_data">
+                                                            @lang('admin.Send login data via email')
+                                                        </label>
+                                                    </div>
+                                                    <!--end::Checkbox-->
+                                                </div>
+                                                <!--end::Input group-->
+                                                <!--begin::Input group-->
                                                 <div class="mb-5">
                                                     <!--begin::Label-->
                                                     <label class="required fw-semibold fs-6 mb-5">@lang('admin.Role')</label>

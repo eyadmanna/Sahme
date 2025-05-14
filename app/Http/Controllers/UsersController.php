@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendLoginData;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Role;
 use Yajra\DataTables\Facades\DataTables;
@@ -51,18 +53,25 @@ class UsersController extends Controller
             } else {
                 $filename = null;
             }
+            $plainPassword = Str::random(8);
+
             // Create user
             $user = new User();
             $user->name = $request->user_name;
             $user->email = $request->user_email;
             $user->mobile_number = $request->mobile_number;
             $user->avatar = $filename;
-            $user->password = Hash::make('password');
+            $user->password = $plainPassword;
+            if (isset($request->send_login_data)){
+                \Mail::to($user->email)->send(new SendLoginData($user, $plainPassword));
+            }
             $user->save();
+
 
             $role = Role::find($validated['user_role']);
             $user->roles()->attach($role);
-            $user->sendEmailVerificationNotification();
+
+            /*$user->sendEmailVerificationNotification();*/
 
             // Return JSON success response
             return response()->json([

@@ -126,15 +126,14 @@
 
                 <div class="card-body py-4">
                     <!--begin::Table-->
-                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_users">
+                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_lands">
                         <thead>
                         <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
-                            <th class="text-center min-w-125px">@lang('admin.User')</th>
-                            <th class="text-center min-w-125px">@lang('admin.Mobile number')</th>
-                            <th class="text-center min-w-125px">@lang('admin.Role')</th>
-                            <th class="text-center min-w-125px">@lang('admin.Last login')</th>
-                            <th class="text-center min-w-125px">@lang('admin.Two-step')</th>
-                            <th class="text-center min-w-125px">@lang('admin.Joined Date')</th>
+                            <th class="text-center min-w-125px">@lang('admin.Investor name')</th>
+                            <th class="text-center min-w-125px">@lang('admin.Province')</th>
+                            <th class="text-center min-w-125px">@lang('admin.City')</th>
+                            <th class="text-center min-w-125px">@lang('admin.Engineering partner evaluation')</th>
+                            <th class="text-center min-w-125px">@lang('admin.Evaluation of the legal partner')</th>
                             <th class="text-end min-w-100px">@lang('admin.Actions')</th>
                         </tr>
                         </thead>

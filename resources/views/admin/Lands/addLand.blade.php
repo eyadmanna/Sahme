@@ -34,202 +34,171 @@
     </div>
     <!--end::Toolbar-->
     <!--begin::Container-->
-    <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+    <div id="kt_content_container_land" class="d-flex flex-column-fluid align-items-start container-xxl">
         <!--begin::Post-->
         <div class="content flex-row-fluid" id="kt_content">
-            <!--begin::Card-->
-            <div class="card card-flush">
-                <!--begin::Card header-->
-                <div class="card-header pt-8">
-                    <!--begin::Col-->
-                    <div class="col-md-4">
-                        <div class="d-flex align-items-center gap-2">
-                        <!--begin::Input-->
-                        <select name="language" aria-label="Select a Language" data-control="select2" data-placeholder="@lang('admin.Investor name')" class="form-select mb-2">
-                            <option></option>
-                            @foreach($investors as $investor)
-                                <option value="{{$investor->id}}">{{$investor->full_name}}</option>
+            <form method="post" action="{{ route('lands.store') }}" class="form" id="kt_add_land">
+                @csrf
 
-                            @endforeach
-                        </select>
-                        <!--end::Input-->
-                            <!--begin::Add Button-->
-                            <a title="@lang('admin.Add a new investor')" href="#" class="btn btn-icon btn-primary rounded-circle">
-                                <i class="ki-duotone ki-plus fs-2"></i>
-                            </a>
-                            <!--end::Add Button-->
+                <!--begin::Card - Investor Info-->
+                <div class="card card-flush">
+                    <!--begin::Card header-->
+                    <div class="card-header pt-8">
+                        <!--begin::Col-->
+                        <div class="col-md-4">
+                            <div class="d-flex align-items-center gap-2">
+                                <!--begin::Input-->
+                                <select id="investor_id" name="investor_id" aria-label="Select a Language" data-control="select2" data-placeholder="@lang('admin.Investor name')" class="form-select mb-2">
+                                    <option></option>
+                                    @foreach($investors as $investor)
+                                        <option value="{{$investor->id}}">{{$investor->full_name}}</option>
+                                    @endforeach
+                                </select>
+                                <!--end::Input-->
+                                <!--begin::Add Button-->
+                                <a title="@lang('admin.Add a new investor')" href="#" class="btn btn-icon btn-primary rounded-circle">
+                                    <i class="ki-duotone ki-plus fs-2"></i>
+                                </a>
+                                <!--end::Add Button-->
+                            </div>
                         </div>
+                        <!--end::Col-->
                     </div>
-                    <!--end::Col-->
-                </div>
-                <!--end::Card header-->
-                <!--begin::Card body-->
-                <div class="card-body">
-                    <!--begin::Form-->
-                    <form class="form" id="kt_add_land">
-                        <!-- Investor details will be loaded here -->
-                        <div id="investor_details" style="display: none;">
-                            <!-- content will be injected here by AJAX -->
-                        </div>
+                    <!--end::Card header-->
+                    <!--begin::Card body-->
+                    <div class="card-body">
+                        <!--begin::Form-->
+                            <!-- Investor details will be loaded here -->
+                            <div id="investor_details" style="display: none;">
+                                <!-- content will be injected here by AJAX -->
+                            </div>
 
-                    </form>
-                    <!--end::Form-->
-                </div>
-                <!--end::Card body-->
-            </div>
-            <!--end::Card-->
-            <!--begin::Card-->
-            <div class="card card-flush mt-5">
-                <!--begin::Card header-->
-                <div class="card-header pt-8">
-                    <!--begin::Col-->
-                    <div class="col-md-4">
-                        <div class="d-flex align-items-center gap-2">
-                            <h3>@lang('admin.Land details')</h3>
-                        </div>
+                        <!--end::Form-->
                     </div>
-                    <!--end::Col-->
+                    <!--end::Card body-->
                 </div>
-                <!--end::Card header-->
-                <!--begin::Card body-->
-                <div class="card-body">
-                    <!--begin::Form-->
-                    <form class="form" id="kt_add_land">
-                        <!--begin::Input group-->
-                        <div class="fv-row mb-15">
-                            <div class="d-flex">
-                                <!-- عنصر 1 -->
-                                <div class="col-md-3 d-flex flex-column flex-md-row align-items-start align-items-md-center gap-2">
-                                    <h6 class="mb-0 required">@lang('admin.Governorate'):</h6>
-                                    <select class="form-select w-150px">
-                                        <option>Option 1</option>
-                                        <option>Option 2</option>
-                                    </select>
-                                </div>
+                <!--end::Card-->
 
-                                <!-- عنصر 2 -->
-                                <div class="col-md-3 d-flex flex-column flex-md-row align-items-start align-items-md-center gap-2">
-                                    <h6 class="mb-0 required">@lang('admin.City'):</h6>
-                                    <select class="form-select w-150px">
-                                        <option>Option 1</option>
-                                        <option>Option 2</option>
-                                    </select>
-                                </div>
-
-                                <!-- عنصر 3 -->
-                                <div class="col-md-3 d-flex flex-column flex-md-row align-items-start align-items-md-center gap-2">
-                                    <h6 class="mb-0 required">@lang('admin.Area'):</h6>
-                                    <select class="form-select w-150px">
-                                        <option>Option 1</option>
-                                        <option>Option 2</option>
-                                    </select>
-                                </div>
-
-                                <!-- عنصر 4 -->
-                                <div class="col-md-3 d-flex flex-column flex-md-row align-items-start align-items-md-center gap-2">
-                                    <h6 class="mb-0 required">@lang('admin.Address in detail'):</h6>
-                                    <textarea class="form-control"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <!--end::Input group-->
-
-                        <!--begin::Input group-->
-                        <div class="fv-row row mb-15">
-                            <!--begin::Col-->
-                            <div class="col-md-3 d-flex  align-items-center mb-5">
-                                <h5 class="mb-0 required">@lang('admin.Land area') </h5>
-                                <label class="ms-2 fs-6 fw-semibold mb-0">05977545454</label>
-
-                            </div>
-                            <!--end::Col-->
-
-                            <!--begin::Col-->
-                            <div class="col-md-3 d-flex  align-items-center mb-5">
-                                <h5 class="mb-0 required">@lang('admin.Part number') </h5>
-                                <label class="ms-2 fs-6 fw-semibold mb-0">admn@gmail.com</label>
-                            </div>
-                            <!--end::Col-->
-                            <!--begin::Col-->
-                            <div class="col-md-3 d-flex align-items-center mb-5">
-                                <h5 class="mb-0 required">@lang('admin.Voucher number') </h5>
-                                <label class="ms-2 fs-6 fw-semibold mb-0">admn@gmail.com</label>
-                            </div>
-                            <!--end::Col-->
-                            <!--begin::Col-->
-                            <div class="col-md-3 d-flex align-items-center mb-5">
-                                <h5 class="mb-0 required">@lang('admin.Type of land ownership') </h5>
-                                <select class="form-select w-150px">
-                                    <option>Option 1</option>
-                                    <option>Option 2</option>
+                <!--begin::Card - Land Details-->
+                <div class="card card-flush mt-5">
+                    <div class="card-header pt-8">
+                        <h3>@lang('admin.Land details')</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-4 mb-15">
+                            <div class="col-md-3">
+                                <label class="form-label required">@lang('admin.Province')</label>
+                                <select id="province_cd" class="form-select location_province" data-control="select2" name="province_cd">
+                                    <option value="" selected>@lang('admin.Select')..</option>
+                                    @foreach ($provinces as $val)
+                                        <option value="{{ $val->id }}">
+                                            {{ $val->{'name_' . app()->getLocale()} }}</option>
+                                    @endforeach
                                 </select>
                             </div>
-                            <!--end::Col-->
-
-                            <!-- يمكنك إضافة أعمدة أخرى حسب الحاجة بنفس النمط -->
-                        </div>
-                        <!--end::Input group-->
-
-                        <!--begin::Input group-->
-                        <div class="fv-row row mb-15">
-                            <!--begin::Col-->
-                            <div class="col-md-4 d-flex  align-items-center mb-5">
-                                <h5 class="mb-0 required">@lang('admin.Border')</h5>
-                                <textarea class="form-control"></textarea>
-
-                            </div>
-                            <!--end::Col-->
-
-                            <!--begin::Col-->
-                            <div class="col-md-4 d-flex align-items-center mb-5">
-                                <h5 class="mb-0 required">@lang('admin.Available services') </h5>
-                                <textarea class="form-control"></textarea>
-                            </div>
-                            <!--end::Col-->
-                            <!--begin::Col-->
-                            <div class="col-md-3 d-flex align-items-center mb-5">
-                                <h5 class="mb-0 required">@lang('admin.Asking price')</h5>
-                                <input type="number" class="form-control">
-                            </div>
-                            <div class="col-md-1 d-flex align-items-center mb-5">
-                                <!--begin::Select-->
-                                <select class="form-control form-select" data-mce-placeholder="@lang('admin.Select currency')">
-                                    <option value="" disabled selected>@lang('admin.Select currency')</option>
-                                    <!-- Add other options here -->
-                                    <option value="usd">USD</option>
-                                    <option value="eur">EUR</option>
+                            <div class="col-md-3" id="cities_block">
+                                <label class="form-label required">@lang('admin.City')</label>
+                                <select class="form-select location_city" name="city_cd" id="location_cities">
+                                    <option value="" selected>@lang('admin.Select')..</option>
                                 </select>
-                                <!--end::Select-->
                             </div>
-
-
-
-                            <!-- يمكنك إضافة أعمدة أخرى حسب الحاجة بنفس النمط -->
+                            <div class="col-md-3" id="areas_block">
+                                <label class="form-label">@lang('admin.District')</label>
+                                <select class="form-select" id="location_areas"  name="district_cd">
+                                    <option value="" selected>@lang('admin.Select')..</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label required">@lang('admin.Address in detail')</label>
+                                <textarea class="form-control" rows="3" name="address" placeholder="@lang('admin.Enter detailed address')"></textarea>
+                            </div>
                         </div>
-                        <!--end::Input group-->
 
-                    </form>
-                    <!--end::Form-->
+                        <div class="row g-4 mb-15">
+                            <div class="col-md-3">
+                                <label class="form-label required">@lang('admin.Land area')</label>
+                                <input class="form-control" id="area" name="area" type="number" placeholder="@lang('admin.Enter the area')">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">@lang('admin.Plot Number')</label>
+                                <input class="form-control" name="plot_number" type="text" placeholder="@lang('admin.Enter the part number')">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">@lang('admin.Parcel Number')</label>
+                                <input class="form-control" name="parcel_number" type="text" placeholder="@lang('admin.Enter the Voucher number')">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label required">@lang('admin.Type of land ownership')</label>
+                                <select class="form-select" name="ownership_type_cd" data-control="select2" data-placeholder="@lang('admin.Choose the land ownership type')">
+                                    <option value="" disabled selected>@lang('admin.Choose the land ownership type')</option>
+                                    @foreach($ownership_type as $ownership_types)
+                                        <option value="{{$ownership_types->id}}">{{$ownership_types->{'name_'.app()->getLocale()} }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row g-4 mb-15">
+                            <div class="col-md-4">
+                                <label class="form-label">@lang('admin.Border')</label>
+                                <textarea class="form-control" rows="3" name="borders"></textarea>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">@lang('admin.Available services')</label>
+                                <textarea class="form-control" rows="3" name="services"></textarea>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label required">@lang('admin.Asking price')</label>
+                                <div class="d-flex gap-2">
+                                    <input type="number" class="form-control" name="price" placeholder="@lang('admin.Enter the price')" style="text-align: right; direction: rtl;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <!--end::Card body-->
-            </div>
-            <!--end::Card-->
-            <!--begin::Action buttons-->
-            <div class="row mt-10">
-                <div class="col-md-9 offset-md-3">
-                    <!--begin::Cancel-->
-                    <button type="button" class="btn btn-light me-3">Cancel</button>
-                    <!--end::Cancel-->
-                    <!--begin::Button-->
-                    <button type="button" class="btn btn-primary" id="kt_file_manager_settings_submit">
-                        <span class="indicator-label">Save</span>
-                        <span class="indicator-progress">Please wait...
-                                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                    </button>
-                    <!--end::Button-->
+                <!--end::Card-->
+
+                <!--begin::Card - Map-->
+                <div class="card card-flush mt-5">
+                    <div class="card-header pt-8">
+                        <h3>@lang('admin.Address on map')</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8 mb-5">
+                                <div id="map" style="height: 400px; width: 100%; border-radius: 8px; border: 1px solid #ddd;"></div>
+                            </div>
+                            <div class="col-md-4 d-flex flex-column justify-content-center gap-3">
+                                <div>
+                                    <label class="form-label fw-bold required">@lang('admin.Latitude')</label>
+                                    <input type="text" id="lat" name="lat" class="form-control" placeholder="@lang('admin.Latitude')" value="31.5012">
+                                </div>
+                                <div>
+                                    <label class="form-label fw-bold required">@lang('admin.Longitude')</label>
+                                    <input type="text" id="long" name="long" class="form-control" placeholder="@lang('admin.Longitude')" value="34.4663">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <!--begin::Action buttons-->
+                <!--end::Card-->
+
+                <!--begin::Actions-->
+                <div class="row mt-10">
+                    <div class="col-md-9 offset-md-3">
+                        <button type="button" class="btn btn-light me-3">@lang('admin.Cancel')</button>
+                        <button id="submit" type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
+                            <span class="indicator-label">@lang('admin.Submit')</span>
+                            <span class="indicator-progress">@lang('admin.Please wait...')
+																	<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                        </button>
+                    </div>
+                </div>
+                <!--end::Actions-->
+
+            </form>
+
+
         </div>
         <!--end::Post-->
     </div>
@@ -237,5 +206,6 @@
 @endsection
 @section('js')
     @include("admin.Lands.Partial.addLand_js")
+
 @endsection
 
