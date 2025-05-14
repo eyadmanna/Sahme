@@ -155,6 +155,10 @@
                             <!--end::Email-->
                         </div>
                         <div class="fv-row mb-8">
+                            <label for="logo" class="required form-label">@lang('engineering.logo')</label>
+                            <input type="file"  name="logo" id="logo" autocomplete="off" class="form-control bg-transparent" />
+                        </div>
+                        <div class="fv-row mb-8">
                             <label for="company_profile" class="required form-label">@lang('engineering.company_profile')</label>
                             <input type="file"  name="company_profile" id="company_profile" autocomplete="off" class="form-control bg-transparent" />
                          </div>

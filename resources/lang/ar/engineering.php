@@ -47,6 +47,25 @@ return [
     'Sorry, an error occurred. Please try again.' => 'عذرًا، حدث خطأ. يرجى المحاولة مرة أخرى.',
     'Please fix the errors in the form.' => 'يرجى إصلاح الأخطاء في النموذج.',
     'tax number is required' => 'رقم الضريبة مطلوب',
+    'profile' => 'الملف الشخصي',
+    'Success Rate' => 'نسبة النجاح',
+    'Projects' => 'المشاريع',
+    'Earnings' => 'الأرباح',
+    'home' => 'الرئيسية',
+    'Profile Compleation' => 'اكتمال الملف الشخصي',
+    'Overview' => 'نظرة عامة',
+    'Profile Details' => 'تفاصيل الملف الشخصي',
+    'Edit Profile' => 'تعديل الملف الشخصي',
+    'Contact Phone' => 'رقم الهاتف',
+    'Company Address' => 'عنوان الشركة',
+    'We need your attention!' => 'نحتاج إلى انتباهك!',
+    'Your request is still under review. Please be patient.' => 'طلبك لا يزال قيد المراجعة. يرجى التحلي بالصبر.',
+    'Your Attachment' => 'المرفقات الخاصة بك',
+    'download' => 'تحميل',
+    'Allow Changes' => 'السماح بالتعديلات',
+    'Communication' => 'التواصل',
+
+
 
 
 

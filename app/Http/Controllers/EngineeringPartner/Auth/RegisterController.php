@@ -34,6 +34,7 @@ class RegisterController extends Controller
             'specializations' => 'required|string|max:255',
             'tax_number' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
+            'logo' => 'required|file|mimes:jpeg,jpg,png,pdf|max:10240',
             'company_profile' => 'required|file|mimes:jpeg,jpg,png,pdf|max:10240',
             'commercial_registration' => 'required|file|mimes:jpeg,jpg,png,pdf|max:10240',
             'liecence' => 'required|file|mimes:jpeg,jpg,png,pdf|max:10240',
@@ -43,6 +44,7 @@ class RegisterController extends Controller
         ]);
 
         $uploadFields = [
+            'logo' => 'logo',
             'company_profile' => 'company',
             'commercial_registration' => 'commercial',
             'liecence' => 'liecence',
@@ -73,6 +75,7 @@ class RegisterController extends Controller
             'specializations' => $request->specializations,
             'tax_number' => $request->tax_number,
             'email' => $request->email,
+            'logo' => $paths['logo'] ?? null,
             'company_profile' => $paths['company_profile'] ?? null,
             'commercial_registration' => $paths['commercial_registration'] ?? null,
             'liecence' => $paths['liecence'] ?? null,

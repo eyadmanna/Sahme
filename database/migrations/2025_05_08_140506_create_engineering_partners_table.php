@@ -21,6 +21,7 @@ class CreateEngineeringPartnersTable extends Migration
             $table->string('commercial_registration_number', 50)->nullable();
             $table->string('tax_number', 50)->nullable();
             $table->text('specializations')->nullable();
+            $table->text('logo')->nullable();
             $table->text('company_profile')->nullable();
             $table->text('commercial_registration')->nullable();
             $table->text('liecence')->nullable();
