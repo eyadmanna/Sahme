@@ -3,6 +3,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EngineeringPartner\Auth\LoginController;
 use App\Http\Controllers\EngineeringPartner\Auth\RegisterController;
 use App\Http\Controllers\EngineeringPartner\LookupsController;
+use App\Http\Controllers\EngineeringPartner\EngineeringController;
 
 Route::post('lookups/get_children_by_parent', [LookupsController::class, 'get_children_by_parent'])->name('get_children_by_parent');
 
@@ -18,7 +19,7 @@ Route::prefix('engineering')->name('engineering.')->group(function () {
         Route::get('dashboard', function () {
             return view('engineering_partner.dashboard');
         })->name('dashboard');
-
+        Route::get('profile', [EngineeringController::class, 'profile'])->name('profile');
         Route::post('logout', [LoginController::class, 'logout'])->name('logout');
     });
 });
