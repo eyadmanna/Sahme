@@ -22,7 +22,6 @@ class DatabaseSeeder extends Seeder
             UsersSeeder::class,
             RolesAndPermissionsSeeder::class,
             LookupsSeeder::class,
-            EngineeringPartnerSeeder::class,
         ]);
     }
 }

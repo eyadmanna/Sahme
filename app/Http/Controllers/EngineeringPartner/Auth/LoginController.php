@@ -21,7 +21,7 @@ class LoginController extends Controller
         ]);
 
         $credentials = $request->only('email', 'password');
- 
+
         if (Auth::guard('engineering')->attempt($credentials)) {
             $request->session()->regenerate();
 
