@@ -21,7 +21,6 @@ class LoginController extends Controller
             'password' => 'required|string|min:8',
         ]);
         $credentials = $request->only('email', 'password');
-        $credentials['status_cd'] = 16;
 
         if (Auth::guard('engineering')->attempt($credentials)) {
             $request->session()->regenerate();
