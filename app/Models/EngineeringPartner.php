@@ -22,6 +22,7 @@ class EngineeringPartner extends Authenticatable
     const STATUS_PENDING = 'pending';
     const STATUS_APPROVED = 'approved';
     const STATUS_REJECTED = 'rejected';
+
     protected static function booted()
     {
 
@@ -47,6 +48,7 @@ class EngineeringPartner extends Authenticatable
         return $this->belongsTo(Lookups::class, 'status_cd', 'id')
                    ->where('master_key', 'engineering_partner_status');
     }
+
     public function province()
     {
         return $this->belongsTo(Lookups::class, 'province_cd', 'id');
