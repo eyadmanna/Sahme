@@ -200,7 +200,7 @@ class LookupsSeeder extends Seeder
                 'is_managed' => 0,
                 'master_key' => 'engineering_consultant_evaluation_status_cd',
                 'item_key' => 'pending',
-                'name_ar' => 'بانتظار الاعتماد',
+                'name_ar' => 'بانتظار التقييم',
                 'name_en' => 'Pending',
             ],
             [
@@ -219,21 +219,21 @@ class LookupsSeeder extends Seeder
             ],
             [
                 'is_managed' => 0,
-                'master_key' => 'engineering_consultant_approval_status_cd',
+                'master_key' => 'project_approval_status_cd',
                 'item_key' => 'pending',
                 'name_ar' => 'بانتظار الاعتماد',
                 'name_en' => 'Pending',
             ],
             [
                 'is_managed' => 0,
-                'master_key' => 'engineering_consultant_approval_status_cd',
+                'master_key' => 'project_approval_status_cd',
                 'item_key' => 'approved',
                 'name_ar' => 'معتمد',
                 'name_en' => 'Approved',
             ],
             [
                 'is_managed' => 0,
-                'master_key' => 'engineering_consultant_approval_status_cd',
+                'master_key' => 'project_approval_status_cd',
                 'item_key' => 'rejected',
                 'name_ar' => 'مرفوض',
                 'name_en' => 'Rejected',
