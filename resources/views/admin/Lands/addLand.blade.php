@@ -122,8 +122,11 @@
 
                         <div class="row g-4 mb-15">
                             <div class="col-md-3">
-                                <label class="form-label required">@lang('admin.Land area')</label>
-                                <input class="form-control" id="area" name="area" type="number" placeholder="@lang('admin.Enter the area')">
+                                <label class="form-label required">@lang('admin.Land area')</label>                                
+                                <div class="input-group">
+                                    <input class="form-control" id="area" name="area" type="number" placeholder="@lang('admin.Enter the area')">
+                                    <span class="input-group-text">م2</span>
+                                </div>
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label">@lang('admin.Plot Number')</label>
@@ -155,8 +158,9 @@
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label required">@lang('admin.Asking price')</label>
-                                <div class="d-flex gap-2">
+                                <div class="input-group">
                                     <input type="number" class="form-control" name="price" placeholder="@lang('admin.Enter the price')" style="text-align: right; direction: rtl;">
+                                    <span class="input-group-text"><b>$</b></span>
                                 </div>
                             </div>
                         </div>
