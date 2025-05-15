@@ -79,10 +79,10 @@
         });
 
         // Initialize select2
-        $('select[name="language"]').select2();
+        $('select[name="investor_id"]').select2();
 
         // Handle change
-        $('select[name="language"]').on('change', function () {
+        $('select[name="investor_id"]').on('change', function () {
             var investorId = $(this).val();
             if (investorId) {
                 $.ajax({
