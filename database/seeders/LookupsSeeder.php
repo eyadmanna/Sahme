@@ -144,12 +144,14 @@ class LookupsSeeder extends Seeder
             ],
             [
                 'is_managed' => 1,
+                'parent_id' => 0,
                 'master_key' => 'ownership_type_cd',
                 'name_ar' => 'نوع الملكية',
                 'name_en' => 'Ownership Type',
             ],
             [
                 'is_managed' => 1,
+                'parent_id' => 19,
                 'master_key' => 'ownership_type_cd',
                 'name_ar' => 'طابو',
                 'name_en' => 'Taboo',
@@ -309,10 +311,10 @@ class LookupsSeeder extends Seeder
                 'name_en' => 'Award Decision Approved',
             ],
 
-            
 
-            
-            
+
+
+
         ];
 
         foreach ($lookups as $lookup) {

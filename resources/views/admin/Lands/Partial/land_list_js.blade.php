@@ -10,8 +10,8 @@
                 { data: 'investor_name', name: 'investor_name' },
                 { data: 'province_cd', name: 'province_cd' },
                 { data: 'city_cd', name: 'city_cd' },
-                { data: 'legal_status_cd', name: 'legal_status_cd' },
                 { data: 'valuation_status_cd', name: 'valuation_status_cd' },
+                { data: 'legal_status_cd', name: 'legal_status_cd' },
                 { data: 'actions', name: 'actions', orderable: false, searchable: false }
             ],
             language: {
