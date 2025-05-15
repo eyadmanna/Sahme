@@ -118,7 +118,6 @@
                     });
                 });
             }
-
             return {
                 init: function () {
                     initAddlandSubmitLegal();
