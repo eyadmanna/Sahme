@@ -1,4 +1,9 @@
 <script>var hostUrl = "assets/";</script>
+<!-- Google Maps API -->
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSNQLhR2yEuFkYAoU_q4sXlvsd_8lOMBA&callback=initMap">
+</script>
+
 <!--begin::Global Javascript Bundle(mandatory for all pages)-->
 <script src="{{asset('assets/plugins/global/plugins.bundle.js')}}"></script>
 <script src="{{asset('assets/js/scripts.bundle.js')}}"></script>
@@ -30,5 +35,6 @@
 <script src="{{asset('assets/js/custom/utilities/modals/users-search.js')}}"></script>
 
 <!--end::Custom Javascript-->
+
 
 @yield('js')
