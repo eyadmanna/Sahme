@@ -37,7 +37,34 @@ class LandsController extends Controller
             $validated = $request->validate([
                 'investor_id' => 'required',
             ]);
-            Lands::create($request->all());
+            $land = new Lands();
+            $land->investor_id = $request->investor_id;
+            $land->land_description = $request->land_description;
+            $land->province_cd = $request->province_cd;
+            $land->city_cd = $request->city_cd;
+            $land->district_cd = $request->district_cd;
+            $land->address = $request->address;
+            $land->area = $request->area;
+            $land->plot_number = $request->plot_number;
+            $land->parcel_number = $request->parcel_number;
+            $land->ownership_type_cd = $request->ownership_type_cd;
+            $land->price = $request->price;
+            $land->lat = $request->lat;
+            $land->long = $request->long;
+            $land->save();
+            foreach ($request->kt_docs_repeater_basic as $item) {
+                if (isset($item['land_attachment']) && $item['land_attachment'] instanceof \Illuminate\Http\UploadedFile) {
+                    $filePath = $item['land_attachment']->store('attachments/lands', 'public');
+
+                    Attachments::create([
+                        'land_id' => $land->id,
+                        'type' => 'land_attachments',
+                        'uploaded_by' => Auth::id(),
+                        'file_path' => $filePath,
+                        'description' => $item['land_description'] ?? null,
+                    ]);
+                }
+            }
 
             return response()->json([
                     'status' => 'success',
@@ -94,9 +121,24 @@ class LandsController extends Controller
         ])->whereNot("parent_id", 0)->where("status", 1)->get();
 
         $data['land'] = Lands::query()->find($id);
-
+        $data['attachments'] = Attachments::where('land_id', $id)
+            ->where('type', 'land_attachments')
+            ->get();
         if ($request->isMethod('post')) {
-            dd('d');
+            $data['land']->legal_partner_id = auth()->user()->id;
+            $data['land']->legal_notes = $request->legal_notes;
+
+            if ($request->input('action') == 'approved') {
+                $data['land']->setStatus('approved');
+            } elseif ($request->input('action') == 'rejected') {
+                $data['land']->setStatus('rejected');
+            }
+            $data['land']->save();
+            return response()->json([
+                'status' => 'success',
+                'message' => __('admin.Land added successfully'),
+                'redirect' => route('lands.index')
+            ]);
         }
 
             return view('admin.Lands.approval_legal_ownership',$data);
@@ -106,13 +148,13 @@ class LandsController extends Controller
         $request->validate([
             'file' => 'required|mimes:pdf,jpg,jpeg,png,doc,docx|max:10240',
         ]);
-        $path = $request->file('file')->store('lands/ownership_certifications', 'public');
+        $path = $request->file('file')->store('attachments/lands', 'public');
 
         $attachment = Attachments::create([
             'land_id' => $id,
             'file_path' => $path,
             'uploaded_by' => Auth::id(),
-            'type' => 'ownership_certification',
+            'type' => 'legal_ownership_certification',
         ]);
 
         return response()->json(['file_id' => $attachment->id]);
@@ -147,14 +189,14 @@ class LandsController extends Controller
             ->addColumn('province_cd', function ($land) {
                 return getlookup($land->province_cd)?->{'name_' . app()->getLocale()} ?? '-';
             })
-            ->addColumn('valuation_status_cd', function ($land) {
-                return $land->valuation_status_cd;
-            })
-            ->addColumn('legal_status_cd', function ($land) {
-                return $land->legal_status_cd;
-            })
             ->addColumn('city_cd', function ($land) {
                 return getlookup($land->city_cd)?->{'name_' . app()->getLocale()} ?? '-';
+            })
+            ->addColumn('valuation_status_cd', function ($land) {
+                return $land->valuation_status_cd ?? '-';
+            })
+            ->addColumn('legal_status_cd', function ($land) {
+                return '<span class="text-center">'.$land->getStatusKey().'</span>';
             })
             ->addColumn('actions', function ($land) {
                 $actions = '<div class="text-end">
@@ -168,10 +210,22 @@ class LandsController extends Controller
                                 <a href="' . url("/lands/view-land/{$land->id}") . '" class="menu-link px-3">'
                         . trans('admin.View') . '</a>
                              </div>';
-                    $actions .= '<div class="menu-item px-3">
-                                <a href="' . url("/lands/approval-legal-ownership/{$land->id}") . '" class="menu-link px-3">'
-                        . trans('admin.Evaluation of the legal partner') . '</a>
+                    if ($land->isApproved()){
+                        $actions .= '<div class="menu-item px-3">
+                                <a href="' . url("/lands/approval-legal-ownership/{$land->id}") . '" class="menu-link px-3 text-blue-700">'
+                            . trans('admin.Legal accreditation is acceptable') . '</a>
                              </div>';
+                    }elseif ($land->isRejected()){
+                        $actions .= '<div class="menu-item px-3">
+                                <a href="' . url("/lands/approval-legal-ownership/{$land->id}") . '" class="menu-link px-3 text-danger">'
+                            . trans('admin.Legal accreditation rejected') . '</a>
+                             </div>';
+                    }else{
+                        $actions .= '<div class="menu-item px-3">
+                                <a href="' . url("/lands/approval-legal-ownership/{$land->id}") . '" class="menu-link px-3">'
+                            . trans('admin.Evaluation of the legal partner') . '</a>
+                             </div>';
+                    }
                     $actions .= '<div class="menu-item px-3">
                                 <a href="#" class="menu-link px-3" data-kt-lands-table-filter="delete_row" data-land-id="' . $land->id . '">'
                         . trans('admin.Delete') . '</a>
@@ -182,7 +236,7 @@ class LandsController extends Controller
 
                 return $actions;
             })
-            ->rawColumns(['investor_name','valuation_status_cd','legal_status_cd', 'actions'])
+            ->rawColumns(['investor_name','province_cd','city_cd','valuation_status_cd','legal_status_cd', 'actions'])
             ->make(true);
     }
 }

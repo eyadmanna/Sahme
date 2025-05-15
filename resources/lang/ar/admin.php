@@ -159,6 +159,14 @@ return [
     'Land ownership certification files' => 'ملفات اعتماد ملكية الإرض',
     'Drop files here or click to upload.' => 'قم بإسقاط الملفات هنا أو انقر للتحميل.',
     'Land ownership approval notes' => 'ملاحظات اعتماد ملكية الأرض',
+    'Legal accreditation rejected' => 'الاعتماد القانوني مرفوض',
+    'Legal accreditation is acceptable' => 'الاعتماد القانوني مقبول',
+    'Attachments' => 'المرفقات',
+    'Attachment' => 'المرفق',
+    'Description' => 'الوصف',
+    'Are you sure you want to approve?' => 'هل أنت متأكد أنك تريد الموافقة؟',
+    'Are you sure you want to reject?' => 'هل أنت متأكد أنك تريد الرفض؟',
+    'Yes' => 'نعم',
 
     /*profile page*/
     'Profile Details' => 'تفاصيل الملف الشخصي',

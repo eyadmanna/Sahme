@@ -1,5 +1,83 @@
 <script>
     $(document).ready(function () {
+        $(document).on("change", "select.location_province", function () {
+            var province_id = $(this).val();
+            var this_city = $("#location_cities");
+            var this_area = $("#location_areas");
+            var cities_block = document.querySelector("#cities_block");
+
+            if (!cities_block) {
+                console.error("#cities_block not found");
+                return;
+            }
+
+            // استخدم getInstance أو أنشئ جديد عند الحاجة فقط
+            var blockUI = KTBlockUI.getInstance(cities_block) ?? new KTBlockUI(cities_block, {
+                message: '<div class="blockui-message"><span class="spinner-border text-primary"></span> @lang("engineering.Please wait")...</div>',
+            });
+
+            if (province_id !== '') {
+                blockUI.block();
+                this_city.empty();
+                this_area.empty();
+
+                $.ajax({
+                    method: "POST",
+                    url: '{{url("/")}}/lookups/get_children_by_parent',
+                    dataType: 'json',
+                    data: { id: province_id, '_token': '{{csrf_token()}}' },
+                    success: function (data) {
+                        this_city.append(data.children);
+                    },
+                    complete: function () {
+                        blockUI.release();
+                    },
+                    error: function () {
+                        blockUI.release();
+                    }
+                });
+            } else {
+                blockUI.release();
+            }
+        });
+        $(document).on("change", "select.location_city", function () {
+            var city_id = $(this).val();
+            var this_area = $("#location_areas");
+            var areas_block = document.querySelector("#areas_block");
+
+            if (!areas_block) {
+                console.error("#areas_block not found");
+                return;
+            }
+
+            var blockUI = KTBlockUI.getInstance(areas_block) ?? new KTBlockUI(areas_block, {
+                message: '<div class="blockui-message"><span class="spinner-border text-primary"></span> @lang("engineering.Please wait")...</div>',
+            });
+
+            if (city_id !== '') {
+                blockUI.block();
+                this_area.empty();
+
+                $.ajax({
+                    method: "POST",
+                    url: '{{url("/")}}/lookups/get_children_by_parent',
+                    dataType: 'json',
+                    data: { id: city_id, '_token': '{{csrf_token()}}' },
+                    success: function (data) {
+                        this_area.append(data.children);
+                    },
+                    complete: function () {
+                        blockUI.release();
+                    },
+                    error: function () {
+                        blockUI.release();
+                    }
+                });
+            } else {
+                blockUI.release();
+            }
+        });
+
         // Initialize select2
         $('select[name="investor_id"]').select2();
 
@@ -160,92 +238,27 @@
 // On document ready
         KTUtil.onDOMContentLoaded(function () {
             KTLandsAddland.init();
+            if (typeof $.fn.repeater !== 'function') {
+                console.error('Repeater plugin not initialized!');
+                return;
+            }
+
+            $('#kt_docs_repeater_basic').repeater({
+                initEmpty: false,
+                show: function () {
+                    $(this).slideDown();
+                },
+                hide: function (deleteElement) {
+                    $(this).slideUp(deleteElement);
+                }
+            });
         });
 
     });
 </script>
 <script>
-    $(document).on("change", "select.location_province", function () {
-        var province_id = $(this).val();
-        var this_city = $("#location_cities");
-        var this_area = $("#location_areas");
-        var cities_block = document.querySelector("#cities_block");
-
-        if (!cities_block) {
-            console.error("#cities_block not found");
-            return;
-        }
-
-        // استخدم getInstance أو أنشئ جديد عند الحاجة فقط
-        var blockUI = KTBlockUI.getInstance(cities_block) ?? new KTBlockUI(cities_block, {
-            message: '<div class="blockui-message"><span class="spinner-border text-primary"></span> @lang("engineering.Please wait")...</div>',
-        });
-
-        if (province_id !== '') {
-            blockUI.block();
-            this_city.empty();
-            this_area.empty();
-
-            $.ajax({
-                method: "POST",
-                url: '{{url("/")}}/lookups/get_children_by_parent',
-                dataType: 'json',
-                data: { id: province_id, '_token': '{{csrf_token()}}' },
-                success: function (data) {
-                    this_city.append(data.children);
-                },
-                complete: function () {
-                    blockUI.release();
-                },
-                error: function () {
-                    blockUI.release();
-                }
-            });
-        } else {
-            blockUI.release();
-        }
-    });
-    $(document).on("change", "select.location_city", function () {
-        var city_id = $(this).val();
-        var this_area = $("#location_areas");
-        var areas_block = document.querySelector("#areas_block");
-
-        if (!areas_block) {
-            console.error("#areas_block not found");
-            return;
-        }
-
-        var blockUI = KTBlockUI.getInstance(areas_block) ?? new KTBlockUI(areas_block, {
-            message: '<div class="blockui-message"><span class="spinner-border text-primary"></span> @lang("engineering.Please wait")...</div>',
-        });
-
-        if (city_id !== '') {
-            blockUI.block();
-            this_area.empty();
-
-            $.ajax({
-                method: "POST",
-                url: '{{url("/")}}/lookups/get_children_by_parent',
-                dataType: 'json',
-                data: { id: city_id, '_token': '{{csrf_token()}}' },
-                success: function (data) {
-                    this_area.append(data.children);
-                },
-                complete: function () {
-                    blockUI.release();
-                },
-                error: function () {
-                    blockUI.release();
-                }
-            });
-        } else {
-            blockUI.release();
-        }
-    });
-
     let map;
     let marker;
-
     function initMap() {
         const initialLat = parseFloat(document.getElementById('lat').value) || 31.5012;
         const initialLng = parseFloat(document.getElementById('long').value) || 34.4663;

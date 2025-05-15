@@ -189,10 +189,56 @@
                 </div>
                 <!--end::Card-->
 
+                <!--begin::Card - Land Details-->
+                <div class="card card-flush mt-5">
+                    <div class="card-header pt-8">
+                        <h3>@lang('admin.Attachments')</h3>
+                    </div>
+                    <div class="card-body">
+                        <!--begin::Repeater-->
+                        <div id="kt_docs_repeater_basic">
+                            <!--begin::Form group-->
+                            <div class="form-group">
+                                <div data-repeater-list="kt_docs_repeater_basic">
+                                    <div data-repeater-item>
+                                        <div class="form-group row">
+                                            <div class="col-md-3">
+                                                <label class="form-label">@lang('admin.Attachment')</label>
+                                                <input name="land_attachment" type="file" class="form-control mb-2 mb-md-0"/>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="form-label">@lang('admin.Description')</label>
+                                                <input name="land_description" type="text" class="form-control mb-2 mb-md-0"/>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <a href="javascript:;" data-repeater-delete class="btn btn-sm btn-light-danger mt-3 mt-md-8">
+                                                    <i class="ki-duotone ki-trash fs-5"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Form group-->
+
+                            <!--begin::Form group-->
+                            <div class="form-group mt-5">
+                                <a href="javascript:;" data-repeater-create class="btn btn-light-primary">
+                                    <i class="ki-duotone ki-plus fs-3"></i>
+                                    Add
+                                </a>
+                            </div>
+                            <!--end::Form group-->
+                        </div>
+                        <!--end::Repeater-->
+                    </div>
+                </div>
+                <!--end::Card-->
+
                 <!--begin::Actions-->
                 <div class="row mt-10">
-                    <div class="col-md-9 offset-md-3">
-                        <button type="button" class="btn btn-light me-3">@lang('admin.Cancel')</button>
+                    <div class="col-md-9 offset-md-3 text-end">
+                        <button type="button" class="btn btn-light me-3">@lang('admin.Discard')</button>
                         <button id="submit" type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
                             <span class="indicator-label">@lang('admin.Submit')</span>
                             <span class="indicator-progress">@lang('admin.Please wait...')

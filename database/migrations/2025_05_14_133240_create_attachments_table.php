@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('attachments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('land_id')->nullable()->index(); // رابط الأرض
+            $table->unsignedBigInteger('land_id')->nullable()->index();
             $table->string('file_path'); // مسار الملف
-            $table->string('type')->nullable(); // نوع المرفق (مثلاً ownership_certification, legal_document)
-            $table->string('original_name')->nullable(); // الاسم الأصلي للملف عند الرفع
+            $table->string('type')->nullable();
+            $table->text('original_name')->nullable(); // الاسم الأصلي للملف عند الرفع
+            $table->string('description')->nullable(); // الاسم الأصلي للملف عند الرفع
             $table->unsignedBigInteger('uploaded_by')->nullable()->index(); // المستخدم الذي رفع الملف
             $table->timestamps();
 

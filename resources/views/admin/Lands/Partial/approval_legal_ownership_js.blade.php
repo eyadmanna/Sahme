@@ -26,6 +26,108 @@
 
         $('select[name="investor_id"]').trigger('change');
 
+        var KTLandsSubmitLegal  = function () {
+            var form = document.querySelector('#kt_approval_legal_land');
+            const element = document.getElementById('kt_content_container_land');
+            const land_id = element.querySelector('#land_id')
+
+            var initAddlandSubmitLegal = function () {
+
+                const submitButtons = element.querySelectorAll('[data-kt-lands-legal-action="submit"]');
+                submitButtons.forEach(submitButton => {
+                    submitButton.addEventListener('click', e => {
+                        e.preventDefault();
+
+                        // Get the action value
+                        const action = submitButton.value;
+
+                        // Show confirmation before sending
+                        Swal.fire({
+                            title: action === 'approved' ? '@lang("admin.Are you sure you want to approve?")' : '@lang("admin.Are you sure you want to reject?")',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonText: '@lang("admin.Yes")',
+                            cancelButtonText: '@lang("admin.No, return")',
+                            customClass: {
+                                confirmButton: 'btn btn-danger',
+                                cancelButton: 'btn btn-secondary'
+                            },
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                submitButton.setAttribute('data-kt-indicator', 'on');
+                                submitButton.disabled = true;
+
+                                const formData = new FormData(form);
+                                formData.append('action', action); // Ensure action is sent
+
+                                const land_Id = document.getElementById('land_id').value;
+                                const url = `/lands/approval-legal-ownership/${land_Id}`; // Build the correct URL
+
+                                fetch(url, {
+                                    method: 'POST',
+                                    headers: {
+                                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                    },
+                                    body: formData
+                                })
+                                    .then(async response => {
+                                        let data = {};
+                                        try {
+                                            data = await response.json();
+                                        } catch (e) {
+                                            console.error('Invalid JSON response');
+                                        }
+                                        submitButton.removeAttribute('data-kt-indicator');
+                                        submitButton.disabled = false;
+
+                                        if (response.ok) {
+                                            Swal.fire({
+                                                text: "@lang('admin.Form has been successfully submitted!')",
+                                                icon: "success",
+                                                confirmButtonText: "@lang('admin.OK')"
+                                            }).then(() => {
+                                                form.reset();
+                                                window.location.href = data.redirect;
+                                            });
+                                        } else if (response.status === 422) {
+                                            let errorMessages = Object.values(data.errors).flat().join('<br>');
+                                            Swal.fire({
+                                                html: `<div class="text-start">${errorMessages}</div>`,
+                                                icon: "error",
+                                                confirmButtonText: "@lang('admin.OK')"
+                                            });
+                                        } else {
+                                            Swal.fire({
+                                                text: data.message || "@lang('admin.Something went wrong.')",
+                                                icon: "error",
+                                                confirmButtonText: "@lang('admin.OK')"
+                                            });
+                                        }
+                                    })
+                                    .catch(error => {
+                                        submitButton.removeAttribute('data-kt-indicator');
+                                        submitButton.disabled = false;
+                                        Swal.fire({
+                                            text: "@lang('admin.Unexpected error.')",
+                                            icon: "error",
+                                            confirmButtonText: "@lang('admin.OK')"
+                                        });
+                                    });
+                            }
+                        });
+                    });
+                });
+            }
+
+            return {
+                init: function () {
+                    initAddlandSubmitLegal();
+                }
+            };
+        }();
+        KTUtil.onDOMContentLoaded(function () {
+            KTLandsSubmitLegal.init();
+        });
 
 
 
@@ -44,12 +146,14 @@
                 var dz = this;
 
                 // تحميل المرفقات السابقة عند فتح الصفحة
-                @foreach($land->attachments()->where('type', 'ownership_certification')->get() as $file)
+                @foreach($land->attachments()->where('type', 'legal_ownership_certification')->get() as $file)
                 var mockFile = { name: "{{ basename($file->file_path) }}", size: 123456, serverId: "{{ $file->id }}" };
                 dz.emit("addedfile", mockFile);
                 dz.emit("thumbnail", mockFile, "{{ asset('storage/'.$file->file_path) }}");
                 dz.emit("complete", mockFile);
                 @endforeach
+
+                mockFile.previewElement.querySelector("[data-dz-name]").innerHTML = '<a href="{{ asset('storage/'.$file->file_path) }}" target="_blank">{{ basename($file->file_path) }}</a>';
 
                 // عند نجاح الرفع
                 this.on("success", function (file, response) {
@@ -80,83 +184,6 @@
     });
 </script>
 <script>
-    $(document).on("change", "select.location_province", function () {
-        var province_id = $(this).val();
-        var this_city = $("#location_cities");
-        var this_area = $("#location_areas");
-        var cities_block = document.querySelector("#cities_block");
-
-        if (!cities_block) {
-            console.error("#cities_block not found");
-            return;
-        }
-
-        // استخدم getInstance أو أنشئ جديد عند الحاجة فقط
-        var blockUI = KTBlockUI.getInstance(cities_block) ?? new KTBlockUI(cities_block, {
-            message: '<div class="blockui-message"><span class="spinner-border text-primary"></span> @lang("engineering.Please wait")...</div>',
-        });
-
-        if (province_id !== '') {
-            blockUI.block();
-            this_city.empty();
-            this_area.empty();
-
-            $.ajax({
-                method: "POST",
-                url: '{{url("/")}}/lookups/get_children_by_parent',
-                dataType: 'json',
-                data: { id: province_id, '_token': '{{csrf_token()}}' },
-                success: function (data) {
-                    this_city.append(data.children);
-                },
-                complete: function () {
-                    blockUI.release();
-                },
-                error: function () {
-                    blockUI.release();
-                }
-            });
-        } else {
-            blockUI.release();
-        }
-    });
-    $(document).on("change", "select.location_city", function () {
-        var city_id = $(this).val();
-        var this_area = $("#location_areas");
-        var areas_block = document.querySelector("#areas_block");
-
-        if (!areas_block) {
-            console.error("#areas_block not found");
-            return;
-        }
-
-        var blockUI = KTBlockUI.getInstance(areas_block) ?? new KTBlockUI(areas_block, {
-            message: '<div class="blockui-message"><span class="spinner-border text-primary"></span> @lang("engineering.Please wait")...</div>',
-        });
-
-        if (city_id !== '') {
-            blockUI.block();
-            this_area.empty();
-
-            $.ajax({
-                method: "POST",
-                url: '{{url("/")}}/lookups/get_children_by_parent',
-                dataType: 'json',
-                data: { id: city_id, '_token': '{{csrf_token()}}' },
-                success: function (data) {
-                    this_area.append(data.children);
-                },
-                complete: function () {
-                    blockUI.release();
-                },
-                error: function () {
-                    blockUI.release();
-                }
-            });
-        } else {
-            blockUI.release();
-        }
-    });
 
     let map;
     let marker;
