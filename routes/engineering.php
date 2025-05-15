@@ -20,6 +20,8 @@ Route::prefix('engineering')->name('engineering.')->group(function () {
             return view('engineering_partner.dashboard');
         })->name('dashboard');
         Route::get('profile', [EngineeringController::class, 'profile'])->name('profile');
+        Route::get('profile/settings', [EngineeringController::class, 'profile_settings'])->name('profile.settings');
+        Route::post('profile/update', [EngineeringController::class, 'update_profile_settings'])->name('profile.update');
         Route::post('logout', [LoginController::class, 'logout'])->name('logout');
     });
 });

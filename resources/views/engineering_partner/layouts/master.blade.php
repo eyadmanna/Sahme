@@ -43,6 +43,14 @@ License: For each use you must have a valid license purchased only from above li
     @endif
     <!--end::Global Stylesheets Bundle-->
     <script>// Frame-busting to prevent site from being loaded within a frame without permission (click-jacking) if (window.top != window.self) { window.top.location.replace(window.self.location.href); }</script>
+    <style>
+        label.error {
+            color: #f1416c;
+        }
+        input.error{
+            border: 1px solid #f1416c !important;
+        }
+    </style>
 </head>
 <!--end::Head-->
 <!--begin::Body-->
