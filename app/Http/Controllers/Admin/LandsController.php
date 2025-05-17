@@ -55,6 +55,11 @@ class LandsController extends Controller
         ])->whereNot("parent_id", 0)->where("status", 1)->get();
         $data['land'] = Lands::query()->find($id);
 
+        $data['attachments'] = Attachments::query()
+            ->where('reference_type', 'land')
+            ->where('reference_id_fk', $id)
+            ->where('attachment_type_cd', 44)
+            ->get();
 
         return view('admin.Lands.editLand',$data);
 
@@ -81,19 +86,26 @@ class LandsController extends Controller
             $land->price = $request->price;
             $land->lat = $request->lat;
             $land->long = $request->long;
-            $land->setStatus('pending'); // كده يكفي
+            $land->valuationsetStatus('pending');
+            $land->setStatus('pending');
             $land->save();
             foreach ($request->kt_docs_repeater_basic as $item) {
                 if (isset($item['land_attachment']) && $item['land_attachment'] instanceof \Illuminate\Http\UploadedFile) {
                     $filePath = $item['land_attachment']->store('attachments/lands', 'public');
+                    $fileType = $item['land_attachment']->getMimeType();
+                    $originalName = $item['land_attachment']->getClientOriginalName();
 
                     Attachments::create([
-                        'land_id' => $land->id,
-                        'type' => 'land_attachments',
-                        'uploaded_by' => Auth::id(),
+                        'reference_type' => 'land',
+                        'reference_id_fk' => $land->id,
+                        'attachment_type_cd' => 44,
+                        'created_by' => Auth::id(),
+                        'file_type' => $fileType,
                         'file_path' => $filePath,
-                        'description' => $item['land_description'] ?? null,
+                        'original_name' => $originalName,
+                        'file_description' => $item['description'] ?? null,
                     ]);
+
                 }
             }
 
@@ -141,7 +153,27 @@ class LandsController extends Controller
                 $land->lat = $request->lat;
                 $land->long = $request->long;
                 $land->save();
-                return response()->json([
+            foreach ($request->kt_docs_repeater_basic as $item) {
+                if (isset($item['land_attachment']) && $item['land_attachment'] instanceof \Illuminate\Http\UploadedFile) {
+                    $filePath = $item['land_attachment']->store('attachments/lands', 'public');
+                    $fileType = $item['land_attachment']->getMimeType();
+                    $originalName = $item['land_attachment']->getClientOriginalName();
+
+                    Attachments::create([
+                        'reference_type' => 'land',
+                        'reference_id_fk' => $land->id,
+                        'attachment_type_cd' => 44,
+                        'created_by' => Auth::id(),
+                        'file_type' => $fileType,
+                        'file_path' => $filePath,
+                        'original_name' => $originalName,
+                        'file_description' => $item['description'] ?? null,
+                    ]);
+
+                }
+            }
+
+            return response()->json([
                     'status' => 'success',
                     'message' => __('admin.Land Updated Successfully'),
                     'redirect' => route('lands.index')
@@ -179,6 +211,11 @@ class LandsController extends Controller
 
         $data['land'] = Lands::query()->find($id);
 
+        $data['attachments'] = Attachments::query()
+            ->where('reference_type', 'land')
+            ->where('reference_id_fk', $id)
+            ->where('attachment_type_cd', 44)
+            ->get();
         return view('admin.Lands.view',$data);
     }
 
@@ -198,8 +235,10 @@ class LandsController extends Controller
         ])->whereNot("parent_id", 0)->where("status", 1)->get();
 
         $data['land'] = Lands::query()->find($id);
-        $data['attachments'] = Attachments::where('land_id', $id)
-            ->where('type', 'land_attachments')
+        $data['attachments'] = Attachments::query()
+            ->where('reference_type', 'land')
+            ->where('reference_id_fk', $id)
+            ->where('attachment_type_cd', 44)
             ->get();
         if ($request->isMethod('post')) {
             $data['land']->legal_partner_id = auth()->user()->id;
@@ -228,13 +267,38 @@ class LandsController extends Controller
         $path = $request->file('file')->store('attachments/lands', 'public');
 
         $attachment = Attachments::create([
-            'land_id' => $id,
+            'reference_type' => 'land',
+            'reference_id_fk' => $id,
+            'attachment_type_cd' => 45,
+            'created_by' => Auth::id(),
             'file_path' => $path,
-            'uploaded_by' => Auth::id(),
-            'type' => 'legal_ownership_certification',
         ]);
 
         return response()->json(['file_id' => $attachment->id]);
+    }
+
+    public function approval_valuation_ownership(Request $request, $id){
+        $data['investors'] = Investors::query()->get();
+        $data["provinces"] = Lookups::query()->where([
+            "master_key" => "province"
+        ])->whereNot("parent_id", 0)->where("status", 1)->get();
+        $data["city"] = Lookups::query()->where([
+            "master_key" => "city"
+        ])->whereNot("parent_id", 0)->where("status", 1)->get();
+        $data["area"] = Lookups::query()->where([
+            "master_key" => "area"
+        ])->whereNot("parent_id", 0)->where("status", 1)->get();
+        $data["ownership_type"] = Lookups::query()->where([
+            "master_key" => "ownership_type_cd"
+        ])->whereNot("parent_id", 0)->where("status", 1)->get();
+
+        $data['land'] = Lands::query()->find($id);
+        $data['attachments'] = Attachments::query()
+            ->where('reference_type', 'land')
+            ->where('reference_id_fk', $id)
+            ->where('attachment_type_cd', 44)
+            ->get();
+        return view('admin.Lands.approval_valuation_ownership',$data);
     }
 
     public function delete_attachment(Request $request)
@@ -278,7 +342,8 @@ class LandsController extends Controller
                 return getlookup($land->city_cd)?->{'name_' . app()->getLocale()} ?? '-';
             })
             ->addColumn('valuation_status_cd', function ($land) {
-                return $land->valuation_status_cd ?? '-';
+                return '<span class="text-center badge-light-primary">'.($land->valuationstatusLookup?->{'name_' . app()->getLocale()} ?? '-').'</span>';
+
             })
             ->addColumn('legal_status_cd', function ($land) {
                 return '<span class="text-center badge-light-primary">'.($land->statusLookup?->{'name_' . app()->getLocale()} ?? '-').'</span>';
@@ -318,6 +383,25 @@ class LandsController extends Controller
                         $actions .= '<div class="menu-item px-3">
                                 <a href="' . url("/lands/approval-legal-ownership/{$land->id}") . '" class="menu-link px-3">'
                             . trans('admin.Evaluation of the legal partner') . '</a>
+                             </div>';
+                    }
+                }
+                if (auth()->user()->can('Real estate appraiser evaluation')) {
+
+                    if ($land->isApproved()) {
+                        $actions .= '<div class="menu-item px-3">
+                                <a href="' . url("/lands/approval-legal-ownership/{$land->id}") . '" class="menu-link px-3 text-blue-700">'
+                            . trans('admin.Legal accreditation is acceptable') . '</a>
+                             </div>';
+                    } elseif ($land->isRejected()) {
+                        $actions .= '<div class="menu-item px-3">
+                                <a href="' . url("/lands/approval-legal-ownership/{$land->id}") . '" class="menu-link px-3 text-danger">'
+                            . trans('admin.Legal accreditation rejected') . '</a>
+                             </div>';
+                    } else {
+                        $actions .= '<div class="menu-item px-3">
+                                <a href="' . url("/lands/approval-valuation-ownership/{$land->id}") . '" class="menu-link px-3">'
+                            . trans('admin.Real estate appraiser evaluation') . '</a>
                              </div>';
                     }
                 }

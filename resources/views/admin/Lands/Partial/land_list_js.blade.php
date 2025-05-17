@@ -22,9 +22,8 @@
             },
             createdRow: function (row, data, dataIndex) {
                 $('td', row).each(function (index) {
-                    if (index !== 3) { // Actions column to remain right aligned
-                        $(this).addClass('text-center');
-                    }
+                   $(this).addClass('text-center');
+
                 });
             },
             drawCallback: function () {

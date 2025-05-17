@@ -120,7 +120,7 @@
                             <th class="text-center min-w-125px">@lang('admin.Investor name')</th>
                             <th class="text-center min-w-125px">@lang('admin.Province')</th>
                             <th class="text-center min-w-125px">@lang('admin.City')</th>
-                            <th class="text-center min-w-125px">@lang('admin.Engineering partner evaluation')</th>
+                            <th class="text-center min-w-125px">@lang('admin.Real estate appraiser evaluation')</th>
                             <th class="text-center min-w-125px">@lang('admin.Evaluation of the legal partner')</th>
                             <th class="text-end min-w-100px">@lang('admin.Actions')</th>
                         </tr>

@@ -290,6 +290,38 @@
             });
         });
 
+        $(document).on('click', '.delete-attachment-btn', function() {
+            let id = $(this).data('id');
+            let $button = $(this); // <<< هنا نخزن الزر في متغير
+
+            Swal.fire({
+                text: "@lang('admin.Are you sure you want to delete the item?')",
+                icon: "warning",
+                confirmButtonText: "@lang('admin.Yes')",
+                customClass: { confirmButton: "btn btn-primary" }
+            }).then(() => {
+                $.ajax({
+                    url: `/attachments/${id}`,
+                    type: 'DELETE',
+                    data: {
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        Swal.fire({
+                            text: "@lang('admin.The item was deleted successfully')",
+                            icon: "success",
+                            buttonsStyling: false,
+                            confirmButtonText: "@lang('OK')",
+                            customClass: {
+                                confirmButton: "btn btn-primary",
+                            }
+                        });
+                        $button.closest('li').remove();
+                    }
+                });
+            });
+        });
+
     });
 </script>
 

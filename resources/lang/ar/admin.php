@@ -170,6 +170,10 @@ return [
     'Are you sure you want to reject?' => 'هل أنت متأكد أنك تريد الرفض؟',
     'Yes' => 'نعم',
     'Existing Attachments' => 'المرفقات الموجودة',
+    'File' => 'الملف',
+    'Are you sure you want to delete the item?' => 'هل انت متاكد انك تريد حذف  العنصر',
+    'The item was deleted successfully' => 'تم حذف العنصر بنجاح',
+    'Real estate appraiser evaluation' => 'تقييم المثمن العقاري',
 
     /*profile page*/
     'Profile Details' => 'تفاصيل الملف الشخصي',

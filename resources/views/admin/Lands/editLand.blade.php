@@ -184,6 +184,34 @@
                         <h3>@lang('admin.Attachments')</h3>
                     </div>
                     <div class="card-body">
+                        <!-- ✅ Existing Attachments Preview -->
+                        @if (!empty($attachments) && $attachments->count())
+                            <div class="mb-5">
+                                <h5>@lang('admin.Existing Attachments')</h5>
+                                <ul class="list-group">
+                                    @foreach ($attachments as $attachment)
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <a href="{{ asset('storage/' . $attachment->file_path) }}" target="_blank">
+                                                    {{ $attachment->original_name }}
+                                                </a>
+                                                <br>
+                                            </div>
+                                            <div>
+                                               <span>{{$attachment->file_description}}</span>
+                                            </div>
+                                            <div class="d-flex gap-2">
+                                                <!-- Delete Button -->
+                                                <a href="javascript:;" data-id="{{ $attachment->id }}" class="delete-attachment-btn btn btn-sm btn-light-danger mt-3 mt-md-8">
+                                                    <i class="ki-duotone ki-trash fs-5"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span></i>
+                                                </a>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
                         <!--begin::Repeater-->
                         <div id="kt_docs_repeater_basic">
                             <!--begin::Form group-->
