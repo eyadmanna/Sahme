@@ -25,6 +25,8 @@ class RolesAndPermissionsSeeder extends Seeder
                 'Land view',
                 'Land create',
                 'Land edit',
+                'Land edit',
+                'Legal Accreditation of the Land',
             ],
             'Projects management' => [
                 'Projects Section View',

@@ -41,7 +41,7 @@
     <!--begin::Card - Land Details-->
     <div class="card card-flush mt-5">
         <div class="card-header pt-8">
-            <h3>@lang('admin.Land details')</h3>
+            <h3 style="color: red">@lang('admin.Land details')</h3>
         </div>
         <div class="card-body">
             <div class="row g-4 mb-15">
@@ -114,7 +114,7 @@
     <!--begin::Card - Map-->
     <div class="card card-flush mt-5">
         <div class="card-header pt-8">
-            <h3>@lang('admin.Address on map')</h3>
+            <h3 style="color: red">@lang('admin.Address on map')</h3>
         </div>
         <div class="card-body">
             <div class="row">
@@ -124,11 +124,11 @@
                 <div class="col-md-4 d-flex flex-column justify-content-center gap-3">
                     <div>
                         <label class="form-label fw-bold required">@lang('admin.Latitude')</label>
-                        <input type="text" id="lat" name="lat" class="form-control" placeholder="@lang('admin.Latitude')" value="31.5012">
+                        <input type="text"  id="lat" name="lat" class="form-control" placeholder="@lang('admin.Latitude')" value="{{$land->lat}}">
                     </div>
                     <div>
                         <label class="form-label fw-bold required">@lang('admin.Longitude')</label>
-                        <input type="text" id="long" name="long" class="form-control" placeholder="@lang('admin.Longitude')" value="34.4663">
+                        <input type="text" id="long" name="long" class="form-control" placeholder="@lang('admin.Longitude')" value="{{$land->long}}">
                     </div>
                 </div>
             </div>
@@ -139,7 +139,7 @@
     <!--begin::Card - Existing Attachments-->
     <div class="card card-flush mt-5">
         <div class="card-header pt-8">
-            <h3>@lang('admin.Existing Attachments')</h3>
+            <h3 style="color: red">@lang('admin.Existing Attachments')</h3>
         </div>
         <div class="card-body">
             @if($attachments->isEmpty())

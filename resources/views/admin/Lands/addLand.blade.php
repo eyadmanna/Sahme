@@ -217,8 +217,8 @@
                 <!--begin::Actions-->
                 <div class="row mt-10">
                     <div class="col-md-9 offset-md-3 text-end">
-                        <button type="button" class="btn btn-light me-3">@lang('admin.Discard')</button>
-                        <button id="submit" type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
+                        <button type="button" class="btn btn-light me-3" data-kt-lands-action="cancel">@lang('admin.Discard')</button>
+                        <button id="submit" type="submit" class="btn btn-primary" data-kt-land-action="submit">
                             <span class="indicator-label">@lang('admin.Submit')</span>
                             <span class="indicator-progress">@lang('admin.Please wait...')
 																	<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>

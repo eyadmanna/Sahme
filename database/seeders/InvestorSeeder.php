@@ -30,8 +30,8 @@ class InvestorSeeder extends Seeder
             ],
             [
                 'full_name' => 'اياد',
-                'phone' => '059000002',
-                'mobile' => '059000002',
+                'phone' => '56415646',
+                'mobile' => '64561844654',
                 'province_cd' => 4,
                 'city_cd' => 6,
                 'district_cd' => 10,
