@@ -82,7 +82,7 @@
                 <!--begin::Card - Land Details-->
                 <div class="card card-flush mt-5">
                     <div class="card-header pt-8">
-                        <h3>@lang('admin.Land details')</h3>
+                        <h5>@lang('admin.Land details')</h5>
                     </div>
                     <div class="card-body">
                         <div class="row g-4 mb-15">
@@ -175,7 +175,7 @@
                 <!--begin::Card - Land Details-->
                 <div class="card card-flush mt-5">
                     <div class="card-header pt-8">
-                        <h3>@lang('admin.Attachments')</h3>
+                        <h5>@lang('admin.Attachments')</h5>
                     </div>
                     <div class="card-body">
                         <!--begin::Repeater-->
@@ -191,7 +191,7 @@
                                             </div>
                                             <div class="col-md-3">
                                                 <label class="form-label">@lang('admin.Description')</label>
-                                                <input name="land_description" type="text" class="form-control mb-2 mb-md-0"/>
+                                                <input name="description" type="text" class="form-control mb-2 mb-md-0"/>
                                             </div>
                                             <div class="col-md-4">
                                                 <a href="javascript:;" data-repeater-delete class="btn btn-sm btn-light-danger mt-3 mt-md-8">

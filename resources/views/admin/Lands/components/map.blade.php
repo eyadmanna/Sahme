@@ -1,6 +1,6 @@
 <div class="card card-flush mt-5">
     <div class="card-header pt-8">
-        <h3>@lang('admin.Address on map')</h3>
+        <h5>@lang('admin.Address on map')</h5>
     </div>
     <div class="card-body">
         <div class="row">

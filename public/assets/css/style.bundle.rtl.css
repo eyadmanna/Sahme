@@ -47204,6 +47204,13 @@ html {
     text-size-adjust: 100%;
 }
 
+@font-face {
+    font-family: "DGAgnadeen";
+    src: url('../plugins/global/fonts/DGAgnadeen-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
 html,
 body {
     height: 100%;
@@ -47371,7 +47378,6 @@ body {
         border-top-left-radius: 0.75rem;
         color: var(--bs-header-navs-tab-color-default);
         font-size: 1.1rem;
-        font-weight: 600;
         padding: 1rem 1.5rem;
         margin-left: 0.25rem;
     }

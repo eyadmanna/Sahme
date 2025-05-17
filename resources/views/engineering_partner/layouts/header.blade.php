@@ -1094,9 +1094,9 @@
                         <!--begin::Wrapper-->
                         <div class="d-flex flex-column flex-lg-row flex-lg-stack flex-wrap gap-2 px-4 px-lg-0">
                             <div class="d-flex flex-column flex-lg-row gap-2">
-                                <a class="btn btn-sm btn-light-primary fw-bold" href="apps/ecommerce/catalog/products.html">عرض الأراضي</a>
-                                <a class="btn btn-sm btn-light-warning fw-bold" href="apps/subscriptions/view.html">الشركاء القانونيين </a>
-                                <a class="btn btn-sm btn-light-info fw-bold" href="apps/subscriptions/view.html">المثمنين العقاريين  </a>
+                                <a class="btn btn-sm btn-light-primary" href="apps/ecommerce/catalog/products.html">عرض الأراضي</a>
+                                <a class="btn btn-sm btn-light-warning" href="apps/subscriptions/view.html">الشركاء القانونيين </a>
+                                <a class="btn btn-sm btn-light-info" href="apps/subscriptions/view.html">المثمنين العقاريين  </a>
                             </div>
                         </div>
                         <!--end::Wrapper-->
@@ -1108,9 +1108,9 @@
                         <!--begin::Wrapper-->
                         <div class="d-flex flex-column flex-lg-row flex-lg-stack flex-wrap gap-2 px-4 px-lg-0">
                             <div class="d-flex flex-column flex-lg-row gap-2">
-                                <a class="btn btn-sm btn-light-primary fw-bold" href="documentation/base/forms/controls.html">إضافة مشروع جديد</a>
-                                <a class="btn btn-sm btn-light-success fw-bold" href="documentation/base/forms/advanced.html">عرض المشاريع</a>
-                                <a class="btn btn-sm btn-light-danger fw-bold" href="documentation/base/forms/floating-labels.html"> تقييم المشاريع</a>
+                                <a class="btn btn-sm btn-light-primary" href="documentation/base/forms/controls.html">إضافة مشروع جديد</a>
+                                <a class="btn btn-sm btn-light-success" href="documentation/base/forms/advanced.html">عرض المشاريع</a>
+                                <a class="btn btn-sm btn-light-danger" href="documentation/base/forms/floating-labels.html"> تقييم المشاريع</a>
                             </div>
                         </div>
                         <!--end::Wrapper-->
@@ -1121,7 +1121,7 @@
                         <!--begin::Wrapper-->
                         <div class="d-flex flex-column flex-lg-row flex-lg-stack flex-wrap gap-2 px-4 px-lg-0">
                             <div class="d-flex flex-column flex-lg-row gap-2">
-                                <a class="btn btn-sm btn-light-primary fw-bold" href="{{route('users.index')}}">عرض الشركاء الهندسيين </a>
+                                <a class="btn btn-sm btn-light-primary" href="{{route('users.index')}}">عرض الشركاء الهندسيين </a>
                             </div>
                         </div>
                         <!--end::Wrapper-->
@@ -1132,10 +1132,10 @@
                         <!--begin::Wrapper-->
                         <div class="d-flex flex-column flex-lg-row flex-lg-stack flex-wrap gap-2 px-4 px-lg-0">
                             <div class="d-flex flex-column flex-lg-row gap-2">
-                                <a class="btn btn-sm btn-light-primary fw-bold" href="apps/ecommerce/catalog/products.html">عرض المقاولين</a>
-                                <a class="btn btn-sm btn-light-danger fw-bold" href="apps/file-manager/folders.html"> إدارة عروض أسعار المقاولين</a>
-                                <a class="btn btn-sm btn-light-info fw-bold" href="apps/subscriptions/view.html"> مراحل تنفيذ المشاريع</a>
-                                <a class="btn btn-sm btn-light-info fw-bold" href="apps/subscriptions/view.html">   </a>
+                                <a class="btn btn-sm btn-light-primary" href="apps/ecommerce/catalog/products.html">عرض المقاولين</a>
+                                <a class="btn btn-sm btn-light-danger" href="apps/file-manager/folders.html"> إدارة عروض أسعار المقاولين</a>
+                                <a class="btn btn-sm btn-light-info" href="apps/subscriptions/view.html"> مراحل تنفيذ المشاريع</a>
+                                <a class="btn btn-sm btn-light-info" href="apps/subscriptions/view.html">   </a>
                             </div>
                         </div>
                         <!--end::Wrapper-->
@@ -1148,11 +1148,11 @@
                         <!--begin::Wrapper-->
                         <div class="d-flex flex-column flex-lg-row flex-lg-stack flex-wrap gap-2 px-4 px-lg-0">
                             <div class="d-flex flex-column flex-lg-row gap-2">
-                                <a class="btn btn-sm btn-light-primary fw-bold" href="apps/ecommerce/catalog/products.html">eCommerce</a>
-                                <a class="btn btn-sm btn-light-danger fw-bold" href="apps/file-manager/folders.html">File Manager</a>
+                                <a class="btn btn-sm btn-light-primary" href="apps/ecommerce/catalog/products.html">eCommerce</a>
+                                <a class="btn btn-sm btn-light-danger" href="apps/file-manager/folders.html">File Manager</a>
                             </div>
                             <div class="d-flex flex-column flex-lg-row gap-2">
-                                <a class="btn btn-sm btn-light-info fw-bold" href="apps/subscriptions/view.html">More Apps</a>
+                                <a class="btn btn-sm btn-light-info" href="apps/subscriptions/view.html">More Apps</a>
                             </div>
                         </div>
                         <!--end::Wrapper-->
