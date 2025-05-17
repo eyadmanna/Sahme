@@ -27,6 +27,7 @@ return [
     'role view' => 'عرض الدور',
     'role create' => 'أضافة الدور',
     'role edit' => 'تعديل الدور',
+    'Legal Accreditation of the Land' => 'الأعتماد القانوني للأرض',
 
 ];
 

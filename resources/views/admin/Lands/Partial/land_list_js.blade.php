@@ -5,6 +5,9 @@
             serverSide: true,
             ajax: {
                 url: "{{ route('lands.getLands') }}",
+                data: function (d) {
+                    d.province_cd = $('#province_cd').val();
+                }
             },
             columns: [
                 { data: 'investor_name', name: 'investor_name' },
@@ -29,6 +32,24 @@
                     KTMenu.createInstances();
                 }
             }
+        });
+        let searchTimeout;
+        $('[data-kt-land-table-filter="search"]').on('keyup', function () {
+            clearTimeout(searchTimeout);
+            let input = this;
+
+            searchTimeout = setTimeout(function () {
+                table.search(input.value).draw();
+            }, 300); // delay in milliseconds
+        });
+        $('.search_btn').on('click', function () {
+            table.draw(); // redraw the table with the filter values
+        });
+        $('.reset_search').on('click', function () {
+            $('#filters')[0].reset(); // clear form fields
+            // Reset the Select2 value manually
+            $('#province_cd').val(null).trigger('change'); // Reset and update UI
+            table.draw(); // refresh table
         });
     });
 

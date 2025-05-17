@@ -14,11 +14,19 @@ use Illuminate\Support\Facades\Validator;
 
 class LandsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:Land create')->only('add','store');
+        $this->middleware('can:Land view')->only('view');
+        $this->middleware('can:Legal Accreditation of the Land')->only('approval_legal_ownership');
+    }
 
     public function index()
     {
-
-        return view('admin.Lands.list');
+        $data["provinces"] = Lookups::query()->where([
+            "master_key" => "province"
+        ])->whereNot("parent_id", 0)->where("status", 1)->get();
+        return view('admin.Lands.list',$data);
     }
     public function add(){
         $data['investors'] = Investors::query()->get();
@@ -29,6 +37,17 @@ class LandsController extends Controller
             "master_key" => "ownership_type_cd"
         ])->whereNot("parent_id", 0)->where("status", 1)->get();
         return view('admin.Lands.addLand',$data);
+
+    }
+    public function edit($ids){
+        $data['investors'] = Investors::query()->get();
+        $data["provinces"] = Lookups::query()->where([
+            "master_key" => "province"
+        ])->whereNot("parent_id", 0)->where("status", 1)->get();
+        $data["ownership_type"] = Lookups::query()->where([
+            "master_key" => "ownership_type_cd"
+        ])->whereNot("parent_id", 0)->where("status", 1)->get();
+        return view('admin.Lands.editLand',$data);
 
     }
     public function store(Request $request){
@@ -100,8 +119,11 @@ class LandsController extends Controller
         $data["ownership_type"] = Lookups::query()->where([
             "master_key" => "ownership_type_cd"
         ])->whereNot("parent_id", 0)->where("status", 1)->get();
-
+        $data['attachments'] = Attachments::where('land_id', $id)
+            ->where('type', 'land_attachments')
+            ->get();
         $data['land'] = Lands::query()->find($id);
+
         return view('admin.Lands.view',$data);
     }
 
@@ -178,13 +200,21 @@ class LandsController extends Controller
     }
 
 
-    public function getLands()
+    public function getLands(Request $request)
     {
         $lands = Lands::query()->orderBy('id', 'desc');
 
+        if ($request->filled('province_cd')) {
+            $lands->where('province_cd', 'like', '%' . $request->province_cd . '%');
+        }
         return DataTables::of($lands)
             ->addColumn('investor_name', function ($land) {
                 return '<div class="badge badge-light fw-bold">' . $land->investor->full_name . '</div>';
+            })
+            ->filterColumn('investor_name', function($query, $keyword) {
+                $query->whereHas('investor', function($q) use ($keyword) {
+                    $q->where('full_name', 'like', "%{$keyword}%");
+                });
             })
             ->addColumn('province_cd', function ($land) {
                 return getlookup($land->province_cd)?->{'name_' . app()->getLocale()} ?? '-';
@@ -205,27 +235,32 @@ class LandsController extends Controller
                     <i class="ki-duotone ki-down fs-5 ms-1"></i>
                 </a>
                 <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">';
+                if (auth()->user()->can('Land view')) {
 
                     $actions .= '<div class="menu-item px-3">
                                 <a href="' . url("/lands/view-land/{$land->id}") . '" class="menu-link px-3">'
                         . trans('admin.View') . '</a>
                              </div>';
-                    if ($land->isApproved()){
+                }
+                if (auth()->user()->can('Legal Accreditation of the Land')) {
+
+                    if ($land->isApproved()) {
                         $actions .= '<div class="menu-item px-3">
                                 <a href="' . url("/lands/approval-legal-ownership/{$land->id}") . '" class="menu-link px-3 text-blue-700">'
                             . trans('admin.Legal accreditation is acceptable') . '</a>
                              </div>';
-                    }elseif ($land->isRejected()){
+                    } elseif ($land->isRejected()) {
                         $actions .= '<div class="menu-item px-3">
                                 <a href="' . url("/lands/approval-legal-ownership/{$land->id}") . '" class="menu-link px-3 text-danger">'
                             . trans('admin.Legal accreditation rejected') . '</a>
                              </div>';
-                    }else{
+                    } else {
                         $actions .= '<div class="menu-item px-3">
                                 <a href="' . url("/lands/approval-legal-ownership/{$land->id}") . '" class="menu-link px-3">'
                             . trans('admin.Evaluation of the legal partner') . '</a>
                              </div>';
                     }
+                }
                     $actions .= '<div class="menu-item px-3">
                                 <a href="#" class="menu-link px-3" data-kt-lands-table-filter="delete_row" data-land-id="' . $land->id . '">'
                         . trans('admin.Delete') . '</a>

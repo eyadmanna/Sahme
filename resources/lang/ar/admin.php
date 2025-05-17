@@ -44,6 +44,7 @@ return [
     'Resend Verification Email' => 'إعادة إرسال بريد إلكتروني للتحقق',
     'Show lands' => 'عرض الأراضي',
     'Select' => 'اختر',
+    'View' => 'عرض',
 
     /*UserManagement*/
     "User Management" => "إدارة المستخدمين",
@@ -167,6 +168,7 @@ return [
     'Are you sure you want to approve?' => 'هل أنت متأكد أنك تريد الموافقة؟',
     'Are you sure you want to reject?' => 'هل أنت متأكد أنك تريد الرفض؟',
     'Yes' => 'نعم',
+    'Existing Attachments' => 'المرفقات الموجودة',
 
     /*profile page*/
     'Profile Details' => 'تفاصيل الملف الشخصي',

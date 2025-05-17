@@ -63,6 +63,7 @@ Route::group(
         Route::get('/lands/getLands', [LandsController::class, 'getLands'])->name('lands.getLands');
         Route::get('/lands/add-land', [LandsController::class, 'add'])->name('lands.add');
         Route::post('/lands/store-land', [LandsController::class,'store'])->name('lands.store');
+        Route::get('/lands/edit-land/{id}', [LandsController::class,'edit'])->name('lands.edit');
         Route::get('/lands/view-land/{id}', [LandsController::class,'view'])->name('lands.view');
         Route::get('/lands/approval-legal-ownership/{id}', [LandsController::class,'approval_legal_ownership'])->name('lands.approval_legal_ownership');
         Route::post('/lands/approval-legal-ownership/{id}', [LandsController::class,'approval_legal_ownership'])->name('lands.approval_legal_ownership');

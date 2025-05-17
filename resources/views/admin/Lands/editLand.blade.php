@@ -68,10 +68,10 @@
                     <!--begin::Card body-->
                     <div class="card-body">
                         <!--begin::Form-->
-                            <!-- Investor details will be loaded here -->
-                            <div id="investor_details" style="display: none;">
-                                <!-- content will be injected here by AJAX -->
-                            </div>
+                        <!-- Investor details will be loaded here -->
+                        <div id="investor_details" style="display: none;">
+                            <!-- content will be injected here by AJAX -->
+                        </div>
 
                         <!--end::Form-->
                     </div>
@@ -88,7 +88,7 @@
                         <div class="row g-4 mb-15">
                             <div class="col-md-8">
                                 <label class="form-label required">@lang('admin.Description of the land')</label>
-                               <input class="form-control" id="land_description" name="land_description" type="text">
+                                <input class="form-control" id="land_description" name="land_description" type="text">
                             </div>
                         </div>
                         <div class="row g-4 mb-15">
@@ -123,10 +123,7 @@
                         <div class="row g-4 mb-15">
                             <div class="col-md-3">
                                 <label class="form-label required">@lang('admin.Land area')</label>
-                                <div class="input-group">
-                                    <input class="form-control" id="area" name="area" type="number" placeholder="@lang('admin.Enter the area')">
-                                    <span class="input-group-text">م2</span>
-                                </div>
+                                <input class="form-control" id="area" name="area" type="number" placeholder="@lang('admin.Enter the area')">
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label">@lang('admin.Plot Number')</label>
@@ -158,9 +155,8 @@
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label required">@lang('admin.Asking price')</label>
-                                <div class="input-group">
+                                <div class="d-flex gap-2">
                                     <input type="number" class="form-control" name="price" placeholder="@lang('admin.Enter the price')" style="text-align: right; direction: rtl;">
-                                    <span class="input-group-text">$</span>
                                 </div>
                             </div>
                         </div>

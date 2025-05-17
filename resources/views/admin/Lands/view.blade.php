@@ -40,18 +40,6 @@
             <form method="post" action="" class="form" id="kt_add_land">
                 @csrf
                 @include('admin.Lands.components.data_land')
-                <!--begin::Actions-->
-                <div class="row mt-10">
-                    <div class="col-md-9 offset-md-3">
-                        <button type="button" class="btn btn-light me-3">@lang('admin.Cancel')</button>
-                        <button id="submit" type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
-                            <span class="indicator-label">@lang('admin.Engineering partner accreditation')</span>
-                            <span class="indicator-progress">@lang('admin.Please wait...')
-                                                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                        </button>
-                    </div>
-                </div>
-                <!--end::Actions-->
             </form>
 
         </div>
