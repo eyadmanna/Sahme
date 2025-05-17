@@ -39,6 +39,17 @@ class LandsController extends Controller
         return view('admin.Lands.addLand',$data);
 
     }
+    public function edit($ids){
+        $data['investors'] = Investors::query()->get();
+        $data["provinces"] = Lookups::query()->where([
+            "master_key" => "province"
+        ])->whereNot("parent_id", 0)->where("status", 1)->get();
+        $data["ownership_type"] = Lookups::query()->where([
+            "master_key" => "ownership_type_cd"
+        ])->whereNot("parent_id", 0)->where("status", 1)->get();
+        return view('admin.Lands.editLand',$data);
+
+    }
     public function store(Request $request){
         try {
             // Validate the request data
