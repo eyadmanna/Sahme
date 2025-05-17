@@ -176,9 +176,7 @@ class LandsController extends Controller
         $data["ownership_type"] = Lookups::query()->where([
             "master_key" => "ownership_type_cd"
         ])->whereNot("parent_id", 0)->where("status", 1)->get();
-        $data['attachments'] = Attachments::where('land_id', $id)
-            ->where('type', 'land_attachments')
-            ->get();
+
         $data['land'] = Lands::query()->find($id);
 
         return view('admin.Lands.view',$data);

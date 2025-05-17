@@ -13,17 +13,19 @@ return new class extends Migration
     {
         Schema::create('attachments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('land_id')->nullable()->index();
+            $table->enum('reference_type', ['land']);
+            $table->unsignedBigInteger('reference_id_fk')->index();
+            $table->unsignedBigInteger('referenced_id_fk')->nullable()->index();
+            $table->string('file_type')->nullable();
             $table->string('file_path'); // مسار الملف
-            $table->string('type')->nullable();
+            $table->string('file_title')->nullable();
+            $table->string('file_description')->nullable();
+            $table->integer('attachment_type_cd')->nullable()->index();
             $table->text('original_name')->nullable(); // الاسم الأصلي للملف عند الرفع
-            $table->string('description')->nullable(); // الاسم الأصلي للملف عند الرفع
-            $table->unsignedBigInteger('uploaded_by')->nullable()->index(); // المستخدم الذي رفع الملف
+            $table->unsignedBigInteger('created_by')->nullable()->index(); // المستخدم الذي رفع الملف
             $table->timestamps();
 
-            // علاقات مفتاحية (اختياري)
-            $table->foreign('land_id')->references('id')->on('lands')->onDelete('cascade');
-            $table->foreign('uploaded_by')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('set null');
         });
     }
 

@@ -410,7 +410,7 @@
                         <!--begin::Name-->
                         <div class="d-none d-md-flex flex-column align-items-end justify-content-center me-2 me-md-4">
                             <span class="text-white opacity-75 fs-8 fw-semibold lh-1 mb-1">{{auth()->user()->name}}</span>
-                            <span class="text-white fs-8 fw-bold lh-1">UX Designer</span>
+                            <span class="text-white fs-8 lh-1">UX Designer</span>
                         </div>
                         <!--end::Name-->
                         <!--begin::Symbol-->
@@ -453,7 +453,7 @@
                             <a href="apps/projects/list.html" class="menu-link px-5">
                                 <span class="menu-text">My Projects</span>
                                 <span class="menu-badge">
-														<span class="badge badge-light-danger badge-circle fw-bold fs-7">3</span>
+														<span class="badge badge-light-danger badge-circle fs-7">3</span>
 													</span>
                             </a>
                         </div>
@@ -505,9 +505,9 @@
                         <!--begin::Wrapper-->
                         <div class="d-flex flex-column flex-lg-row flex-lg-stack flex-wrap gap-2 px-4 px-lg-0">
                             <div class="d-flex flex-column flex-lg-row gap-2">
-                                <a class="btn btn-sm btn-light-primary fw-bold" href="{{route('lands.index')}}">@lang('admin.Show lands')</a>
-                                <a class="btn btn-sm btn-light-warning fw-bold" href="apps/subscriptions/view.html">الشركاء القانونيين </a>
-                                <a class="btn btn-sm btn-light-info fw-bold" href="apps/subscriptions/view.html">المثمنين العقاريين  </a>
+                                <a class="btn btn-sm btn-light-primary" href="{{route('lands.index')}}">@lang('admin.Show lands')</a>
+                                <a class="btn btn-sm btn-light-warning" href="apps/subscriptions/view.html">الشركاء القانونيين </a>
+                                <a class="btn btn-sm btn-light-info" href="apps/subscriptions/view.html">المثمنين العقاريين  </a>
                             </div>
                         </div>
                         <!--end::Wrapper-->
@@ -519,9 +519,9 @@
                         <!--begin::Wrapper-->
                         <div class="d-flex flex-column flex-lg-row flex-lg-stack flex-wrap gap-2 px-4 px-lg-0">
                             <div class="d-flex flex-column flex-lg-row gap-2">
-                                <a class="btn btn-sm btn-light-primary fw-bold" href="documentation/base/forms/controls.html">إضافة مشروع جديد</a>
-                                <a class="btn btn-sm btn-light-success fw-bold" href="documentation/base/forms/advanced.html">عرض المشاريع</a>
-                                <a class="btn btn-sm btn-light-danger fw-bold" href="documentation/base/forms/floating-labels.html"> تقييم المشاريع</a>
+                                <a class="btn btn-sm btn-light-primary" href="documentation/base/forms/controls.html">إضافة مشروع جديد</a>
+                                <a class="btn btn-sm btn-light-success" href="documentation/base/forms/advanced.html">عرض المشاريع</a>
+                                <a class="btn btn-sm btn-light-danger" href="documentation/base/forms/floating-labels.html"> تقييم المشاريع</a>
                             </div>
                         </div>
                         <!--end::Wrapper-->
@@ -532,7 +532,7 @@
                         <!--begin::Wrapper-->
                         <div class="d-flex flex-column flex-lg-row flex-lg-stack flex-wrap gap-2 px-4 px-lg-0">
                             <div class="d-flex flex-column flex-lg-row gap-2">
-                                <a class="btn btn-sm btn-light-primary fw-bold" href="{{route('users.index')}}">عرض الشركاء الهندسيين </a>
+                                <a class="btn btn-sm btn-light-primary" href="{{route('users.index')}}">عرض الشركاء الهندسيين </a>
                             </div>
                         </div>
                         <!--end::Wrapper-->
@@ -543,10 +543,10 @@
                         <!--begin::Wrapper-->
                         <div class="d-flex flex-column flex-lg-row flex-lg-stack flex-wrap gap-2 px-4 px-lg-0">
                             <div class="d-flex flex-column flex-lg-row gap-2">
-                                <a class="btn btn-sm btn-light-primary fw-bold" href="apps/ecommerce/catalog/products.html">عرض المقاولين</a>
-                                <a class="btn btn-sm btn-light-danger fw-bold" href="apps/file-manager/folders.html"> إدارة عروض أسعار المقاولين</a>
-                                <a class="btn btn-sm btn-light-info fw-bold" href="apps/subscriptions/view.html"> مراحل تنفيذ المشاريع</a>
-                                <a class="btn btn-sm btn-light-info fw-bold" href="apps/subscriptions/view.html">   </a>
+                                <a class="btn btn-sm btn-light-primary" href="apps/ecommerce/catalog/products.html">عرض المقاولين</a>
+                                <a class="btn btn-sm btn-light-danger" href="apps/file-manager/folders.html"> إدارة عروض أسعار المقاولين</a>
+                                <a class="btn btn-sm btn-light-info" href="apps/subscriptions/view.html"> مراحل تنفيذ المشاريع</a>
+                                <a class="btn btn-sm btn-light-info" href="apps/subscriptions/view.html">   </a>
                             </div>
                         </div>
                         <!--end::Wrapper-->
@@ -563,7 +563,7 @@
                             <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
                                 <!--begin:Menu link-->
                                 <span class="menu-link py-3">
-                                                        <span class="btn btn-sm btn-light-info fw-bold">@lang('admin.User and Permission Management')</span>
+                                                        <span class="btn btn-sm btn-light-info">@lang('admin.User and Permission Management')</span>
                                                         <span class="menu-arrow d-lg-none"></span>
                                                     </span>
                                 <!--end:Menu link-->
@@ -618,11 +618,11 @@
                         <!--begin::Wrapper-->
                         <div class="d-flex flex-column flex-lg-row flex-lg-stack flex-wrap gap-2 px-4 px-lg-0">
                             <div class="d-flex flex-column flex-lg-row gap-2">
-                                <a class="btn btn-sm btn-light-primary fw-bold" href="apps/ecommerce/catalog/products.html">eCommerce</a>
-                                <a class="btn btn-sm btn-light-danger fw-bold" href="apps/file-manager/folders.html">File Manager</a>
+                                <a class="btn btn-sm btn-light-primary" href="apps/ecommerce/catalog/products.html">eCommerce</a>
+                                <a class="btn btn-sm btn-light-danger" href="apps/file-manager/folders.html">File Manager</a>
                             </div>
                             <div class="d-flex flex-column flex-lg-row gap-2">
-                                <a class="btn btn-sm btn-light-info fw-bold" href="apps/subscriptions/view.html">More Apps</a>
+                                <a class="btn btn-sm btn-light-info" href="apps/subscriptions/view.html">More Apps</a>
                             </div>
                         </div>
                         <!--end::Wrapper-->

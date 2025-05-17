@@ -310,6 +310,29 @@ class LookupsSeeder extends Seeder
                 'name_ar' => 'تم اعتماد الترسية',
                 'name_en' => 'Award Decision Approved',
             ],
+            [
+                'is_managed' => 1,
+                'parent_id' => 0,
+                'master_key' => 'land_attachment_types',
+                'name_ar' => 'نوع مرفقات الأرض',
+                'name_en' => 'Land Attachment Types',
+            ],
+            [
+                'is_managed' => 1,
+                'parent_id' => 43,
+                'master_key' => 'land_attachment_types',
+                'item_key' => 'land_creation_attachments',
+                'name_ar' => 'مرفقات إضافة الأرض',
+                'name_en' => 'Land Creation Attachments',
+            ],
+            [
+                'is_managed' => 1,
+                'parent_id' => 43,
+                'master_key' => 'land_attachment_types',
+                'item_key' => 'land_ownership_attachments',
+                'name_ar' => 'مرفقات ملكية الأرض',
+                'name_en' => 'Land Ownership Attachments',
+            ],
 
 
 

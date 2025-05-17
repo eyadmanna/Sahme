@@ -82,7 +82,7 @@
                 <!--begin::Card - Land Details-->
                 <div class="card card-flush mt-5">
                     <div class="card-header pt-8">
-                        <h3>@lang('admin.Land details')</h3>
+                        <h5>@lang('admin.Land details')</h5>
                     </div>
                     <div class="card-body">
                         <div class="row g-4 mb-15">
@@ -175,7 +175,7 @@
                 <!--begin::Card - Land Details-->
                 <div class="card card-flush mt-5">
                     <div class="card-header pt-8">
-                        <h3>@lang('admin.Attachments')</h3>
+                        <h5>@lang('admin.Attachments')</h5>
                     </div>
                     <div class="card-body">
                         <!--begin::Repeater-->
