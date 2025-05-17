@@ -10,15 +10,13 @@
             <div class="col-md-4 d-flex flex-column justify-content-center gap-3">
                 <div>
                     <label class="form-label fw-bold required">@lang('admin.Latitude')</label>
-                    <input type="text" id="lat" name="lat" class="form-control" placeholder="@lang('admin.Latitude')" value="31.5012">
+                    <input type="text" id="lat" name="lat" class="form-control" placeholder="@lang('admin.Latitude')" value="{{ $lat ?? '31.5012' }}">
                 </div>
                 <div>
                     <label class="form-label fw-bold required">@lang('admin.Longitude')</label>
-                    <input type="text" id="long" name="long" class="form-control" placeholder="@lang('admin.Longitude')" value="34.4663">
+                    <input type="text" id="long" name="long" class="form-control" placeholder="@lang('admin.Longitude')" value="{{ $lng ?? '34.4663' }}">
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-

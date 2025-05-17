@@ -111,6 +111,7 @@ return [
     /*Land management*/
     'Land management' => 'إدارة الأراضي',
     'Add land' => 'أضافة أرض',
+    'Edit land' => 'تعديل أرض',
     'View land' => 'عرض أرض',
     'Adding land for investment' => 'أضافة أرض للاستثمار',
     'Search for land' => 'بحث عن الارض',
@@ -197,6 +198,8 @@ return [
 
     /*footer */
     'TAQAT - All Rights Reserved' => 'طاقات - جميع الحقوق محفوظة'
+
+
 
 
 ];

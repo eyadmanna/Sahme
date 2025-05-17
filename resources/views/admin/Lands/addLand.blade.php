@@ -191,7 +191,7 @@
                                             </div>
                                             <div class="col-md-3">
                                                 <label class="form-label">@lang('admin.Description')</label>
-                                                <input name="land_description" type="text" class="form-control mb-2 mb-md-0"/>
+                                                <input name="description" type="text" class="form-control mb-2 mb-md-0"/>
                                             </div>
                                             <div class="col-md-4">
                                                 <a href="javascript:;" data-repeater-delete class="btn btn-sm btn-light-danger mt-3 mt-md-8">

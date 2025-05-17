@@ -61,7 +61,7 @@
                                 formData.append('action', action); // Ensure action is sent
 
                                 const land_Id = document.getElementById('land_id').value;
-                                const url = `/lands/approval-legal-ownership/${land_Id}`; // Build the correct URL
+                                const url = `{{url("/")}}/lands/approval-legal-ownership/${land_Id}`; // Build the correct URL
 
                                 fetch(url, {
                                     method: 'POST',

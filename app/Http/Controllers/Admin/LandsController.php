@@ -39,14 +39,23 @@ class LandsController extends Controller
         return view('admin.Lands.addLand',$data);
 
     }
-    public function edit($ids){
+    public function edit($id){
         $data['investors'] = Investors::query()->get();
         $data["provinces"] = Lookups::query()->where([
             "master_key" => "province"
         ])->whereNot("parent_id", 0)->where("status", 1)->get();
+        $data["city"] = Lookups::query()->where([
+            "master_key" => "city"
+        ])->whereNot("parent_id", 0)->where("status", 1)->get();
+        $data["area"] = Lookups::query()->where([
+            "master_key" => "area"
+        ])->whereNot("parent_id", 0)->where("status", 1)->get();
         $data["ownership_type"] = Lookups::query()->where([
             "master_key" => "ownership_type_cd"
         ])->whereNot("parent_id", 0)->where("status", 1)->get();
+        $data['land'] = Lands::query()->find($id);
+
+
         return view('admin.Lands.editLand',$data);
 
     }
@@ -67,9 +76,12 @@ class LandsController extends Controller
             $land->plot_number = $request->plot_number;
             $land->parcel_number = $request->parcel_number;
             $land->ownership_type_cd = $request->ownership_type_cd;
+            $land->borders = $request->borders;
+            $land->services = $request->services;
             $land->price = $request->price;
             $land->lat = $request->lat;
             $land->long = $request->long;
+            $land->setStatus('pending'); // كده يكفي
             $land->save();
             foreach ($request->kt_docs_repeater_basic as $item) {
                 if (isset($item['land_attachment']) && $item['land_attachment'] instanceof \Illuminate\Http\UploadedFile) {
@@ -103,6 +115,51 @@ class LandsController extends Controller
                 'error' => $e->getMessage()
             ], 500);
         }
+    }
+
+    public function update(Request $request , $id){
+        try {
+            // Validate the request data
+            $validated = $request->validate([
+                'investor_id' => 'required',
+            ]);
+                $land = Lands::query()->find($id);
+
+                $land->investor_id = $request->investor_id;
+                $land->land_description = $request->land_description;
+                $land->province_cd = $request->province_cd;
+                $land->city_cd = $request->city_cd;
+                $land->district_cd = $request->district_cd;
+                $land->address = $request->address;
+                $land->area = $request->area;
+                $land->plot_number = $request->plot_number;
+                $land->parcel_number = $request->parcel_number;
+                $land->ownership_type_cd = $request->ownership_type_cd;
+                $land->borders = $request->borders;
+                $land->services = $request->services;
+                $land->price = $request->price;
+                $land->lat = $request->lat;
+                $land->long = $request->long;
+                $land->save();
+                return response()->json([
+                    'status' => 'success',
+                    'message' => __('admin.Land Updated Successfully'),
+                    'redirect' => route('lands.index')
+                ]);
+        }catch (\Illuminate\Validation\ValidationException $e) {
+            // Return validation errors in JSON format
+            return response()->json([
+                'message' => 'Validation failed.',
+                'errors' => $e->errors()
+            ], 422);
+        } catch (\Exception $e){
+            // Return general error
+            return response()->json([
+                'message' => $e->getMessage(),
+                'error' => $e->getMessage()
+            ], 500);
+        }
+
     }
 
     public function view($id){
@@ -226,7 +283,7 @@ class LandsController extends Controller
                 return $land->valuation_status_cd ?? '-';
             })
             ->addColumn('legal_status_cd', function ($land) {
-                return '<span class="text-center">'.$land->getStatusKey().'</span>';
+                return '<span class="text-center badge-light-primary">'.($land->statusLookup?->{'name_' . app()->getLocale()} ?? '-').'</span>';
             })
             ->addColumn('actions', function ($land) {
                 $actions = '<div class="text-end">
@@ -236,10 +293,15 @@ class LandsController extends Controller
                 </a>
                 <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">';
                 if (auth()->user()->can('Land view')) {
-
                     $actions .= '<div class="menu-item px-3">
                                 <a href="' . url("/lands/view-land/{$land->id}") . '" class="menu-link px-3">'
                         . trans('admin.View') . '</a>
+                             </div>';
+                }
+                if (auth()->user()->can('Land edit')) {
+                    $actions .= '<div class="menu-item px-3">
+                                <a href="' . url("/lands/edit-land/{$land->id}") . '" class="menu-link px-3">'
+                        . trans('admin.Edit') . '</a>
                              </div>';
                 }
                 if (auth()->user()->can('Legal Accreditation of the Land')) {
