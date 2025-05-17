@@ -170,7 +170,14 @@
                     <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bold">
                         <!--begin::Nav item-->
                         <li class="nav-item mt-2">
-                            <a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="#">@lang('engineering.Overview')</a>
+                            <a class="nav-link text-active-primary ms-0 me-10 py-5 {{ request()->routeIs('engineering.profile') ? 'active' : '' }}" href="#">@lang('engineering.Overview')</a>
+                        </li>
+                        <!--end::Nav item-->
+                        <!--begin::Nav item-->
+                        <li class="nav-item mt-2">
+                            <a class="nav-link text-active-primary ms-0 me-10 py-5 {{ request()->routeIs('engineering.profile.settings') ? 'active' : '' }}" href="{{ route('engineering.profile.settings') }}">
+                                @lang('engineering.Settings')
+                            </a>
                         </li>
                         <!--end::Nav item-->
 
@@ -188,11 +195,11 @@
                         <h3 class="fw-bold m-0">@lang('engineering.Profile Details')</h3>
                     </div>
                     <!--end::Card title-->
-                    @if($user->isApproved())
+{{--                    @if($user->isApproved())--}}
                         <!--begin::Action-->
-                        <a href="account/settings.html" class="btn btn-sm btn-primary align-self-center">@lang('engineering.Edit Profile')</a>
+                        <a href="{{route('engineering.profile.settings')}}" class="btn btn-sm btn-primary align-self-center">@lang('engineering.Edit Profile')</a>
                         <!--end::Action-->
-                    @endif
+{{--                    @endif--}}
 
                 </div>
                 <!--begin::Card header-->
