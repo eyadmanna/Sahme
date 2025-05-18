@@ -24,37 +24,43 @@
                     <div class="header-tabs overflow-auto mx-4 ms-lg-10 mb-5 mb-lg-0" id="kt_header_tabs" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_header_navs_wrapper', lg: '#kt_brand_tabs'}">
                         <!--begin::Header tabs-->
                         <ul class="nav flex-nowrap text-nowrap">
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" 
+                                    data-bs-toggle="tab" 
+                                    href="#kt_header_navs_tab_1"
+                                    aria-selected="{{ request()->routeIs('dashboard') ? 'true' : 'false' }}"> <i class="la la-home fs-2"></i></a>
+                            </li>
                             @can('Land Section View')
                             <li class="nav-item">
-                                <a class="nav-link {{ request()->routeIs('dashboard', 'lands.index') ? 'active' : '' }}"
+                                <a class="nav-link {{ request()->routeIs('lands.index') ? 'active' : '' }}"
                                    data-bs-toggle="tab"
-                                   href="#kt_header_navs_tab_1"
-                                   aria-selected="{{ request()->routeIs('dashboard', 'lands.index') ? 'true' : 'false' }}"
+                                   href="#kt_header_navs_tab_2"
+                                   aria-selected="{{ request()->routeIs('lands.index') ? 'true' : 'false' }}"
                                    role="tab">@lang('admin.Land management')</a>
                             </li>
                             @endcan
                             @can('Projects Section View')
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#kt_header_navs_tab_2">إدارة المشاريع</a>
+                                <a class="nav-link" data-bs-toggle="tab" href="#kt_header_navs_tab_3"> المشاريع</a>
                             </li>
                             @endcan
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#kt_header_navs_tab_3">إدارة الشركاء الهندسيين</a>
+                                <a class="nav-link" data-bs-toggle="tab" href="#kt_header_navs_tab_4">  الشركاء الهندسيين والمقاولين</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#kt_header_navs_tab_4">إدارة المقاولين</a>
+                                <a class="nav-link" data-bs-toggle="tab" href="#kt_header_navs_tab_5"> المستثمرين</a>
                             </li>
                             @can('Settings Section View')
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('users.index', 'roles.index','users.view') ? 'active' : '' }}"
                                    data-bs-toggle="tab"
-                                   href="#kt_header_navs_tab_5"
+                                   href="#kt_header_navs_tab_6"
                                    aria-selected="{{ request()->routeIs('users.index', 'roles.index','users.view') ? 'true' : 'false' }}"
                                    role="tab">@lang('admin.System settings')</a>
                             </li>
                             @endcan()
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#kt_header_navs_tab_6">التقارير </a>
+                                <a class="nav-link" data-bs-toggle="tab" href="#kt_header_navs_tab_7">التقارير </a>
                             </li>
                         </ul>
                         <!--begin::Header tabs-->
@@ -500,8 +506,18 @@
                 <!--begin::Header tab content-->
                 <div class="tab-content" data-kt-scroll="true" data-kt-scroll-activate="{default: true, lg: false}" data-kt-scroll-height="auto" data-kt-scroll-offset="70px">
                     <!--begin::Tab panel-->
+                    
+                    <div class="tab-pane fade {{ request()->routeIs('dashboard') ? 'show active' : '' }}" id="kt_header_navs_tab_1">
+                        <!--begin::Wrapper-->
+                        <div class="d-flex flex-column flex-lg-row flex-lg-stack flex-wrap gap-2 px-4 px-lg-0">
+                            <div class="d-flex flex-column flex-lg-row gap-2">
+                                <a class="btn btn-sm btn-light-primary" href="{{route('dashboard')}}">@lang('admin.Dashboard')</a>
+                            </div>
+                        </div>
+                        <!--end::Wrapper-->
+                    </div>
                     @can('Land Section View')
-                    <div class="tab-pane fade {{ request()->routeIs('dashboard','lands.index','lands.add') ? 'show active' : '' }}" id="kt_header_navs_tab_1">
+                    <div class="tab-pane fade {{ request()->routeIs('lands.index','lands.add') ? 'show active' : '' }}" id="kt_header_navs_tab_2">
                         <!--begin::Wrapper-->
                         <div class="d-flex flex-column flex-lg-row flex-lg-stack flex-wrap gap-2 px-4 px-lg-0">
                             <div class="d-flex flex-column flex-lg-row gap-2">
@@ -515,7 +531,7 @@
                     @endcan()
                     <!--end::Tab panel-->
                     <!--begin::Tab panel-->
-                    <div class="tab-pane fade" id="kt_header_navs_tab_2">
+                    <div class="tab-pane fade" id="kt_header_navs_tab_3">
                         <!--begin::Wrapper-->
                         <div class="d-flex flex-column flex-lg-row flex-lg-stack flex-wrap gap-2 px-4 px-lg-0">
                             <div class="d-flex flex-column flex-lg-row gap-2">
@@ -528,32 +544,32 @@
                     </div>
                     <!--end::Tab panel-->
                     <!--begin::Tab panel-->
-                    <div class="tab-pane fade" id="kt_header_navs_tab_3">
-                        <!--begin::Wrapper-->
-                        <div class="d-flex flex-column flex-lg-row flex-lg-stack flex-wrap gap-2 px-4 px-lg-0">
-                            <div class="d-flex flex-column flex-lg-row gap-2">
-                                <a class="btn btn-sm btn-light-primary" href="{{route('users.index')}}">عرض الشركاء الهندسيين </a>
-                            </div>
-                        </div>
-                        <!--end::Wrapper-->
-                    </div>
-                    <!--end::Tab panel-->
-                    <!--begin::Tab panel-->
                     <div class="tab-pane fade" id="kt_header_navs_tab_4">
                         <!--begin::Wrapper-->
                         <div class="d-flex flex-column flex-lg-row flex-lg-stack flex-wrap gap-2 px-4 px-lg-0">
                             <div class="d-flex flex-column flex-lg-row gap-2">
+                                <a class="btn btn-sm btn-light-primary" href="{{route('users.index')}}">عرض الشركاء الهندسيين </a>
                                 <a class="btn btn-sm btn-light-primary" href="apps/ecommerce/catalog/products.html">عرض المقاولين</a>
                                 <a class="btn btn-sm btn-light-danger" href="apps/file-manager/folders.html"> إدارة عروض أسعار المقاولين</a>
                                 <a class="btn btn-sm btn-light-info" href="apps/subscriptions/view.html"> مراحل تنفيذ المشاريع</a>
-                                <a class="btn btn-sm btn-light-info" href="apps/subscriptions/view.html">   </a>
                             </div>
                         </div>
                         <!--end::Wrapper-->
                     </div>
                     <!--end::Tab panel-->
                     <!--begin::Tab panel-->
-                    <div class="tab-pane fade {{ request()->routeIs('users.index', 'roles.index','users.view') ? 'show active' : '' }}" id="kt_header_navs_tab_5">
+                    <div class="tab-pane fade" id="kt_header_navs_tab_5">
+                        <!--begin::Wrapper-->
+                        <div class="d-flex flex-column flex-lg-row flex-lg-stack flex-wrap gap-2 px-4 px-lg-0">
+                            <div class="d-flex flex-column flex-lg-row gap-2">
+                                <a class="btn btn-sm btn-light-primary" href="apps/ecommerce/catalog/products.html">عرض المستثمرين</a>
+                            </div>
+                        </div>
+                        <!--end::Wrapper-->
+                    </div>
+                    <!--end::Tab panel-->
+                    <!--begin::Tab panel-->
+                    <div class="tab-pane fade {{ request()->routeIs('users.index', 'roles.index','users.view') ? 'show active' : '' }}" id="kt_header_navs_tab_6">
                        <!--begin::Menu wrapper-->
                        <div class="header-menu flex-column align-items-stretch flex-lg-row">
                         <!--begin::Menu-->
@@ -614,7 +630,7 @@
                     <!--end::Tab panel-->
 
                     <!--begin::Tab panel-->
-                    <div class="tab-pane fade" id="kt_header_navs_tab_6">
+                    <div class="tab-pane fade" id="kt_header_navs_tab_7">
                         <!--begin::Wrapper-->
                         <div class="d-flex flex-column flex-lg-row flex-lg-stack flex-wrap gap-2 px-4 px-lg-0">
                             <div class="d-flex flex-column flex-lg-row gap-2">
