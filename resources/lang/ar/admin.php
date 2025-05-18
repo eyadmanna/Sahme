@@ -174,6 +174,17 @@ return [
     'Are you sure you want to delete the item?' => 'هل انت متاكد انك تريد حذف  العنصر',
     'The item was deleted successfully' => 'تم حذف العنصر بنجاح',
     'Real estate appraiser evaluation' => 'تقييم المثمن العقاري',
+    'Price adoption' => 'اعتماد السعر',
+    'Request to modify the price' => 'طلب تعديل السعر',
+    'Valuation price' => 'سعر التثمين',
+    'Appraisal notes' => 'ملاحظات التثمين',
+    'Send a modification request' => 'ارسال طلب تعديل',
+    'The valuation has been approved.' => 'تم اعتماد التثمين',
+    'This field is required' => 'هذه الحقل مطلوب',
+    'Are you sure you want to send a price change request?' => 'هل انت متاكد من ارسال طلب تعديل السعر',
+    'Price change request sent successfully' => 'تم ارسال طلب تغيير السعر بنجاح',
+    'Price must be numeric' => 'يجب أن يكون السعر رقميًا',
+
 
     /*profile page*/
     'Profile Details' => 'تفاصيل الملف الشخصي',

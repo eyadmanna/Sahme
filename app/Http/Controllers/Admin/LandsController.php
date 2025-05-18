@@ -298,6 +298,23 @@ class LandsController extends Controller
             ->where('reference_id_fk', $id)
             ->where('attachment_type_cd', 44)
             ->get();
+
+        if ($request->isMethod('post')){
+            $data['land']->valuator_id = auth()->user()->id;
+            if ($request->input('action') == 'approved') {
+                $data['land']->valuationsetStatus('approved');
+            } else {
+                $data['land']->valuationsetStatus('edit_request');
+                $data['land']->valuation_price = $request->valuation_price;
+                $data['land']->valuation_notes = $request->valuation_notes;
+            }
+            $data['land']->save();
+            return response()->json([
+                'status' => 'success',
+                'message' => __('admin.Price change request sent successfully'),
+                'redirect' => route('lands.index')
+            ]);
+        }
         return view('admin.Lands.approval_valuation_ownership',$data);
     }
 
@@ -391,7 +408,7 @@ class LandsController extends Controller
                     if ($land->isApproved()) {
                         $actions .= '<div class="menu-item px-3">
                                 <a href="' . url("/lands/approval-legal-ownership/{$land->id}") . '" class="menu-link px-3 text-blue-700">'
-                            . trans('admin.Legal accreditation is acceptable') . '</a>
+                            . trans('admin.The valuation has been approved.') . '</a>
                              </div>';
                     } elseif ($land->isRejected()) {
                         $actions .= '<div class="menu-item px-3">
