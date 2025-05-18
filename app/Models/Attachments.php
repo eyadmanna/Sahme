@@ -11,11 +11,14 @@ class Attachments extends Model
     protected $table = 'attachments';
 
     protected $fillable = [
-        'land_id',
+        'reference_type',
+        'reference_id_fk',
+        'attachment_type_cd',
+        'created_by',
+        'file_type',
         'file_path',
-        'type',
         'original_name',
-        'uploaded_by',
+        'file_description',
     ];
 
     public function land()

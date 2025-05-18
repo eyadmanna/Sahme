@@ -23,6 +23,11 @@ class Lands extends Model
         return $this->belongsTo(Lookups::class, 'legal_status_cd', 'id')
             ->where('master_key', 'legal_status_cd');
     }
+    public function valuationstatusLookup()
+    {
+        return $this->belongsTo(Lookups::class, 'valuation_status_cd', 'id')
+            ->where('master_key', 'valuation_status_cd');
+    }
 
     public function setStatus(string $statusKey)
     {
@@ -31,6 +36,15 @@ class Lands extends Model
             ->firstOrFail();
 
         $this->legal_status_cd = $status->id;
+        return $this;
+    }
+    public function valuationsetStatus(string $statusKey)
+    {
+        $status = Lookups::where('master_key', 'valuation_status_cd')
+            ->where('item_key', $statusKey)
+            ->firstOrFail();
+
+        $this->valuation_status_cd = $status->id;
         return $this;
     }
     public function markAsPending() { return $this->setStatus(self::STATUS_PENDING); }
@@ -53,7 +67,7 @@ class Lands extends Model
     }
     public function attachments()
     {
-        return $this->hasMany(Attachments::class, 'land_id');
+        return $this->hasMany(Attachments::class, 'reference_id_fk');
     }
 
 

@@ -61,7 +61,7 @@
                                 formData.append('action', action); // Ensure action is sent
 
                                 const land_Id = document.getElementById('land_id').value;
-                                const url = `/lands/approval-legal-ownership/${land_Id}`; // Build the correct URL
+                                const url = `{{url("/")}}/lands/approval-legal-ownership/${land_Id}`; // Build the correct URL
 
                                 fetch(url, {
                                     method: 'POST',
@@ -146,7 +146,10 @@
 
                 // تحميل المرفقات السابقة عند فتح الصفحة
                 @php
-                    $attachments = $land->attachments()->where('type', 'legal_ownership_certification')->get();
+                    $attachments = $land->attachments()
+                        ->where('reference_type', 'land')
+                        ->where('attachment_type_cd', 45)
+                        ->get();
                 @endphp
 
                 @if($attachments->count() > 0)

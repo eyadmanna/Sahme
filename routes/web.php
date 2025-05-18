@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AttachmentController;
 use App\Http\Controllers\Admin\LandsController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\TwoFactorController;
@@ -64,8 +65,12 @@ Route::group(
         Route::get('/lands/add-land', [LandsController::class, 'add'])->name('lands.add');
         Route::post('/lands/store-land', [LandsController::class,'store'])->name('lands.store');
         Route::get('/lands/edit-land/{id}', [LandsController::class,'edit'])->name('lands.edit');
+        Route::delete('/attachments/{id}', [AttachmentController::class, 'destroy'])->name('attachments.destroy');
+        Route::post('/lands/update-land/{id}', [LandsController::class,'update'])->name('lands.update');
         Route::get('/lands/view-land/{id}', [LandsController::class,'view'])->name('lands.view');
         Route::get('/lands/approval-legal-ownership/{id}', [LandsController::class,'approval_legal_ownership'])->name('lands.approval_legal_ownership');
+        Route::get('/lands/approval-valuation-ownership/{id}', [LandsController::class,'approval_valuation_ownership'])->name('lands.approval_valuation_ownership');
+        Route::post('/lands/approval-valuation-ownership/{id}', [LandsController::class,'approval_valuation_ownership'])->name('lands.approval_valuation_ownership');
         Route::post('/lands/approval-legal-ownership/{id}', [LandsController::class,'approval_legal_ownership'])->name('lands.approval_legal_ownership');
         Route::post('/lands/upload-legal-attachment/{id}', [LandsController::class, 'upload_legal_attachment'])->name('lands.upload_legal_attachment');
         Route::post('/lands/delete-attachment', [LandsController::class, 'delete_attachment'])->name('lands.delete_attachment');

@@ -163,7 +163,7 @@
                                         {{ basename($attachment->file_path) }}
                                     </a>
                                 </td>
-                                <td>{{ $attachment->description ?? '-' }}</td>
+                                <td>{{ $attachment->file_description ?? '-' }}</td>
                             </tr>
                         @endforeach
                         </tbody>
