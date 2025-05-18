@@ -359,11 +359,11 @@ class LandsController extends Controller
                 return getlookup($land->city_cd)?->{'name_' . app()->getLocale()} ?? '-';
             })
             ->addColumn('valuation_status_cd', function ($land) {
-                return '<span class="text-center badge-light-primary">'.($land->valuationstatusLookup?->{'name_' . app()->getLocale()} ?? '-').'</span>';
+                return '<span class="text-center badge-light-' . $land->valuationstatusLookup?->extra_1 . '">'.($land->valuationstatusLookup?->{'name_' . app()->getLocale()} ?? '-').'</span>';
 
             })
             ->addColumn('legal_status_cd', function ($land) {
-                return '<span class="text-center badge-light-primary">'.($land->statusLookup?->{'name_' . app()->getLocale()} ?? '-').'</span>';
+                return '<span class="text-center badge-light-' . $land->statusLookup?->extra_1 . '">'.($land->statusLookup?->{'name_' . app()->getLocale()} ?? '-').'</span>';
             })
             ->addColumn('actions', function ($land) {
                 $actions = '<div class="text-end">

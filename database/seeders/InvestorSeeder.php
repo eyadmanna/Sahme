@@ -24,7 +24,7 @@ class InvestorSeeder extends Seeder
                 'district_cd' => 10,
                 'address' => 'الشجاعية',
                 'yearly_income' => 5,
-                'status_cd' => 2,
+                'status_cd' => 48,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -37,7 +37,7 @@ class InvestorSeeder extends Seeder
                 'district_cd' => 10,
                 'address' => 'الشجاعية',
                 'yearly_income' => 5,
-                'status_cd' => 2,
+                'status_cd' => 48,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]

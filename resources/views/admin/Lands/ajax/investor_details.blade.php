@@ -11,7 +11,7 @@
 
     <div class="col-md-3 d-flex align-items-center mb-5">
         <h5 class="mb-0">@lang('admin.The condition') :</h5>
-        <label class="ms-2 fs-6 fw-semibold mb-0">{{ $investor->status_cd }}</label>
+        <label class="ms-2 fs-6 fw-semibold mb-0">{{ getlookup($investor->status_cd)->{"name_".app()->getLocale()} ?? '-' }}</label>
     </div>
 
     <div class="col-md-3 d-flex align-items-center mb-5">
@@ -24,17 +24,17 @@
 <div class="fv-row row mb-15">
     <div class="col-md-3 d-flex align-items-center mb-5">
         <h5 class="mb-0">@lang('admin.Province') :</h5>
-        <label class="ms-2 fs-6 fw-semibold mb-0">{{ $investor->governerate_cd }}</label>
+        <label class="ms-2 fs-6 fw-semibold mb-0">{{ getlookup($investor->province_cd)->{"name_".app()->getLocale()} ?? '-' }}</label>
     </div>
 
     <div class="col-md-3 d-flex align-items-center mb-5">
         <h5 class="mb-0">@lang('admin.City') :</h5>
-        <label class="ms-2 fs-6 fw-semibold mb-0">{{ $investor->city_cd }}</label>
+        <label class="ms-2 fs-6 fw-semibold mb-0">{{ getlookup($investor->city_cd)->{"name_".app()->getLocale()} ?? '-' }}</label>
     </div>
 
     <div class="col-md-3 d-flex align-items-center mb-5">
         <h5 class="mb-0">@lang('admin.District') :</h5>
-        <label class="ms-2 fs-6 fw-semibold mb-0">{{ $investor->district_cd }}</label>
+        <label class="ms-2 fs-6 fw-semibold mb-0">{{ getlookup($investor->district_cd)->{"name_".app()->getLocale()} ?? '-' }}</label>
     </div>
 
     <div class="col-md-3 d-flex align-items-center mb-5">

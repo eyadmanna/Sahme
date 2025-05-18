@@ -127,6 +127,7 @@ class LookupsSeeder extends Seeder
                 'item_key' => 'pending',
                 'name_ar' => 'بانتظار الاعتماد',
                 'name_en' => 'Pending',
+                'extra_1' => 'info',
             ],
             [
                 'is_managed' => 0,
@@ -134,6 +135,7 @@ class LookupsSeeder extends Seeder
                 'item_key' => 'approved',
                 'name_ar' => 'معتمد',
                 'name_en' => 'Approved',
+                'extra_1' => 'success',
             ],
             [
                 'is_managed' => 0,
@@ -141,6 +143,7 @@ class LookupsSeeder extends Seeder
                 'item_key' => 'rejected',
                 'name_ar' => 'مرفوض',
                 'name_en' => 'Rejected',
+                'extra_1' => 'danger',
             ],
             [
                 'is_managed' => 1,
@@ -162,6 +165,7 @@ class LookupsSeeder extends Seeder
                 'item_key' => 'pending',
                 'name_ar' => 'بانتظار الاعتماد',
                 'name_en' => 'Pending',
+                'extra_1' => 'info',
             ],
             [
                 'is_managed' => 0,
@@ -169,6 +173,7 @@ class LookupsSeeder extends Seeder
                 'item_key' => 'approved',
                 'name_ar' => 'معتمد',
                 'name_en' => 'Approved',
+                'extra_1' => 'success',
             ],
             [
                 'is_managed' => 0,
@@ -176,6 +181,7 @@ class LookupsSeeder extends Seeder
                 'item_key' => 'edit_request',
                 'name_ar' => 'طلب تعديل السعر',
                 'name_en' => 'Price Adjustment Request',
+                'extra_1' => 'warning',
             ],
             [
                 'is_managed' => 0,
@@ -183,6 +189,7 @@ class LookupsSeeder extends Seeder
                 'item_key' => 'pending',
                 'name_ar' => 'بانتظار الاعتماد',
                 'name_en' => 'Pending',
+                'extra_1' => 'info',
             ],
             [
                 'is_managed' => 0,
@@ -190,6 +197,7 @@ class LookupsSeeder extends Seeder
                 'item_key' => 'approved',
                 'name_ar' => 'معتمد',
                 'name_en' => 'Approved',
+                'extra_1' => 'success',
             ],
             [
                 'is_managed' => 0,
@@ -197,6 +205,7 @@ class LookupsSeeder extends Seeder
                 'item_key' => 'rejected',
                 'name_ar' => 'مرفوض',
                 'name_en' => 'Rejected',
+                'extra_1' => 'danger',
             ],
             [
                 'is_managed' => 0,
@@ -204,6 +213,7 @@ class LookupsSeeder extends Seeder
                 'item_key' => 'pending',
                 'name_ar' => 'بانتظار التقييم',
                 'name_en' => 'Pending',
+                'extra_1' => 'info',
             ],
             [
                 'is_managed' => 0,
@@ -211,6 +221,7 @@ class LookupsSeeder extends Seeder
                 'item_key' => 'need_edit',
                 'name_ar' => 'يحتاج تعديل',
                 'name_en' => 'Needs Editing',
+                'extra_1' => 'warning',
             ],
             [
                 'is_managed' => 0,
@@ -218,6 +229,7 @@ class LookupsSeeder extends Seeder
                 'item_key' => 'no_need_edit',
                 'name_ar' => 'لا يحتاج تعديل',
                 'name_en' => 'No Need Editing',
+                'extra_1' => 'success',
             ],
             [
                 'is_managed' => 0,
@@ -225,6 +237,7 @@ class LookupsSeeder extends Seeder
                 'item_key' => 'pending',
                 'name_ar' => 'بانتظار الاعتماد',
                 'name_en' => 'Pending',
+                'extra_1' => 'info',
             ],
             [
                 'is_managed' => 0,
@@ -232,6 +245,7 @@ class LookupsSeeder extends Seeder
                 'item_key' => 'approved',
                 'name_ar' => 'معتمد',
                 'name_en' => 'Approved',
+                'extra_1' => 'success',
             ],
             [
                 'is_managed' => 0,
@@ -239,6 +253,7 @@ class LookupsSeeder extends Seeder
                 'item_key' => 'rejected',
                 'name_ar' => 'مرفوض',
                 'name_en' => 'Rejected',
+                'extra_1' => 'danger',
             ],
             [
                 'is_managed' => 0,
@@ -246,6 +261,7 @@ class LookupsSeeder extends Seeder
                 'item_key' => 'pending',
                 'name_ar' => 'بانتظار الاعتماد',
                 'name_en' => 'Pending',
+                'extra_1' => 'info',
             ],
             [
                 'is_managed' => 0,
@@ -253,6 +269,7 @@ class LookupsSeeder extends Seeder
                 'item_key' => 'approved',
                 'name_ar' => 'معتمد',
                 'name_en' => 'Approved',
+                'extra_1' => 'success',
             ],
             [
                 'is_managed' => 0,
@@ -260,6 +277,7 @@ class LookupsSeeder extends Seeder
                 'item_key' => 'rejected',
                 'name_ar' => 'مرفوض',
                 'name_en' => 'Rejected',
+                'extra_1' => 'danger',
             ],
             [
                 'is_managed' => 0,
@@ -267,6 +285,7 @@ class LookupsSeeder extends Seeder
                 'item_key' => 'new',
                 'name_ar' => 'جديد',
                 'name_en' => 'New',
+                'extra_1' => 'info',
             ],
             [
                 'is_managed' => 0,
@@ -274,6 +293,7 @@ class LookupsSeeder extends Seeder
                 'item_key' => 'approved',
                 'name_ar' => 'معتمد',
                 'name_en' => 'Approved',
+                'extra_1' => 'success',
             ],
             [
                 'is_managed' => 0,
@@ -281,6 +301,7 @@ class LookupsSeeder extends Seeder
                 'item_key' => 'rejected',
                 'name_ar' => 'مرفوض',
                 'name_en' => 'Rejected',
+                'extra_1' => 'danger',
             ],
             [
                 'is_managed' => 0,
@@ -288,6 +309,7 @@ class LookupsSeeder extends Seeder
                 'item_key' => 'accepting_offers',
                 'name_ar' => 'استقبال عروض الأسعار',
                 'name_en' => 'Accepting Offers',
+                'extra_1' => 'primary',
             ],
             [
                 'is_managed' => 0,
@@ -295,6 +317,7 @@ class LookupsSeeder extends Seeder
                 'item_key' => 'waiting_for_awarding',
                 'name_ar' => 'بانتظار الترسية',
                 'name_en' => 'Awaiting Award Decision',
+                'extra_1' => 'info',
             ],
             [
                 'is_managed' => 0,
@@ -302,6 +325,7 @@ class LookupsSeeder extends Seeder
                 'item_key' => 'awarded',
                 'name_ar' => 'تم الترسية',
                 'name_en' => 'Awarded',
+                'extra_1' => 'primary',
             ],
             [
                 'is_managed' => 0,
@@ -309,6 +333,7 @@ class LookupsSeeder extends Seeder
                 'item_key' => 'awarding_approved',
                 'name_ar' => 'تم اعتماد الترسية',
                 'name_en' => 'Award Decision Approved',
+                'extra_1' => 'success',
             ],
             [
                 'is_managed' => 1,
@@ -332,6 +357,37 @@ class LookupsSeeder extends Seeder
                 'item_key' => 'land_ownership_attachments',
                 'name_ar' => 'مرفقات ملكية الأرض',
                 'name_en' => 'Land Ownership Attachments',
+            ],
+            [
+                'is_managed' => 0,
+                'parent_id' => 0,
+                'master_key' => 'investor_status',
+                'name_ar' => 'حالة المستثمر',
+                'name_en' => 'Investor Status',
+            ],
+            [
+                'is_managed' => 0,
+                'master_key' => 'investor_status',
+                'item_key' => 'pending',
+                'name_ar' => 'بانتظار الاعتماد',
+                'name_en' => 'Pending',
+                'extra_1' => 'info',
+            ],
+            [
+                'is_managed' => 0,
+                'master_key' => 'investor_status',
+                'item_key' => 'approved',
+                'name_ar' => 'معتمد',
+                'name_en' => 'Approved',
+                'extra_1' => 'success',
+            ],
+            [
+                'is_managed' => 0,
+                'master_key' => 'investor_status',
+                'item_key' => 'rejected',
+                'name_ar' => 'مرفوض',
+                'name_en' => 'Rejected',
+                'extra_1' => 'danger',
             ],
 
 
