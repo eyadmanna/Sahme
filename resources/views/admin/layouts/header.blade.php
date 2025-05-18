@@ -24,37 +24,45 @@
                     <div class="header-tabs overflow-auto mx-4 ms-lg-10 mb-5 mb-lg-0" id="kt_header_tabs" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_header_navs_wrapper', lg: '#kt_brand_tabs'}">
                         <!--begin::Header tabs-->
                         <ul class="nav flex-nowrap text-nowrap">
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" 
+                                    data-bs-toggle="tab" 
+                                    href="#kt_header_navs_tab_1"
+                                    aria-selected="{{ request()->routeIs('dashboard') ? 'true' : 'false' }}"> 
+                                    <i class="la la-home" style="font-size: 18px;"></i>
+                                </a>
+                            </li>
                             @can('Land Section View')
                             <li class="nav-item">
-                                <a class="nav-link {{ request()->routeIs('dashboard', 'lands.index') ? 'active' : '' }}"
+                                <a class="nav-link {{ request()->routeIs('lands.index') ? 'active' : '' }}"
                                    data-bs-toggle="tab"
-                                   href="#kt_header_navs_tab_1"
-                                   aria-selected="{{ request()->routeIs('dashboard', 'lands.index') ? 'true' : 'false' }}"
+                                   href="#kt_header_navs_tab_2"
+                                   aria-selected="{{ request()->routeIs('lands.index') ? 'true' : 'false' }}"
                                    role="tab">@lang('admin.Land management')</a>
                             </li>
                             @endcan
                             @can('Projects Section View')
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#kt_header_navs_tab_2">إدارة المشاريع</a>
+                                <a class="nav-link" data-bs-toggle="tab" href="#kt_header_navs_tab_3"> المشاريع</a>
                             </li>
                             @endcan
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#kt_header_navs_tab_3">إدارة الشركاء الهندسيين</a>
+                                <a class="nav-link" data-bs-toggle="tab" href="#kt_header_navs_tab_4">  الشركاء الهندسيين والمقاولين</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#kt_header_navs_tab_4">إدارة المقاولين</a>
+                                <a class="nav-link" data-bs-toggle="tab" href="#kt_header_navs_tab_5"> المستثمرين</a>
                             </li>
                             @can('Settings Section View')
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('users.index', 'roles.index','users.view') ? 'active' : '' }}"
                                    data-bs-toggle="tab"
-                                   href="#kt_header_navs_tab_5"
+                                   href="#kt_header_navs_tab_6"
                                    aria-selected="{{ request()->routeIs('users.index', 'roles.index','users.view') ? 'true' : 'false' }}"
                                    role="tab">@lang('admin.System settings')</a>
                             </li>
                             @endcan()
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#kt_header_navs_tab_6">التقارير </a>
+                                <a class="nav-link" data-bs-toggle="tab" href="#kt_header_navs_tab_7">التقارير </a>
                             </li>
                         </ul>
                         <!--begin::Header tabs-->
@@ -108,449 +116,11 @@
 															</i>
 														</span>
                                     <!--end::Reset-->
-                                    <!--begin::Toolbar-->
-                                    <div class="position-absolute top-50 end-0 translate-middle-y" data-kt-search-element="toolbar">
-                                        <!--begin::Preferences toggle-->
-                                        <div data-kt-search-element="preferences-show" class="btn btn-icon w-20px btn-sm btn-active-color-primary me-1" data-bs-toggle="tooltip" title="Show search preferences">
-                                            <i class="ki-duotone ki-setting-2 fs-2">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                            </i>
-                                        </div>
-                                        <!--end::Preferences toggle-->
-                                        <!--begin::Advanced search toggle-->
-                                        <div data-kt-search-element="advanced-options-form-show" class="btn btn-icon w-20px btn-sm btn-active-color-primary" data-bs-toggle="tooltip" title="Show more search options">
-                                            <i class="ki-duotone ki-down fs-2"></i>
-                                        </div>
-                                        <!--end::Advanced search toggle-->
-                                    </div>
-                                    <!--end::Toolbar-->
                                 </form>
                                 <!--end::Form-->
                                 <!--begin::Separator-->
                                 <div class="separator border-gray-200 mb-6"></div>
                                 <!--end::Separator-->
-                                <!--begin::Recently viewed-->
-                                <div data-kt-search-element="results" class="d-none">
-                                    <!--begin::Items-->
-                                    <div class="scroll-y mh-200px mh-lg-350px">
-                                        <!--begin::Category title-->
-                                        <h3 class="fs-5 text-muted m-0 pb-5" data-kt-search-element="category-title">Users</h3>
-                                        <!--end::Category title-->
-                                        <!--begin::Item-->
-                                        <a href="#" class="d-flex text-gray-900 text-hover-primary align-items-center mb-5">
-                                            <!--begin::Symbol-->
-                                            <div class="symbol symbol-40px me-4">
-                                                <img src="{{asset('assets/media/avatars/300-6.jpg')}}" alt="" />
-                                            </div>
-                                            <!--end::Symbol-->
-                                            <!--begin::Title-->
-                                            <div class="d-flex flex-column justify-content-start fw-semibold">
-                                                <span class="fs-6 fw-semibold">Karina Clark</span>
-                                                <span class="fs-7 fw-semibold text-muted">Marketing Manager</span>
-                                            </div>
-                                            <!--end::Title-->
-                                        </a>
-                                        <!--end::Item-->
-                                        <!--begin::Item-->
-                                        <a href="#" class="d-flex text-gray-900 text-hover-primary align-items-center mb-5">
-                                            <!--begin::Symbol-->
-                                            <div class="symbol symbol-40px me-4">
-                                                <img src="{{asset('assets/media/avatars/300-2.jpg')}}" alt="" />
-                                            </div>
-                                            <!--end::Symbol-->
-                                            <!--begin::Title-->
-                                            <div class="d-flex flex-column justify-content-start fw-semibold">
-                                                <span class="fs-6 fw-semibold">Olivia Bold</span>
-                                                <span class="fs-7 fw-semibold text-muted">Software Engineer</span>
-                                            </div>
-                                            <!--end::Title-->
-                                        </a>
-                                        <!--end::Item-->
-                                        <!--begin::Item-->
-                                        <a href="#" class="d-flex text-gray-900 text-hover-primary align-items-center mb-5">
-                                            <!--begin::Symbol-->
-                                            <div class="symbol symbol-40px me-4">
-                                                <img src="{{asset('assets/media/avatars/300-9.jpg')}}" alt="" />
-                                            </div>
-                                            <!--end::Symbol-->
-                                            <!--begin::Title-->
-                                            <div class="d-flex flex-column justify-content-start fw-semibold">
-                                                <span class="fs-6 fw-semibold">Ana Clark</span>
-                                                <span class="fs-7 fw-semibold text-muted">UI/UX Designer</span>
-                                            </div>
-                                            <!--end::Title-->
-                                        </a>
-                                        <!--end::Item-->
-                                        <!--begin::Item-->
-                                        <a href="#" class="d-flex text-gray-900 text-hover-primary align-items-center mb-5">
-                                            <!--begin::Symbol-->
-                                            <div class="symbol symbol-40px me-4">
-                                                <img src="{{asset('assets/media/avatars/300-14.jpg')}}" alt="" />
-                                            </div>
-                                            <!--end::Symbol-->
-                                            <!--begin::Title-->
-                                            <div class="d-flex flex-column justify-content-start fw-semibold">
-                                                <span class="fs-6 fw-semibold">Nick Pitola</span>
-                                                <span class="fs-7 fw-semibold text-muted">Art Director</span>
-                                            </div>
-                                            <!--end::Title-->
-                                        </a>
-                                        <!--end::Item-->
-                                        <!--begin::Item-->
-                                        <a href="#" class="d-flex text-gray-900 text-hover-primary align-items-center mb-5">
-                                            <!--begin::Symbol-->
-                                            <div class="symbol symbol-40px me-4">
-                                                <img src="{{asset('assets/media/avatars/300-11.jpg')}}" alt="" />
-                                            </div>
-                                            <!--end::Symbol-->
-                                            <!--begin::Title-->
-                                            <div class="d-flex flex-column justify-content-start fw-semibold">
-                                                <span class="fs-6 fw-semibold">Edward Kulnic</span>
-                                                <span class="fs-7 fw-semibold text-muted">System Administrator</span>
-                                            </div>
-                                            <!--end::Title-->
-                                        </a>
-                                        <!--end::Item-->
-                                        <!--begin::Category title-->
-                                        <h3 class="fs-5 text-muted m-0 pt-5 pb-5" data-kt-search-element="category-title">Customers</h3>
-                                        <!--end::Category title-->
-                                        <!--begin::Item-->
-                                        <a href="#" class="d-flex text-gray-900 text-hover-primary align-items-center mb-5">
-                                            <!--begin::Symbol-->
-                                            <div class="symbol symbol-40px me-4">
-																	<span class="symbol-label bg-light">
-																		<img class="w-20px h-20px" src="{{asset('assets/media/svg/brand-logos/volicity-9.svg')}}" alt="" />
-																	</span>
-                                            </div>
-                                            <!--end::Symbol-->
-                                            <!--begin::Title-->
-                                            <div class="d-flex flex-column justify-content-start fw-semibold">
-                                                <span class="fs-6 fw-semibold">Company Rbranding</span>
-                                                <span class="fs-7 fw-semibold text-muted">UI Design</span>
-                                            </div>
-                                            <!--end::Title-->
-                                        </a>
-                                        <!--end::Item-->
-                                        <!--begin::Item-->
-                                        <a href="#" class="d-flex text-gray-900 text-hover-primary align-items-center mb-5">
-                                            <!--begin::Symbol-->
-                                            <div class="symbol symbol-40px me-4">
-																	<span class="symbol-label bg-light">
-																		<img class="w-20px h-20px" src="{{asset('assets/media/svg/brand-logos/tvit.svg')}}" alt="" />
-																	</span>
-                                            </div>
-                                            <!--end::Symbol-->
-                                            <!--begin::Title-->
-                                            <div class="d-flex flex-column justify-content-start fw-semibold">
-                                                <span class="fs-6 fw-semibold">Company Re-branding</span>
-                                                <span class="fs-7 fw-semibold text-muted">Web Development</span>
-                                            </div>
-                                            <!--end::Title-->
-                                        </a>
-                                        <!--end::Item-->
-                                        <!--begin::Item-->
-                                        <a href="#" class="d-flex text-gray-900 text-hover-primary align-items-center mb-5">
-                                            <!--begin::Symbol-->
-                                            <div class="symbol symbol-40px me-4">
-																	<span class="symbol-label bg-light">
-																		<img class="w-20px h-20px" src="{{asset('assets/media/svg/misc/infography.svg')}}" alt="" />
-																	</span>
-                                            </div>
-                                            <!--end::Symbol-->
-                                            <!--begin::Title-->
-                                            <div class="d-flex flex-column justify-content-start fw-semibold">
-                                                <span class="fs-6 fw-semibold">Business Analytics App</span>
-                                                <span class="fs-7 fw-semibold text-muted">Administration</span>
-                                            </div>
-                                            <!--end::Title-->
-                                        </a>
-                                        <!--end::Item-->
-                                        <!--begin::Item-->
-                                        <a href="#" class="d-flex text-gray-900 text-hover-primary align-items-center mb-5">
-                                            <!--begin::Symbol-->
-                                            <div class="symbol symbol-40px me-4">
-																	<span class="symbol-label bg-light">
-																		<img class="w-20px h-20px" src="{{asset('assets/media/svg/brand-logos/leaf.svg')}}" alt="" />
-																	</span>
-                                            </div>
-                                            <!--end::Symbol-->
-                                            <!--begin::Title-->
-                                            <div class="d-flex flex-column justify-content-start fw-semibold">
-                                                <span class="fs-6 fw-semibold">EcoLeaf App Launch</span>
-                                                <span class="fs-7 fw-semibold text-muted">Marketing</span>
-                                            </div>
-                                            <!--end::Title-->
-                                        </a>
-                                        <!--end::Item-->
-                                        <!--begin::Item-->
-                                        <a href="#" class="d-flex text-gray-900 text-hover-primary align-items-center mb-5">
-                                            <!--begin::Symbol-->
-                                            <div class="symbol symbol-40px me-4">
-																	<span class="symbol-label bg-light">
-																		<img class="w-20px h-20px" src="{{asset('assets/media/svg/brand-logos/tower.svg')}}" alt="" />
-																	</span>
-                                            </div>
-                                            <!--end::Symbol-->
-                                            <!--begin::Title-->
-                                            <div class="d-flex flex-column justify-content-start fw-semibold">
-                                                <span class="fs-6 fw-semibold">Tower Group Website</span>
-                                                <span class="fs-7 fw-semibold text-muted">Google Adwords</span>
-                                            </div>
-                                            <!--end::Title-->
-                                        </a>
-                                        <!--end::Item-->
-                                        <!--begin::Category title-->
-                                        <h3 class="fs-5 text-muted m-0 pt-5 pb-5" data-kt-search-element="category-title">Projects</h3>
-                                        <!--end::Category title-->
-                                        <!--begin::Item-->
-                                        <a href="#" class="d-flex text-gray-900 text-hover-primary align-items-center mb-5">
-                                            <!--begin::Symbol-->
-                                            <div class="symbol symbol-40px me-4">
-																	<span class="symbol-label bg-light">
-																		<i class="ki-duotone ki-notepad fs-2 text-primary">
-																			<span class="path1"></span>
-																			<span class="path2"></span>
-																			<span class="path3"></span>
-																			<span class="path4"></span>
-																			<span class="path5"></span>
-																		</i>
-																	</span>
-                                            </div>
-                                            <!--end::Symbol-->
-                                            <!--begin::Title-->
-                                            <div class="d-flex flex-column">
-                                                <span class="fs-6 fw-semibold">Si-Fi Project by AU Themes</span>
-                                                <span class="fs-7 fw-semibold text-muted">#45670</span>
-                                            </div>
-                                            <!--end::Title-->
-                                        </a>
-                                        <!--end::Item-->
-                                        <!--begin::Item-->
-                                        <a href="#" class="d-flex text-gray-900 text-hover-primary align-items-center mb-5">
-                                            <!--begin::Symbol-->
-                                            <div class="symbol symbol-40px me-4">
-																	<span class="symbol-label bg-light">
-																		<i class="ki-duotone ki-frame fs-2 text-primary">
-																			<span class="path1"></span>
-																			<span class="path2"></span>
-																			<span class="path3"></span>
-																			<span class="path4"></span>
-																		</i>
-																	</span>
-                                            </div>
-                                            <!--end::Symbol-->
-                                            <!--begin::Title-->
-                                            <div class="d-flex flex-column">
-                                                <span class="fs-6 fw-semibold">Shopix Mobile App Planning</span>
-                                                <span class="fs-7 fw-semibold text-muted">#45690</span>
-                                            </div>
-                                            <!--end::Title-->
-                                        </a>
-                                        <!--end::Item-->
-                                        <!--begin::Item-->
-                                        <a href="#" class="d-flex text-gray-900 text-hover-primary align-items-center mb-5">
-                                            <!--begin::Symbol-->
-                                            <div class="symbol symbol-40px me-4">
-																	<span class="symbol-label bg-light">
-																		<i class="ki-duotone ki-message-text-2 fs-2 text-primary">
-																			<span class="path1"></span>
-																			<span class="path2"></span>
-																			<span class="path3"></span>
-																		</i>
-																	</span>
-                                            </div>
-                                            <!--end::Symbol-->
-                                            <!--begin::Title-->
-                                            <div class="d-flex flex-column">
-                                                <span class="fs-6 fw-semibold">Finance Monitoring SAAS Discussion</span>
-                                                <span class="fs-7 fw-semibold text-muted">#21090</span>
-                                            </div>
-                                            <!--end::Title-->
-                                        </a>
-                                        <!--end::Item-->
-                                        <!--begin::Item-->
-                                        <a href="#" class="d-flex text-gray-900 text-hover-primary align-items-center mb-5">
-                                            <!--begin::Symbol-->
-                                            <div class="symbol symbol-40px me-4">
-																	<span class="symbol-label bg-light">
-																		<i class="ki-duotone ki-profile-circle fs-2 text-primary">
-																			<span class="path1"></span>
-																			<span class="path2"></span>
-																			<span class="path3"></span>
-																		</i>
-																	</span>
-                                            </div>
-                                            <!--end::Symbol-->
-                                            <!--begin::Title-->
-                                            <div class="d-flex flex-column">
-                                                <span class="fs-6 fw-semibold">Dashboard Analitics Launch</span>
-                                                <span class="fs-7 fw-semibold text-muted">#34560</span>
-                                            </div>
-                                            <!--end::Title-->
-                                        </a>
-                                        <!--end::Item-->
-                                    </div>
-                                    <!--end::Items-->
-                                </div>
-                                <!--end::Recently viewed-->
-                                <!--begin::Recently viewed-->
-                                <div class="mb-5" data-kt-search-element="main">
-                                    <!--begin::Heading-->
-                                    <div class="d-flex flex-stack fw-semibold mb-4">
-                                        <!--begin::Label-->
-                                        <span class="text-muted fs-6 me-2">Recently Searched:</span>
-                                        <!--end::Label-->
-                                    </div>
-                                    <!--end::Heading-->
-                                    <!--begin::Items-->
-                                    <div class="scroll-y mh-200px mh-lg-325px">
-                                        <!--begin::Item-->
-                                        <div class="d-flex align-items-center mb-5">
-                                            <!--begin::Symbol-->
-                                            <div class="symbol symbol-40px me-4">
-																	<span class="symbol-label bg-light">
-																		<i class="ki-duotone ki-laptop fs-2 text-primary">
-																			<span class="path1"></span>
-																			<span class="path2"></span>
-																		</i>
-																	</span>
-                                            </div>
-                                            <!--end::Symbol-->
-                                            <!--begin::Title-->
-                                            <div class="d-flex flex-column">
-                                                <a href="#" class="fs-6 text-gray-800 text-hover-primary fw-semibold">BoomApp by Keenthemes</a>
-                                                <span class="fs-7 text-muted fw-semibold">#45789</span>
-                                            </div>
-                                            <!--end::Title-->
-                                        </div>
-                                        <!--end::Item-->
-                                        <!--begin::Item-->
-                                        <div class="d-flex align-items-center mb-5">
-                                            <!--begin::Symbol-->
-                                            <div class="symbol symbol-40px me-4">
-																	<span class="symbol-label bg-light">
-																		<i class="ki-duotone ki-chart-simple fs-2 text-primary">
-																			<span class="path1"></span>
-																			<span class="path2"></span>
-																			<span class="path3"></span>
-																			<span class="path4"></span>
-																		</i>
-																	</span>
-                                            </div>
-                                            <!--end::Symbol-->
-                                            <!--begin::Title-->
-                                            <div class="d-flex flex-column">
-                                                <a href="#" class="fs-6 text-gray-800 text-hover-primary fw-semibold">"Kept API Project Meeting</a>
-                                                <span class="fs-7 text-muted fw-semibold">#84050</span>
-                                            </div>
-                                            <!--end::Title-->
-                                        </div>
-                                        <!--end::Item-->
-                                        <!--begin::Item-->
-                                        <div class="d-flex align-items-center mb-5">
-                                            <!--begin::Symbol-->
-                                            <div class="symbol symbol-40px me-4">
-																	<span class="symbol-label bg-light">
-																		<i class="ki-duotone ki-chart fs-2 text-primary">
-																			<span class="path1"></span>
-																			<span class="path2"></span>
-																		</i>
-																	</span>
-                                            </div>
-                                            <!--end::Symbol-->
-                                            <!--begin::Title-->
-                                            <div class="d-flex flex-column">
-                                                <a href="#" class="fs-6 text-gray-800 text-hover-primary fw-semibold">"KPI Monitoring App Launch</a>
-                                                <span class="fs-7 text-muted fw-semibold">#84250</span>
-                                            </div>
-                                            <!--end::Title-->
-                                        </div>
-                                        <!--end::Item-->
-                                        <!--begin::Item-->
-                                        <div class="d-flex align-items-center mb-5">
-                                            <!--begin::Symbol-->
-                                            <div class="symbol symbol-40px me-4">
-																	<span class="symbol-label bg-light">
-																		<i class="ki-duotone ki-chart-line-down fs-2 text-primary">
-																			<span class="path1"></span>
-																			<span class="path2"></span>
-																		</i>
-																	</span>
-                                            </div>
-                                            <!--end::Symbol-->
-                                            <!--begin::Title-->
-                                            <div class="d-flex flex-column">
-                                                <a href="#" class="fs-6 text-gray-800 text-hover-primary fw-semibold">Project Reference FAQ</a>
-                                                <span class="fs-7 text-muted fw-semibold">#67945</span>
-                                            </div>
-                                            <!--end::Title-->
-                                        </div>
-                                        <!--end::Item-->
-                                        <!--begin::Item-->
-                                        <div class="d-flex align-items-center mb-5">
-                                            <!--begin::Symbol-->
-                                            <div class="symbol symbol-40px me-4">
-																	<span class="symbol-label bg-light">
-																		<i class="ki-duotone ki-sms fs-2 text-primary">
-																			<span class="path1"></span>
-																			<span class="path2"></span>
-																		</i>
-																	</span>
-                                            </div>
-                                            <!--end::Symbol-->
-                                            <!--begin::Title-->
-                                            <div class="d-flex flex-column">
-                                                <a href="#" class="fs-6 text-gray-800 text-hover-primary fw-semibold">"FitPro App Development</a>
-                                                <span class="fs-7 text-muted fw-semibold">#84250</span>
-                                            </div>
-                                            <!--end::Title-->
-                                        </div>
-                                        <!--end::Item-->
-                                        <!--begin::Item-->
-                                        <div class="d-flex align-items-center mb-5">
-                                            <!--begin::Symbol-->
-                                            <div class="symbol symbol-40px me-4">
-																	<span class="symbol-label bg-light">
-																		<i class="ki-duotone ki-bank fs-2 text-primary">
-																			<span class="path1"></span>
-																			<span class="path2"></span>
-																		</i>
-																	</span>
-                                            </div>
-                                            <!--end::Symbol-->
-                                            <!--begin::Title-->
-                                            <div class="d-flex flex-column">
-                                                <a href="#" class="fs-6 text-gray-800 text-hover-primary fw-semibold">Shopix Mobile App</a>
-                                                <span class="fs-7 text-muted fw-semibold">#45690</span>
-                                            </div>
-                                            <!--end::Title-->
-                                        </div>
-                                        <!--end::Item-->
-                                        <!--begin::Item-->
-                                        <div class="d-flex align-items-center mb-5">
-                                            <!--begin::Symbol-->
-                                            <div class="symbol symbol-40px me-4">
-																	<span class="symbol-label bg-light">
-																		<i class="ki-duotone ki-chart-line-down fs-2 text-primary">
-																			<span class="path1"></span>
-																			<span class="path2"></span>
-																		</i>
-																	</span>
-                                            </div>
-                                            <!--end::Symbol-->
-                                            <!--begin::Title-->
-                                            <div class="d-flex flex-column">
-                                                <a href="#" class="fs-6 text-gray-800 text-hover-primary fw-semibold">"Landing UI Design" Launch</a>
-                                                <span class="fs-7 text-muted fw-semibold">#24005</span>
-                                            </div>
-                                            <!--end::Title-->
-                                        </div>
-                                        <!--end::Item-->
-                                    </div>
-                                    <!--end::Items-->
-                                </div>
-                                <!--end::Recently viewed-->
                                 <!--begin::Empty-->
                                 <div data-kt-search-element="empty" class="text-center d-none">
                                     <!--begin::Icon-->
@@ -681,79 +251,12 @@
                                 <!--end::Actions-->
                             </form>
                             <!--end::Preferences-->
-                            <!--begin::Preferences-->
-                            <form data-kt-search-element="preferences" class="pt-1 d-none">
-                                <!--begin::Heading-->
-                                <h3 class="fw-semibold text-gray-900 mb-7">Search Preferences</h3>
-                                <!--end::Heading-->
-                                <!--begin::Input group-->
-                                <div class="pb-4 border-bottom">
-                                    <label class="form-check form-switch form-switch-sm form-check-custom form-check-solid flex-stack">
-                                        <span class="form-check-label text-gray-700 fs-6 fw-semibold ms-0 me-2">Projects</span>
-                                        <input class="form-check-input" type="checkbox" value="1" checked="checked" />
-                                    </label>
-                                </div>
-                                <!--end::Input group-->
-                                <!--begin::Input group-->
-                                <div class="py-4 border-bottom">
-                                    <label class="form-check form-switch form-switch-sm form-check-custom form-check-solid flex-stack">
-                                        <span class="form-check-label text-gray-700 fs-6 fw-semibold ms-0 me-2">Targets</span>
-                                        <input class="form-check-input" type="checkbox" value="1" checked="checked" />
-                                    </label>
-                                </div>
-                                <!--end::Input group-->
-                                <!--begin::Input group-->
-                                <div class="py-4 border-bottom">
-                                    <label class="form-check form-switch form-switch-sm form-check-custom form-check-solid flex-stack">
-                                        <span class="form-check-label text-gray-700 fs-6 fw-semibold ms-0 me-2">Affiliate Programs</span>
-                                        <input class="form-check-input" type="checkbox" value="1" />
-                                    </label>
-                                </div>
-                                <!--end::Input group-->
-                                <!--begin::Input group-->
-                                <div class="py-4 border-bottom">
-                                    <label class="form-check form-switch form-switch-sm form-check-custom form-check-solid flex-stack">
-                                        <span class="form-check-label text-gray-700 fs-6 fw-semibold ms-0 me-2">Referrals</span>
-                                        <input class="form-check-input" type="checkbox" value="1" checked="checked" />
-                                    </label>
-                                </div>
-                                <!--end::Input group-->
-                                <!--begin::Input group-->
-                                <div class="py-4 border-bottom">
-                                    <label class="form-check form-switch form-switch-sm form-check-custom form-check-solid flex-stack">
-                                        <span class="form-check-label text-gray-700 fs-6 fw-semibold ms-0 me-2">Users</span>
-                                        <input class="form-check-input" type="checkbox" value="1" />
-                                    </label>
-                                </div>
-                                <!--end::Input group-->
-                                <!--begin::Actions-->
-                                <div class="d-flex justify-content-end pt-7">
-                                    <button type="reset" class="btn btn-sm btn-light fw-bold btn-active-light-primary me-2" data-kt-search-element="preferences-dismiss">Cancel</button>
-                                    <button type="submit" class="btn btn-sm fw-bold btn-primary">Save Changes</button>
-                                </div>
-                                <!--end::Actions-->
-                            </form>
-                            <!--end::Preferences-->
                         </div>
                         <!--end::Menu-->
                     </div>
                     <!--end::Search-->
                 </div>
                 <!--end::Search-->
-                <!--begin::Activities-->
-                <div class="d-flex align-items-center ms-1">
-                    <!--begin::Drawer toggle-->
-                    <div class="btn btn-icon btn-color-white bg-hover-white bg-hover-opacity-10 w-35px h-35px h-md-40px w-md-40px" id="kt_activities_toggle">
-                        <i class="ki-duotone ki-chart-simple fs-1">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                            <span class="path3"></span>
-                            <span class="path4"></span>
-                        </i>
-                    </div>
-                    <!--end::Drawer toggle-->
-                </div>
-                <!--end::Activities-->
                 <!--begin::Chat-->
                 <div class="d-flex align-items-center ms-1">
                     <!--begin::Menu wrapper-->
@@ -786,49 +289,24 @@
                         <!--begin::Heading-->
                         <div class="d-flex flex-column flex-center bgi-no-repeat rounded-top px-9 py-10" style="background-image:url('assets/media/misc/menu-header-bg.jpg')">
                             <!--begin::Title-->
-                            <h3 class="text-white fw-semibold mb-3">Quick Links</h3>
+                            <!--<h3 class="text-info fw-semibold mb-3">الأنظمة الأخرى</h3>-->
                             <!--end::Title-->
                             <!--begin::Status-->
-                            <span class="badge bg-primary text-inverse-primary py-2 px-3">25 pending tasks</span>
+                            <span class="badge bg-primary text-inverse-primary py-2 px-3">الأنظمة الأخرى</span>
                             <!--end::Status-->
                         </div>
                         <!--end::Heading-->
                         <!--begin:Nav-->
-                        <div class="row g-0">
+                        <div class="row g-0 border-top">
                             <!--begin:Item-->
                             <div class="col-6">
-                                <a href="apps/projects/budget.html" class="d-flex flex-column flex-center h-100 p-6 bg-hover-light border-end border-bottom">
-                                    <i class="ki-duotone ki-dollar fs-3x text-primary mb-2">
-                                        <span class="path1"></span>
-                                        <span class="path2"></span>
-                                        <span class="path3"></span>
-                                    </i>
-                                    <span class="fs-5 fw-semibold text-gray-800 mb-0">Accounting</span>
-                                    <span class="fs-7 text-gray-500">eCommerce</span>
-                                </a>
-                            </div>
-                            <!--end:Item-->
-                            <!--begin:Item-->
-                            <div class="col-6">
-                                <a href="apps/projects/settings.html" class="d-flex flex-column flex-center h-100 p-6 bg-hover-light border-bottom">
-                                    <i class="ki-duotone ki-sms fs-3x text-primary mb-2">
-                                        <span class="path1"></span>
-                                        <span class="path2"></span>
-                                    </i>
-                                    <span class="fs-5 fw-semibold text-gray-800 mb-0">Administration</span>
-                                    <span class="fs-7 text-gray-500">Console</span>
-                                </a>
-                            </div>
-                            <!--end:Item-->
-                            <!--begin:Item-->
-                            <div class="col-6">
-                                <a href="apps/projects/list.html" class="d-flex flex-column flex-center h-100 p-6 bg-hover-light border-end">
+                                <a target="_blank" href="{{ route('engineering.login') }}" class="d-flex flex-column flex-center h-100 p-6 bg-hover-light border-end">
                                     <i class="ki-duotone ki-abstract-41 fs-3x text-primary mb-2">
                                         <span class="path1"></span>
                                         <span class="path2"></span>
                                     </i>
-                                    <span class="fs-5 fw-semibold text-gray-800 mb-0">Projects</span>
-                                    <span class="fs-7 text-gray-500">Pending Tasks</span>
+                                    <span class="fs-5 fw-semibold text-gray-800 mb-0">بوابة الشركاء الهندسيين</span>
+                                    <span class="fs-7 text-gray-500">200 مستخدم</span>
                                 </a>
                             </div>
                             <!--end:Item-->
@@ -839,8 +317,8 @@
                                         <span class="path1"></span>
                                         <span class="path2"></span>
                                     </i>
-                                    <span class="fs-5 fw-semibold text-gray-800 mb-0">Customers</span>
-                                    <span class="fs-7 text-gray-500">Latest cases</span>
+                                    <span class="fs-5 fw-semibold text-gray-800 mb-0">بوابة المقاولين</span>
+                                    <span class="fs-7 text-gray-500">50 مستخدم</span>
                                 </a>
                             </div>
                             <!--end:Item-->
@@ -848,11 +326,7 @@
                         <!--end:Nav-->
                         <!--begin::View more-->
                         <div class="py-2 text-center border-top">
-                            <a href="pages/user-profile/activity.html" class="btn btn-color-gray-600 btn-active-color-primary">View All
-                                <i class="ki-duotone ki-arrow-right fs-5">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                </i></a>
+                            <span class="btn btn-color-gray-600"></span>
                         </div>
                         <!--end::View more-->
                     </div>
@@ -944,7 +418,7 @@
                         <!--begin::Name-->
                         <div class="d-none d-md-flex flex-column align-items-end justify-content-center me-2 me-md-4">
                             <span class="text-white opacity-75 fs-8 fw-semibold lh-1 mb-1">{{auth()->user()->name}}</span>
-                            <span class="text-white fs-8 fw-bold lh-1">UX Designer</span>
+                            <span class="text-white fs-8 lh-1">UX Designer</span>
                         </div>
                         <!--end::Name-->
                         <!--begin::Symbol-->
@@ -987,7 +461,7 @@
                             <a href="apps/projects/list.html" class="menu-link px-5">
                                 <span class="menu-text">My Projects</span>
                                 <span class="menu-badge">
-														<span class="badge badge-light-danger badge-circle fw-bold fs-7">3</span>
+														<span class="badge badge-light-danger badge-circle fs-7">3</span>
 													</span>
                             </a>
                         </div>
@@ -1034,14 +508,24 @@
                 <!--begin::Header tab content-->
                 <div class="tab-content" data-kt-scroll="true" data-kt-scroll-activate="{default: true, lg: false}" data-kt-scroll-height="auto" data-kt-scroll-offset="70px">
                     <!--begin::Tab panel-->
-                    @can('Land Section View')
-                    <div class="tab-pane fade {{ request()->routeIs('dashboard','lands.index','lands.add') ? 'show active' : '' }}" id="kt_header_navs_tab_1">
+                    
+                    <div class="tab-pane fade {{ request()->routeIs('dashboard') ? 'show active' : '' }}" id="kt_header_navs_tab_1">
                         <!--begin::Wrapper-->
                         <div class="d-flex flex-column flex-lg-row flex-lg-stack flex-wrap gap-2 px-4 px-lg-0">
                             <div class="d-flex flex-column flex-lg-row gap-2">
-                                <a class="btn btn-sm btn-light-primary fw-bold" href="{{route('lands.index')}}">@lang('admin.Show lands')</a>
-                                <a class="btn btn-sm btn-light-warning fw-bold" href="apps/subscriptions/view.html">الشركاء القانونيين </a>
-                                <a class="btn btn-sm btn-light-info fw-bold" href="apps/subscriptions/view.html">المثمنين العقاريين  </a>
+                                <a class="btn btn-sm btn-light-primary" href="{{route('dashboard')}}">@lang('admin.Home')</a>
+                            </div>
+                        </div>
+                        <!--end::Wrapper-->
+                    </div>
+                    @can('Land Section View')
+                    <div class="tab-pane fade {{ request()->routeIs('lands.index','lands.add') ? 'show active' : '' }}" id="kt_header_navs_tab_2">
+                        <!--begin::Wrapper-->
+                        <div class="d-flex flex-column flex-lg-row flex-lg-stack flex-wrap gap-2 px-4 px-lg-0">
+                            <div class="d-flex flex-column flex-lg-row gap-2">
+                                <a class="btn btn-sm btn-light-primary" href="{{route('lands.index')}}">@lang('admin.Show lands')</a>
+                                <a class="btn btn-sm btn-light-warning" href="apps/subscriptions/view.html">الشركاء القانونيين </a>
+                                <a class="btn btn-sm btn-light-info" href="apps/subscriptions/view.html">المثمنين العقاريين  </a>
                             </div>
                         </div>
                         <!--end::Wrapper-->
@@ -1049,24 +533,13 @@
                     @endcan()
                     <!--end::Tab panel-->
                     <!--begin::Tab panel-->
-                    <div class="tab-pane fade" id="kt_header_navs_tab_2">
-                        <!--begin::Wrapper-->
-                        <div class="d-flex flex-column flex-lg-row flex-lg-stack flex-wrap gap-2 px-4 px-lg-0">
-                            <div class="d-flex flex-column flex-lg-row gap-2">
-                                <a class="btn btn-sm btn-light-primary fw-bold" href="documentation/base/forms/controls.html">إضافة مشروع جديد</a>
-                                <a class="btn btn-sm btn-light-success fw-bold" href="documentation/base/forms/advanced.html">عرض المشاريع</a>
-                                <a class="btn btn-sm btn-light-danger fw-bold" href="documentation/base/forms/floating-labels.html"> تقييم المشاريع</a>
-                            </div>
-                        </div>
-                        <!--end::Wrapper-->
-                    </div>
-                    <!--end::Tab panel-->
-                    <!--begin::Tab panel-->
                     <div class="tab-pane fade" id="kt_header_navs_tab_3">
                         <!--begin::Wrapper-->
                         <div class="d-flex flex-column flex-lg-row flex-lg-stack flex-wrap gap-2 px-4 px-lg-0">
                             <div class="d-flex flex-column flex-lg-row gap-2">
-                                <a class="btn btn-sm btn-light-primary fw-bold" href="{{route('users.index')}}">عرض الشركاء الهندسيين </a>
+                                <a class="btn btn-sm btn-light-primary" href="documentation/base/forms/controls.html">إضافة مشروع جديد</a>
+                                <a class="btn btn-sm btn-light-success" href="documentation/base/forms/advanced.html">عرض المشاريع</a>
+                                <a class="btn btn-sm btn-light-danger" href="documentation/base/forms/floating-labels.html"> تقييم المشاريع</a>
                             </div>
                         </div>
                         <!--end::Wrapper-->
@@ -1077,17 +550,28 @@
                         <!--begin::Wrapper-->
                         <div class="d-flex flex-column flex-lg-row flex-lg-stack flex-wrap gap-2 px-4 px-lg-0">
                             <div class="d-flex flex-column flex-lg-row gap-2">
-                                <a class="btn btn-sm btn-light-primary fw-bold" href="apps/ecommerce/catalog/products.html">عرض المقاولين</a>
-                                <a class="btn btn-sm btn-light-danger fw-bold" href="apps/file-manager/folders.html"> إدارة عروض أسعار المقاولين</a>
-                                <a class="btn btn-sm btn-light-info fw-bold" href="apps/subscriptions/view.html"> مراحل تنفيذ المشاريع</a>
-                                <a class="btn btn-sm btn-light-info fw-bold" href="apps/subscriptions/view.html">   </a>
+                                <a class="btn btn-sm btn-light-primary" href="{{route('users.index')}}">عرض الشركاء الهندسيين </a>
+                                <a class="btn btn-sm btn-light-primary" href="apps/ecommerce/catalog/products.html">عرض المقاولين</a>
+                                <a class="btn btn-sm btn-light-danger" href="apps/file-manager/folders.html"> إدارة عروض أسعار المقاولين</a>
+                                <a class="btn btn-sm btn-light-info" href="apps/subscriptions/view.html"> مراحل تنفيذ المشاريع</a>
                             </div>
                         </div>
                         <!--end::Wrapper-->
                     </div>
                     <!--end::Tab panel-->
                     <!--begin::Tab panel-->
-                    <div class="tab-pane fade {{ request()->routeIs('users.index', 'roles.index','users.view') ? 'show active' : '' }}" id="kt_header_navs_tab_5">
+                    <div class="tab-pane fade" id="kt_header_navs_tab_5">
+                        <!--begin::Wrapper-->
+                        <div class="d-flex flex-column flex-lg-row flex-lg-stack flex-wrap gap-2 px-4 px-lg-0">
+                            <div class="d-flex flex-column flex-lg-row gap-2">
+                                <a class="btn btn-sm btn-light-primary" href="apps/ecommerce/catalog/products.html">عرض المستثمرين</a>
+                            </div>
+                        </div>
+                        <!--end::Wrapper-->
+                    </div>
+                    <!--end::Tab panel-->
+                    <!--begin::Tab panel-->
+                    <div class="tab-pane fade {{ request()->routeIs('users.index', 'roles.index','users.view') ? 'show active' : '' }}" id="kt_header_navs_tab_6">
                        <!--begin::Menu wrapper-->
                        <div class="header-menu flex-column align-items-stretch flex-lg-row">
                         <!--begin::Menu-->
@@ -1097,7 +581,7 @@
                             <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
                                 <!--begin:Menu link-->
                                 <span class="menu-link py-3">
-                                                        <span class="btn btn-sm btn-light-info fw-bold">@lang('admin.User and Permission Management')</span>
+                                                        <span class="btn btn-sm btn-light-info">@lang('admin.User and Permission Management')</span>
                                                         <span class="menu-arrow d-lg-none"></span>
                                                     </span>
                                 <!--end:Menu link-->
@@ -1148,15 +632,15 @@
                     <!--end::Tab panel-->
 
                     <!--begin::Tab panel-->
-                    <div class="tab-pane fade" id="kt_header_navs_tab_6">
+                    <div class="tab-pane fade" id="kt_header_navs_tab_7">
                         <!--begin::Wrapper-->
                         <div class="d-flex flex-column flex-lg-row flex-lg-stack flex-wrap gap-2 px-4 px-lg-0">
                             <div class="d-flex flex-column flex-lg-row gap-2">
-                                <a class="btn btn-sm btn-light-primary fw-bold" href="apps/ecommerce/catalog/products.html">eCommerce</a>
-                                <a class="btn btn-sm btn-light-danger fw-bold" href="apps/file-manager/folders.html">File Manager</a>
+                                <a class="btn btn-sm btn-light-primary" href="apps/ecommerce/catalog/products.html">eCommerce</a>
+                                <a class="btn btn-sm btn-light-danger" href="apps/file-manager/folders.html">File Manager</a>
                             </div>
                             <div class="d-flex flex-column flex-lg-row gap-2">
-                                <a class="btn btn-sm btn-light-info fw-bold" href="apps/subscriptions/view.html">More Apps</a>
+                                <a class="btn btn-sm btn-light-info" href="apps/subscriptions/view.html">More Apps</a>
                             </div>
                         </div>
                         <!--end::Wrapper-->

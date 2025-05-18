@@ -44,6 +44,7 @@ return [
     'Resend Verification Email' => 'إعادة إرسال بريد إلكتروني للتحقق',
     'Show lands' => 'عرض الأراضي',
     'Select' => 'اختر',
+    'View' => 'عرض',
 
     /*UserManagement*/
     "User Management" => "إدارة المستخدمين",
@@ -110,6 +111,7 @@ return [
     /*Land management*/
     'Land management' => 'إدارة الأراضي',
     'Add land' => 'أضافة أرض',
+    'Edit land' => 'تعديل أرض',
     'View land' => 'عرض أرض',
     'Adding land for investment' => 'أضافة أرض للاستثمار',
     'Search for land' => 'بحث عن الارض',
@@ -149,8 +151,40 @@ return [
     'Asking price is required' => 'حقل السعر مطلوب',
     'Land area is required' => 'حقل مساحة الأرض مطلوب',
     'Engineering partner evaluation' => 'تقييم الشريك الهندسي',
-    'Evaluation of the legal partner' => 'تقييم الشريك القانوني',
+    'Evaluation of the legal partner' => 'اعتماد الملكية القانونية',
     'Engineering partner accreditation' => 'اعتماد الشريك الهندسي',
+    'Description of the land' => 'وصف الأرض',
+    'Description land filed is required' => 'حقل وصف الارض مطلوب',
+    'Land adoption' => 'اعتماد الأرض',
+    'Refusal to approve the land' => 'رفض اعتماد الأرض',
+    'Credentials' => 'بيانات الاعتماد',
+    'Land ownership certification files' => 'ملفات اعتماد ملكية الإرض',
+    'Drop files here or click to upload.' => 'قم بإسقاط الملفات هنا أو انقر للتحميل.',
+    'Land ownership approval notes' => 'ملاحظات اعتماد ملكية الأرض',
+    'Legal accreditation rejected' => 'الاعتماد القانوني مرفوض',
+    'Legal accreditation is acceptable' => 'الاعتماد القانوني مقبول',
+    'Attachments' => 'المرفقات',
+    'Attachment' => 'المرفق',
+    'Description' => 'الوصف',
+    'Are you sure you want to approve?' => 'هل أنت متأكد أنك تريد الموافقة؟',
+    'Are you sure you want to reject?' => 'هل أنت متأكد أنك تريد الرفض؟',
+    'Yes' => 'نعم',
+    'Existing Attachments' => 'المرفقات الموجودة',
+    'File' => 'الملف',
+    'Are you sure you want to delete the item?' => 'هل انت متاكد انك تريد حذف  العنصر',
+    'The item was deleted successfully' => 'تم حذف العنصر بنجاح',
+    'Real estate appraiser evaluation' => 'تقييم المثمن العقاري',
+    'Price adoption' => 'اعتماد السعر',
+    'Request to modify the price' => 'طلب تعديل السعر',
+    'Valuation price' => 'سعر التثمين',
+    'Appraisal notes' => 'ملاحظات التثمين',
+    'Send a modification request' => 'ارسال طلب تعديل',
+    'The valuation has been approved.' => 'تم اعتماد التثمين',
+    'This field is required' => 'هذه الحقل مطلوب',
+    'Are you sure you want to send a price change request?' => 'هل انت متاكد من ارسال طلب تعديل السعر',
+    'Price change request sent successfully' => 'تم ارسال طلب تغيير السعر بنجاح',
+    'Price must be numeric' => 'يجب أن يكون السعر رقميًا',
+
 
     /*profile page*/
     'Profile Details' => 'تفاصيل الملف الشخصي',
@@ -179,6 +213,8 @@ return [
 
     /*footer */
     'TAQAT - All Rights Reserved' => 'طاقات - جميع الحقوق محفوظة'
+
+
 
 
 ];

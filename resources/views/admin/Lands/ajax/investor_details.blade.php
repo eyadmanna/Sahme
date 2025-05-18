@@ -23,7 +23,7 @@
 </div>
 <div class="fv-row row mb-15">
     <div class="col-md-3 d-flex align-items-center mb-5">
-        <h5 class="mb-0">@lang('admin.Governorate') :</h5>
+        <h5 class="mb-0">@lang('admin.Province') :</h5>
         <label class="ms-2 fs-6 fw-semibold mb-0">{{ $investor->governerate_cd }}</label>
     </div>
 
@@ -33,7 +33,7 @@
     </div>
 
     <div class="col-md-3 d-flex align-items-center mb-5">
-        <h5 class="mb-0">@lang('admin.Area') :</h5>
+        <h5 class="mb-0">@lang('admin.District') :</h5>
         <label class="ms-2 fs-6 fw-semibold mb-0">{{ $investor->district_cd }}</label>
     </div>
 

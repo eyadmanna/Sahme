@@ -144,12 +144,14 @@ class LookupsSeeder extends Seeder
             ],
             [
                 'is_managed' => 1,
+                'parent_id' => 0,
                 'master_key' => 'ownership_type_cd',
                 'name_ar' => 'نوع الملكية',
                 'name_en' => 'Ownership Type',
             ],
             [
                 'is_managed' => 1,
+                'parent_id' => 19,
                 'master_key' => 'ownership_type_cd',
                 'name_ar' => 'طابو',
                 'name_en' => 'Taboo',
@@ -200,7 +202,7 @@ class LookupsSeeder extends Seeder
                 'is_managed' => 0,
                 'master_key' => 'engineering_consultant_evaluation_status_cd',
                 'item_key' => 'pending',
-                'name_ar' => 'بانتظار الاعتماد',
+                'name_ar' => 'بانتظار التقييم',
                 'name_en' => 'Pending',
             ],
             [
@@ -219,21 +221,21 @@ class LookupsSeeder extends Seeder
             ],
             [
                 'is_managed' => 0,
-                'master_key' => 'engineering_consultant_approval_status_cd',
+                'master_key' => 'project_approval_status_cd',
                 'item_key' => 'pending',
                 'name_ar' => 'بانتظار الاعتماد',
                 'name_en' => 'Pending',
             ],
             [
                 'is_managed' => 0,
-                'master_key' => 'engineering_consultant_approval_status_cd',
+                'master_key' => 'project_approval_status_cd',
                 'item_key' => 'approved',
                 'name_ar' => 'معتمد',
                 'name_en' => 'Approved',
             ],
             [
                 'is_managed' => 0,
-                'master_key' => 'engineering_consultant_approval_status_cd',
+                'master_key' => 'project_approval_status_cd',
                 'item_key' => 'rejected',
                 'name_ar' => 'مرفوض',
                 'name_en' => 'Rejected',
@@ -308,11 +310,34 @@ class LookupsSeeder extends Seeder
                 'name_ar' => 'تم اعتماد الترسية',
                 'name_en' => 'Award Decision Approved',
             ],
+            [
+                'is_managed' => 1,
+                'parent_id' => 0,
+                'master_key' => 'land_attachment_types',
+                'name_ar' => 'نوع مرفقات الأرض',
+                'name_en' => 'Land Attachment Types',
+            ],
+            [
+                'is_managed' => 1,
+                'parent_id' => 43,
+                'master_key' => 'land_attachment_types',
+                'item_key' => 'land_creation_attachments',
+                'name_ar' => 'مرفقات إضافة الأرض',
+                'name_en' => 'Land Creation Attachments',
+            ],
+            [
+                'is_managed' => 1,
+                'parent_id' => 43,
+                'master_key' => 'land_attachment_types',
+                'item_key' => 'land_ownership_attachments',
+                'name_ar' => 'مرفقات ملكية الأرض',
+                'name_en' => 'Land Ownership Attachments',
+            ],
 
-            
 
-            
-            
+
+
+
         ];
 
         foreach ($lookups as $lookup) {

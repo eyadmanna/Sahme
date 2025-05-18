@@ -105,7 +105,7 @@
         $('select[name="investor_id"]').trigger('change');
 
 
-        var KTLandsAddland = function () {
+        var KTLandsEditland = function () {
             var form = document.querySelector('#kt_add_land');
             const element = document.getElementById('kt_content_container_land');
             var validator = null;
@@ -167,7 +167,8 @@
                                     submitButton.disabled = false;
 
                                     const formData = new FormData(form);
-                                    const url = `{{ route('lands.store') }}`;
+                                    const land_Id = document.getElementById('land_id').value;
+                                    const url = `{{url("/")}}/lands/update-land/${land_Id}`; // Build the correct URL
 
                                     fetch(url, {
                                         method: 'POST',
@@ -272,7 +273,7 @@
 
 // On document ready
         KTUtil.onDOMContentLoaded(function () {
-            KTLandsAddland.init();
+            KTLandsEditland.init();
             if (typeof $.fn.repeater !== 'function') {
                 console.error('Repeater plugin not initialized!');
                 return;
@@ -286,6 +287,38 @@
                 hide: function (deleteElement) {
                     $(this).slideUp(deleteElement);
                 }
+            });
+        });
+
+        $(document).on('click', '.delete-attachment-btn', function() {
+            let id = $(this).data('id');
+            let $button = $(this); // <<< هنا نخزن الزر في متغير
+
+            Swal.fire({
+                text: "@lang('admin.Are you sure you want to delete the item?')",
+                icon: "warning",
+                confirmButtonText: "@lang('admin.Yes')",
+                customClass: { confirmButton: "btn btn-primary" }
+            }).then(() => {
+                $.ajax({
+                    url: `/attachments/${id}`,
+                    type: 'DELETE',
+                    data: {
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        Swal.fire({
+                            text: "@lang('admin.The item was deleted successfully')",
+                            icon: "success",
+                            buttonsStyling: false,
+                            confirmButtonText: "@lang('OK')",
+                            customClass: {
+                                confirmButton: "btn btn-primary",
+                            }
+                        });
+                        $button.closest('li').remove();
+                    }
+                });
             });
         });
 

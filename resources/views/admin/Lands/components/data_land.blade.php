@@ -41,91 +41,71 @@
     <!--begin::Card - Land Details-->
     <div class="card card-flush mt-5">
         <div class="card-header pt-8">
-            <h3>@lang('admin.Land details')</h3>
+            <h3 style="color: red">@lang('admin.Land details')</h3>
         </div>
         <div class="card-body">
             <div class="row g-4 mb-15">
                 <div class="col-md-3">
-                    <label class="form-label required">@lang('admin.Province')</label>
-                    <select id="province_cd" class="form-select location_province" data-control="select2" name="province_cd">
-                        <option value="" selected>@lang('admin.Select')..</option>
-                        @foreach ($provinces as $val)
-                            <option value="{{ $val->id }}" @if($val->id == $land->province_cd) selected @endif>
-                                {{ $val->{'name_' . app()->getLocale()} }}</option>
-                        @endforeach
-                    </select>
+                    <h2>@lang('admin.Description of the land')</h2>
                 </div>
-                <div class="col-md-3" id="cities_block">
-                    <label class="form-label required">@lang('admin.City')</label>
-                    <select class="form-select location_city" name="city_cd" id="location_cities">
-                        <option value="" selected>@lang('admin.Select')..</option>
-                        @foreach ($city as $val)
-                            <option value="{{ $val->id }}" @if($val->id == $land->city_cd) selected @endif>
-                                {{ $val->{'name_' . app()->getLocale()} }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="col-md-3" id="areas_block">
-                    <label class="form-label">@lang('admin.District')</label>
-                    <select class="form-select" id="location_areas"  name="district_cd">
-                        <option value="" selected>@lang('admin.Select')..</option>
-                        @foreach ($area as $val)
-                            <option value="{{ $val->id }}" @if($val->id == $land->district_cd) selected @endif>
-                                {{ $val->{'name_' . app()->getLocale()} }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <label class="form-label required">@lang('admin.Address in detail')</label>
-                    <textarea class="form-control" rows="3" name="address" placeholder="@lang('admin.Enter detailed address')">
-                                    {{$land->address}}
-                                </textarea>
+                <div class="col-md-6">
+                    <input id="land_id" type="hidden" name="land_id" value="{{$land->id}}">
+                    <h5 id="land_description" name="land_description" type="text">{{$land->land_description}}</h5>
                 </div>
             </div>
 
             <div class="row g-4 mb-15">
-                <div class="col-md-3">
-                    <label class="form-label required">@lang('admin.Land area')</label>
-                    <input class="form-control"  value="{{$land->area}}" id="area" name="area" type="number" placeholder="@lang('admin.Enter the area')">
-                </div>
-                <div class="col-md-3">
-                    <label class="form-label">@lang('admin.Plot Number')</label>
-                    <input class="form-control" value="{{$land->plot_number}}" name="plot_number" type="text" placeholder="@lang('admin.Enter the part number')">
-                </div>
-                <div class="col-md-3">
-                    <label class="form-label">@lang('admin.Parcel Number')</label>
-                    <input class="form-control" value="{{$land->parcel_number}}"  name="parcel_number" type="text" placeholder="@lang('admin.Enter the Voucher number')">
-                </div>
-                <div class="col-md-3">
-                    <label class="form-label required">@lang('admin.Type of land ownership')</label>
-                    <select class="form-select" name="ownership_type_cd" data-control="select2" data-placeholder="@lang('admin.Choose the land ownership type')">
-                        <option value="" disabled selected>@lang('admin.Choose the land ownership type')</option>
-                        @foreach($ownership_type as $ownership_types)
-                            <option value="{{$ownership_types->id}}"@if($ownership_types->id == $land->ownership_type_cd) selected @endif>{{$ownership_types->{'name_'.app()->getLocale()} }}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-
-            <div class="row g-4 mb-15">
-                <div class="col-md-4">
-                    <label class="form-label">@lang('admin.Border')</label>
-                    <textarea class="form-control" rows="3" name="borders">
-                                    {{$land->borders}}
-                                </textarea>
-                </div>
-                <div class="col-md-4">
-                    <label class="form-label">@lang('admin.Available services')</label>
-                    <textarea class="form-control" rows="3" name="services">
-                                  {{$land->services}}
-                                </textarea>
-                </div>
-                <div class="col-md-4">
-                    <label class="form-label required">@lang('admin.Asking price')</label>
-                    <div class="d-flex gap-2">
-                        <input type="number" class="form-control" value="{{$land->price}}" name="price" placeholder="@lang('admin.Enter the price')" style="text-align: right; direction: rtl;">
+                    <div class="col-md-3 d-flex">
+                        <h2 class="mb-0 me-5">@lang('admin.Province')</h2>
+                        <h6>{{ getlookup($land->province_cd)->{"name_".app()->getLocale()} ?? '-' }}</h6>
                     </div>
+                    <div class="col-md-3 d-flex">
+                        <h2 class="mb-0 me-5">@lang('admin.City')</h2>
+                        <h6>{{ getlookup($land->city_cd)->{"name_".app()->getLocale()} ?? '-' }}</h6>
+                    </div>
+                    <div class="col-md-3 d-flex">
+                        <h2 class="mb-0 me-5">@lang('admin.District')</h2>
+                        <h6>{{ getlookup($land->district_cd)->{"name_".app()->getLocale()} ?? '-' }}</h6>
+                    </div>
+                    <div class="col-md-3 d-flex">
+                        <h2 class="mb-0 me-5">@lang('admin.Address in detail')</h2>
+                        <h6>{{ $land->address}}</h6>
+                    </div>
+            </div>
+
+            <div class="row g-4 mb-15">
+                <div class="col-md-3 d-flex">
+                    <h2 class="mb-0 me-5">@lang('admin.Land area')</h2>
+                    <h6>{{ $land->area}}</h6>
                 </div>
+                <div class="col-md-3 d-flex">
+                    <h2 class="mb-0 me-5">@lang('admin.Plot Number')</h2>
+                    <h6>{{ $land->parcel_number}}</h6>
+                </div>
+                <div class="col-md-3 d-flex">
+                    <h2 class="mb-0 me-5">@lang('admin.Parcel Number')</h2>
+                    <h6>{{ $land->plot_number}}</h6>
+                </div>
+                <div class="col-md-3 d-flex">
+                    <h2 class="mb-0 me-5">@lang('admin.Type of land ownership')</h2>
+                    <h6>{{ getlookup($land->ownership_type_cd)->{'name_'.app()->getLocale()} ?? '-'}}</h6>
+                </div>
+            </div>
+
+            <div class="row g-4 mb-15">
+                <div class="col-md-3 d-flex">
+                    <h2 class="mb-0 me-5">@lang('admin.Border')</h2>
+                    <h6>{{ $land->borders}}</h6>
+                </div>
+                <div class="col-md-3 d-flex">
+                    <h2 class="mb-0 me-5">@lang('admin.Available services')</h2>
+                    <h6>{{ $land->services}}</h6>
+                </div>
+                <div class="col-md-3 d-flex">
+                    <h2 class="mb-0 me-5">@lang('admin.Asking price')</h2>
+                    <h6>{{ $land->price}}</h6>
+                </div>
+
             </div>
         </div>
     </div>
@@ -134,7 +114,7 @@
     <!--begin::Card - Map-->
     <div class="card card-flush mt-5">
         <div class="card-header pt-8">
-            <h3>@lang('admin.Address on map')</h3>
+            <h3 style="color: red">@lang('admin.Address on map')</h3>
         </div>
         <div class="card-body">
             <div class="row">
@@ -144,14 +124,53 @@
                 <div class="col-md-4 d-flex flex-column justify-content-center gap-3">
                     <div>
                         <label class="form-label fw-bold required">@lang('admin.Latitude')</label>
-                        <input type="text" id="lat" name="lat" class="form-control" placeholder="@lang('admin.Latitude')" value="31.5012">
+                        <input type="text"  id="lat" name="lat" class="form-control" placeholder="@lang('admin.Latitude')" value="{{$land->lat}}">
                     </div>
                     <div>
                         <label class="form-label fw-bold required">@lang('admin.Longitude')</label>
-                        <input type="text" id="long" name="long" class="form-control" placeholder="@lang('admin.Longitude')" value="34.4663">
+                        <input type="text" id="long" name="long" class="form-control" placeholder="@lang('admin.Longitude')" value="{{$land->long}}">
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!--end::Card-->
+
+    <!--begin::Card - Existing Attachments-->
+    <div class="card card-flush mt-5">
+        <div class="card-header pt-8">
+            <h3 style="color: red">@lang('admin.Existing Attachments')</h3>
+        </div>
+        <div class="card-body">
+            @if($attachments->isEmpty())
+                <div class="alert alert-info">
+                    @lang('admin.No attachments found.')
+                </div>
+            @else
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>@lang('admin.File')</th>
+                            <th>@lang('admin.Description')</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($attachments as $attachment)
+                            <tr>
+                                <td>
+                                    <a href="{{ asset('storage/' . $attachment->file_path) }}" target="_blank">
+                                        {{ basename($attachment->file_path) }}
+                                    </a>
+                                </td>
+                                <td>{{ $attachment->file_description ?? '-' }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @endif
+        </div>
+    </div>
+    <!--end::Card-->
+

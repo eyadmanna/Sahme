@@ -1,6 +1,6 @@
 /.phpunit.cache
 /node_modules
-/public
+/public/uploads
 /storage/*.key
 /vendor
 .env
@@ -15,6 +15,6 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
-/assets
+/assets/
 .htaccess
 index.php

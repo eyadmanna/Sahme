@@ -46,7 +46,7 @@
                                 <span class="path1"></span>
                                 <span class="path2"></span>
                             </i>
-                            <input type="text" data-kt-user-table-filter="search" class="form-control form-control-solid w-250px ps-13" placeholder="@lang('admin.Search for land')" />
+                            <input type="text" data-kt-land-table-filter="search" class="form-control form-control-solid w-250px ps-13" placeholder="@lang('admin.Search for land')" />
                         </div>
                         <!--end::Search-->
                     </div>
@@ -56,61 +56,19 @@
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
                             <!--begin::Filter-->
-                            <button type="button" class="btn btn-light-primary me-3" data-bs-toggle="collapse" href="#kt_user_view_details">
+                            <button type="button" class="btn btn-light-primary me-3" data-bs-toggle="collapse" href="#kt_land_view_details">
                                 <i class="ki-duotone ki-filter fs-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                 </i></button>
-                            <!--begin::Menu 1-->
-                            <div class="menu menu-sub menu-sub-dropdown w-300px w-md-325px" data-kt-menu="true">
-                                <!--begin::Header-->
-                                <div class="px-7 py-5">
-                                    <div class="fs-5 text-gray-900 fw-bold">Filter Options</div>
-                                </div>
-                                <!--end::Header-->
-                                <!--begin::Separator-->
-                                <div class="separator border-gray-200"></div>
-                                <!--end::Separator-->
-                                <!--begin::Content-->
-                                <div class="px-7 py-5" data-kt-user-table-filter="form">
-                                    <!--begin::Input group-->
-                                    <div class="mb-10">
-                                        <label class="form-label fs-6 fw-semibold">Role:</label>
-                                        <select class="form-select form-select-solid fw-bold" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-kt-user-table-filter="role" data-hide-search="true">
-                                            <option></option>
-                                            <option value="Administrator">Administrator</option>
-                                            <option value="Analyst">Analyst</option>
-                                            <option value="Developer">Developer</option>
-                                            <option value="Support">Support</option>
-                                            <option value="Trial">Trial</option>
-                                        </select>
-                                    </div>
-                                    <!--end::Input group-->
-                                    <!--begin::Input group-->
-                                    <div class="mb-10">
-                                        <label class="form-label fs-6 fw-semibold">Two Step Verification:</label>
-                                        <select class="form-select form-select-solid fw-bold" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-kt-user-table-filter="two-step" data-hide-search="true">
-                                            <option></option>
-                                            <option value="Enabled">Enabled</option>
-                                        </select>
-                                    </div>
-                                    <!--end::Input group-->
-                                    <!--begin::Actions-->
-                                    <div class="d-flex justify-content-end">
-                                        <button type="reset" class="btn btn-light btn-active-light-primary fw-semibold me-2 px-6" data-kt-menu-dismiss="true" data-kt-user-table-filter="reset">Reset</button>
-                                        <button type="submit" class="btn btn-primary fw-semibold px-6" data-kt-menu-dismiss="true" data-kt-user-table-filter="filter">Apply</button>
-                                    </div>
-                                    <!--end::Actions-->
-                                </div>
-                                <!--end::Content-->
-                            </div>
-                            <!--end::Menu 1-->
                             <!--end::Filter-->
+                            @can('Land create')
                             <!--begin::Add land-->
                             <a href="{{url('/lands/add-land')}}" class="btn btn-primary">
                                     <i class="ki-duotone ki-plus fs-2"></i>@lang('admin.Add land')
                             </a>
                             <!--end::Add land-->
+                            @endcan
                         </div>
                         <!--end::Toolbar-->
                         <!--begin::Group actions-->
@@ -124,6 +82,36 @@
                     <!--end::Card toolbar-->
                 </div>
 
+                <!--end::Card header-->
+                <div id="kt_land_view_details" class="collapse mb-5">
+                    <div class="py-5 px-10">
+                        <form class="kt-form kt-form--label-right form-control" id="filters" method="GET" autocomplete="off">
+
+                            <div class="form-group row">
+                                <div class="col-form-label col-lg-3 col-sm-6">
+                                    <label class="form-control-label">@lang('admin.Province')</label>
+                                    <select id="province_cd" class="form-select location_province" data-control="select2" name="province_cd">
+                                        <option value="" selected>@lang('admin.Select')..</option>
+                                        @foreach ($provinces as $val)
+                                            <option value="{{ $val->id }}">
+                                                {{ $val->{'name_' . app()->getLocale()} }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-form-label col-lg-2 col-sm-6">
+                                    <a href="javascript:void(0)" style="width: 100%" class="btn btn-info search_btn"><i class="la la-search"></i> @lang('admin.Search')</a>
+                                </div>
+                                <div class="col-form-label col-lg-2 col-sm-6">
+                                    <a href="javascript:void(0)" style="width: 100%" class="btn btn-secondary reset_search"><i class="la la-recycle"></i> @lang('admin.Reset')</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!--begin::Card body-->
                 <div class="card-body py-4">
                     <!--begin::Table-->
                     <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_lands">
@@ -132,7 +120,7 @@
                             <th class="text-center min-w-125px">@lang('admin.Investor name')</th>
                             <th class="text-center min-w-125px">@lang('admin.Province')</th>
                             <th class="text-center min-w-125px">@lang('admin.City')</th>
-                            <th class="text-center min-w-125px">@lang('admin.Engineering partner evaluation')</th>
+                            <th class="text-center min-w-125px">@lang('admin.Real estate appraiser evaluation')</th>
                             <th class="text-center min-w-125px">@lang('admin.Evaluation of the legal partner')</th>
                             <th class="text-end min-w-100px">@lang('admin.Actions')</th>
                         </tr>
