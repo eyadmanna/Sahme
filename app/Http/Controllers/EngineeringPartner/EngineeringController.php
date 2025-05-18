@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\EngineeringPartner;
 
 use App\Http\Controllers\Controller;
+use App\Models\Lookups;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
