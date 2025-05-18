@@ -13,10 +13,13 @@ class Lands extends Model
     protected $guarded = []; // للسماح لكل الحقول (مع الانتباه للمخاطر الأمنية)
 
 
-    const STATUS_PENDING = 'pending';
-    const STATUS_APPROVED = 'approved';
-    const STATUS_REJECTED = 'rejected';
+    const VALUATION_STATUS_PENDING = 'pending';
+    const VALUATION_STATUS_APPROVED = 'approved';
+    const VALUATION_STATUS_EDIT_REQUEST = 'edit_request';
 
+    const LEGAL_STATUS_PENDING = 'pending';
+    const LEGAL_STATUS_APPROVED = 'approved';
+    const LEGAL_STATUS_REJECTED = 'rejected';
 
     public function statusLookup()
     {
@@ -38,7 +41,7 @@ class Lands extends Model
         $this->legal_status_cd = $status->id;
         return $this;
     }
-    public function valuationsetStatus(string $statusKey)
+    public function setValuationStatus(string $statusKey)
     {
         $status = Lookups::where('master_key', 'valuation_status_cd')
             ->where('item_key', $statusKey)
@@ -47,18 +50,32 @@ class Lands extends Model
         $this->valuation_status_cd = $status->id;
         return $this;
     }
-    public function markAsPending() { return $this->setStatus(self::STATUS_PENDING); }
-    public function markAsApproved() { return $this->setStatus(self::STATUS_APPROVED); }
-    public function markAsRejected() { return $this->setStatus(self::STATUS_REJECTED); }
 
-    // Status check methods
-    public function isPending(): bool { return $this->getStatusKey() === self::STATUS_PENDING; }
-    public function isApproved(): bool { return $this->getStatusKey() === self::STATUS_APPROVED; }
-    public function isRejected(): bool { return $this->getStatusKey() === self::STATUS_REJECTED; }
+    public function markAsLegalPending() { return $this->setStatus(self::LEGAL_STATUS_PENDING); }
+    public function markAsLegalApproved() { return $this->setStatus(self::LEGAL_STATUS_APPROVED); }
+    public function markAsLegalRejected() { return $this->setStatus(self::LEGAL_STATUS_REJECTED); }
+
+    public function isLegalPending(): bool { return $this->getStatusKey() === self::LEGAL_STATUS_PENDING; }
+    public function isLegalApproved(): bool { return $this->getStatusKey() === self::LEGAL_STATUS_APPROVED; }
+    public function isLegalRejected(): bool { return $this->getStatusKey() === self::LEGAL_STATUS_REJECTED; }
+
+    
+    public function markAsValuationPending() { return $this->setValuationStatus(self::VALUATION_STATUS_PENDING); }
+    public function markAsValuationApproved() { return $this->setValuationStatus(self::VALUATION_STATUS_APPROVED); }
+    public function markAsValuationEditRequest() { return $this->setValuationStatus(self::VALUATION_STATUS_EDIT_REQUEST); }
+
+    public function isValuationPending(): bool { return $this->getValuationStatusKey() === self::VALUATION_STATUS_PENDING; }
+    public function isValuationApproved(): bool { return $this->getValuationStatusKey() === self::VALUATION_STATUS_APPROVED; }
+    public function isValuationEditRequest(): bool { return $this->getValuationStatusKey() === self::VALUATION_STATUS_EDIT_REQUEST; }
 
     public function getStatusKey(): ?string
     {
         return optional($this->statusLookup)->item_key;
+    }
+
+    public function getValuationStatusKey(): ?string
+    {
+        return optional($this->valuationStatusLookup)->item_key;
     }
 
     public function investor()
