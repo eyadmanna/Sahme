@@ -162,7 +162,7 @@
                                                 // Laravel validation errors
                                                 let errorMessages = Object.values(data.errors).flat().join('<br>');
                                                 Swal.fire({
-                                                    html: `<div class="text-start">${errorMessages}</div>`,
+                                                    html: `<div class="text-center">${errorMessages}</div>`,
                                                     icon: "error",
                                                     buttonsStyling: false,
                                                     confirmButtonText: "@lang('admin.OK')",

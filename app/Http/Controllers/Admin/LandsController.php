@@ -385,42 +385,17 @@ class LandsController extends Controller
                              </div>';
                 }
                 if (auth()->user()->can('Legal Accreditation of the Land')) {
-
-                    if ($land->isApproved()) {
-                        $actions .= '<div class="menu-item px-3">
-                                <a href="' . url("/lands/approval-legal-ownership/{$land->id}") . '" class="menu-link px-3 text-blue-700">'
-                            . trans('admin.Legal accreditation is acceptable') . '</a>
-                             </div>';
-                    } elseif ($land->isRejected()) {
-                        $actions .= '<div class="menu-item px-3">
-                                <a href="' . url("/lands/approval-legal-ownership/{$land->id}") . '" class="menu-link px-3 text-danger">'
-                            . trans('admin.Legal accreditation rejected') . '</a>
-                             </div>';
-                    } else {
                         $actions .= '<div class="menu-item px-3">
                                 <a href="' . url("/lands/approval-legal-ownership/{$land->id}") . '" class="menu-link px-3">'
                             . trans('admin.Evaluation of the legal partner') . '</a>
                              </div>';
-                    }
+
                 }
                 if (auth()->user()->can('Real estate appraiser evaluation')) {
-
-                    if ($land->isApproved()) {
-                        $actions .= '<div class="menu-item px-3">
-                                <a href="' . url("/lands/approval-legal-ownership/{$land->id}") . '" class="menu-link px-3 text-blue-700">'
-                            . trans('admin.The valuation has been approved.') . '</a>
-                             </div>';
-                    } elseif ($land->isRejected()) {
-                        $actions .= '<div class="menu-item px-3">
-                                <a href="' . url("/lands/approval-legal-ownership/{$land->id}") . '" class="menu-link px-3 text-danger">'
-                            . trans('admin.Legal accreditation rejected') . '</a>
-                             </div>';
-                    } else {
                         $actions .= '<div class="menu-item px-3">
                                 <a href="' . url("/lands/approval-valuation-ownership/{$land->id}") . '" class="menu-link px-3">'
                             . trans('admin.Real estate appraiser evaluation') . '</a>
                              </div>';
-                    }
                 }
                     $actions .= '<div class="menu-item px-3">
                                 <a href="#" class="menu-link px-3" data-kt-lands-table-filter="delete_row" data-land-id="' . $land->id . '">'

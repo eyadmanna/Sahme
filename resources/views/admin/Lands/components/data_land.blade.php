@@ -7,7 +7,7 @@
             <div class="col-md-4">
                 <div class="d-flex align-items-center gap-2">
                     <!--begin::Input-->
-                    <select id="investor_id" name="investor_id" aria-label="Select a Language" data-control="select2" data-placeholder="@lang('admin.Investor name')" class="form-select mb-2">
+                    <select disabled id="investor_id" name="investor_id" aria-label="Select a Language" data-control="select2" data-placeholder="@lang('admin.Investor name')" class="form-select mb-2">
                         <option></option>
                         @foreach($investors as $investor)
                             <option value="{{$investor->id}}" @if($investor->id == $land->investor_id) selected @endif>{{$investor->full_name}}</option>
