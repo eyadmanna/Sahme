@@ -28,7 +28,9 @@
                                 <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" 
                                     data-bs-toggle="tab" 
                                     href="#kt_header_navs_tab_1"
-                                    aria-selected="{{ request()->routeIs('dashboard') ? 'true' : 'false' }}"> <i class="la la-home fs-2"></i></a>
+                                    aria-selected="{{ request()->routeIs('dashboard') ? 'true' : 'false' }}"> 
+                                    <i class="la la-home" style="font-size: 18px;"></i>
+                                </a>
                             </li>
                             @can('Land Section View')
                             <li class="nav-item">
@@ -511,7 +513,7 @@
                         <!--begin::Wrapper-->
                         <div class="d-flex flex-column flex-lg-row flex-lg-stack flex-wrap gap-2 px-4 px-lg-0">
                             <div class="d-flex flex-column flex-lg-row gap-2">
-                                <a class="btn btn-sm btn-light-primary" href="{{route('dashboard')}}">@lang('admin.Dashboard')</a>
+                                <a class="btn btn-sm btn-light-primary" href="{{route('dashboard')}}">@lang('admin.Home')</a>
                             </div>
                         </div>
                         <!--end::Wrapper-->
