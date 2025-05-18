@@ -200,9 +200,15 @@
                 trigger: new FormValidation.plugins.Trigger(),
                 bootstrap5: new FormValidation.plugins.Bootstrap5({
                     rowSelector: '.fv-row',
-                    eleInvalidClass: '',
-                    eleValidClass: ''
-                })
+                    eleInvalidClass: 'is-invalid',  // ✅ Border أحمر
+                    eleValidClass: 'is-valid',       // ✅ Border أخضر
+                    // ✅ لإظهار الأيقونات
+                    formClass: 'fv-plugins-bootstrap5',
+                    messageClass: 'fv-help-block',
+                    invalidFormClass: 'fv-plugins-bootstrap5-invalid',
+                    validFormClass: 'fv-plugins-bootstrap5-valid'
+                }),
+
             }
         });
         // تفعيل Select2 وربطها بالفاليديشن
@@ -273,4 +279,177 @@
         });
     });
 </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form_password = document.getElementById('kt_signin_change_password');
+        const saveButton_password = document.getElementById('kt_password_submit');
+        const data_url_password = '{{ route('engineering.profile.update-password') }}';
+
+        const formValidation = FormValidation.formValidation(form_password, {
+            fields: {
+                'currentpassword': {
+                    validators: {
+                        notEmpty: {
+                            message: '{{ __("engineering.current_password_required") }}'
+                        }
+                    }
+                },
+                'newpassword': {
+                    validators: {
+                        notEmpty: {
+                            message: '{{ __("engineering.new_password_required") }}'
+                        },
+                        stringLength: {
+                            min: 8,
+                            message: '{{ __("engineering.password_min_length") }}'
+                        }
+                    }
+                },
+                'confirmpassword': {
+                    validators: {
+                        notEmpty: {
+                            message: '{{ __("engineering.confirm_password_required") }}'
+                        },
+                        identical: {
+                            compare: function () {
+                                return form_password.querySelector('[name="newpassword"]').value;
+                            },
+                            message: '{{ __("engineering.passwords_do_not_match") }}'
+                        }
+                    }
+                }
+            },
+            plugins: {
+                trigger: new FormValidation.plugins.Trigger(),
+                bootstrap5: new FormValidation.plugins.Bootstrap5({
+                    rowSelector: '.fv-row',
+                    eleInvalidClass: 'is-invalid',
+                    eleValidClass: 'is-valid'
+                }),
+            }
+        });
+
+        saveButton_password.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            formValidation.validate().then(function (status) {
+                if (status === 'Valid') {
+                    const formData = new FormData(form_password);
+
+                    saveButton_password.disabled = true;
+                    saveButton_password.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> {{ __("engineering.saving") }}`;
+
+                    $.ajax({
+                        url: data_url_password,
+                        method: 'POST',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function (data) {
+                            saveButton_password.disabled = false;
+                            saveButton_password.textContent = '{{ __("engineering.Update Password") }}';
+
+                            // ✅ إزالة الأخطاء السابقة
+                            form_password.querySelectorAll('.is-invalid').forEach(function (el) {
+                                el.classList.remove('is-invalid');
+                            });
+                            form_password.querySelectorAll('.invalid-feedback').forEach(function (el) {
+                                el.remove();
+                            });
+
+                            toastr.success(data.message || '{{ __("engineering.password_updated_successfully") }}');
+                            form_password.reset();
+                            formValidation.resetForm();
+                        },
+
+                        error: function (xhr) {
+                            saveButton_password.disabled = false;
+                            saveButton_password.textContent = '{{ __("engineering.Update Password") }}';
+
+                            const errors = xhr.responseJSON?.errors || {};
+                            if (xhr.status === 422 && Object.keys(errors).length > 0) {
+                                Object.keys(errors).forEach(function (field) {
+                                    let input = form_password.querySelector(`[name="${field}"]`);
+                                    if (input) {
+                                        input.classList.add('is-invalid');
+                                        let feedback = input.nextElementSibling;
+                                        if (!feedback || !feedback.classList.contains('invalid-feedback')) {
+                                            feedback = document.createElement('div');
+                                            feedback.classList.add('invalid-feedback');
+                                            input.parentNode.insertBefore(feedback, input.nextSibling);
+                                        }
+                                        feedback.textContent = errors[field][0];
+                                    }
+                                });
+
+                                toastr.error(Object.values(errors)[0][0]);
+                            } else if (xhr.responseJSON?.message) {
+                                toastr.error(xhr.responseJSON.message);
+
+                                const inputCurrent = form_password.querySelector('[name="currentpassword"]');
+                                if (inputCurrent) {
+                                    inputCurrent.classList.add('is-invalid');
+                                    let feedback = inputCurrent.nextElementSibling;
+                                    if (!feedback || !feedback.classList.contains('invalid-feedback')) {
+                                        feedback = document.createElement('div');
+                                        feedback.classList.add('invalid-feedback');
+                                        inputCurrent.parentNode.insertBefore(feedback, inputCurrent.nextSibling);
+                                    }
+                                    feedback.textContent = xhr.responseJSON.message;
+                                }
+                            } else {
+                                toastr.error('{{ __("engineering.unexpected_error_occurred") }}');
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    });
+</script>
+
+
+<script !src="">
+    "use strict";
+
+    var KTChangePassword = function () {
+        var passwordForm;
+        var passwordMainEl;
+        var passwordEditEl;
+        var passwordChange;
+        var passwordCancel;
+
+        var toggleChangePassword = function () {
+            passwordMainEl.classList.toggle('d-none');
+            passwordChange.classList.toggle('d-none');
+            passwordEditEl.classList.toggle('d-none');
+        }
+
+
+        return {
+            init: function () {
+                passwordForm = document.getElementById('kt_signin_change_password');
+                passwordMainEl = document.getElementById('kt_signin_password');
+                passwordEditEl = document.getElementById('kt_signin_password_edit');
+                passwordChange = document.getElementById('kt_signin_password_button');
+                passwordCancel = document.getElementById('kt_password_cancel');
+
+                if (!passwordForm || !passwordChange || !passwordCancel) return;
+
+                passwordChange.querySelector('button').addEventListener('click', toggleChangePassword);
+                passwordCancel.addEventListener('click', toggleChangePassword);
+
+            }
+        }
+    }();
+
+    KTUtil.onDOMContentLoaded(function () {
+        KTChangePassword.init();
+    });
+
+</script>
+
 

@@ -22,6 +22,7 @@ Route::prefix('engineering')->name('engineering.')->group(function () {
         Route::get('profile', [EngineeringController::class, 'profile'])->name('profile');
         Route::get('profile/settings', [EngineeringController::class, 'profile_settings'])->name('profile.settings');
         Route::post('profile/update', [EngineeringController::class, 'update_profile_settings'])->name('profile.update');
+        Route::post('profile/update-password', [EngineeringController::class, 'update_password'])->name('profile.update-password');
         Route::post('logout', [LoginController::class, 'logout'])->name('logout');
     });
 });
