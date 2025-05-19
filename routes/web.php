@@ -79,6 +79,13 @@ Route::group(
 
         Route::get('/engineering_partners/list', [EngineeringController::class, 'index'])->name('engineering_partners.index');
         Route::get('/engineering_partners/get_engineering_partners', [EngineeringController::class, 'get_engineering_partners'])->name('get_engineering_partners');
+        Route::get('/engineering_partners/create', [EngineeringController::class, 'create'])->name('engineering_partners.create');
+        Route::post('/engineering_partners/store', [EngineeringController::class, 'store'])->name('engineering_partners.store');
+        Route::get('/engineering_partners/profile/{id}', [EngineeringController::class, 'profile'])->name('engineering_partners.profile');
+        Route::get('/engineering_partners/profile/settings/{id}', [EngineeringController::class, 'profile_settings'])->name('engineering_partners.settings');
+        Route::post('/engineering_partners/profile/update_settings/{id}', [EngineeringController::class, 'update_settings'])->name('engineering_partners.update_settings');
+        Route::post('/engineering_partners/profile/update-password', [EngineeringController::class, 'update_password'])->name('engineering_partners.profile.update-password');
+
 
     });
 
