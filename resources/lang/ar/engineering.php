@@ -123,6 +123,8 @@ return [
     'Verify Mobile Heading' => 'رسالة نصية: تحقق من رقم هاتفك المحمول',
     'Verify Mobile Notice' => 'أدخل رقم هاتفك المحمول مع رمز الدولة وسنرسل إليك رمز التحقق عند الطلب.',
     'Mobile Placeholder' => 'رقم الهاتف المحمول مع رمز الدولة...',
+    'engineering_partner_management' => 'ادارة الشركاء الهندسيين ',
+    'add_engineering_partner' => 'إضافة شريك هندسي',
 
 
 
