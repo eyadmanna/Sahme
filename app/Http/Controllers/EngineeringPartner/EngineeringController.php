@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Lookups;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class EngineeringController extends Controller
 {
@@ -112,6 +113,40 @@ class EngineeringController extends Controller
             ], 500);
         }
     }
+
+
+    public function update_password(Request $request)
+    {
+        $request->validate([
+            'currentpassword' => ['required'],
+            'newpassword' => ['required', 'string', 'min:8'],
+            'confirmpassword' => ['required', 'same:newpassword'],
+        ], [
+            'currentpassword.required' => __('engineering.current_password_required'),
+            'newpassword.required' => __('engineering.new_password_required'),
+            'newpassword.min' => __('engineering.password_min_length'),
+            'confirmpassword.required' => __('engineering.confirm_password_required'),
+            'confirmpassword.same' => __('engineering.passwords_do_not_match'),
+        ]);
+
+        $user = Auth::user();
+
+        if (!Hash::check($request->currentpassword, $user->password)) {
+            return response()->json([
+                'success' => false,
+                'message' => __('engineering.current_password_incorrect'),
+            ], 422);
+        }
+
+        $user->password = Hash::make($request->newpassword);
+        $user->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => __('engineering.password_updated_successfully'),
+        ]);
+    }
+
 
 
 
