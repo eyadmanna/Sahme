@@ -95,8 +95,8 @@
                         <div class="row g-4 mb-15">
                             <div class="col-md-3">
                                 <label class="form-label required">@lang('admin.Province')</label>
-                                <select id="province_cd" class="form-select location_province" data-control="select2" name="province_cd">
-                                    <option value="" selected>@lang('admin.Select')..</option>
+                                <select id="province_cd" class="form-select location_province" data-control="select2" name="province_cd" data-placeholder="@lang('engineering.select_province')">
+                                    <option value="" selected>@lang('lang.Select')..</option>
                                     @foreach ($provinces as $val)
                                         <option value="{{ $val->id }}" @if($val->id == $land->province_cd) selected @endif>
                                             {{ $val->{'name_' . app()->getLocale()} }}</option>
@@ -105,8 +105,8 @@
                             </div>
                             <div class="col-md-3" id="cities_block">
                                 <label class="form-label required">@lang('admin.City')</label>
-                                <select class="form-select location_city" name="city_cd" id="location_cities">
-                                    <option value="" selected>@lang('admin.Select')..</option>
+                                <select class="form-select location_city" name="city_cd" id="location_cities" data-control="select2" data-placeholder="@lang('engineering.select_city')">
+                                    <option value="" selected>@lang('lang.Select')..</option>
                                     @foreach ($city as $val)
                                         <option value="{{ $val->id }}" @if($val->id == $land->city_cd) selected @endif>
                                             {{ $val->{'name_' . app()->getLocale()} }}</option>
@@ -115,8 +115,8 @@
                             </div>
                             <div class="col-md-3" id="areas_block">
                                 <label class="form-label">@lang('admin.District')</label>
-                                <select class="form-select" id="location_areas"  name="district_cd">
-                                    <option value="" selected>@lang('admin.Select')..</option>
+                                <select class="form-select" id="location_areas"  name="district_cd" data-control="select2" data-placeholder="@lang('engineering.select_district')">
+                                    <option value="" selected>@lang('lang.Select')..</option>
                                     @foreach ($area as $val)
                                         <option value="{{ $val->id }}" @if($val->id == $land->district_cd) selected @endif>
                                             {{ $val->{'name_' . app()->getLocale()} }}</option>

@@ -7,7 +7,7 @@
             <div class="col-md-4">
                 <div class="d-flex align-items-center gap-2">
                     <!--begin::Input-->
-                    <select id="investor_id" name="investor_id" aria-label="Select a Language" data-control="select2" data-placeholder="@lang('admin.Investor name')" class="form-select mb-2">
+                    <select disabled id="investor_id" name="investor_id" aria-label="Select a Language" data-control="select2" data-placeholder="@lang('admin.Investor name')" class="form-select mb-2">
                         <option></option>
                         @foreach($investors as $investor)
                             <option value="{{$investor->id}}" @if($investor->id == $land->investor_id) selected @endif>{{$investor->full_name}}</option>
@@ -46,64 +46,64 @@
         <div class="card-body">
             <div class="row g-4 mb-15">
                 <div class="col-md-3">
-                    <h2>@lang('admin.Description of the land')</h2>
+                    <h6>@lang('admin.Description of the land'):</h6>
                 </div>
                 <div class="col-md-6">
                     <input id="land_id" type="hidden" name="land_id" value="{{$land->id}}">
-                    <h5 id="land_description" name="land_description" type="text">{{$land->land_description}}</h5>
+                    <span id="land_description" name="land_description" type="text">{{$land->land_description}}</span>
                 </div>
             </div>
 
             <div class="row g-4 mb-15">
                     <div class="col-md-3 d-flex">
-                        <h2 class="mb-0 me-5">@lang('admin.Province')</h2>
-                        <h6>{{ getlookup($land->province_cd)->{"name_".app()->getLocale()} ?? '-' }}</h6>
+                        <h6 class="mb-0 me-5">@lang('admin.Province'):</h6>
+                        <span>{{ getlookup($land->province_cd)->{"name_".app()->getLocale()} ?? '-' }}</span>
                     </div>
                     <div class="col-md-3 d-flex">
-                        <h2 class="mb-0 me-5">@lang('admin.City')</h2>
-                        <h6>{{ getlookup($land->city_cd)->{"name_".app()->getLocale()} ?? '-' }}</h6>
+                        <h6 class="mb-0 me-5">@lang('admin.City'):</h6>
+                        <span>{{ getlookup($land->city_cd)->{"name_".app()->getLocale()} ?? '-' }}</span>
                     </div>
                     <div class="col-md-3 d-flex">
-                        <h2 class="mb-0 me-5">@lang('admin.District')</h2>
-                        <h6>{{ getlookup($land->district_cd)->{"name_".app()->getLocale()} ?? '-' }}</h6>
+                        <h6 class="mb-0 me-5">@lang('admin.District'):</h6>
+                        <span>{{ getlookup($land->district_cd)->{"name_".app()->getLocale()} ?? '-' }}</span>
                     </div>
                     <div class="col-md-3 d-flex">
-                        <h2 class="mb-0 me-5">@lang('admin.Address in detail')</h2>
-                        <h6>{{ $land->address}}</h6>
+                        <h6 class="mb-0 me-5">@lang('admin.Address in detail'):</h6>
+                        <span>{{ $land->address}}</span>
                     </div>
             </div>
 
             <div class="row g-4 mb-15">
                 <div class="col-md-3 d-flex">
-                    <h2 class="mb-0 me-5">@lang('admin.Land area')</h2>
-                    <h6>{{ $land->area}}</h6>
+                    <h6 class="mb-0 me-5">@lang('admin.Land area'):</h6>
+                    <span>{{ $land->area}}</span>
                 </div>
                 <div class="col-md-3 d-flex">
-                    <h2 class="mb-0 me-5">@lang('admin.Plot Number')</h2>
-                    <h6>{{ $land->parcel_number}}</h6>
+                    <h6 class="mb-0 me-5">@lang('admin.Plot Number'):</h6>
+                    <span>{{ $land->parcel_number}}</span>
                 </div>
                 <div class="col-md-3 d-flex">
-                    <h2 class="mb-0 me-5">@lang('admin.Parcel Number')</h2>
-                    <h6>{{ $land->plot_number}}</h6>
+                    <h6 class="mb-0 me-5">@lang('admin.Parcel Number'):</h6>
+                    <span>{{ $land->plot_number}}</span>
                 </div>
                 <div class="col-md-3 d-flex">
-                    <h2 class="mb-0 me-5">@lang('admin.Type of land ownership')</h2>
-                    <h6>{{ getlookup($land->ownership_type_cd)->{'name_'.app()->getLocale()} ?? '-'}}</h6>
+                    <h6 class="mb-0 me-5">@lang('admin.Type of land ownership'):</h6>
+                    <span>{{ getlookup($land->ownership_type_cd)->{'name_'.app()->getLocale()} ?? '-'}}</span>
                 </div>
             </div>
 
             <div class="row g-4 mb-15">
                 <div class="col-md-3 d-flex">
-                    <h2 class="mb-0 me-5">@lang('admin.Border')</h2>
-                    <h6>{{ $land->borders}}</h6>
+                    <h6 class="mb-0 me-5">@lang('admin.Border'):</h6>
+                    <span>{{ $land->borders}}</span>
                 </div>
                 <div class="col-md-3 d-flex">
-                    <h2 class="mb-0 me-5">@lang('admin.Available services')</h2>
-                    <h6>{{ $land->services}}</h6>
+                    <h6 class="mb-0 me-5">@lang('admin.Available services'):</h6>
+                    <span>{{ $land->services}}</span>
                 </div>
                 <div class="col-md-3 d-flex">
-                    <h2 class="mb-0 me-5">@lang('admin.Asking price')</h2>
-                    <h6>{{ $land->price}}</h6>
+                    <h6 class="mb-0 me-5">@lang('admin.Asking price'):</h6>
+                    <span>{{ $land->price}} $</span>
                 </div>
 
             </div>

@@ -86,7 +86,7 @@ class LandsController extends Controller
             $land->price = $request->price;
             $land->lat = $request->lat;
             $land->long = $request->long;
-            $land->valuationsetStatus('pending');
+            $land->setValuationStatus('pending');
             $land->setStatus('pending');
             $land->save();
             foreach ($request->kt_docs_repeater_basic as $item) {
@@ -302,9 +302,9 @@ class LandsController extends Controller
         if ($request->isMethod('post')){
             $data['land']->valuator_id = auth()->user()->id;
             if ($request->input('action') == 'approved') {
-                $data['land']->valuationsetStatus('approved');
+                $data['land']->setValuationStatus('approved');
             } else {
-                $data['land']->valuationsetStatus('edit_request');
+                $data['land']->setValuationStatus('edit_request');
                 $data['land']->valuation_price = $request->valuation_price;
                 $data['land']->valuation_notes = $request->valuation_notes;
             }
@@ -359,11 +359,11 @@ class LandsController extends Controller
                 return getlookup($land->city_cd)?->{'name_' . app()->getLocale()} ?? '-';
             })
             ->addColumn('valuation_status_cd', function ($land) {
-                return '<span class="text-center badge-light-primary">'.($land->valuationstatusLookup?->{'name_' . app()->getLocale()} ?? '-').'</span>';
+                return '<span class="badge badge-light-' . $land->valuationstatusLookup?->extra_1 . '"> <i class="la la-' . $land->valuationstatusLookup?->extra_2 . ' text-' . $land->valuationstatusLookup?->extra_1 . '"></i> '.($land->valuationstatusLookup?->{'name_' . app()->getLocale()} ?? '-').'</span>';
 
             })
             ->addColumn('legal_status_cd', function ($land) {
-                return '<span class="text-center badge-light-primary">'.($land->statusLookup?->{'name_' . app()->getLocale()} ?? '-').'</span>';
+                return '<span class="badge badge-light-' . $land->statusLookup?->extra_1 . '"> <i class="la la-' . $land->statusLookup?->extra_2 . ' text-' . $land->statusLookup?->extra_1 . '"></i> '.($land->statusLookup?->{'name_' . app()->getLocale()} ?? '-').'</span>';
             })
             ->addColumn('actions', function ($land) {
                 $actions = '<div class="text-end">
@@ -385,43 +385,25 @@ class LandsController extends Controller
                              </div>';
                 }
                 if (auth()->user()->can('Legal Accreditation of the Land')) {
-
-                    if ($land->isApproved()) {
-                        $actions .= '<div class="menu-item px-3">
-                                <a href="' . url("/lands/approval-legal-ownership/{$land->id}") . '" class="menu-link px-3 text-blue-700">'
-                            . trans('admin.Legal accreditation is acceptable') . '</a>
-                             </div>';
-                    } elseif ($land->isRejected()) {
-                        $actions .= '<div class="menu-item px-3">
-                                <a href="' . url("/lands/approval-legal-ownership/{$land->id}") . '" class="menu-link px-3 text-danger">'
-                            . trans('admin.Legal accreditation rejected') . '</a>
-                             </div>';
-                    } else {
                         $actions .= '<div class="menu-item px-3">
                                 <a href="' . url("/lands/approval-legal-ownership/{$land->id}") . '" class="menu-link px-3">'
                             . trans('admin.Evaluation of the legal partner') . '</a>
                              </div>';
-                    }
+
                 }
                 if (auth()->user()->can('Real estate appraiser evaluation')) {
-
-                    if ($land->isApproved()) {
-                        $actions .= '<div class="menu-item px-3">
-                                <a href="' . url("/lands/approval-legal-ownership/{$land->id}") . '" class="menu-link px-3 text-blue-700">'
-                            . trans('admin.The valuation has been approved.') . '</a>
-                             </div>';
-                    } elseif ($land->isRejected()) {
-                        $actions .= '<div class="menu-item px-3">
-                                <a href="' . url("/lands/approval-legal-ownership/{$land->id}") . '" class="menu-link px-3 text-danger">'
-                            . trans('admin.Legal accreditation rejected') . '</a>
-                             </div>';
-                    } else {
                         $actions .= '<div class="menu-item px-3">
                                 <a href="' . url("/lands/approval-valuation-ownership/{$land->id}") . '" class="menu-link px-3">'
                             . trans('admin.Real estate appraiser evaluation') . '</a>
                              </div>';
-                    }
                 }
+
+                if($land->isLegalApproved() && $land->isValuationApproved()) {
+                    $actions .= '<div class="menu-item px-3">
+                                <a href="#" class="menu-link px-3">إنشاء مشروع</a>
+                             </div>';
+                }
+
                     $actions .= '<div class="menu-item px-3">
                                 <a href="#" class="menu-link px-3" data-kt-lands-table-filter="delete_row" data-land-id="' . $land->id . '">'
                         . trans('admin.Delete') . '</a>

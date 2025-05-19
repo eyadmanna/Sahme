@@ -76,6 +76,9 @@ Route::group(
         Route::post('/lands/upload-legal-attachment/{id}', [LandsController::class, 'upload_legal_attachment'])->name('lands.upload_legal_attachment');
         Route::post('/lands/delete-attachment', [LandsController::class, 'delete_attachment'])->name('lands.delete_attachment');
 
+        Route::post('/projects/add-project', [LandsController::class, 'add'])->name('projects.add');
+
+
 
         Route::get('/engineering_partners/list', [EngineeringController::class, 'index'])->name('engineering_partners.index');
         Route::get('/engineering_partners/get_engineering_partners', [EngineeringController::class, 'get_engineering_partners'])->name('get_engineering_partners');
