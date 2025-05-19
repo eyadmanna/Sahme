@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AttachmentController;
 use App\Http\Controllers\Admin\LandsController;
+use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\TwoFactorController;
 use App\Http\Controllers\ProfileController;
@@ -75,7 +76,10 @@ Route::group(
         Route::post('/lands/upload-legal-attachment/{id}', [LandsController::class, 'upload_legal_attachment'])->name('lands.upload_legal_attachment');
         Route::post('/lands/delete-attachment', [LandsController::class, 'delete_attachment'])->name('lands.delete_attachment');
 
-        Route::post('/projects/add-project', [LandsController::class, 'add'])->name('projects.add');
+        Route::get('/projects/list', [ProjectController::class, 'index'])->name('projects.index');
+        Route::get('/projects/add-project/{land_id?}', [ProjectController::class, 'add'])->name('projects.add');
+        Route::post('/projects/store-details', [ProjectController::class, 'store'])->name('projects.store');
+        Route::get('/land/land-details', [LandsController::class, 'getLandDetails'])->name('land.getLandDetails');
 
 
 

@@ -184,8 +184,22 @@ return [
     'Are you sure you want to send a price change request?' => 'هل انت متاكد من ارسال طلب تعديل السعر',
     'Price change request sent successfully' => 'تم ارسال طلب تغيير السعر بنجاح',
     'Price must be numeric' => 'يجب أن يكون السعر رقميًا',
+    'Error loading data.' => 'حدث خطأ أثناء تحميل البيانات.',
 
 
+    /*Projects*/
+    'Projects'=>'المشاريع',
+    'Project data'=>'بيانات المشروع',
+    'Investor data' => 'بيانات المستثمر',
+    'Add a new project'=>'إضافة مشروع جديد',
+    'Project name'=>'اسم المشروع',
+    'Project description'=>'وصف المشروع',
+    'Project type'=>'نوع المشروع',
+    'Project space'=>'مساحة المشروع',
+    'Project cost'=>'تكلفة المشروع',
+    'Enter The project cost'=>'أضف تكلفة المشروع',
+    'Engineering bid opening date'=>'أضف تكلفة المشروع',
+    'Closing date for engineering bids'=>'أضف تكلفة المشروع',
     /*profile page*/
     'Profile Details' => 'تفاصيل الملف الشخصي',
     'Phone number must be active' => 'يجب أن يكون رقم الهاتف نشطًا',

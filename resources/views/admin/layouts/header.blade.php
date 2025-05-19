@@ -25,10 +25,10 @@
                         <!--begin::Header tabs-->
                         <ul class="nav flex-nowrap text-nowrap">
                             <li class="nav-item">
-                                <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" 
-                                    data-bs-toggle="tab" 
+                                <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}"
+                                    data-bs-toggle="tab"
                                     href="#kt_header_navs_tab_1"
-                                    aria-selected="{{ request()->routeIs('dashboard') ? 'true' : 'false' }}"> 
+                                    aria-selected="{{ request()->routeIs('dashboard') ? 'true' : 'false' }}">
                                     <i class="la la-home" style="font-size: 18px;"></i>
                                 </a>
                             </li>
@@ -43,7 +43,10 @@
                             @endcan
                             @can('Projects Section View')
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#kt_header_navs_tab_3"> المشاريع</a>
+                                <a class="nav-link {{ request()->routeIs('projects.add') ? 'active' : '' }}"
+                                data-bs-toggle="tab"
+                                aria-selected="{{ request()->routeIs('projects.add') ? 'true' : 'false' }}"
+                                href="#kt_header_navs_tab_3"> المشاريع</a>
                             </li>
                             @endcan
                             <li class="nav-item">
@@ -508,7 +511,7 @@
                 <!--begin::Header tab content-->
                 <div class="tab-content" data-kt-scroll="true" data-kt-scroll-activate="{default: true, lg: false}" data-kt-scroll-height="auto" data-kt-scroll-offset="70px">
                     <!--begin::Tab panel-->
-                    
+
                     <div class="tab-pane fade {{ request()->routeIs('dashboard') ? 'show active' : '' }}" id="kt_header_navs_tab_1">
                         <!--begin::Wrapper-->
                         <div class="d-flex flex-column flex-lg-row flex-lg-stack flex-wrap gap-2 px-4 px-lg-0">
@@ -533,11 +536,11 @@
                     @endcan()
                     <!--end::Tab panel-->
                     <!--begin::Tab panel-->
-                    <div class="tab-pane fade" id="kt_header_navs_tab_3">
+                    <div class="tab-pane fade {{ request()->routeIs('projects.index','projects.add') ? 'show active' : '' }}"  id="kt_header_navs_tab_3">
                         <!--begin::Wrapper-->
                         <div class="d-flex flex-column flex-lg-row flex-lg-stack flex-wrap gap-2 px-4 px-lg-0">
                             <div class="d-flex flex-column flex-lg-row gap-2">
-                                <a class="btn btn-sm btn-light-primary" href="documentation/base/forms/controls.html">إضافة مشروع جديد</a>
+                                <a class="btn btn-sm btn-light-primary" href="{{route('projects.add')}}">@lang('admin.Add a new project')</a>
                                 <a class="btn btn-sm btn-light-success" href="documentation/base/forms/advanced.html">عرض المشاريع</a>
                                 <a class="btn btn-sm btn-light-danger" href="documentation/base/forms/floating-labels.html"> تقييم المشاريع</a>
                             </div>

@@ -353,7 +353,7 @@
                                     submitButton.disabled = false;
                                     const formData = new FormData(form); // Handles file uploads too
                                     const roleId = role_id.value; // Get role_id from the hidden input
-                                    const url = `/update-roles/${roleId}`; // Build the correct URL
+                                    const url = `{{url("/")}}/update-roles/${roleId}`; // Build the correct URL
 
                                     fetch(url, {
                                         method: 'POST',
@@ -503,7 +503,7 @@
             let roleId = $(this).data('role-id');
 
             $.ajax({
-                url: `/edit-roles/${roleId}`,
+                url: `{{url("/")}}/edit-roles/${roleId}`,
                 method: 'GET',
                 success: function (response) {
                     // Fill in the role name

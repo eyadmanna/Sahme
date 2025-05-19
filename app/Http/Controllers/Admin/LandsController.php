@@ -400,7 +400,7 @@ class LandsController extends Controller
 
                 if($land->isLegalApproved() && $land->isValuationApproved()) {
                     $actions .= '<div class="menu-item px-3">
-                                <a href="#" class="menu-link px-3">إنشاء مشروع</a>
+                                <a href="' . route('projects.add', ['land_id' => $land->id])  . '" class="menu-link px-3">إنشاء مشروع</a>
                              </div>';
                 }
 
@@ -416,5 +416,13 @@ class LandsController extends Controller
             })
             ->rawColumns(['investor_name','province_cd','city_cd','valuation_status_cd','legal_status_cd', 'actions'])
             ->make(true);
+    }
+
+    public function getLandDetails(Request $request){
+        $land = Lands::find($request->id);
+        if (!$land) {
+            return response()->json('Investor not found', 404);
+        }
+        return view('admin.Projects.ajax.land_details', compact('land'))->render();
     }
 }
