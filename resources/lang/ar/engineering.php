@@ -36,6 +36,7 @@ return [
     'Commercial registration is required' => 'التسجيل التجاري مطلوب',
     'Licence is required' => 'الرخصة مطلوبة',
     'Tax record is required' => 'السجل الضريبي مطلوب',
+    'Logo is required' => 'الشعار مطلوب',
     'Previous projects is required' => 'المشاريع السابقة مطلوبة',
     'The password is required' => 'كلمة المرور مطلوبة',
     'Please enter a valid password' => 'يرجى إدخال كلمة مرور صالحة',
@@ -119,10 +120,13 @@ return [
     'Manual Entry Notice' => 'إذا واجهت مشكلة في استخدام رمز QR، اختر الإدخال اليدوي في التطبيق، وادخل اسم المستخدم والرمز التالي:',
     'Enter Authentication Code' => 'أدخل رمز المصادقة',
      'Submit' => 'إرسال',
+     'Search' => 'بحث',
     'Please wait...' => 'يرجى الانتظار...',
     'Verify Mobile Heading' => 'رسالة نصية: تحقق من رقم هاتفك المحمول',
     'Verify Mobile Notice' => 'أدخل رقم هاتفك المحمول مع رمز الدولة وسنرسل إليك رمز التحقق عند الطلب.',
     'Mobile Placeholder' => 'رقم الهاتف المحمول مع رمز الدولة...',
+    'engineering_partner_management' => 'ادارة الشركاء الهندسيين ',
+    'add_engineering_partner' => 'إضافة شريك هندسي',
 
 
 
