@@ -150,6 +150,7 @@
     <!--end::Container-->
 @endsection
 @section('js')
+    @include("admin.Lands.Partial.general_land_js")
     @include("admin.Lands.Partial.approval_valuation_ownership")
 
 @endsection

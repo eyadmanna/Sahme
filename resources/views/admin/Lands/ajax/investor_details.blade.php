@@ -1,47 +1,43 @@
 <div class="fv-row row mb-15">
-    <div class="col-md-3 d-flex align-items-center mb-5">
-        <h5 class="mb-0">@lang('admin.Mobile number') :</h5>
-        <label class="ms-2 fs-6 fw-semibold mb-0">{{ $investor->phone }}</label>
+    <div class="col-md-3 mb-5">
+        <label class="form-label d-block">@lang('admin.Mobile number')</label>
+        <div class="text-muted">{{ $investor->phone }}</div>
     </div>
 
-    <div class="col-md-3 d-flex align-items-center mb-5">
-        <h5 class="mb-0">@lang('admin.Email') :</h5>
-        <label class="ms-2 fs-6 fw-semibold mb-0">{{ $investor->email }}</label>
+    <div class="col-md-3 mb-5">
+        <label class="form-label d-block">@lang('admin.Email')</label>
+        <div class="text-muted">{{ $investor->email }}</div>
     </div>
 
-    <div class="col-md-3 d-flex align-items-center mb-5">
-        <h5 class="mb-0">@lang('admin.The condition') :</h5>
-        <label class="ms-2 fs-6 fw-semibold mb-0">{{ getlookup($investor->status_cd)->{"name_".app()->getLocale()} ?? '-' }}</label>
+    <div class="col-md-3 mb-5">
+        <label class="form-label d-block">@lang('admin.The condition')</label>
+        <div class="text-muted">{{ getlookup($investor->status_cd)->{"name_".app()->getLocale()} ?? '-' }}</div>
     </div>
 
-    <div class="col-md-3 d-flex align-items-center mb-5">
-        <h5 class="mb-0">@lang('admin.Registration Date') :</h5>
-        <label class="ms-2 fs-6 fw-semibold mb-0">
-            {{ $investor->created_at ? $investor->created_at->format('Y-m-d') : '' }}
-        </label>
+    <div class="col-md-3 mb-5">
+        <label class="form-label d-block">@lang('admin.Registration Date')</label>
+        <div class="text-muted">{{ $investor->created_at ? $investor->created_at->format('Y-m-d') : '' }}</div>
     </div>
 </div>
+
 <div class="fv-row row mb-15">
-    <div class="col-md-3 d-flex align-items-center mb-5">
-        <h5 class="mb-0">@lang('admin.Province') :</h5>
-        <label class="ms-2 fs-6 fw-semibold mb-0">{{ getlookup($investor->province_cd)->{"name_".app()->getLocale()} ?? '-' }}</label>
+    <div class="col-md-3 mb-5">
+        <label class="form-label d-block">@lang('admin.Province')</label>
+        <div class="text-muted">{{ getlookup($investor->province_cd)->{"name_".app()->getLocale()} ?? '-' }}</div>
     </div>
 
-    <div class="col-md-3 d-flex align-items-center mb-5">
-        <h5 class="mb-0">@lang('admin.City') :</h5>
-        <label class="ms-2 fs-6 fw-semibold mb-0">{{ getlookup($investor->city_cd)->{"name_".app()->getLocale()} ?? '-' }}</label>
+    <div class="col-md-3 mb-5">
+        <label class="form-label d-block">@lang('admin.City')</label>
+        <div class="text-muted">{{ getlookup($investor->city_cd)->{"name_".app()->getLocale()} ?? '-' }}</div>
     </div>
 
-    <div class="col-md-3 d-flex align-items-center mb-5">
-        <h5 class="mb-0">@lang('admin.District') :</h5>
-        <label class="ms-2 fs-6 fw-semibold mb-0">{{ getlookup($investor->district_cd)->{"name_".app()->getLocale()} ?? '-' }}</label>
+    <div class="col-md-3 mb-5">
+        <label class="form-label d-block">@lang('admin.District')</label>
+        <div class="text-muted">{{ getlookup($investor->district_cd)->{"name_".app()->getLocale()} ?? '-' }}</div>
     </div>
 
-    <div class="col-md-3 d-flex align-items-center mb-5">
-        <h5 class="mb-0">@lang('admin.Address in detail') :</h5>
-        <label class="ms-2 fs-6 fw-semibold mb-0">
-            {{ $investor->address }}
-        </label>
+    <div class="col-md-3 mb-5">
+        <label class="form-label d-block">@lang('admin.Address in detail')</label>
+        <div class="text-muted">{{ $investor->address }}</div>
     </div>
 </div>
-

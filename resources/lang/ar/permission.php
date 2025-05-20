@@ -13,6 +13,8 @@ return [
     'Land create' => 'إضافة أرض',
     'Land edit' => 'تعديل أرض',
     'Projects view' => 'عرض مشروع',
+    'Projects edit' => 'تعديل مشروع',
+    'Engineering Consultant Evaluation' => 'تقييم الإستشاري الهندسي',
     'Projects create' => 'أضافة مشروع',
     'Land Section View' => 'عرض قسم الأرض',
     'Projects Section View' => 'عرض قسم المشاريع',
