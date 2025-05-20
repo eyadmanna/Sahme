@@ -418,6 +418,36 @@ class LookupsSeeder extends Seeder
                 'extra_2' => 'times-circle',
             ],
 
+            
+            [
+                'is_managed' => 1,
+                'parent_id' => 0,
+                'master_key' => 'project_type_cd',
+                'name_ar' => 'نوع المشروع',
+                'name_en' => 'Project Type',
+            ],
+            [
+                'is_managed' => 1,
+                'parent_id' => 50,
+                'master_key' => 'project_type_cd',
+                'name_ar' => 'عمارة سكنية',
+                'name_en' => 'عمارة سكنية',
+            ],
+            [
+                'is_managed' => 1,
+                'parent_id' => 50,
+                'master_key' => 'project_type_cd',
+                'name_ar' => 'عمارة تجارية',
+                'name_en' => 'عمارة تجارية',
+            ],
+            [
+                'is_managed' => 1,
+                'parent_id' => 50,
+                'master_key' => 'project_type_cd',
+                'name_ar' => 'برج',
+                'name_en' => 'برج',
+            ],
+
 
 
 

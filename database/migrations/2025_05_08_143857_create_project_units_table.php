@@ -11,9 +11,10 @@ class CreateProjectUnitsTable extends Migration
         Schema::create('project_units', function (Blueprint $table) {
             $table->id();
             $table->foreignId('project_id')->constrained('projects')->onUpdate('cascade')->onDelete('cascade');
-            $table->integer('unit_type_cd');
-            $table->decimal('area', 10, 2);
-            $table->integer('floor');
+            $table->integer('parent_id')->comment('0: item is Floor, else: item is unit related to floor in parent_id');
+            $table->integer('description')->nullable();
+            $table->integer('unit_type_cd')->nullable();
+            $table->decimal('area', 10, 2)->nullable();
             $table->integer('rooms')->nullable();
             $table->integer('bathrooms')->nullable();
             $table->text('finishing_details')->nullable();
