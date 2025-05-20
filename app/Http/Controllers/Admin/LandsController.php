@@ -386,21 +386,21 @@ class LandsController extends Controller
                 }
                 if (auth()->user()->can('Legal Accreditation of the Land')) {
                         $actions .= '<div class="menu-item px-3">
-                                <a href="' . url("/lands/approval-legal-ownership/{$land->id}") . '" class="menu-link px-3">'
+                                <a href="' . url("/lands/approval-legal-ownership/{$land->id}") . '" class="menu-link px-3 text-start">'
                             . trans('admin.Evaluation of the legal partner') . '</a>
                              </div>';
 
                 }
                 if (auth()->user()->can('Real estate appraiser evaluation')) {
                         $actions .= '<div class="menu-item px-3">
-                                <a href="' . url("/lands/approval-valuation-ownership/{$land->id}") . '" class="menu-link px-3">'
+                                <a href="' . url("/lands/approval-valuation-ownership/{$land->id}") . '" class="menu-link px-3 text-start">'
                             . trans('admin.Real estate appraiser evaluation') . '</a>
                              </div>';
                 }
 
                 if($land->isLegalApproved() && $land->isValuationApproved()) {
                     $actions .= '<div class="menu-item px-3">
-                                <a href="#" class="menu-link px-3">إنشاء مشروع</a>
+                                <a href="' . route('projects.add', ['land_id' => $land->id])  . '" class="menu-link px-3 text-start">إنشاء مشروع</a>
                              </div>';
                 }
 
@@ -416,5 +416,13 @@ class LandsController extends Controller
             })
             ->rawColumns(['investor_name','province_cd','city_cd','valuation_status_cd','legal_status_cd', 'actions'])
             ->make(true);
+    }
+
+    public function getLandDetails(Request $request){
+        $land = Lands::find($request->id);
+        if (!$land) {
+            return response()->json('Investor not found', 404);
+        }
+        return view('admin.Projects.ajax.land_details', compact('land'))->render();
     }
 }

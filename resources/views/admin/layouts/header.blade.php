@@ -34,7 +34,7 @@
                             </li>
                             @can('Land Section View')
                             <li class="nav-item">
-                                <a class="nav-link {{ request()->routeIs('lands.index') ? 'active' : '' }}"
+                                <a class="nav-link {{ request()->routeIs('lands*') ? 'active' : '' }}"
                                    data-bs-toggle="tab"
                                    href="#kt_header_navs_tab_2"
                                    aria-selected="{{ request()->routeIs('lands.index') ? 'true' : 'false' }}"
@@ -43,7 +43,10 @@
                             @endcan
                             @can('Projects Section View')
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#kt_header_navs_tab_3"> المشاريع</a>
+                                <a class="nav-link {{ request()->routeIs('projects*') ? 'active' : '' }}"
+                                data-bs-toggle="tab"
+                                aria-selected="{{ request()->routeIs('projects*') ? 'true' : 'false' }}"
+                                href="#kt_header_navs_tab_3"> المشاريع</a>
                             </li>
                             @endcan
                             <li class="nav-item">
@@ -418,7 +421,7 @@
                         <!--begin::Name-->
                         <div class="d-none d-md-flex flex-column align-items-end justify-content-center me-2 me-md-4">
                             <span class="text-white opacity-75 fs-8 fw-semibold lh-1 mb-1">{{auth()->user()->name}}</span>
-                            <span class="text-white fs-8 lh-1">UX Designer</span>
+                            <span class="text-white fs-8 lh-1">{{auth()->user()->getRoleNames()->join(', ')}}</span>
                         </div>
                         <!--end::Name-->
                         <!--begin::Symbol-->
@@ -519,7 +522,7 @@
                         <!--end::Wrapper-->
                     </div>
                     @can('Land Section View')
-                    <div class="tab-pane fade {{ request()->routeIs('lands.index','lands.add') ? 'show active' : '' }}" id="kt_header_navs_tab_2">
+                    <div class="tab-pane fade {{ request()->routeIs('lands*') ? 'show active' : '' }}" id="kt_header_navs_tab_2">
                         <!--begin::Wrapper-->
                         <div class="d-flex flex-column flex-lg-row flex-lg-stack flex-wrap gap-2 px-4 px-lg-0">
                             <div class="d-flex flex-column flex-lg-row gap-2">
@@ -533,12 +536,12 @@
                     @endcan()
                     <!--end::Tab panel-->
                     <!--begin::Tab panel-->
-                    <div class="tab-pane fade" id="kt_header_navs_tab_3">
+                    <div class="tab-pane fade {{ request()->routeIs('projects*') ? 'show active' : '' }}"  id="kt_header_navs_tab_3">
                         <!--begin::Wrapper-->
                         <div class="d-flex flex-column flex-lg-row flex-lg-stack flex-wrap gap-2 px-4 px-lg-0">
                             <div class="d-flex flex-column flex-lg-row gap-2">
-                                <a class="btn btn-sm btn-light-primary" href="documentation/base/forms/controls.html">إضافة مشروع جديد</a>
-                                <a class="btn btn-sm btn-light-success" href="documentation/base/forms/advanced.html">عرض المشاريع</a>
+                                <a class="btn btn-sm btn-light-primary" href="{{route('projects.add')}}">@lang('admin.Add a new project')</a>
+                                <a class="btn btn-sm btn-light-success" href="{{route('projects.index')}}">@lang('admin.Projects View')</a>
                                 <a class="btn btn-sm btn-light-danger" href="documentation/base/forms/floating-labels.html"> تقييم المشاريع</a>
                             </div>
                         </div>

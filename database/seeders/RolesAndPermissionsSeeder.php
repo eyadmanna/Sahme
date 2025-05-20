@@ -32,7 +32,9 @@ class RolesAndPermissionsSeeder extends Seeder
             'Projects management' => [
                 'Projects Section View',
                 'Projects view',
+                'Projects edit',
                 'Projects create',
+                'Engineering Consultant Evaluation',
             ],
             'Engineering Partner Management' => [
                 'Engineering Section View'
