@@ -34,8 +34,6 @@
     <div id="kt_content_container_project" class="d-flex flex-column-fluid align-items-start container-xxl">
         <!--begin::Post-->
         <div class="content flex-row-fluid" id="kt_content">
-            <form method="post" action="{{ route('projects.store') }}" class="form" id="kt_add_project">
-                @csrf
                 <!--begin::Card - Land Info-->
                 <div class="card card-flush">
                     <!--begin::Card header-->
@@ -55,7 +53,6 @@
                         <!--begin::Col-->
                         <div class="col-md-6 fv-row">
                             <div class="d-flex align-items-center gap-2">
-                                <label class="required form-label">@lang('admin.Choose the land')</label>
                                 <!--begin::Input-->
                                 <select id="land_id" disabled name="land_id" aria-label="Select a Language" data-control="select2" data-placeholder="@lang('admin.Land details')" class="form-select mb-2">
                                     <option  data-lat="{{$land->lat}}"
@@ -179,12 +176,34 @@
                                 <input disabled type="date" name="offers_end_date" class="form-control text-start" value="{{$project->offers_end_date}}">
                             </div>
                         </div>
+                        <form method="post" action="{{ route('projects.store') }}" class="form mt-15" id="kt_add_project">
+                            @csrf
+                        <div class="row g-4">
+                            <div class="col-md-3">
+                                <h4>@lang('admin.Project evaluation')</h4>
+                            </div>
+                            <div class="col-md-9 text-end">
+                                <button type="button" class="btn btn-light me-3 text-start"  data-kt-lands-legal-action="cancel" style="margin-inline-start: inherit">@lang('admin.Discard')</button>
+                                <button data-land-id="{{ $land->id }}" type="submit" name="action" value="approved" class="btn btn-primary" data-kt-valuation-approval-action="submit">
+                                    <span class="indicator-label">@lang('admin.No modification required')</span>
+                                    <span class="indicator-progress">@lang('admin.Please wait...')
+                                                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                </button>
+                                <button data-land-id="{{ $land->id }}" type="submit" name="action" value="approved" class="btn btn-danger ms-4" data-kt-valuation-approval-action="submit">
+                                    <span class="indicator-label">@lang('admin.Modification required')</span>
+                                    <span class="indicator-progress">@lang('admin.Please wait...')
+                                                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                </button>
+
+                            </div>
+                        </div>
+                        </form>
+
                         <!--end::Form-->
                     </div>
                     <!--end::Card body-->
                 </div>
                 <!--end::Card-->
-            </form>
 
         </div>
         <!--end::Post-->

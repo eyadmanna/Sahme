@@ -211,6 +211,9 @@ return [
     'Engineering Builder Approval Status'=>'حالة الموافقة على مُنشئ الهندسة',
     'Project evaluation by engineering consultant'=>'تقييم المشروع من خلال الاستشاري الهندسي',
     'Engineering Consultant Evaluation'=>'تقييم الاستشاري الهندسي',
+    'Project evaluation'=>'تقييم المشروع',
+    'No modification required'=>'لا يحتاج لتعديل',
+    'Modification required'=>' يحتاج لتعديل',
 
     /*profile page*/
     'Profile Details' => 'تفاصيل الملف الشخصي',

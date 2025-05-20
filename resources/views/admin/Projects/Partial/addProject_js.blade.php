@@ -9,6 +9,7 @@
     }
 
     $(document).ready(function () {
+        $(".kt_datepicker").flatpickr();
         // Initialize select2
         $('select[name="land_id"]').select2();
 
