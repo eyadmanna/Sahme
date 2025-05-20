@@ -105,6 +105,7 @@
                     form,
                     {
                         fields: {
+                            land_id: { validators: { notEmpty: { message: '{{ __("admin.This field is required") }}' } } },
                             title: { validators: { notEmpty: { message: '{{ __("admin.This field is required") }}' } } },
                             project_type_cd: { validators: { notEmpty: { message: '{{ __("admin.This field is required") }}' } } },
                             area: { validators: { notEmpty: { message: '{{ __("admin.This field is required") }}' } } },

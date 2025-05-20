@@ -40,11 +40,25 @@
                 <div class="card card-flush">
                     <!--begin::Card header-->
                     <div class="card-header pt-8">
-                        <!--begin::Col-->
                         <div class="col-md-4">
                             <div class="d-flex align-items-center gap-2">
                                 <!--begin::Input-->
+                                <h3>@lang('admin.Land details')</h3>
+                                <!--end::Input-->
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--end::Card header-->
+                    <!--begin::Card body-->
+                    <div class="card-body">
+                        <!--begin::Col-->
+                        <div class="col-md-6 fv-row">
+                            <div class="d-flex align-items-center gap-2">
+                                <label class="required form-label">@lang('admin.Choose the land')</label>
+                                <!--begin::Input-->
                                 <select id="land_id" name="land_id" aria-label="Select a Language" data-control="select2" data-placeholder="@lang('admin.Land details')" class="form-select mb-2">
+                                    <option></option>
                                     @foreach($lands as $land)
                                         <option  data-lat="{{$land->lat}}"
                                                  data-long="{{$land->long}}" data-investor_id="{{$land->investor_id}}" value="{{$land->id}}" @if($land->id == $land_id) selected @endif>
@@ -62,13 +76,9 @@
                             </div>
                         </div>
                         <!--end::Col-->
-                    </div>
-                    <!--end::Card header-->
-                    <!--begin::Card body-->
-                    <div class="card-body">
                         <!--begin::Form-->
                         <!-- Investor details will be loaded here -->
-                        <div id="land_details" style="display: none;">
+                        <div class="mt-10" id="land_details" style="display: none;">
                             <!-- content will be injected here by AJAX -->
                         </div>
 

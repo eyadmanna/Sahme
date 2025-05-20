@@ -189,6 +189,7 @@ return [
 
     /*Projects*/
     'Projects'=>'المشاريع',
+    'Projects View'=>'عرض المشاريع',
     'Project data'=>'بيانات المشروع',
     'Investor data' => 'بيانات المستثمر',
     'Add a new project'=>'إضافة مشروع جديد',
@@ -198,8 +199,12 @@ return [
     'Project space'=>'مساحة المشروع',
     'Project cost'=>'تكلفة المشروع',
     'Enter The project cost'=>'أضف تكلفة المشروع',
-    'Engineering bid opening date'=>'أضف تكلفة المشروع',
-    'Closing date for engineering bids'=>'أضف تكلفة المشروع',
+    'Engineering bid opening date'=>'تاريخ فتح التقديم للعطاءات الهندسية',
+    'Closing date for engineering bids'=>'آخر موعد لتقديم العطاءات الهندسية',
+    'Choose the land' => 'اختر الأرض',
+    'Land Location Map'=>'خريطة موقع الأرض',
+    'Search for a project'=>'بحث عن مشروع',
+
     /*profile page*/
     'Profile Details' => 'تفاصيل الملف الشخصي',
     'Phone number must be active' => 'يجب أن يكون رقم الهاتف نشطًا',
