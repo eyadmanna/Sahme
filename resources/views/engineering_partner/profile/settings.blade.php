@@ -334,6 +334,19 @@
                             <div class="row fv-row mb-6">
                                 <!--begin::Label-->
                                 <label class="col-lg-2 col-form-label fw-semibold fs-6">
+                                    <span class="required">@lang('engineering.tax_number')</span>
+
+                                </label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row">
+                                    <input type="text" name="tax_number" class="form-control form-control-lg form-control-solid" placeholder="@lang('engineering.tax_number')" value="{{$user->tax_number}}" />
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <div class="row fv-row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-2 col-form-label fw-semibold fs-6">
                                     <span class="required">@lang('engineering.commercial_registration_number')</span>
 
                                 </label>
@@ -360,7 +373,7 @@
                             <div class="row fv-row mb-6">
                                 <!--begin::Label-->
                                 <label class="col-lg-2 col-form-label fw-semibold fs-6">
-                                    <span class="required">@lang('engineering.company_profile')</span>
+                                    <span class=" ">@lang('engineering.company_profile')</span>
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
@@ -369,7 +382,7 @@
                                 </div>
                                 <!--end::Col-->
                                 <label class="col-lg-2 col-form-label fw-semibold fs-6">
-                                    <span class="required">@lang('engineering.commercial_registration')</span>
+                                    <span class=" ">@lang('engineering.commercial_registration')</span>
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
@@ -382,7 +395,7 @@
                             <div class="row fv-row mb-6">
 
                                 <label class="col-lg-2 col-form-label fw-semibold fs-6">
-                                    <span class="required">@lang('engineering.liecence')</span>
+                                    <span class=" ">@lang('engineering.liecence')</span>
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
@@ -391,7 +404,7 @@
                                 </div>
                                 <!--end::Col-->
                                 <label class="col-lg-2 col-form-label fw-semibold fs-6">
-                                    <span class="required">@lang('engineering.tax_record')</span>
+                                    <span class=" ">@lang('engineering.tax_record')</span>
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
@@ -405,7 +418,7 @@
 
 
                                 <label class="col-lg-2 col-form-label fw-semibold fs-6">
-                                    <span class="required">@lang('engineering.previous_projects')</span>
+                                    <span class=" ">@lang('engineering.previous_projects')</span>
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Col-->

@@ -68,7 +68,17 @@ class EngineeringController extends Controller
                 return '<span>'.$user->mobile.'</span>';
             })
 
+            ->addColumn('status_cd', function ($user) {
+                $locale = app()->getLocale();
+                $status = $user->statusLookup?->{'name_' . $locale} ?? '-';
+                $extra_1 = $user->statusLookup?->extra_1; // اللون
+                $extra_2 = $user->statusLookup?->extra_2; // اسم الأيقونة (مثل ki-check)
 
+                return '<span class="badge badge-' . $extra_1 . ' fw-bold d-inline-flex align-items-center gap-1">'
+                    . ($extra_2 ? '<i class="ki-duotone ' . e($extra_2) . ' fs-5"></i>' : '')
+                    . $status .
+                    '</span>';
+            })
 
             ->addColumn('created_at', function ($user) {
                 $date = $user->created_at ? $user->created_at->format('Y-m-d') : '-';
@@ -103,7 +113,7 @@ class EngineeringController extends Controller
 
                 return $actions;
             })
-            ->rawColumns(['company_name','mobile','created_at','actions'])
+            ->rawColumns(['company_name','status_cd','mobile','created_at','actions'])
             ->make(true);
     }
 
@@ -320,6 +330,42 @@ class EngineeringController extends Controller
             'message' => __('engineering.password_updated_successfully'),
         ]);
     }
+    public function accredit($id)
+    {
+        $user = EngineeringPartner::findOrFail($id);
+
+        try {
+            $user->markAsApproved()->save();
+
+            return response()->json([
+                'success' => true,
+                'message' => __('engineering.accreditation_success')
+            ]);
+        } catch (\Exception $e) {
+            \Log::error($e);
+            return response()->json([
+                'success' => false,
+                'message' => __('engineering.error_occurred')
+            ], 500);
+        }
+    }
+    public function reject(Request $request, $id)
+    {
+        $request->validate([
+            'reason' => 'required|string|max:1000',
+        ]);
+
+        $partner = EngineeringPartner::findOrFail($id);
+        $partner->markAsRejected();
+        $partner->rejection_reason = $request->reason;
+        $partner->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => __('engineering.rejection_success')
+        ]);
+    }
+
 
 
 

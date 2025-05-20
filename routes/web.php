@@ -88,6 +88,9 @@ Route::group(
         Route::get('/engineering_partners/profile/settings/{id}', [EngineeringController::class, 'profile_settings'])->name('engineering_partners.settings');
         Route::post('/engineering_partners/profile/update_settings/{id}', [EngineeringController::class, 'update_settings'])->name('engineering_partners.update_settings');
         Route::post('/engineering_partners/profile/update-password', [EngineeringController::class, 'update_password'])->name('engineering_partners.profile.update-password');
+        Route::post('/engineering_partners/accredit/{id}', [EngineeringController::class, 'accredit'])->name('engineering_partners.accredit');
+        Route::post('engineering-partners/{id}/reject', [EngineeringController::class, 'reject'])->name('engineering_partners.reject');
+
 
 
     });

@@ -174,6 +174,13 @@
                         }
                     }
                 },
+                'tax_number': {
+                    validators: {
+                        notEmpty: {
+                            message: '{{ __("engineering.tax_number_required") }}'
+                        }
+                    }
+                },
                 'commercial_registration_number': {
                     validators: {
                         notEmpty: {
