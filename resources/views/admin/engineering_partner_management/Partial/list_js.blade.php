@@ -15,6 +15,7 @@
             columns: [
                 { data: 'company_name', name: 'company_name' }, // 👈 This matches the column
                 { data: 'mobile', name: 'mobile' },
+                { data: 'status_cd', name: 'status_cd' },
                  { data: 'created_at', name: 'created_at' },
                 { data: 'actions', name: 'actions', orderable: false, searchable: false }
             ],

@@ -199,7 +199,27 @@
                         <!--begin::Action-->
                         <a href="{{route('engineering_partners.settings',$user->id)}}" class="btn btn-sm btn-primary align-self-center">@lang('engineering.Edit Profile')</a>
                         <!--end::Action-->
-{{--                    @endif--}}
+                    @if($user->isPending())
+                        <div id="action-section"  class="my-auto">
+                            <a id="accreditation" href="javascript:void(0)" class="btn btn-sm btn-success">
+                                <i class="ki-duotone ki-check fs-2">
+                                </i>
+                                @lang('engineering.accreditation')
+                            </a>
+
+                            <a id="rejection" href="javascript:void(0)" class="btn btn-sm btn-danger">
+                                <i class="ki-duotone ki-minus-circle fs-2">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                </i>
+                                @lang('engineering.rejection')
+                            </a>
+                        </div>
+                    @endif
+
+
+
+                    {{--                    @endif--}}
 
                 </div>
                 <!--begin::Card header-->
@@ -444,6 +464,91 @@
                 window.open(url, '_blank');
             }
         }
+    </script>
+
+@endsection
+@section('js')
+    <script>
+        $(document).on('click', '#accreditation', function () {
+
+            Swal.fire({
+                title: '{{ __("engineering.confirm_title") }}',
+                text: '{{ __("engineering.confirm_text") }}',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: '{{ __("engineering.confirm_button") }}',
+                cancelButtonText: '{{ __("engineering.cancel_button") }}'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '{{ route('engineering_partners.accredit', $user->id) }}',
+                        type: 'POST',
+                        data: {
+                            _token: $('meta[name="csrf-token"]').attr('content'),
+                        },
+                        success: function (response) {
+                            if (response.success) {
+                                Swal.fire('{{ __("engineering.success_title") }}', '{{ __("engineering.success_text") }}', 'success');
+
+                                 $('#action-section').fadeOut();
+                            } else {
+                                Swal.fire('{{ __("engineering.error_title") }}', response.message ?? '{{ __("engineering.error_text") }}', 'error');
+                            }
+                        },
+                        error: function () {
+                            Swal.fire('{{ __("engineering.error_title") }}', '{{ __("engineering.error_text") }}', 'error');
+                        }
+                    });
+                }
+            });
+
+        });
+    </script>
+    <script>
+        $(document).on('click', '#rejection', function () {
+            Swal.fire({
+                title: '{{ __("engineering.confirm_title") }}',
+                text: '{{ __("engineering.reject_confirm_text") }}',
+                icon: 'warning',
+                input: 'textarea',
+                inputLabel: '{{ __("engineering.rejection_reason_label") }}',
+                inputPlaceholder: '{{ __("engineering.rejection_reason_placeholder") }}',
+                inputAttributes: {
+                    'aria-label': 'Rejection reason'
+                },
+                showCancelButton: true,
+                confirmButtonText: '{{ __("engineering.reject_button") }}',
+                cancelButtonText: '{{ __("engineering.cancel_button") }}',
+                preConfirm: (reason) => {
+                    if (!reason) {
+                        Swal.showValidationMessage('{{ __("engineering.rejection_reason_required") }}');
+                    }
+                    return reason;
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '{{ route('engineering_partners.reject', $user->id) }}',
+                        type: 'POST',
+                        data: {
+                            _token: $('meta[name="csrf-token"]').attr('content'),
+                            reason: result.value
+                        },
+                        success: function (response) {
+                            if (response.success) {
+                                Swal.fire('{{ __("engineering.success_title") }}', response.message, 'success');
+                                $('#action-section').fadeOut();
+                            } else {
+                                Swal.fire('{{ __("engineering.error_title") }}', response.message, 'error');
+                            }
+                        },
+                        error: function () {
+                            Swal.fire('{{ __("engineering.error_title") }}', '{{ __("engineering.error_text") }}', 'error');
+                        }
+                    });
+                }
+            });
+        });
     </script>
 
 @endsection
