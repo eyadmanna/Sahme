@@ -386,21 +386,21 @@ class LandsController extends Controller
                 }
                 if (auth()->user()->can('Legal Accreditation of the Land')) {
                         $actions .= '<div class="menu-item px-3">
-                                <a href="' . url("/lands/approval-legal-ownership/{$land->id}") . '" class="menu-link px-3">'
+                                <a href="' . url("/lands/approval-legal-ownership/{$land->id}") . '" class="menu-link px-3 text-start">'
                             . trans('admin.Evaluation of the legal partner') . '</a>
                              </div>';
 
                 }
                 if (auth()->user()->can('Real estate appraiser evaluation')) {
                         $actions .= '<div class="menu-item px-3">
-                                <a href="' . url("/lands/approval-valuation-ownership/{$land->id}") . '" class="menu-link px-3">'
+                                <a href="' . url("/lands/approval-valuation-ownership/{$land->id}") . '" class="menu-link px-3 text-start">'
                             . trans('admin.Real estate appraiser evaluation') . '</a>
                              </div>';
                 }
 
                 if($land->isLegalApproved() && $land->isValuationApproved()) {
                     $actions .= '<div class="menu-item px-3">
-                                <a href="' . route('projects.add', ['land_id' => $land->id])  . '" class="menu-link px-3">إنشاء مشروع</a>
+                                <a href="' . route('projects.add', ['land_id' => $land->id])  . '" class="menu-link px-3 text-start">إنشاء مشروع</a>
                              </div>';
                 }
 

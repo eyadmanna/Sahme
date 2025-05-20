@@ -9,6 +9,7 @@
     }
 
     $(document).ready(function () {
+        $(".kt_datepicker").flatpickr();
         // Initialize select2
         $('select[name="land_id"]').select2();
 
@@ -147,7 +148,8 @@
                                     submitButton.disabled = false;
 
                                     const formData = new FormData(form);
-                                    const url = `{{ route('projects.store') }}`;
+                                    const project_Id = document.getElementById('project_id').value;
+                                    const url = `{{url("/")}}/projects/update-project/${project_Id}`; // Build the correct URL
 
                                     fetch(url, {
                                         method: 'POST',

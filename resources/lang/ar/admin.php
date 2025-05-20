@@ -190,6 +190,7 @@ return [
     /*Projects*/
     'Projects'=>'المشاريع',
     'Projects View'=>'عرض المشاريع',
+    'Project View'=>'عرض المشروع',
     'Project data'=>'بيانات المشروع',
     'Investor data' => 'بيانات المستثمر',
     'Add a new project'=>'إضافة مشروع جديد',
@@ -204,6 +205,12 @@ return [
     'Choose the land' => 'اختر الأرض',
     'Land Location Map'=>'خريطة موقع الأرض',
     'Search for a project'=>'بحث عن مشروع',
+    'Project status'=>'حالة المشروع',
+    'Engineering consultant evaluation status'=>'حالة تقييم الاستشاري الهندسي',
+    'Engineering Consultant Evaluation Approval Status'=>'حالة الموافقة على تقييم الاستشاري الهندسي',
+    'Engineering Builder Approval Status'=>'حالة الموافقة على مُنشئ الهندسة',
+    'Project evaluation by engineering consultant'=>'تقييم المشروع من خلال الاستشاري الهندسي',
+    'Engineering Consultant Evaluation'=>'تقييم الاستشاري الهندسي',
 
     /*profile page*/
     'Profile Details' => 'تفاصيل الملف الشخصي',

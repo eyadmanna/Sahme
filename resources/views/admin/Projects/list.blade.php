@@ -46,7 +46,7 @@
                                 <span class="path1"></span>
                                 <span class="path2"></span>
                             </i>
-                            <input type="text" data-kt-land-table-filter="search" class="form-control form-control-solid w-250px ps-13" placeholder="@lang('admin.Search for a project')" />
+                            <input type="text" data-kt-project-table-filter="search" class="form-control form-control-solid w-250px ps-13" placeholder="@lang('admin.Search for a project')" />
                         </div>
                         <!--end::Search-->
                     </div>
@@ -71,13 +71,6 @@
                             @endcan
                         </div>
                         <!--end::Toolbar-->
-                        <!--begin::Group actions-->
-                        <div class="d-flex justify-content-end align-items-center d-none" data-kt-user-table-toolbar="selected">
-                            <div class="fw-bold me-5">
-                                <span class="me-2" data-kt-user-table-select="selected_count"></span>Selected</div>
-                            <button type="button" class="btn btn-danger" data-kt-user-table-select="delete_selected">Delete Selected</button>
-                        </div>
-                        <!--end::Group actions-->
                     </div>
                     <!--end::Card toolbar-->
                 </div>
@@ -89,12 +82,11 @@
 
                             <div class="form-group row">
                                 <div class="col-form-label col-lg-3 col-sm-6">
-                                    <label class="form-control-label">@lang('admin.Province')</label>
-                                    <select id="province_cd" class="form-select location_province" data-control="select2" name="province_cd">
+                                    <label class="form-control-label">@lang('admin.Project type')</label>
+                                    <select id="project_type_cd" class="form-select" data-control="select2" name="project_type_cd">
                                         <option value="" selected>@lang('admin.Select')..</option>
-                                        @foreach ($provinces as $val)
-                                            <option value="{{ $val->id }}">
-                                                {{ $val->{'name_' . app()->getLocale()} }}</option>
+                                        @foreach(get_is_managed_lookupby_master_key('project_type_cd') as $val)
+                                            <option value="{{$val->id}}">{{$val->{'name_' . app()->getLocale()} }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -119,8 +111,10 @@
                         <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
                             <th class="text-center min-w-125px">@lang('admin.Project name')</th>
                             <th class="text-center min-w-125px">@lang('admin.Project type')</th>
-                            <th class="text-center min-w-125px">@lang('admin.Project space')</th>
-                            <th class="text-center min-w-125px">@lang('admin.Project cost')</th>
+                            <th class="text-center min-w-125px">@lang('admin.Project status')</th>
+                            <th class="text-center min-w-125px">@lang('admin.Engineering consultant evaluation status')</th>
+                            <th class="text-center min-w-125px">@lang('admin.Engineering Consultant Evaluation Approval Status')</th>
+                            <th class="text-center min-w-125px">@lang('admin.Engineering Builder Approval Status')</th>
                             <th class="text-center min-w-125px">@lang('admin.Engineering bid opening date')</th>
                             <th class="text-center min-w-125px">@lang('admin.Closing date for engineering bids')</th>
                             <th class="text-end min-w-100px">@lang('admin.Actions')</th>

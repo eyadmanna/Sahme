@@ -62,6 +62,7 @@ class UsersController extends Controller
             $user->mobile_number = $request->mobile_number;
             $user->avatar = $filename;
             $user->password = $plainPassword;
+
             if (isset($request->send_login_data)){
                 \Mail::to($user->email)->send(new SendLoginData($user, $plainPassword));
             }
