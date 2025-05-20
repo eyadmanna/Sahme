@@ -50,7 +50,9 @@
                             </li>
                             @endcan
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#kt_header_navs_tab_4">  الشركاء الهندسيين والمقاولين</a>
+                                <a class="nav-link {{ request()->routeIs('engineering_partners.*') ? 'active' : '' }}" 
+                                data-bs-toggle="tab" 
+                                href="#kt_header_navs_tab_4">  الشركاء الهندسيين والمقاولين</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tab" href="#kt_header_navs_tab_5"> المستثمرين</a>
@@ -549,7 +551,7 @@
                     </div>
                     <!--end::Tab panel-->
                     <!--begin::Tab panel-->
-                    <div class="tab-pane fade" id="kt_header_navs_tab_4">
+                    <div class="tab-pane fade {{ request()->routeIs('engineering_partners.*') ? 'show active' : '' }}" id="kt_header_navs_tab_4">
                         <!--begin::Wrapper-->
                         <div class="d-flex flex-column flex-lg-row flex-lg-stack flex-wrap gap-2 px-4 px-lg-0">
                             <div class="d-flex flex-column flex-lg-row gap-2">
