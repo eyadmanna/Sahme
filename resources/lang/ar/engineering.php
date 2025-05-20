@@ -127,6 +127,25 @@ return [
     'Mobile Placeholder' => 'رقم الهاتف المحمول مع رمز الدولة...',
     'engineering_partner_management' => 'ادارة الشركاء الهندسيين ',
     'add_engineering_partner' => 'إضافة شريك هندسي',
+    'accreditation' => 'اعتماد',
+    'accreditation_success' => 'تم اعتماد الطلب بنجاح.',
+    'confirm_title' => 'هل أنت متأكد؟',
+    'confirm_text' => 'سيتم اعتماد هذا الطلب!',
+    'confirm_button' => 'نعم، اعتماد',
+    'cancel_button' => 'إلغاء',
+    'success_title' => 'تم!',
+    'success_text' => 'تم اعتماد الشريك الهندسي بنجاح.',
+    'error_title' => 'خطأ!',
+    'error_text' => 'حدث خطأ أثناء المعالجة.',
+    'rejection_reason_label' => 'سبب الرفض',
+    'rejection_reason_placeholder' => 'يرجى كتابة سبب الرفض هنا...',
+    'rejection_reason_required' => 'سبب الرفض مطلوب!',
+    'reject_button' => 'نعم، رفض',
+    'reject_confirm_text' => 'هل أنت متأكد أنك تريد رفض هذا الطلب؟',
+    'rejection_success' => 'تم رفض الطلب بنجاح.',
+    'Status' => 'حالة الطلب',
+    'rejection' => 'رفض الطلب',
+
 
 
 

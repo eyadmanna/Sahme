@@ -62,7 +62,7 @@
                             <!--end::Filter-->
 
                             <!--begin::Add user-->
-                            <a href="{{route('engineering_partners.create')}}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                            <a href="{{route('engineering_partners.create')}}" class="btn btn-primary" >
                                 <i class="ki-duotone ki-plus fs-2"></i>@lang('engineering.add_engineering_partner')</a>
                             <!--end::Add user-->
                         </div>
@@ -110,6 +110,7 @@
                         <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
                             <th class="text-center min-w-125px">@lang('admin.User')</th>
                             <th class="text-center min-w-125px">@lang('engineering.Mobile')</th>
+                            <th class="text-center min-w-125px">@lang('engineering.Status')</th>
                             <th class="text-center min-w-125px">@lang('admin.Joined Date')</th>
                             <th class="text-end min-w-100px">@lang('admin.Actions')</th>
                         </tr>
