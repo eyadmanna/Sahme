@@ -34,11 +34,7 @@
                             </li>
                             @can('Land Section View')
                             <li class="nav-item">
-<<<<<<< HEAD
-                                <a class="nav-link {{ request()->routeIs('lands.index', 'lands.add') ? 'active' : '' }}"
-=======
                                 <a class="nav-link {{ request()->routeIs('lands*') ? 'active' : '' }}"
->>>>>>> fb06045dbe615d764b3f6b168398c32ea0a7b187
                                    data-bs-toggle="tab"
                                    href="#kt_header_navs_tab_2"
                                    aria-selected="{{ request()->routeIs('lands.index') ? 'true' : 'false' }}"
