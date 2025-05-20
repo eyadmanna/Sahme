@@ -185,6 +185,7 @@ return [
     'Price change request sent successfully' => 'تم ارسال طلب تغيير السعر بنجاح',
     'Price must be numeric' => 'يجب أن يكون السعر رقميًا',
     'Error loading data.' => 'حدث خطأ أثناء تحميل البيانات.',
+    'No attachments found.' => 'لم يتم العثور على أي مرفقات',
 
 
     /*Projects*/

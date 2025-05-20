@@ -83,27 +83,28 @@
                             <textarea class="form-control" name="legal_notes">{{$land->legal_notes}}</textarea>
                         </div>
                     </div>
+                    <!--begin::Actions-->
+                    <div class="row mt-10">
+                        <div class="col-md-9 offset-md-3">
+                            <button data-land-id="{{ $land->id }}" type="submit" name="action" value="approved" class="btn btn-primary" data-kt-lands-legal-action="submit">
+                                <span class="indicator-label">@lang('admin.Land adoption')</span>
+                                <span class="indicator-progress">@lang('admin.Please wait...')
+                                                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                            </button>
+                            <button data-land-id="{{ $land->id }}" type="submit" name="action" value="rejected" class="btn btn-danger" data-kt-lands-legal-action="submit">
+                                <span class="indicator-label">@lang('admin.Refusal to approve the land')</span>
+                                <span class="indicator-progress">@lang('admin.Please wait...')
+                                                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                            </button>
+                            <button type="button" class="btn btn-light me-3"  data-kt-lands-legal-action="cancel" style="margin-inline-start: inherit">@lang('admin.Discard')</button>
+
+                        </div>
+                    </div>
+                    <!--end::Actions-->
                 </div>
             </div>
             <!--end::Card-->
-                <!--begin::Actions-->
-                <div class="row mt-10">
-                    <div class="col-md-9 offset-md-3">
-                        <button data-land-id="{{ $land->id }}" type="submit" name="action" value="approved" class="btn btn-primary" data-kt-lands-legal-action="submit">
-                            <span class="indicator-label">@lang('admin.Land adoption')</span>
-                            <span class="indicator-progress">@lang('admin.Please wait...')
-                                                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                        </button>
-                        <button data-land-id="{{ $land->id }}" type="submit" name="action" value="rejected" class="btn btn-danger" data-kt-lands-legal-action="submit">
-                            <span class="indicator-label">@lang('admin.Refusal to approve the land')</span>
-                            <span class="indicator-progress">@lang('admin.Please wait...')
-                                                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                        </button>
-                        <button type="button" class="btn btn-light me-3" style="margin-inline-start: inherit">@lang('admin.Discard')</button>
 
-                    </div>
-                </div>
-                <!--end::Actions-->
             </form>
 
         </div>

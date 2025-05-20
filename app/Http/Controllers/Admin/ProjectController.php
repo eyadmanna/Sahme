@@ -21,7 +21,9 @@ class ProjectController extends Controller
     }
     public function add($land_id = null){
 
-        $data['lands'] = Lands::query()->where('valuation_status_cd',22)->where('legal_status_cd',25)->get();
+        $data['lands'] = Lands::all()->filter(function($land) {
+            return $land->isValuationApproved() && $land->isLegalApproved();
+        });
         $data['land_id'] = $land_id ;
 
         return view('admin.Projects.addProject',$data);
@@ -129,7 +131,9 @@ class ProjectController extends Controller
     }
 
     public function engineering_consultant_evaluation(Request $request ,$id){
-
+        $data['project'] = Projects::find($id);
+        $data['land'] = $data['project']->lands;
+        return view('admin.Projects.project_evaluation_by_engineering_consultant',$data);
     }
     public function getProjects(Request $request){
         $projects = Projects::query()->orderBy('id', 'desc');
