@@ -187,7 +187,6 @@ return [
     'Error loading data.' => 'حدث خطأ أثناء تحميل البيانات.',
     'No attachments found.' => 'لم يتم العثور على أي مرفقات',
 
-
     /*Projects*/
     'Projects'=>'المشاريع',
     'Projects View'=>'عرض المشاريع',
