@@ -68,7 +68,7 @@ return [
     "Change avatar"  => "تغيير الصورة",
     "View User"  => "عرض المستخدم",
     "User created successfully"  => "تم إنشاء المستخدم بنجاح",
-    "Form has been successfully submitted!"  => "تم إرسال النموذج بنجاح!",
+    "Form has been successfully submitted!"  => "تم الحفظ بنجاح",
     "Sorry, looks like there are some errors detected, please try again."  => "عذراً، يبدو أنه تم اكتشاف بعض الأخطاء، يرجى المحاولة مرة أخرى.",
     "Are you sure you would like to cancel?"  => "هل أنت متأكد أنك تريد الإلغاء؟",
     "Yes, cancel it!"  => "نعم، قم بإلغائه!",
@@ -107,6 +107,7 @@ return [
     "Search"  => "بحث",
     "Reset"  => "إعادة ضبط",
     "Send login data via email"  => "ارسال بيانات الدخول عبر الايميل",
+    "Land Photos"  => "صور الأرض",
 
     /*Land management*/
     'Land management' => 'إدارة الأراضي',

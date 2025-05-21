@@ -9,6 +9,8 @@ use App\Models\Lands;
 use App\Models\Lookups;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Validator;
 
@@ -60,6 +62,10 @@ class LandsController extends Controller
             ->where('reference_id_fk', $id)
             ->where('attachment_type_cd', 44)
             ->get();
+        $data['land_image'] = Attachments::query()
+            ->where('reference_type','land_images')
+            ->where('reference_id_fk',$id)
+            ->get();
 
         return view('admin.Lands.editLand',$data);
 
@@ -70,6 +76,8 @@ class LandsController extends Controller
             $validated = $request->validate([
                 'investor_id' => 'required',
             ]);
+            $imagePaths = [];
+
             $land = new Lands();
             $land->investor_id = $request->investor_id;
             $land->land_description = $request->land_description;
@@ -108,6 +116,26 @@ class LandsController extends Controller
 
                 }
             }
+            if ($request->hasFile('land_images')) {
+                foreach ($request->file('land_images') as $image) {
+                    $filename = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+                    $path = $image->storeAs('attachments/lands', $filename, 'public');
+                    $fileType2 = $image->getMimeType();
+                    $originalName2 = $image->getClientOriginalName();
+
+                    $imagePaths[] = $path;
+
+                    Attachments::create([
+                        'reference_type' => 'land_images',
+                        'reference_id_fk' => $land->id,
+                        'created_by' => Auth::id(),
+                        'file_type' => $fileType2,
+                        'file_path' => $path,
+                        'original_name' => $originalName2,
+                    ]);
+                }
+            }
+
 
             return response()->json([
                     'status' => 'success',
@@ -172,12 +200,54 @@ class LandsController extends Controller
 
                 }
             }
+// حذف الصور القديمة المحددة
+            if ($request->filled('deleted_images')) {
+                $deletedIds = explode(',', $request->deleted_images);
+                $images = Attachments::whereIn('id', $deletedIds)->get();
+
+                foreach ($images as $image) {
+                    Storage::disk('public')->delete($image->file_path);
+                    $image->delete();
+                }
+            }
+
+            if ($request->hasFile('land_images')) {
+                foreach ($request->file('land_images') as $image) {
+                    $filename = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+                    $path = $image->storeAs('attachments/lands', $filename, 'public');
+                    $fileType2 = $image->getMimeType();
+                    $originalName2 = $image->getClientOriginalName();
+
+                    $imagePaths[] = $path;
+
+                    Attachments::create([
+                        'reference_type' => 'land_images',
+                        'reference_id_fk' => $land->id,
+                        'created_by' => Auth::id(),
+                        'file_type' => $fileType2,
+                        'file_path' => $path,
+                        'original_name' => $originalName2,
+                    ]);
+                }
+            }
 
             return response()->json([
                     'status' => 'success',
                     'message' => __('admin.Land Updated Successfully'),
                     'redirect' => route('lands.index')
                 ]);
+        } catch (\Throwable $e) {
+            // Log the actual error
+            Log::error('Engineering Consultant Evaluation Error', [
+                'message' => $e->getMessage(),
+                'file'    => $e->getFile(),
+                'line'    => $e->getLine(),
+            ]);
+
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Internal server error. Please check the logs.',
+            ], 500);
         }catch (\Illuminate\Validation\ValidationException $e) {
             // Return validation errors in JSON format
             return response()->json([

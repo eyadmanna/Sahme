@@ -52,6 +52,7 @@
         <!--begin::Card body-->
         <div class="card-body">
             <!-- Description -->
+            <input type="hidden" value="{{$land->id}}" id="land_id" name="land_id">
             <div class="mb-7">
                 <label class="form-label fw-bold">@lang('admin.Description of the land'):</label>
                 <div class="form-control form-control-solid bg-light">{{ $land->land_description }}</div>

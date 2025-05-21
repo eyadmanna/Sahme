@@ -30,6 +30,24 @@ License: For each use you must have a valid license purchased only from above li
     @if(App::getLocale() == 'ar')
         <link href="{{asset('assets/css/style.bundle.rtl.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('assets/plugins/global/plugins.bundle.rtl.css')}}" rel="stylesheet" type="text/css" />
+        <style>
+            /* إعادة تنسيق علامة الصح الافتراضية */
+            .swal2-icon.swal2-success {
+                direction: ltr !important; /* إجبار الاتجاه داخل الأيقونة */
+                transform: scaleX(-1); /* قلب الأيقونة أفقيًا لتتناسب مع العربية */
+            }
+
+            .swal2-icon.swal2-success .swal2-success-line-tip,
+            .swal2-icon.swal2-success .swal2-success-line-long {
+                background-color: #28a745 !important; /* تحسين اللون */
+            }
+
+            /* تحسين الحلقة الخارجية */
+            .swal2-icon.swal2-success .swal2-success-ring {
+                border: 4px solid #c6f6d5; /* لون أخضر خفيف متناسق */
+            }
+
+        </style>
     @else
         <link href="{{asset('assets/plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('assets/css/style.bundle.css')}}" rel="stylesheet" type="text/css" />
@@ -579,7 +597,7 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--end::Notice-->
                             </div>
 
-                            
+
                             <!--end::Timeline details-->
                         </div>
                         <!--end::Timeline content-->
