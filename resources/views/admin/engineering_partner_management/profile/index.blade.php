@@ -56,8 +56,25 @@
                                     <div class="d-flex align-items-center mb-2">
                                         <a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bold me-1">{{$user->company_name}}</a>
                                         @if($user->isApproved())
-                                            <a href="#">
-                                                <i class="ki-duotone ki-verify fs-1 text-primary">
+                                            <a href="#" id="badge_status">
+                                                <i class="ki-duotone ki-verify fs-2hx text-primary">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                </i>
+                                            </a>
+                                        @endif
+                                        @if($user->isRejected())
+                                            <a href="#"  id="badge_status">
+                                                <i class="ki-duotone ki-shield-cross fs-2hx text-danger" >
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                    <span class="path3"></span>
+                                                </i>
+                                            </a>
+                                        @endif
+                                        @if($user->isPending())
+                                            <a href="#"  id="badge_status">
+                                                <i class="ki-duotone ki-watch fs-2hx text-warning" >
                                                     <span class="path1"></span>
                                                     <span class="path2"></span>
                                                 </i>
@@ -214,10 +231,29 @@
                                 </i>
                                 @lang('engineering.rejection')
                             </a>
+                            <a id="re_accreditation" href="javascript:void(0)" class="btn btn-sm btn-warning d-none" >
+                                <i class="ki-duotone ki-arrows-circle fs-2">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                </i>
+                                @lang('engineering.re_accreditation')
+                            </a>
                         </div>
                     @endif
 
+                    @if($user->isRejected())
+                        <div id="action-section"  class="my-auto">
+                            <a id="re_accreditation" href="javascript:void(0)" class="btn btn-sm btn-warning" >
+                                <i class="ki-duotone ki-arrows-circle fs-2">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                </i>
+                                @lang('engineering.re_accreditation')
+                            </a>
 
+
+                        </div>
+                    @endif
 
                     {{--                    @endif--}}
 
@@ -282,8 +318,40 @@
                         </div>
                         <!--end::Col-->
                     </div>
+                    <div id="rejected_div"></div>
                     <!--end::Input group-->
+                    @if($user->isRejected())
+                        <!--begin::Notice-->
+                        <div class="notice d-flex bg-light-danger rounded border-danger border border-dashed p-6">
+                            <!--begin::Icon-->
+                            <i class="ki-duotone ki-information fs-2tx text-danager me-4">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                                <span class="path3"></span>
+                            </i>
+                            <!--end::Icon-->
 
+                            <!--begin::Wrapper-->
+                            <div class="d-flex flex-stack flex-grow-1">
+                                <!--begin::Content-->
+                                <div class="fw-semibold">
+                                    <h4 class="text-gray-900 fw-bold">@lang('engineering.We need your attention!')</h4>
+                                    <div class="fs-6 text-gray-700 mb-2">
+                                        @lang('engineering.Your request has been rejected. Please check the reason below.')
+                                    </div>
+
+                                    @if($user->rejection_reason)
+                                        <div class="fs-6 text-danger">
+                                            <strong>@lang('engineering.Rejection Reason'):</strong> {{ $user->rejection_reason }}
+                                        </div>
+                                    @endif
+                                </div>
+                                <!--end::Content-->
+                            </div>
+                            <!--end::Wrapper-->
+                        </div>
+                        <!--end::Notice-->
+                    @endif
 
                 </div>
                 <!--end::Card body-->
@@ -457,98 +525,11 @@
         <!--end::Post-->
     </div>
     <!--end::Container-->
-    <script>
-        function openInNewTab(button) {
-            const url = button.getAttribute('data-url');
-            if (url) {
-                window.open(url, '_blank');
-            }
-        }
-    </script>
+
 
 @endsection
 @section('js')
-    <script>
-        $(document).on('click', '#accreditation', function () {
 
-            Swal.fire({
-                title: '{{ __("engineering.confirm_title") }}',
-                text: '{{ __("engineering.confirm_text") }}',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: '{{ __("engineering.confirm_button") }}',
-                cancelButtonText: '{{ __("engineering.cancel_button") }}'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: '{{ route('engineering_partners.accredit', $user->id) }}',
-                        type: 'POST',
-                        data: {
-                            _token: $('meta[name="csrf-token"]').attr('content'),
-                        },
-                        success: function (response) {
-                            if (response.success) {
-                                Swal.fire('{{ __("engineering.success_title") }}', '{{ __("engineering.success_text") }}', 'success');
-
-                                 $('#action-section').fadeOut();
-                            } else {
-                                Swal.fire('{{ __("engineering.error_title") }}', response.message ?? '{{ __("engineering.error_text") }}', 'error');
-                            }
-                        },
-                        error: function () {
-                            Swal.fire('{{ __("engineering.error_title") }}', '{{ __("engineering.error_text") }}', 'error');
-                        }
-                    });
-                }
-            });
-
-        });
-    </script>
-    <script>
-        $(document).on('click', '#rejection', function () {
-            Swal.fire({
-                title: '{{ __("engineering.confirm_title") }}',
-                text: '{{ __("engineering.reject_confirm_text") }}',
-                icon: 'warning',
-                input: 'textarea',
-                inputLabel: '{{ __("engineering.rejection_reason_label") }}',
-                inputPlaceholder: '{{ __("engineering.rejection_reason_placeholder") }}',
-                inputAttributes: {
-                    'aria-label': 'Rejection reason'
-                },
-                showCancelButton: true,
-                confirmButtonText: '{{ __("engineering.reject_button") }}',
-                cancelButtonText: '{{ __("engineering.cancel_button") }}',
-                preConfirm: (reason) => {
-                    if (!reason) {
-                        Swal.showValidationMessage('{{ __("engineering.rejection_reason_required") }}');
-                    }
-                    return reason;
-                }
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: '{{ route('engineering_partners.reject', $user->id) }}',
-                        type: 'POST',
-                        data: {
-                            _token: $('meta[name="csrf-token"]').attr('content'),
-                            reason: result.value
-                        },
-                        success: function (response) {
-                            if (response.success) {
-                                Swal.fire('{{ __("engineering.success_title") }}', response.message, 'success');
-                                $('#action-section').fadeOut();
-                            } else {
-                                Swal.fire('{{ __("engineering.error_title") }}', response.message, 'error');
-                            }
-                        },
-                        error: function () {
-                            Swal.fire('{{ __("engineering.error_title") }}', '{{ __("engineering.error_text") }}', 'error');
-                        }
-                    });
-                }
-            });
-        });
-    </script>
+    @include('admin.engineering_partner_management.partial.index_js')
 
 @endsection
