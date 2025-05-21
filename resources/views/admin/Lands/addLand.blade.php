@@ -160,7 +160,7 @@
                             <div class="col-md-4">
                                 <label class="form-label required">@lang('admin.Asking price')</label>
                                 <div class="input-group">
-                                    <input type="number" class="form-control" name="price" placeholder="@lang('admin.Enter the price')" style="text-align: right; direction: rtl;">
+                                    <input type="text" class="form-control number_format" name="price" placeholder="@lang('admin.Enter the price')" style="text-align: right; direction: rtl;">
                                     <span class="input-group-text">$</span>
                                 </div>
                             </div>

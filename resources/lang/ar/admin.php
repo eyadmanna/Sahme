@@ -163,6 +163,7 @@ return [
     'Land ownership approval notes' => 'ملاحظات اعتماد ملكية الأرض',
     'Legal accreditation rejected' => 'الاعتماد القانوني مرفوض',
     'Legal accreditation is acceptable' => 'الاعتماد القانوني مقبول',
+    'Legal approval of the land' => 'الاعتماد القانوني للأرض',
     'Attachments' => 'المرفقات',
     'Attachment' => 'المرفق',
     'Description' => 'الوصف',
@@ -214,6 +215,8 @@ return [
     'Project evaluation'=>'تقييم المشروع',
     'No modification required'=>'لا يحتاج لتعديل',
     'Modification required'=>' يحتاج لتعديل',
+    'Request to modify a project'=>'طلب تعديل مشروع',
+    'Modifications required'=>'التعديلات المطلوبة',
 
     /*profile page*/
     'Profile Details' => 'تفاصيل الملف الشخصي',

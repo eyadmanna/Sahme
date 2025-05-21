@@ -32,7 +32,40 @@
 
 <!--end::Custom Javascript-->
 
+<script>
 
+
+    document.addEventListener('DOMContentLoaded', function () {
+
+        function formatNumberInput(input) {
+            // حذف الفواصل، ثم حذف أي أرقام عشرية، ثم حذف أي حروف غير أرقام
+            let value = input.value.replace(/,/g, '').replace(/\..*$/, '').replace(/\D/g, '');
+
+            // إذا القيمة فارغة، لا تفعل شيء
+            if (!value) {
+                input.value = '';
+                return;
+            }
+
+            // تنسيق الرقم بإضافة الفواصل
+            input.value = new Intl.NumberFormat('en-US').format(value);
+        }
+
+        // تطبيق التنسيق على كل الحقول التي تحمل الكلاس number_format
+        document.querySelectorAll('.number_format').forEach(input => {
+            // عند تحميل الصفحة تنسيق القيمة الموجودة مسبقاً
+            if (input.value) {
+                formatNumberInput(input);
+            }
+
+            // تنسيق الرقم أثناء الإدخال
+            input.addEventListener('input', function () {
+                formatNumberInput(this);
+            });
+        });
+    });
+
+</script>
 
 
 @yield('js')

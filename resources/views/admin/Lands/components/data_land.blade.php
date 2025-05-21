@@ -117,7 +117,7 @@
                 </div>
                 <div class="col-md-4">
                     <label class="form-label fw-bold">@lang('admin.Asking price'):</label>
-                    <div class="form-control form-control-solid bg-light">{{ $land->price }} $</div>
+                    <input class="form-control form-control-solid bg-light number_format" value="{{ $land->price }} $">
                 </div>
             </div>
         </div>

@@ -165,7 +165,7 @@
                             <div class="col-md-4">
                                 <label class="form-label required">@lang('admin.Asking price')</label>
                                 <div class="d-flex gap-2">
-                                    <input type="number" class="form-control" value="{{$land->price}}" name="price" placeholder="@lang('admin.Enter the price')" style="text-align: right; direction: rtl;">
+                                    <input type="text" class="form-control number_format" value="{{$land->price}}" name="price" placeholder="@lang('admin.Enter the price')" style="text-align: right; direction: rtl;">
                                 </div>
                             </div>
                         </div>

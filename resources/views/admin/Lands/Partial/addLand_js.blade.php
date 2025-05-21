@@ -125,7 +125,6 @@
                             price: {
                                 validators: {
                                     notEmpty: { message: '{{ __("admin.Asking price is required") }}' },
-                                    numeric: { message: '{{ __("admin.Price must be numeric") }}' }
                                 }
                             },
                             lat: { validators: { notEmpty: { message: '{{ __("admin.Latitude is required") }}' } } },
