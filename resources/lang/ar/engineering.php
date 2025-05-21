@@ -145,6 +145,9 @@ return [
     'rejection_success' => 'تم رفض الطلب بنجاح.',
     'Status' => 'حالة الطلب',
     'rejection' => 'رفض الطلب',
+    're_accreditation' => 'اعادة اعتماد',
+    'Your request has been rejected. Please check the reason below.' => 'تم رفض طلبك. يرجى مراجعة سبب الرفض أدناه.',
+    'Rejection Reason' => 'سبب الرفض',
 
 
 
