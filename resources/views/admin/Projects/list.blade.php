@@ -7,7 +7,7 @@
             <!--begin::Page title-->
             <div class="page-title d-flex flex-column align-items-start me-3 py-2 py-lg-0 gap-2">
                 <!--begin::Title-->
-                <h1 class="d-flex text-gray-900 fw-bold m-0 fs-3">@lang('admin.Show lands')</h1>
+                <h1 class="d-flex text-gray-900 fw-bold m-0 fs-3">@lang('admin.Projects View')</h1>
                 <!--end::Title-->
                 <!--begin::Breadcrumb-->
                 <ul class="breadcrumb breadcrumb-dot fw-semibold text-gray-600 fs-7">
@@ -17,10 +17,10 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-gray-600">@lang('admin.Land management')</li>
+                    <li class="breadcrumb-item text-gray-600">@lang('admin.Projects')</li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-gray-600">@lang('admin.Show lands')</li>
+                    <li class="breadcrumb-item text-gray-600">@lang('admin.Projects View')</li>
                     <!--end::Item-->
                 </ul>
                 <!--end::Breadcrumb-->
@@ -46,7 +46,7 @@
                                 <span class="path1"></span>
                                 <span class="path2"></span>
                             </i>
-                            <input type="text" data-kt-land-table-filter="search" class="form-control form-control-solid w-250px ps-13" placeholder="@lang('admin.Search for land')" />
+                            <input type="text" data-kt-project-table-filter="search" class="form-control form-control-solid w-250px ps-13" placeholder="@lang('admin.Search for a project')" />
                         </div>
                         <!--end::Search-->
                     </div>
@@ -62,22 +62,15 @@
                                     <span class="path2"></span>
                                 </i></button>
                             <!--end::Filter-->
-                            @can('Land create')
-                            <!--begin::Add land-->
-                            <a href="{{url('/lands/add-land')}}" class="btn btn-primary">
-                                    <i class="ki-duotone ki-plus fs-2"></i>@lang('admin.Add land')
-                            </a>
-                            <!--end::Add land-->
+                            @can('Projects create')
+                                <!--begin::Add land-->
+                                <a href="{{route('projects.add')}}" class="btn btn-primary">
+                                    <i class="ki-duotone ki-plus fs-2"></i>@lang('admin.Add a new project')
+                                </a>
+                                <!--end::Add land-->
                             @endcan
                         </div>
                         <!--end::Toolbar-->
-                        <!--begin::Group actions-->
-                        <div class="d-flex justify-content-end align-items-center d-none" data-kt-user-table-toolbar="selected">
-                            <div class="fw-bold me-5">
-                                <span class="me-2" data-kt-user-table-select="selected_count"></span>Selected</div>
-                            <button type="button" class="btn btn-danger" data-kt-user-table-select="delete_selected">Delete Selected</button>
-                        </div>
-                        <!--end::Group actions-->
                     </div>
                     <!--end::Card toolbar-->
                 </div>
@@ -89,12 +82,11 @@
 
                             <div class="form-group row">
                                 <div class="col-form-label col-lg-3 col-sm-6">
-                                    <label class="form-control-label">@lang('admin.Province')</label>
-                                    <select id="province_cd" class="form-select location_province" data-control="select2" name="province_cd">
+                                    <label class="form-control-label">@lang('admin.Project type')</label>
+                                    <select id="project_type_cd" class="form-select" data-control="select2" name="project_type_cd">
                                         <option value="" selected>@lang('admin.Select')..</option>
-                                        @foreach ($provinces as $val)
-                                            <option value="{{ $val->id }}">
-                                                {{ $val->{'name_' . app()->getLocale()} }}</option>
+                                        @foreach(get_is_managed_lookupby_master_key('project_type_cd') as $val)
+                                            <option value="{{$val->id}}">{{$val->{'name_' . app()->getLocale()} }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -114,14 +106,17 @@
                 <!--begin::Card body-->
                 <div class="card-body py-4">
                     <!--begin::Table-->
-                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_lands">
+                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_projects">
                         <thead>
                         <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
-                            <th class="text-center min-w-125px">@lang('admin.Investor name')</th>
-                            <th class="text-center min-w-125px">@lang('admin.Province')</th>
-                            <th class="text-center min-w-125px">@lang('admin.City')</th>
-                            <th class="text-center min-w-125px">@lang('admin.Real estate appraiser evaluation')</th>
-                            <th class="text-center min-w-125px">@lang('admin.Evaluation of the legal partner')</th>
+                            <th class="text-center min-w-125px">@lang('admin.Project name')</th>
+                            <th class="text-center min-w-125px">@lang('admin.Project type')</th>
+                            <th class="text-center min-w-125px">@lang('admin.Project status')</th>
+                            <th class="text-center min-w-125px">@lang('admin.Engineering consultant evaluation status')</th>
+                            <th class="text-center min-w-125px">@lang('admin.Engineering Consultant Evaluation Approval Status')</th>
+                            <th class="text-center min-w-125px">@lang('admin.Engineering Builder Approval Status')</th>
+                            <th class="text-center min-w-125px">@lang('admin.Engineering bid opening date')</th>
+                            <th class="text-center min-w-125px">@lang('admin.Closing date for engineering bids')</th>
                             <th class="text-end min-w-100px">@lang('admin.Actions')</th>
                         </tr>
                         </thead>
@@ -139,7 +134,6 @@
     <!--end::Container-->
 @endsection
 @section('js')
-    @include("admin.Lands.Partial.general_land_js")
-    @include("admin.Lands.Partial.land_list_js")
+    @include("admin.Projects.Partial.project_list_js")
 @endsection
 

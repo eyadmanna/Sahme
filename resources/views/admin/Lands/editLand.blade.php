@@ -274,6 +274,7 @@
     <!--end::Container-->
 @endsection
 @section('js')
+    @include("admin.Lands.Partial.general_land_js")
     @include("admin.Lands.Partial.editLand_js")
 
 @endsection

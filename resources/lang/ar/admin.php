@@ -184,7 +184,33 @@ return [
     'Are you sure you want to send a price change request?' => 'هل انت متاكد من ارسال طلب تعديل السعر',
     'Price change request sent successfully' => 'تم ارسال طلب تغيير السعر بنجاح',
     'Price must be numeric' => 'يجب أن يكون السعر رقميًا',
+    'Error loading data.' => 'حدث خطأ أثناء تحميل البيانات.',
 
+
+    /*Projects*/
+    'Projects'=>'المشاريع',
+    'Projects View'=>'عرض المشاريع',
+    'Project View'=>'عرض المشروع',
+    'Project data'=>'بيانات المشروع',
+    'Investor data' => 'بيانات المستثمر',
+    'Add a new project'=>'إضافة مشروع جديد',
+    'Project name'=>'اسم المشروع',
+    'Project description'=>'وصف المشروع',
+    'Project type'=>'نوع المشروع',
+    'Project space'=>'مساحة المشروع',
+    'Project cost'=>'تكلفة المشروع',
+    'Enter The project cost'=>'أضف تكلفة المشروع',
+    'Engineering bid opening date'=>'تاريخ فتح التقديم للعطاءات الهندسية',
+    'Closing date for engineering bids'=>'آخر موعد لتقديم العطاءات الهندسية',
+    'Choose the land' => 'اختر الأرض',
+    'Land Location Map'=>'خريطة موقع الأرض',
+    'Search for a project'=>'بحث عن مشروع',
+    'Project status'=>'حالة المشروع',
+    'Engineering consultant evaluation status'=>'حالة تقييم الاستشاري الهندسي',
+    'Engineering Consultant Evaluation Approval Status'=>'حالة الموافقة على تقييم الاستشاري الهندسي',
+    'Engineering Builder Approval Status'=>'حالة الموافقة على مُنشئ الهندسة',
+    'Project evaluation by engineering consultant'=>'تقييم المشروع من خلال الاستشاري الهندسي',
+    'Engineering Consultant Evaluation'=>'تقييم الاستشاري الهندسي',
 
     /*profile page*/
     'Profile Details' => 'تفاصيل الملف الشخصي',

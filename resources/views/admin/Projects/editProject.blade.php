@@ -34,10 +34,11 @@
     <div id="kt_content_container_project" class="d-flex flex-column-fluid align-items-start container-xxl">
         <!--begin::Post-->
         <div class="content flex-row-fluid" id="kt_content">
-            <form method="post" action="{{ route('projects.store') }}" class="form" id="kt_add_project">
+            <form method="POST" action="{{ route('projects.update', $project->id) }}" class="form" id="kt_add_project">
                 @csrf
                 <!--begin::Card - Land Info-->
                 <div class="card card-flush">
+                    <input type="hidden" value="{{$project->id}}" id="project_id" name="project_id">
                     <!--begin::Card header-->
                     <div class="card-header pt-8">
                         <div class="col-md-4">
@@ -61,7 +62,7 @@
                                     <option></option>
                                     @foreach($lands as $land)
                                         <option  data-lat="{{$land->lat}}"
-                                                 data-long="{{$land->long}}" data-investor_id="{{$land->investor_id}}" value="{{$land->id}}" @if($land->id == $land_id) selected @endif>
+                                                 data-long="{{$land->long}}" data-investor_id="{{$land->investor_id}}" value="{{$land->id}}" @if($land->id == $project->lands->id) selected @endif>
                                             {{ Str::words($land->land_description, 3, '...') }}
                                             - {{$land->area}} - {{$land->investor->full_name}}
                                         </option>
@@ -145,61 +146,61 @@
                     <!--begin::Card body-->
                     <div class="card-body">
                         <!--begin::Form-->
-                            <div class="row g-4 mb-15">
-                                <div class="col-md-6 fv-row">
-                                    <label class="required form-label">@lang('admin.Project name')</label>
-                                    <input class="form-control" name="title">
-                                </div>
-                                <div class="col-md-6 fv-row">
-                                    <label class="form-label">@lang('admin.Project description')</label>
-                                    <textarea  row="3" class="form-control" name="description"></textarea>
+                        <div class="row g-4 mb-15">
+                            <div class="col-md-6 fv-row">
+                                <label class="required form-label">@lang('admin.Project name')</label>
+                                <input class="form-control" name="title" value="{{$project->title}}">
+                            </div>
+                            <div class="col-md-6 fv-row">
+                                <label class="form-label">@lang('admin.Project description')</label>
+                                <textarea  row="3" class="form-control" name="description">{{$project->description}}</textarea>
+                            </div>
+                        </div>
+                        <div class="row g-4 mb-15">
+                            <div class="col-md-4 fv-row">
+                                <label class="required form-label">@lang('admin.Project type')</label>
+                                <select name="project_type_cd" class="form-select" data-control="select2" data-placeholder="@lang('admin.Project type')">
+                                    <option></option>
+                                    @foreach(get_is_managed_lookupby_master_key('project_type_cd') as $val)
+                                        <option value="{{$val->id}}" @if($val->id == $project->project_type_cd) selected @endif>{{$val->{'name_' . app()->getLocale()} }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-4 fv-row">
+                                <label class="required form-label">@lang('admin.Project space')</label>
+                                <div class="input-group">
+                                    <input class="form-control text-start" id="area" name="area" value="{{$project->area}}" type="number" placeholder="@lang('admin.Enter the area')">
+                                    <span class="input-group-text">م2</span>
                                 </div>
                             </div>
-                            <div class="row g-4 mb-15">
-                                <div class="col-md-4 fv-row">
-                                    <label class="required form-label">@lang('admin.Project type')</label>
-                                    <select name="project_type_cd" class="form-select" data-control="select2" data-placeholder="@lang('admin.Project type')">
-                                        <option></option>
-                                        @foreach(get_is_managed_lookupby_master_key('project_type_cd') as $val)
-                                            <option value="{{$val->id}}">{{$val->{'name_' . app()->getLocale()} }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-4 fv-row">
-                                    <label class="required form-label">@lang('admin.Project space')</label>
-                                    <div class="input-group">
-                                        <input class="form-control text-start" id="area" name="area" type="number" placeholder="@lang('admin.Enter the area')">
-                                        <span class="input-group-text">م2</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 fv-row">
-                                    <label class="required form-label">@lang('admin.Project cost')</label>
-                                    <div class="input-group">
-                                        <input class="form-control text-start" id="project_cost" name="project_cost" type="number" placeholder="@lang('admin.Enter The project cost')">
-                                        <span class="input-group-text">$</span>
-                                    </div>
+                            <div class="col-md-4 fv-row">
+                                <label class="required form-label">@lang('admin.Project cost')</label>
+                                <div class="input-group">
+                                    <input value="{{$project->project_cost}}" class="form-control text-start" id="project_cost" name="project_cost" type="number" placeholder="@lang('admin.Enter The project cost')">
+                                    <span class="input-group-text">$</span>
                                 </div>
                             </div>
-                            <div class="row g-4 mb-15">
-                                <div class="col-md-6 fv-row">
-                                    <label class="required form-label">@lang('admin.Engineering bid opening date')</label>
-                                    <input type="date" name="offers_start_date" class="form-control text-start">
-                                </div>
-                                <div class="col-md-6 fv-row">
-                                    <label class="required form-label">@lang('admin.Closing date for engineering bids')</label>
-                                    <input type="date" name="offers_end_date" class="form-control text-start">
-                                </div>
+                        </div>
+                        <div class="row g-4 mb-15">
+                            <div class="col-md-6 fv-row">
+                                <label class="required form-label">@lang('admin.Engineering bid opening date')</label>
+                                <input type="date" name="offers_start_date" class="form-control text-start kt_datepicker" value="{{$project->offers_start_date}}">
                             </div>
-                            <div class="row g-4 mb-15">
-                                <div class="col-md-9 offset-md-3 text-end fv-row">
-                                    <button type="button" class="btn btn-light me-3" data-kt-project-action="cancel">@lang('admin.Discard')</button>
-                                    <button id="submit" type="submit" class="btn btn-primary" data-kt-project-action="submit">
-                                        <span class="indicator-label">@lang('admin.Submit')</span>
-                                        <span class="indicator-progress">@lang('admin.Please wait...')
+                            <div class="col-md-6 fv-row">
+                                <label class="required form-label">@lang('admin.Closing date for engineering bids')</label>
+                                <input type="date" name="offers_end_date" value="{{$project->offers_end_date}}" class="form-control text-start kt_datepicker">
+                            </div>
+                        </div>
+                        <div class="row g-4 mb-15">
+                            <div class="col-md-9 offset-md-3 text-end fv-row">
+                                <button type="button" class="btn btn-light me-3" data-kt-project-action="cancel">@lang('admin.Discard')</button>
+                                <button id="submit" type="submit" class="btn btn-primary" data-kt-project-action="submit">
+                                    <span class="indicator-label">@lang('admin.Submit')</span>
+                                    <span class="indicator-progress">@lang('admin.Please wait...')
                                                                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                    </button>
-                                </div>
+                                </button>
                             </div>
+                        </div>
 
                         <!--end::Form-->
                     </div>
@@ -214,7 +215,7 @@
     <!--end::Container-->
 @endsection
 @section('js')
-    @include("admin.Projects.Partial.addProject_js")
+    @include("admin.Projects.Partial.editProject_js")
 
 @endsection
 

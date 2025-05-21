@@ -14,34 +14,32 @@ class InvestorSeeder extends Seeder
     public function run(): void
     {
         //
-        Investors::insert([
+        $investors = [
             [
                 'full_name' => 'محمد',
-                'phone' => '059000002',
-                'mobile' => '059000002',
+                'phone' => '28123456',
+                'mobile' => '0599123456',
                 'province_cd' => 4,
                 'city_cd' => 6,
                 'district_cd' => 10,
                 'address' => 'الشجاعية',
-                'yearly_income' => 5,
-                'status_cd' => 48,
-                'created_at' => now(),
-                'updated_at' => now(),
+                'yearly_income' => 55000,
             ],
             [
                 'full_name' => 'اياد',
-                'phone' => '56415646',
-                'mobile' => '64561844654',
+                'phone' => '28111222',
+                'mobile' => '0599111222',
                 'province_cd' => 4,
                 'city_cd' => 6,
                 'district_cd' => 10,
-                'address' => 'الشجاعية',
-                'yearly_income' => 5,
-                'status_cd' => 48,
-                'created_at' => now(),
-                'updated_at' => now(),
+                'address' => 'النصر',
+                'yearly_income' => 65000,
             ]
-        ]);
+        ];
+
+        foreach ($investors as $data) {
+            Investors::create($data); 
+        }
 
     }
 }
