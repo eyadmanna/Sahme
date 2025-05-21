@@ -150,11 +150,11 @@
                         <div class="row g-4 mb-15">
                             <div class="col-md-4">
                                 <label class="form-label">@lang('admin.Border')</label>
-                                <textarea class="form-control" rows="3" name="borders"></textarea>
+                                <textarea class="form-control" rows="3" name="borders" placeholder="@lang('admin.Enter borders of the land here')"></textarea>
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label">@lang('admin.Available services')</label>
-                                <textarea class="form-control" rows="3" name="services"></textarea>
+                                <textarea class="form-control" rows="3" name="services" placeholder="@lang('admin.Enter services of the land here')"></textarea>
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label required">@lang('admin.Asking price')</label>
