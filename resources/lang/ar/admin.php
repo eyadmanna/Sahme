@@ -163,6 +163,7 @@ return [
     'Land ownership approval notes' => 'ملاحظات اعتماد ملكية الأرض',
     'Legal accreditation rejected' => 'الاعتماد القانوني مرفوض',
     'Legal accreditation is acceptable' => 'الاعتماد القانوني مقبول',
+    'Legal approval of the land' => 'الاعتماد القانوني للأرض',
     'Attachments' => 'المرفقات',
     'Attachment' => 'المرفق',
     'Description' => 'الوصف',
@@ -185,7 +186,7 @@ return [
     'Price change request sent successfully' => 'تم ارسال طلب تغيير السعر بنجاح',
     'Price must be numeric' => 'يجب أن يكون السعر رقميًا',
     'Error loading data.' => 'حدث خطأ أثناء تحميل البيانات.',
-
+    'No attachments found.' => 'لم يتم العثور على أي مرفقات',
 
     /*Projects*/
     'Projects'=>'المشاريع',
@@ -211,6 +212,11 @@ return [
     'Engineering Builder Approval Status'=>'حالة الموافقة على مُنشئ الهندسة',
     'Project evaluation by engineering consultant'=>'تقييم المشروع من خلال الاستشاري الهندسي',
     'Engineering Consultant Evaluation'=>'تقييم الاستشاري الهندسي',
+    'Project evaluation'=>'تقييم المشروع',
+    'No modification required'=>'لا يحتاج لتعديل',
+    'Modification required'=>' يحتاج لتعديل',
+    'Request to modify a project'=>'طلب تعديل مشروع',
+    'Modifications required'=>'التعديلات المطلوبة',
 
     /*profile page*/
     'Profile Details' => 'تفاصيل الملف الشخصي',

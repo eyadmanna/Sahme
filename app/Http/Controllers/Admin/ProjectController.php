@@ -7,6 +7,7 @@ use App\Models\Lands;
 use App\Models\Lookups;
 use App\Models\Projects;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\DataTables;
 
 class ProjectController extends Controller
@@ -21,7 +22,9 @@ class ProjectController extends Controller
     }
     public function add($land_id = null){
 
-        $data['lands'] = Lands::query()->where('valuation_status_cd',22)->where('legal_status_cd',25)->get();
+        $data['lands'] = Lands::all()->filter(function($land) {
+            return $land->isValuationApproved() && $land->isLegalApproved();
+        });
         $data['land_id'] = $land_id ;
 
         return view('admin.Projects.addProject',$data);
@@ -128,8 +131,43 @@ class ProjectController extends Controller
         }
     }
 
-    public function engineering_consultant_evaluation(Request $request ,$id){
+    public function engineering_consultant_evaluation(Request $request, $id)
+    {
+        try {
+            $data['project'] = Projects::findOrFail($id);
+            $data['land'] = $data['project']->lands;
 
+            if ($request->isMethod('post')) {
+                if ($request->input('action') == 'no_need_edit') {
+                    $data['project']->setEvaluationStatus('no_need_edit');
+                } else {
+                    $data['project']->setEvaluationStatus('need_edit');
+                    $data['project']->engineering_consultant_evaluation_notes = $request->engineering_consultant_evaluation_notes;
+                }
+
+                $data['project']->save();
+
+                return response()->json([
+                    'status' => 'success',
+                    'message' => __('admin.Price change request sent successfully'),
+                    'redirect' => route('projects.index'),
+                ]);
+            }
+
+            return view('admin.Projects.project_evaluation_by_engineering_consultant', $data);
+        } catch (\Throwable $e) {
+            // Log the actual error
+            Log::error('Engineering Consultant Evaluation Error', [
+                'message' => $e->getMessage(),
+                'file'    => $e->getFile(),
+                'line'    => $e->getLine(),
+            ]);
+
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Internal server error. Please check the logs.',
+            ], 500);
+        }
     }
     public function getProjects(Request $request){
         $projects = Projects::query()->orderBy('id', 'desc');

@@ -34,8 +34,6 @@
     <div id="kt_content_container_project" class="d-flex flex-column-fluid align-items-start container-xxl">
         <!--begin::Post-->
         <div class="content flex-row-fluid" id="kt_content">
-            <form method="post" action="{{ route('projects.store') }}" class="form" id="kt_add_project">
-                @csrf
                 <!--begin::Card - Land Info-->
                 <div class="card card-flush">
                     <!--begin::Card header-->
@@ -55,7 +53,6 @@
                         <!--begin::Col-->
                         <div class="col-md-6 fv-row">
                             <div class="d-flex align-items-center gap-2">
-                                <label class="required form-label">@lang('admin.Choose the land')</label>
                                 <!--begin::Input-->
                                 <select id="land_id" disabled name="land_id" aria-label="Select a Language" data-control="select2" data-placeholder="@lang('admin.Land details')" class="form-select mb-2">
                                     <option  data-lat="{{$land->lat}}"
@@ -179,12 +176,93 @@
                                 <input disabled type="date" name="offers_end_date" class="form-control text-start" value="{{$project->offers_end_date}}">
                             </div>
                         </div>
+                        <form method="post" action="{{ route('projects.engineering_consultant_evaluation',$project->id) }}" class="form mt-15" id="kt_engineering_consultant_evaluation_project">
+                            @csrf
+                        <div class="row g-4">
+                            <input type="hidden" value="{{$project->id}}" id="project_id" name="project_id">
+                            <div class="col-md-3">
+                                <h4>@lang('admin.Project evaluation')</h4>
+                            </div>
+                            <div class="col-md-9 text-end">
+                                <button type="button" class="btn btn-light me-3 text-start"  data-kt-project-evaluation-engineering-consultant-action="cancel" style="margin-inline-start: inherit">@lang('admin.Discard')</button>
+                                <button data-land-id="{{ $land->id }}" type="submit" name="action" value="no_need_edit" class="btn btn-primary" data-kt-project-evaluation-engineering-consultant-action="submit">
+                                    <span class="indicator-label">@lang('admin.No modification required')</span>
+                                    <span class="indicator-progress">@lang('admin.Please wait...')
+                                                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                </button>
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#kt_modal_no_need_edit">@lang('admin.Modification required')</button>
+
+
+                            </div>
+                        </div>
+                        </form>
+
                         <!--end::Form-->
                     </div>
                     <!--end::Card body-->
                 </div>
                 <!--end::Card-->
-            </form>
+
+            <div class="modal fade" id="kt_modal_no_need_edit" tabindex="-1" aria-hidden="true">
+                <!--begin::Modal dialog-->
+                <div class="modal-dialog modal-dialog-centered mw-650px">
+                    <!--begin::Modal content-->
+                    <div class="modal-content">
+                        <!--begin::Modal header-->
+                        <div class="modal-header" id="kt_modal_modify_price_header">
+                            <!--begin::Modal title-->
+                            <h2 class="fw-bold">@lang('admin.Request to modify a project')</h2>
+                            <!--end::Modal title-->
+                            <!--begin::Close-->
+                            <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="ki-duotone ki-cross fs-1">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                </i>
+                            </div>
+                            <!--end::Close-->
+                        </div>
+                        <!--end::Modal header-->
+                        <!--begin::Modal body-->
+                        <div class="modal-body px-5 my-7">
+                            <!--begin::Form-->
+                            <form id="kt_modal_modify_engineering_consultant_evaluation_notes_form" class="form"  method="post" action="{{ route('projects.engineering_consultant_evaluation', $project->id) }}"  enctype="multipart/form-data">
+                                @csrf                                            <!--begin::Scroll-->
+                                <div class="d-flex flex-column scroll-y px-5 px-lg-10" id="kt_modal_modify_price_scroll" data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_modify_price_header" data-kt-scroll-wrappers="#kt_modal_modify_price_scroll" data-kt-scroll-offset="300px">
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-7">
+                                        <!--begin::Label-->
+                                        <label class="required fw-semibold fs-6 mb-2">@lang('admin.Modifications required')</label>
+                                        <!--end::Label-->
+                                        <!--begin::Input-->
+                                        <div class="input-group">
+                                            <textarea rows="3" class="form-control" name="engineering_consultant_evaluation_notes" style="text-align: right; direction: rtl;"></textarea>
+                                        </div>
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Input group-->
+                                </div>
+                                <!--end::Scroll-->
+                                <!--begin::Actions-->
+                                <div class="text-center pt-10">
+                                    <button type="reset" class="btn btn-light me-3" data-kt-project-evaluation-engineering-consultant-notes-action="cancel">@lang('admin.Discard')</button>
+                                    <button type="submit" class="btn btn-primary" value="engineering_consultant_evaluation_notes"  data-kt-project-evaluation-engineering-consultant-notes-action="submit">
+                                        <span class="indicator-label">@lang('admin.Send a modification request')</span>
+                                        <span class="indicator-progress">@lang('admin.Please wait...')
+																	<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                    </button>
+                                </div>
+                                <!--end::Actions-->
+                            </form>
+                            <!--end::Form-->
+                        </div>
+                        <!--end::Modal body-->
+                    </div>
+                    <!--end::Modal content-->
+                </div>
+                <!--end::Modal dialog-->
+            </div>
+
 
         </div>
         <!--end::Post-->
@@ -192,7 +270,7 @@
     <!--end::Container-->
 @endsection
 @section('js')
-    @include("admin.Projects.Partial.addProject_js")
+    @include("admin.Projects.Partial.project_evaluation_by_engineering_consultant_js")
 
 @endsection
 

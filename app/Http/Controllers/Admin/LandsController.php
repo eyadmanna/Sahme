@@ -83,7 +83,7 @@ class LandsController extends Controller
             $land->ownership_type_cd = $request->ownership_type_cd;
             $land->borders = $request->borders;
             $land->services = $request->services;
-            $land->price = $request->price;
+            $land->price = str_replace(',', '', $request->price);
             $land->lat = $request->lat;
             $land->long = $request->long;
             $land->setValuationStatus('pending');
@@ -149,7 +149,7 @@ class LandsController extends Controller
                 $land->ownership_type_cd = $request->ownership_type_cd;
                 $land->borders = $request->borders;
                 $land->services = $request->services;
-                $land->price = $request->price;
+                $land->price = str_replace(',', '', $request->price);
                 $land->lat = $request->lat;
                 $land->long = $request->long;
                 $land->save();

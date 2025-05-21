@@ -183,11 +183,11 @@
                             <div class="row g-4 mb-15">
                                 <div class="col-md-6 fv-row">
                                     <label class="required form-label">@lang('admin.Engineering bid opening date')</label>
-                                    <input type="date" name="offers_start_date" class="form-control text-start">
+                                    <input type="date" name="offers_start_date" class="form-control text-start kt_datepicker">
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="required form-label">@lang('admin.Closing date for engineering bids')</label>
-                                    <input type="date" name="offers_end_date" class="form-control text-start">
+                                    <input type="date" name="offers_end_date" class="form-control text-start kt_datepicker">
                                 </div>
                             </div>
                             <div class="row g-4 mb-15">

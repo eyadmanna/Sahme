@@ -119,6 +119,14 @@
                         });
                     });
                 });
+                // Cancel button handler
+                const cancelButton = element.querySelector('[data-kt-valuation-approval-action="cancel"]');
+                cancelButton.addEventListener('click', e => {
+                    e.preventDefault();
+
+                    window.location.href = "{{ route('lands.index') }}"; // Redirect to land.index route
+
+                });
             }
 
             var initValuationModifyPriceSubmitLegal = () => {
