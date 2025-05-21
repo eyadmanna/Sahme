@@ -41,14 +41,14 @@ class LookupsSeeder extends Seeder
                 'is_managed' => 1,
                 'parent_id' => 1,
                 'master_key' => 'province',
-                'name_ar' => 'قطاع غزة',
+                'name_ar' => 'محافظات قطاع غزة',
                 'name_en' => 'Gaza Strip',
             ],
             [
                 'is_managed' => 1,
                 'parent_id' => 1,
                 'master_key' => 'province',
-                'name_ar' => 'الضفة الغربية',
+                'name_ar' => 'محافظات الضفة الغربية',
                 'name_en' => 'West Bank',
             ],
             [

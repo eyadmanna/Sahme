@@ -46,6 +46,7 @@
                     <div class="card-header pt-8">
                         <!--begin::Col-->
                         <div class="col-md-4">
+                            <h3>@lang('admin.Investor data')</h3>
                             <div class="d-flex align-items-center gap-2">
                                 <!--begin::Input-->
                                 <select id="investor_id" name="investor_id" aria-label="Select a Language" data-control="select2" data-placeholder="@lang('admin.Investor name')" class="form-select mb-2">
@@ -150,16 +151,16 @@
                         <div class="row g-4 mb-15">
                             <div class="col-md-4">
                                 <label class="form-label">@lang('admin.Border')</label>
-                                <textarea class="form-control" rows="3" name="borders"></textarea>
+                                <textarea class="form-control" rows="3" name="borders" placeholder="@lang('admin.Enter borders of the land here')"></textarea>
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label">@lang('admin.Available services')</label>
-                                <textarea class="form-control" rows="3" name="services"></textarea>
+                                <textarea class="form-control" rows="3" name="services" placeholder="@lang('admin.Enter services of the land here')"></textarea>
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label required">@lang('admin.Asking price')</label>
                                 <div class="input-group">
-                                    <input type="number" class="form-control" name="price" placeholder="@lang('admin.Enter the price')" style="text-align: right; direction: rtl;">
+                                    <input type="text" class="form-control number_format" name="price" placeholder="@lang('admin.Enter the price')" style="text-align: right; direction: rtl;">
                                     <span class="input-group-text">$</span>
                                 </div>
                             </div>

@@ -9,7 +9,6 @@
     }
 
     $(document).ready(function () {
-        $(".kt_datepicker").flatpickr();
         // Initialize select2
         $('select[name="land_id"]').select2();
 
@@ -97,59 +96,30 @@
         $('select[name="land_id"]').trigger('change');
 
         var KTProjectsAddproject = function () {
-            var form = document.querySelector('#kt_add_project');
+            var form = document.querySelector('#kt_engineering_consultant_evaluation_project');
+            var form_notes = document.querySelector('#kt_modal_modify_engineering_consultant_evaluation_notes_form');
             const element = document.getElementById('kt_content_container_project');
-            var validator = null;
             var initAddproject = function () {
 
-                validator = FormValidation.formValidation(
-                    form,
-                    {
-                        fields: {
-                            land_id: { validators: { notEmpty: { message: '{{ __("admin.This field is required") }}' } } },
-                            title: { validators: { notEmpty: { message: '{{ __("admin.This field is required") }}' } } },
-                            project_type_cd: { validators: { notEmpty: { message: '{{ __("admin.This field is required") }}' } } },
-                            area: { validators: { notEmpty: { message: '{{ __("admin.This field is required") }}' } } },
-                            project_cost: { validators: { notEmpty: { message: '{{ __("admin.This field is required") }}' } } },
-
-                        },
-                        plugins: {
-                            trigger: new FormValidation.plugins.Trigger(),
-                            bootstrap5: new FormValidation.plugins.Bootstrap5({
-                                rowSelector: '.fv-row',
-                                eleInvalidClass: 'is-invalid',
-                                eleValidClass: 'is-valid'
-                            }),
-                            submitButton: new FormValidation.plugins.SubmitButton(),
-                            // Removed DefaultSubmit
-                        }
-                    }
-                );
-
-                validator.on('core.form.invalid', function () {
-                    var invalidElements = form.querySelectorAll('.is-invalid');
-                    if (invalidElements.length > 0) {
-                        invalidElements[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        invalidElements[0].focus();
-                    }
-                });
-
-                const submitButton = element.querySelector('[data-kt-project-action="submit"]');
+                const submitButton = element.querySelector('[data-kt-project-evaluation-engineering-consultant-action="submit"]');
                 submitButton.addEventListener('click', e => {
                     e.preventDefault();
-                    if (validator) {
-                        validator.validate().then(function (status) {
-                            if (status == 'Valid') {
                                 submitButton.setAttribute('data-kt-indicator', 'on');
                                 submitButton.disabled = true;
 
+                                // Get the action value
+                                const action = submitButton.value;
+
                                 setTimeout(function () {
-                                    submitButton.removeAttribute('data-kt-indicator');
-                                    submitButton.disabled = false;
 
                                     const formData = new FormData(form);
-                                    const url = `{{ route('projects.store') }}`;
+                                    formData.append('action', action); // Ensure action is sent
 
+                                    const project_Id = document.getElementById('project_id').value;
+                                    const url = `{{url("/")}}/projects/engineering-consultant-evaluation/${project_Id}`; // Build the correct URL
+
+                                    submitButton.removeAttribute('data-kt-indicator');
+                                    submitButton.disabled = false;
                                     fetch(url, {
                                         method: 'POST',
                                         headers: {
@@ -158,9 +128,14 @@
                                         body: formData
                                     })
                                         .then(async response => {
-                                            const data = await response.json();
+                                            let data = {};
+                                            try {
+                                                data = await response.json();
+                                            } catch (e) {
+                                                console.error('Invalid JSON response');
+                                            }
 
-                                            if (response.ok) {
+                                            if (response.ok && data.status === 'success') {
                                                 Swal.fire({
                                                     text: "@lang('admin.Form has been successfully submitted!')",
                                                     icon: "success",
@@ -196,50 +171,86 @@
                                             });
                                         });
                                 }, 1000);
-                            } else {
-                                Swal.fire({
-                                    text: "@lang('admin.Sorry, looks like there are some errors detected, please try again.')",
-                                    icon: "error",
-                                    confirmButtonText: "@lang('admin.OK')",
-                                    customClass: { confirmButton: "btn btn-primary" }
-                                });
-                            }
-                        });
-                    }
+
                 });
 
                 // Cancel button handler
-                const cancelButton = element.querySelector('[data-kt-project-action="cancel"]');
+                const cancelButton = element.querySelector('[data-kt-project-evaluation-engineering-consultant-action="cancel"]');
                 cancelButton.addEventListener('click', e => {
                     e.preventDefault();
 
-                    Swal.fire({
-                        text: "@lang('admin.Are you sure you would like to cancel?')",
-                        icon: "warning",
-                        showCancelButton: true,
-                        buttonsStyling: false,
-                        confirmButtonText: "@lang('admin.Yes, cancel it!')",
-                        cancelButtonText: "@lang('admin.No, return')",
-                        customClass: {
-                            confirmButton: "btn btn-primary",
-                            cancelButton: "btn btn-active-light"
-                        }
-                    }).then(function (result) {
-                        if (result.value) {
                             window.location.href = "{{ route('projects.index') }}"; // Redirect to land.index route
+                });
+                const submitnoteButton = element.querySelector('[data-kt-project-evaluation-engineering-consultant-notes-action="submit"]');
+                submitnoteButton.addEventListener('click', e => {
+                    e.preventDefault();
+                    submitnoteButton.setAttribute('data-kt-indicator', 'on');
+                    submitnoteButton.disabled = true;
 
-                        } else if (result.dismiss === 'cancel') {
-                            Swal.fire({
-                                text: "@lang('admin.Your form has not been cancelled!.')",
-                                icon: "error",
-                                buttonsStyling: false,
-                                confirmButtonText: "@lang('OK')",
-                                customClass: {
-                                    confirmButton: "btn btn-primary",
+                    // Get the action value
+                    const action = submitnoteButton.value;
+
+                    setTimeout(function () {
+
+                        const formData = new FormData(form_notes);
+                        formData.append('action', action); // Ensure action is sent
+                        const project_Id = document.getElementById('project_id').value;
+                        const url = `{{url("/")}}/projects/engineering-consultant-evaluation/${project_Id}`; // Build the correct URL
+
+                        submitnoteButton.removeAttribute('data-kt-indicator');
+                        submitnoteButton.disabled = false;
+                        fetch(url, {
+                            method: 'POST',
+                            headers: {
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            },
+                            body: formData
+                        })
+                            .then(async response => {
+                                let data = {};
+                                try {
+                                    data = await response.json();
+                                } catch (e) {
+                                    console.error('Invalid JSON response');
                                 }
+
+                                if (response.ok && data.status === 'success') {
+                                    Swal.fire({
+                                        text: "@lang('admin.Form has been successfully submitted!')",
+                                        icon: "success",
+                                        confirmButtonText: "@lang('admin.OK')",
+                                        customClass: { confirmButton: "btn btn-primary" }
+                                    }).then(() => {
+                                        form.reset();
+                                        window.location.href = data.redirect; // Safe redirect from JS
+                                    });
+                                } else if (response.status === 422) {
+                                    let errorMessages = Object.values(data.errors).flat().join('<br>');
+                                    Swal.fire({
+                                        html: `<div class="text-start">${errorMessages}</div>`,
+                                        icon: "error",
+                                        confirmButtonText: "@lang('admin.OK')",
+                                        customClass: { confirmButton: "btn btn-danger" }
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        text: data.message || "@lang('admin.Something went wrong.')",
+                                        icon: "error",
+                                        confirmButtonText: "@lang('admin.OK')",
+                                        customClass: { confirmButton: "btn btn-danger" }
+                                    });
+                                }
+                            })
+                            .catch(error => {
+                                Swal.fire({
+                                    text: "@lang('admin.Unexpected error: ')",
+                                    icon: "error",
+                                    confirmButtonText: "@lang('admin.OK')",
+                                    customClass: { confirmButton: "btn btn-danger" }
+                                });
                             });
-                        }
-                    });
+                    }, 1000);
+
                 });
 
             }

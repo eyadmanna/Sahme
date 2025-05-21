@@ -38,27 +38,33 @@
         <!--begin::Post-->
         <div class="content flex-row-fluid" id="kt_content">
             @include('admin.Lands.components.data_land')
-            <form method="post" action="{{ route('lands.approval_legal_ownership', $land->id) }}" class="form" id="kt_approval_valuation_land" enctype="multipart/form-data">
-                @csrf
+            <div class="card card-flush mt-5">
+                <div class="card-body">
+                    <form method="post" action="{{ route('lands.approval_legal_ownership', $land->id) }}" class="form" id="kt_approval_valuation_land" enctype="multipart/form-data">
+                        @csrf
 
-                <!--begin::Actions-->
-                <div class="row mt-10">
-                    <div class="col-md-3 d-flex">
-                        <h2 class="mb-0 me-5">@lang('admin.Asking price')</h2>
-                        <h6 style="color: green">{{ $land->price}}</h6>
-                    </div>
-                    <div class="col-md-9 offset-md-3">
-                        <button data-land-id="{{ $land->id }}" type="submit" name="action" value="approved" class="btn btn-primary" data-kt-valuation-approval-action="submit">
-                            <span class="indicator-label">@lang('admin.Price adoption')</span>
-                            <span class="indicator-progress">@lang('admin.Please wait...')
+                        <!--begin::Actions-->
+                        <div class="row mt-10">
+                            <div class="col-md-3 d-flex">
+                                <h2 class="mb-0 me-5">@lang('admin.Asking price')</h2>
+                                <h6 style="color: green">{{ $land->price}}</h6>
+                            </div>
+                            <div class="col-md-9 offset-md-3 text-end">
+                                <button type="button" class="btn btn-light me-3"  data-kt-valuation-approval-action="cancel" style="margin-inline-start: inherit">@lang('admin.Discard')</button>
+
+                                <button data-land-id="{{ $land->id }}" type="submit" name="action" value="approved" class="btn btn-primary" data-kt-valuation-approval-action="submit">
+                                    <span class="indicator-label">@lang('admin.Price adoption')</span>
+                                    <span class="indicator-progress">@lang('admin.Please wait...')
                                                                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                        </button>
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#kt_modal_modify_price">@lang('admin.Request to modify the price')</button>
+                                </button>
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#kt_modal_modify_price">@lang('admin.Request to modify the price')</button>
 
-                    </div>
+                            </div>
+                        </div>
+                        <!--end::Actions-->
+                    </form>
                 </div>
-                <!--end::Actions-->
-            </form>
+            </div>
 
         </div>
         <!--end::Post-->

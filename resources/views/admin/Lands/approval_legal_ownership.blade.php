@@ -7,7 +7,7 @@
             <!--begin::Page title-->
             <div class="page-title d-flex flex-column align-items-start me-3 py-2 py-lg-0 gap-2">
                 <!--begin::Title-->
-                <h1 class="d-flex text-gray-900 fw-bold m-0 fs-3">@lang('admin.Adding land for investment')</h1>
+                <h1 class="d-flex text-gray-900 fw-bold m-0 fs-3">@lang('admin.Legal approval of the land')</h1>
                 <!--end::Title-->
                 <!--begin::Breadcrumb-->
                 <ul class="breadcrumb breadcrumb-dot fw-semibold text-gray-600 fs-7">
@@ -23,7 +23,7 @@
                     <li class="breadcrumb-item text-gray-600">@lang('admin.Show lands')</li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-gray-600">@lang('admin.View land')</li>
+                    <li class="breadcrumb-item text-gray-600">@lang('admin.Evaluation of the legal partner')</li>
                     <!--end::Item-->
                 </ul>
                 <!--end::Breadcrumb-->
@@ -83,27 +83,28 @@
                             <textarea class="form-control" name="legal_notes">{{$land->legal_notes}}</textarea>
                         </div>
                     </div>
+                    <!--begin::Actions-->
+                    <div class="row mt-10">
+                        <div class="col-md-9 offset-md-3">
+                            <button data-land-id="{{ $land->id }}" type="submit" name="action" value="approved" class="btn btn-primary" data-kt-lands-legal-action="submit">
+                                <span class="indicator-label">@lang('admin.Land adoption')</span>
+                                <span class="indicator-progress">@lang('admin.Please wait...')
+                                                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                            </button>
+                            <button data-land-id="{{ $land->id }}" type="submit" name="action" value="rejected" class="btn btn-danger" data-kt-lands-legal-action="submit">
+                                <span class="indicator-label">@lang('admin.Refusal to approve the land')</span>
+                                <span class="indicator-progress">@lang('admin.Please wait...')
+                                                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                            </button>
+                            <button type="button" class="btn btn-light me-3"  data-kt-lands-legal-action="cancel" style="margin-inline-start: inherit">@lang('admin.Discard')</button>
+
+                        </div>
+                    </div>
+                    <!--end::Actions-->
                 </div>
             </div>
             <!--end::Card-->
-                <!--begin::Actions-->
-                <div class="row mt-10">
-                    <div class="col-md-9 offset-md-3">
-                        <button data-land-id="{{ $land->id }}" type="submit" name="action" value="approved" class="btn btn-primary" data-kt-lands-legal-action="submit">
-                            <span class="indicator-label">@lang('admin.Land adoption')</span>
-                            <span class="indicator-progress">@lang('admin.Please wait...')
-                                                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                        </button>
-                        <button data-land-id="{{ $land->id }}" type="submit" name="action" value="rejected" class="btn btn-danger" data-kt-lands-legal-action="submit">
-                            <span class="indicator-label">@lang('admin.Refusal to approve the land')</span>
-                            <span class="indicator-progress">@lang('admin.Please wait...')
-                                                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                        </button>
-                        <button type="button" class="btn btn-light me-3" style="margin-inline-start: inherit">@lang('admin.Discard')</button>
 
-                    </div>
-                </div>
-                <!--end::Actions-->
             </form>
 
         </div>

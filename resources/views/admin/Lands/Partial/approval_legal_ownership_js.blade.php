@@ -117,6 +117,39 @@
                         });
                     });
                 });
+                // Cancel button handler
+                const cancelButton = element.querySelector('[data-kt-lands-legal-action="cancel"]');
+                cancelButton.addEventListener('click', e => {
+                    e.preventDefault();
+
+                    Swal.fire({
+                        text: "@lang('admin.Are you sure you would like to cancel?')",
+                        icon: "warning",
+                        showCancelButton: true,
+                        buttonsStyling: false,
+                        confirmButtonText: "@lang('admin.Yes, cancel it!')",
+                        cancelButtonText: "@lang('admin.No, return')",
+                        customClass: {
+                            confirmButton: "btn btn-primary",
+                            cancelButton: "btn btn-active-light"
+                        }
+                    }).then(function (result) {
+                        if (result.value) {
+                            window.location.href = "{{ route('lands.index') }}"; // Redirect to land.index route
+
+                        } else if (result.dismiss === 'cancel') {
+                            Swal.fire({
+                                text: "@lang('admin.Your form has not been cancelled!.')",
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "@lang('OK')",
+                                customClass: {
+                                    confirmButton: "btn btn-primary",
+                                }
+                            });
+                        }
+                    });
+                });
             }
             return {
                 init: function () {
