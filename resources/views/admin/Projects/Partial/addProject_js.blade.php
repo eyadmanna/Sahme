@@ -45,6 +45,55 @@
     }
 
     $(document).ready(function () {
+        $(document).on('click', '.search_btn', function (e) {
+            e.preventDefault();
+            let data = {
+                province_cd: $('select[name="province_cd"]').val(),
+                city_cd: $('select[name="city_cd"]').val(),
+                district_cd: $('select[name="district_cd"]').val(),
+                address: $('input[name="address"]').val(),
+                ownership_type_cd: $('select[name="ownership_type_cd"]').val(),
+                area_from: $('input[name="area_from"]').val(),
+                area_to: $('input[name="area_to"]').val(),
+                price_from: $('input[name="price_from"]').val(),
+                price_to: $('input[name="price_to"]').val(),
+
+                // أضف أي عناصر أخرى بنفس الطريقة
+            };
+
+            console.log(data);
+
+            $.ajax({
+                url: '{{ route("projects.land_filter") }}',
+                method: 'GET',
+                data: data,
+                beforeSend: function () {
+                    $('#land_id').html('<option disabled selected>جاري التحميل...</option>');
+                },
+                success: function (response) {
+                    // تأكد أن الـ response يحتوي على مصفوفة lands
+                    let select = $('#land_id');
+                    select.empty();
+                    select.append('<option></option>'); // لإعادة الخيار الفارغ
+
+                    response.lands.forEach(function (land) {
+                        select.append(`
+                        <option value="${land.id}" data-lat="${land.lat}" data-long="${land.long}" data-investor_id="${land.investor_id}">
+                            ${land.investor_name} - ${land.area}م2 - ${land.land_description}
+                        </option>
+                    `);
+                    });
+
+                    // إعادة تهيئة Select2
+                    select.select2();
+                },
+                error: function (xhr) {
+                    alert('حدث خطأ أثناء جلب البيانات');
+                    console.error(xhr);
+                }
+            });
+        });
+
         $(".kt_datepicker").flatpickr();
         // Initialize select2
         $('select[name="land_id"]').select2();
@@ -290,6 +339,7 @@
 // On document ready
         KTUtil.onDOMContentLoaded(function () {
             KTProjectsAddproject.init();
+
         });
 
     });
