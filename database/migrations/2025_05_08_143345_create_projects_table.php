@@ -24,8 +24,8 @@ class CreateProjectsTable extends Migration
             $table->integer('approval_status_cd')->nullable();
             $table->text('decline_reasons')->nullable();
             $table->integer('project_status_cd')->nullable();
-            $table->date('offers_start_date');
-            $table->date('offers_end_date');
+            $table->date('offers_start_date')->nullable();
+            $table->date('offers_end_date')->nullable();
             //$table->foreignId('awarded_engineering_offer_id')->nullable()->constrained('engineering_offers')->onUpdate('cascade')->onDelete('set null');
             $table->integer('awarded_engineering_offer_id')->nullable();
             $table->foreignId('awarded_engineering_added_by')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('set null');

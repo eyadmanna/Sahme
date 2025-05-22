@@ -429,6 +429,39 @@ class LandsController extends Controller
         if ($request->filled('location_cities')) {
             $lands->where('city_cd', 'like', '%' . $request->location_cities . '%');
         }
+        if ($request->filled('location_areas')) {
+            $lands->where('district_cd', 'like', '%' . $request->location_areas . '%');
+        }
+        if ($request->filled('address')) {
+            $lands->where('address', 'like', '%' . $request->address . '%');
+        }
+        if ($request->filled('ownership_type_cd')) {
+            $lands->where('ownership_type_cd', 'like', '%' . $request->ownership_type_cd . '%');
+        }
+        // استعلام عن ID الحالة القانونية والمثمن
+        $valuationApprovedId = Lookups::where('master_key', 'valuation_status_cd')->where('item_key', 'approved')->value('id');
+        $legalApprovedId     = Lookups::where('master_key', 'legal_status_cd')->where('item_key', 'approved')->value('id');
+
+        if ($request->filled('accreditation_status') && $request->accreditation_status == 'approved') {
+            $lands->where('valuation_status_cd', $valuationApprovedId)
+                ->where('legal_status_cd', $legalApprovedId);
+        } elseif ($request->filled('accreditation_status') && $request->accreditation_status == 'pending') {
+            $lands->where('valuation_status_cd', '!=', $valuationApprovedId)
+                ->where('legal_status_cd', '!=', $legalApprovedId);
+        }
+        if ($request->filled('area_from')) {
+            $lands->where('area', '>=', $request->area_from);
+        }
+
+        if ($request->filled('area_to')) {
+            $lands->where('area', '<=', $request->area_to);
+        }
+        if ($request->filled('price_from')) {
+            $lands->where('price', '>=', $request->price_from);
+        }
+        if ($request->filled('price_to')) {
+            $lands->where('price', '<=', $request->price_to);
+        }
         return DataTables::of($lands)
             ->addColumn('investor_name', function ($land) {
                 return '<div class="badge badge-light fw-bold">' . $land->investor->full_name . '</div>';

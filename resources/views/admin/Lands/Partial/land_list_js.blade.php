@@ -85,6 +85,14 @@
                 data: function (d) {
                     d.province_cd = $('#province_cd').val();
                     d.location_cities = $('#location_cities').val();
+                    d.location_areas = $('#location_areas').val();
+                    d.address = $('#address').val();
+                    d.ownership_type_cd = $('#ownership_type_cd').val();
+                    d.accreditation_status = $('#accreditation_status').val();
+                    d.area_from = $('#area_from').val();
+                    d.area_to = $('#area_to').val();
+                    d.price_from = $('#price_from').val();
+                    d.price_to = $('#price_to').val();
                 }
             },
             columns: [
@@ -126,10 +134,17 @@
             $('#filters')[0].reset(); // clear form fields
             // Reset the Select2 value manually
             $('#province_cd').val(null).trigger('change'); // Reset and update UI
-            $('#location_cities').val(null).trigger('change'); // Reset and update UI
+            $('#location_cities').val(null).trigger('change');
+            $('#location_areas').val(null).trigger('change');
+            $('#address').val(null).trigger('change');
+            $('#ownership_type_cd').val(null).trigger('change');
+            $('#accreditation_status').val(null).trigger('change');
+            $('#area_from').val(null).trigger('change');
+            $('#area_to').val(null).trigger('change');
+            $('#price_from').val(null).trigger('change');
+            $('#price_to').val(null).trigger('change');
             table.draw(); // refresh table
         });
-
     });
 
 
