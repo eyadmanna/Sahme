@@ -1,40 +1,4 @@
 <script>
-    $(document).on('click', '.search_btn', function (e) {
-        e.preventDefault();
-        var formData = $('#filters').serialize();
-        console.log($('#filters').html());
-        console.log(formData);
-        $.ajax({
-            url: '{{ route("projects.land_filter") }}',
-            method: 'GET',
-            data: formData,
-            beforeSend: function () {
-                $('#land_id').html('<option disabled selected>جاري التحميل...</option>');
-            },
-            success: function (response) {
-                // تأكد أن الـ response يحتوي على مصفوفة lands
-                let select = $('#land_id');
-                select.empty();
-                select.append('<option></option>'); // لإعادة الخيار الفارغ
-
-                response.lands.forEach(function (land) {
-                    select.append(`
-                        <option value="${land.id}" data-lat="${land.lat}" data-long="${land.long}" data-investor_id="${land.investor_id}">
-                            ${land.investor_name} - ${land.area}م2 - ${land.land_description}
-                        </option>
-                    `);
-                });
-
-                // إعادة تهيئة Select2
-                select.select2();
-            },
-            error: function (xhr) {
-                alert('حدث خطأ أثناء جلب البيانات');
-                console.error(xhr);
-            }
-        });
-    });
-
     let myMap;
     let myMarker;
 
@@ -60,9 +24,61 @@
 
                 // أضف أي عناصر أخرى بنفس الطريقة
             };
+            $.ajax({
+                url: '{{ route("projects.land_filter") }}',
+                method: 'GET',
+                data: data,
+                beforeSend: function () {
+                    $('#land_id').html('<option disabled selected>جاري التحميل...</option>');
+                },
+                success: function (response) {
+                    // تأكد أن الـ response يحتوي على مصفوفة lands
+                    let select = $('#land_id');
+                    select.empty();
+                    select.append('<option></option>'); // لإعادة الخيار الفارغ
 
-            console.log(data);
+                    response.lands.forEach(function (land) {
+                        select.append(`
+                        <option value="${land.id}" data-lat="${land.lat}" data-long="${land.long}" data-investor_id="${land.investor_id}">
+                            ${land.investor_name} - ${land.area}م2 - ${land.land_description}
+                        </option>
+                    `);
+                    });
 
+                    // إعادة تهيئة Select2
+                    select.select2();
+                },
+                error: function (xhr) {
+                    alert('حدث خطأ أثناء جلب البيانات');
+                    console.error(xhr);
+                }
+            });
+        });
+        $(document).on('click', '.reset_search', function (e) {
+            e.preventDefault();
+            // أولًا: إفراغ جميع الحقول
+            $('select[name="province_cd"]').val(null).trigger('change');
+            $('select[name="city_cd"]').val(null).trigger('change');
+            $('select[name="district_cd"]').val(null).trigger('change');
+            $('input[name="address"]').val('');
+            $('select[name="ownership_type_cd"]').val(null).trigger('change');
+            $('input[name="area_from"]').val('');
+            $('input[name="area_to"]').val('');
+            $('input[name="price_from"]').val('');
+            $('input[name="price_to"]').val('');
+
+            // ثانيًا: إنشاء كائن البيانات مع كل القيم فارغة
+            let data = {
+                province_cd: null,
+                city_cd: null,
+                district_cd: null,
+                address: null,
+                ownership_type_cd: null,
+                area_from: null,
+                area_to: null,
+                price_from: null,
+                price_to: null
+            };
             $.ajax({
                 url: '{{ route("projects.land_filter") }}',
                 method: 'GET',

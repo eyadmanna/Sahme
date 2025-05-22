@@ -87,8 +87,17 @@ class ProjectController extends Controller
 
     }
     public function edit($id){
+        $data["provinces"] = Lookups::query()->where([
+            "master_key" => "province"
+        ])->whereNot("parent_id", 0)->where("status", 1)->get();
+        $data["ownership_type"] = Lookups::query()->where([
+            "master_key" => "ownership_type_cd"
+        ])->whereNot("parent_id", 0)->where("status", 1)->get();
+
         $data['project'] = Projects::find($id);
-        $data['lands'] = Lands::query()->where('valuation_status_cd',22)->where('legal_status_cd',25)->get();
+        $data['lands'] = Lands::all()->filter(function($land) {
+            return $land->isValuationApproved() && $land->isLegalApproved();
+        });
 
         return view('admin.Projects.editProject',$data);
     }

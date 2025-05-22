@@ -49,7 +49,7 @@
 @endsection
 @section('js')
     @include("admin.Lands.Partial.general_land_js")
-    @include("admin.Lands.Partial.addLand_js")
+    @include("admin.Lands.Partial.viewLand_js")
 
 @endsection
 
