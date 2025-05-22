@@ -28,6 +28,9 @@ class LandsController extends Controller
         $data["provinces"] = Lookups::query()->where([
             "master_key" => "province"
         ])->whereNot("parent_id", 0)->where("status", 1)->get();
+        $data["ownership_type"] = Lookups::query()->where([
+            "master_key" => "ownership_type_cd"
+        ])->whereNot("parent_id", 0)->where("status", 1)->get();
         return view('admin.Lands.list',$data);
     }
     public function add(){
@@ -286,6 +289,10 @@ class LandsController extends Controller
             ->where('reference_id_fk', $id)
             ->where('attachment_type_cd', 44)
             ->get();
+        $data['land_image'] = Attachments::query()
+            ->where('reference_type','land_images')
+            ->where('reference_id_fk',$id)
+            ->get();
         return view('admin.Lands.view',$data);
     }
 
@@ -327,6 +334,10 @@ class LandsController extends Controller
             ]);
         }
 
+        $data['land_image'] = Attachments::query()
+            ->where('reference_type','land_images')
+            ->where('reference_id_fk',$id)
+            ->get();
             return view('admin.Lands.approval_legal_ownership',$data);
     }
     public function upload_legal_attachment(Request $request, $id)
@@ -367,6 +378,10 @@ class LandsController extends Controller
             ->where('reference_type', 'land')
             ->where('reference_id_fk', $id)
             ->where('attachment_type_cd', 44)
+            ->get();
+        $data['land_image'] = Attachments::query()
+            ->where('reference_type','land_images')
+            ->where('reference_id_fk',$id)
             ->get();
 
         if ($request->isMethod('post')){
@@ -409,9 +424,11 @@ class LandsController extends Controller
     public function getLands(Request $request)
     {
         $lands = Lands::query()->orderBy('id', 'desc');
-
         if ($request->filled('province_cd')) {
             $lands->where('province_cd', 'like', '%' . $request->province_cd . '%');
+        }
+        if ($request->filled('location_cities')) {
+            $lands->where('city_cd', 'like', '%' . $request->location_cities . '%');
         }
         return DataTables::of($lands)
             ->addColumn('investor_name', function ($land) {
