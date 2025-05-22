@@ -53,6 +53,80 @@
                     <!--end::Card header-->
                     <!--begin::Card body-->
                     <div class="card-body">
+                        <div id="kt_land_view_details" class="collapse mb-5">
+                            <div class="py-5 px-10">
+                                <div id="filters" class="kt-form kt-form--label-right form-control">
+                                    <div class="form-group row">
+                                        <div class="col-form-label col-lg-3 col-sm-6">
+                                            <label class="form-control-label">@lang('admin.Province')</label>
+                                            <select id="province_cd" class="form-select location_province" data-control="select2" name="province_cd">
+                                                <option value="" selected>@lang('admin.Select')..</option>
+                                                @foreach ($provinces as $val)
+                                                    <option value="{{ $val->id }}">
+                                                        {{ $val->{'name_' . app()->getLocale()} }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-form-label col-lg-3 col-sm-6" id="cities_block">
+                                            <label class="form-label">@lang('admin.City')</label>
+                                            <select class="form-select location_city" data-control="select2" name="city_cd" id="location_cities" data-placeholder="@lang('engineering.select_city')">
+                                                <option value="" selected>@lang('admin.Select')..</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-form-label col-lg-3 col-sm-6">
+                                            <label class="form-label">@lang('admin.District')</label>
+                                            <select class="form-select" id="location_areas" data-control="select2"  name="district_cd" data-placeholder="@lang('engineering.select_district')">
+                                                <option value="" selected>@lang('admin.Select')..</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-form-label col-lg-3 col-sm-6">
+                                            <label class="form-label">@lang('admin.Address in detail')</label>
+                                            <input class="form-control" name="address" id="address" placeholder="@lang('admin.Enter detailed address')">
+
+                                        </div>
+                                        <div class="col-form-label col-lg-3 col-sm-6">
+                                            <label class="form-label">@lang('admin.Type of land ownership')</label>
+                                            <select class="form-select" id="ownership_type_cd" name="ownership_type_cd" data-control="select2" data-placeholder="@lang('admin.Choose the land ownership type')">
+                                                <option value="" disabled selected>@lang('admin.Choose the land ownership type')</option>
+                                                @foreach($ownership_type as $ownership_types)
+                                                    <option value="{{$ownership_types->id}}">{{$ownership_types->{'name_'.app()->getLocale()} }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-form-label col-lg-3 col-sm-6">
+                                            <label class="form-label">@lang('admin.Area')</label>
+                                            <div class="col-md-6 col-sm-12">
+                                                <input class="form-control text-start" id="area_from" name="area_from" type="number" placeholder="@lang('admin.From')">
+                                            </div>
+
+                                            <div class="col-md-6 col-sm-12">
+                                                <input class="form-control text-start" id="area_to" name="area_to" type="number" placeholder="@lang('admin.To')">
+                                            </div>
+                                        </div>
+                                        <div class="col-form-label col-lg-3 col-sm-6">
+                                            <label class="form-label">@lang('admin.Price')</label>
+                                            <div class="col-md-6 col-sm-12">
+                                                <input class="form-control text-start" id="price_from" name="price_from" type="number" placeholder="@lang('admin.From')">
+                                            </div>
+
+                                            <div class="col-md-6 col-sm-12">
+                                                <input class="form-control text-start" id="price_to" name="price_to" type="number" placeholder="@lang('admin.To')">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-form-label col-lg-2 col-sm-6">
+                                            <a href="javascript:void(0)" style="width: 100%" class="btn btn-info search_btn"><i class="la la-search"></i> @lang('admin.Search')</a>
+                                        </div>
+                                        <div class="col-form-label col-lg-2 col-sm-6">
+                                            <a href="javascript:void(0)" style="width: 100%" class="btn btn-secondary reset_search"><i class="la la-recycle"></i> @lang('admin.Reset')</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <!--begin::Col-->
                         <div class="col-md-6 fv-row">
                             <div class="d-flex align-items-center gap-2">
@@ -74,6 +148,15 @@
                                     <i class="ki-duotone ki-plus fs-2"></i>
                                 </a>
                                 <!--end::Add Button-->
+                                <!--begin::Filter-->
+                                <button type="button" class="btn btn-light-facebook me-3" data-bs-toggle="collapse" href="#kt_land_view_details"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('admin.Advanced search')">
+                                    <i class="ki-duotone ki-filter fs-2">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                    </i>
+                                </button>
+                                <!--end::Filter-->
                             </div>
                         </div>
                         <!--end::Col-->
@@ -147,16 +230,6 @@
                     <div class="card-body">
                         <!--begin::Form-->
                         <div class="row g-4 mb-15">
-                            <div class="col-md-6 fv-row">
-                                <label class="required form-label">@lang('admin.Project name')</label>
-                                <input class="form-control" name="title" value="{{$project->title}}">
-                            </div>
-                            <div class="col-md-6 fv-row">
-                                <label class="form-label">@lang('admin.Project description')</label>
-                                <textarea  row="3" class="form-control" name="description">{{$project->description}}</textarea>
-                            </div>
-                        </div>
-                        <div class="row g-4 mb-15">
                             <div class="col-md-4 fv-row">
                                 <label class="required form-label">@lang('admin.Project type')</label>
                                 <select name="project_type_cd" class="form-select" data-control="select2" data-placeholder="@lang('admin.Project type')">
@@ -180,15 +253,13 @@
                                     <span class="input-group-text">$</span>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row g-4 mb-15">
                             <div class="col-md-6 fv-row">
-                                <label class="required form-label">@lang('admin.Engineering bid opening date')</label>
-                                <input type="date" name="offers_start_date" class="form-control text-start kt_datepicker" value="{{$project->offers_start_date}}">
+                                <label class="required form-label">@lang('admin.Project name')</label>
+                                <input class="form-control" name="title" value="{{$project->title}}">
                             </div>
                             <div class="col-md-6 fv-row">
-                                <label class="required form-label">@lang('admin.Closing date for engineering bids')</label>
-                                <input type="date" name="offers_end_date" value="{{$project->offers_end_date}}" class="form-control text-start kt_datepicker">
+                                <label class="form-label">@lang('admin.Project description')</label>
+                                <textarea  row="3" class="form-control" name="description">{{$project->description}}</textarea>
                             </div>
                         </div>
                         <div class="row g-4 mb-15">

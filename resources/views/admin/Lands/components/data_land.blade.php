@@ -121,15 +121,21 @@
                     <label class="form-label required">@lang('admin.Land Photos')</label>
 
                     <div class="row mt-4" id="existing-images">
-                        <div id="land_images_container" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px;">
+                        <div id="land_images_container"
+                             style="display: flex; overflow-x: auto; gap: 15px; padding-bottom: 10px;">
                             @foreach ($land_image as $image)
-                                <div id="image-{{ $image->id }}" style="position: relative;">
+                                <div id="image-{{ $image->id }}"
+                                     style="flex: 0 0 auto; position: relative; width: 200px; cursor: pointer;"
+                                     data-image="{{ asset('storage/' . $image->file_path) }}"
+                                     class="openImagePreview">
                                     <div class="card shadow-sm">
-                                        <img src="{{ asset('storage/' . $image->file_path) }}" class="card-img-top rounded" style="height: 180px; object-fit: cover;">
+                                        <img src="{{ asset('storage/' . $image->file_path) }}" class="card-img-top rounded"
+                                             style="height: 180px; object-fit: cover; width: 100%;">
                                     </div>
                                 </div>
                             @endforeach
                         </div>
+
                     </div>
                     <div class="row mt-4" id="preview_images" style="gap: 15px;"></div>
 
@@ -203,9 +209,20 @@
             @endif
         </div>
     </div>
+    <!-- Modal لعرض الصورة -->
+    <div class="modal fade" id="imagePreviewModal" tabindex="-1" aria-labelledby="imagePreviewModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-body p-0">
+                    <img src="" id="previewImage" class="w-100 rounded" style="max-height: 80vh; object-fit: contain;">
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!--end::Card-->
 
-    <script>
+ {{--   <script>
         let selectedImages = [];
 
         document.getElementById('land_images').addEventListener('change', function (event) {
@@ -259,4 +276,19 @@
                 updatePreview(); // إعادة عرض الصور
             }
         });
-    </script>
+    </script>--}}
+    <style>
+        #land_images_container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        #land_images_container::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 4px;
+        }
+
+        #land_images_container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+    </style>
+

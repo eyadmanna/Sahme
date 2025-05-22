@@ -182,18 +182,24 @@
                                 <input type="hidden" name="deleted_images" id="deleted_images">
 
                                 <div class="row mt-4" id="existing-images">
-                                    <div id="land_images_container" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px;">
+                                    <div id="land_images_container"
+                                         style="display: flex; overflow-x: auto; gap: 15px; padding-bottom: 10px;">
                                         @foreach ($land_image as $image)
-                                            <div id="image-{{ $image->id }}" style="position: relative;">
+                                            <div id="image-{{ $image->id }}"
+                                                 style="flex: 0 0 auto; position: relative; width: 200px; cursor: pointer;"
+                                                 data-image="{{ asset('storage/' . $image->file_path) }}"
+                                                 class="openImagePreview">
                                                 <div class="card shadow-sm">
-                                                    <img src="{{ asset('storage/' . $image->file_path) }}" class="card-img-top rounded" style="height: 180px; object-fit: cover;">
-                                                    <button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0 m-2 delete-image-btn" data-id="{{ $image->id }}">
-                                                        &times;
-                                                    </button>
+                                                    <img src="{{ asset('storage/' . $image->file_path) }}" class="card-img-top rounded"
+                                                         style="height: 180px; object-fit: cover; width: 100%;">
                                                 </div>
+                                                <button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0 m-2 delete-image-btn" data-id="{{ $image->id }}">
+                                                    &times;
+                                                </button>
                                             </div>
                                         @endforeach
                                     </div>
+
                                 </div>
                                 <div class="row mt-4" id="preview_images" style="gap: 15px;"></div>
 
