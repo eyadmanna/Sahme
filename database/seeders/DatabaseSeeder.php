@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             LookupsSeeder::class,
             EngineeringPartnerSeeder::class,
             InvestorSeeder::class,
+            SettingsSeeder::class,
         ]);
     }
 }
