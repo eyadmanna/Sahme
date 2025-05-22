@@ -153,7 +153,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="form-group row">
                                 <div class="col-form-label col-lg-2 col-sm-6">
                                     <a href="javascript:void(0)" style="width: 100%" class="btn btn-info search_btn"><i class="la la-search"></i> @lang('admin.Search')</a>
