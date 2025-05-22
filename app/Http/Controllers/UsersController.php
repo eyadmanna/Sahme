@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\SendLoginData;
+use App\Mail\SendGenericMail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -64,7 +64,11 @@ class UsersController extends Controller
             $user->password = $plainPassword;
 
             if (isset($request->send_login_data)){
-                \Mail::to($user->email)->send(new SendLoginData($user, $plainPassword));
+                $subject = 'مرحباً بك في سهمي';
+                $body_data = ['user' => $user, 'plainPassword' => $plainPassword];
+                $view_file = 'emails.send_login_data';
+                \Mail::to($user->email)->send(new SendGenericMail($subject, $body_data, $view_file));
+                // \Mail::to($user->email)->send(new SendLoginData($user, $plainPassword));
             }
             $user->save();
 
