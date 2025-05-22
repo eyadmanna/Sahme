@@ -544,6 +544,4 @@ class LandsController extends Controller
         }
         return view('admin.Projects.ajax.land_details', compact('land'))->render();
     }
-    // LandController.php
-
 }

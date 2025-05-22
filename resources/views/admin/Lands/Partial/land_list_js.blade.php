@@ -145,7 +145,6 @@
             $('#price_to').val(null).trigger('change');
             table.draw(); // refresh table
         });
-
     });
 
 
