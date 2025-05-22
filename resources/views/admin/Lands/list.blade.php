@@ -98,6 +98,32 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                <div class="col-form-label col-lg-3 col-sm-6" id="cities_block">
+                                    <label class="form-label">@lang('admin.City')</label>
+                                    <select class="form-select location_city" data-control="select2" name="city_cd" id="location_cities" data-placeholder="@lang('engineering.select_city')">
+                                        <option value="" selected>@lang('admin.Select')..</option>
+                                    </select>
+                                </div>
+                                <div class="col-form-label col-lg-3 col-sm-6" id="areas_block">
+                                    <label class="form-label">@lang('admin.District')</label>
+                                    <select class="form-select" id="location_areas" data-control="select2"  name="district_cd" data-placeholder="@lang('engineering.select_district')">
+                                           <option value="" selected>@lang('admin.Select')..</option>
+                                    </select>
+                                </div>
+                                <div class="col-form-label col-lg-3 col-sm-6" id="areas_block">
+                                    <label class="form-label required">@lang('admin.Address in detail')</label>
+                                    <input class="form-control" name="address" placeholder="@lang('admin.Enter detailed address')">
+
+                                </div>
+                                <div class="col-form-label col-lg-3 col-sm-6" id="areas_block">
+                                    <label class="form-label required">@lang('admin.Type of land ownership')</label>
+                                    <select class="form-select" name="ownership_type_cd" data-control="select2" data-placeholder="@lang('admin.Choose the land ownership type')">
+                                        <option value="" disabled selected>@lang('admin.Choose the land ownership type')</option>
+                                        @foreach($ownership_type as $ownership_types)
+                                            <option value="{{$ownership_types->id}}">{{$ownership_types->{'name_'.app()->getLocale()} }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
 
                             <div class="form-group row">
@@ -139,7 +165,6 @@
     <!--end::Container-->
 @endsection
 @section('js')
-    @include("admin.Lands.Partial.general_land_js")
     @include("admin.Lands.Partial.land_list_js")
 @endsection
 

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('attachments', function (Blueprint $table) {
             $table->id();
-            $table->enum('reference_type', ['land']);
+            $table->enum('reference_type', ['land','land_images']);
             $table->unsignedBigInteger('reference_id_fk')->index();
             $table->unsignedBigInteger('referenced_id_fk')->nullable()->index();
             $table->string('file_type')->nullable();

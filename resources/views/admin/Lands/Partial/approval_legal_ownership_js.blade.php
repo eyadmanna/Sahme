@@ -29,7 +29,6 @@
         var KTLandsSubmitLegal  = function () {
             var form = document.querySelector('#kt_approval_legal_land');
             const element = document.getElementById('kt_content_container_land');
-            const land_id = element.querySelector('#land_id')
 
             var initAddlandSubmitLegal = function () {
 
