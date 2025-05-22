@@ -1,4 +1,40 @@
 <script>
+    $(document).on('click', '.search_btn', function (e) {
+        e.preventDefault();
+        var formData = $('#filters').serialize();
+        console.log($('#filters').html());
+        console.log(formData);
+        $.ajax({
+            url: '{{ route("projects.land_filter") }}',
+            method: 'GET',
+            data: formData,
+            beforeSend: function () {
+                $('#land_id').html('<option disabled selected>جاري التحميل...</option>');
+            },
+            success: function (response) {
+                // تأكد أن الـ response يحتوي على مصفوفة lands
+                let select = $('#land_id');
+                select.empty();
+                select.append('<option></option>'); // لإعادة الخيار الفارغ
+
+                response.lands.forEach(function (land) {
+                    select.append(`
+                        <option value="${land.id}" data-lat="${land.lat}" data-long="${land.long}" data-investor_id="${land.investor_id}">
+                            ${land.investor_name} - ${land.area}م2 - ${land.land_description}
+                        </option>
+                    `);
+                });
+
+                // إعادة تهيئة Select2
+                select.select2();
+            },
+            error: function (xhr) {
+                alert('حدث خطأ أثناء جلب البيانات');
+                console.error(xhr);
+            }
+        });
+    });
+
     let myMap;
     let myMarker;
 
