@@ -89,7 +89,7 @@
                         <div class="row g-4 mb-15">
                             <div class="col-md-8">
                                 <label class="form-label required">@lang('admin.Description of the land')</label>
-                               <input class="form-control" id="land_description" name="land_description" type="text">
+                               <input class="form-control" id="land_description" name="land_description" type="text" placeholder="@lang('admin.Enter land description here')">
                             </div>
                         </div>
                         <div class="row g-4 mb-15">
@@ -151,11 +151,11 @@
                         <div class="row g-4 mb-15">
                             <div class="col-md-4">
                                 <label class="form-label">@lang('admin.Border')</label>
-                                <textarea class="form-control" rows="3" name="borders"></textarea>
+                                <textarea class="form-control" rows="3" name="borders" placeholder="@lang('admin.Enter borders of the land here')"></textarea>
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label">@lang('admin.Available services')</label>
-                                <textarea class="form-control" rows="3" name="services"></textarea>
+                                <textarea class="form-control" rows="3" name="services" placeholder="@lang('admin.Enter services of the land here')"></textarea>
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label required">@lang('admin.Asking price')</label>
@@ -185,7 +185,7 @@
                 <!--begin::Card - Land Details-->
                 <div class="card card-flush mt-5">
                     <div class="card-header pt-8">
-                        <h5>@lang('admin.Attachments')</h5>
+                        <h5>@lang('admin.Attached Documents')</h5>
                     </div>
                     <div class="card-body">
                         <!--begin::Repeater-->

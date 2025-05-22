@@ -188,6 +188,10 @@ return [
     'Price must be numeric' => 'يجب أن يكون السعر رقميًا',
     'Error loading data.' => 'حدث خطأ أثناء تحميل البيانات.',
     'No attachments found.' => 'لم يتم العثور على أي مرفقات',
+    'Enter land description here' => 'أدخل وصف الارض هنا',
+    'Enter borders of the land here' => 'مثال- الحد الشمالي: شارع 8 متر، الحد الجنوبي: أرض 500 متر، الحد الشرقي: شارع 16 متر، الحد الغربي: عمارة تجارية، ..الخ ',
+    'Enter services of the land here' => 'مثال - يتوفر خط مياه بلدية، يتوفر تمديد كهرباء، يتوفر شبكة انترنت، ..الخ',
+    'Attached Documents' => 'المستندات المرفقة',
 
     /*Projects*/
     'Projects'=>'المشاريع',

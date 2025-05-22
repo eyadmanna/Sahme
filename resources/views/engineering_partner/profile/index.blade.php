@@ -56,8 +56,25 @@
                                     <div class="d-flex align-items-center mb-2">
                                         <a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bold me-1">{{$user->company_name}}</a>
                                         @if($user->isApproved())
-                                            <a href="#">
-                                                <i class="ki-duotone ki-verify fs-1 text-primary">
+                                            <a href="#" id="badge_status">
+                                                <i class="ki-duotone ki-verify fs-2hx text-primary">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                </i>
+                                            </a>
+                                        @endif
+                                        @if($user->isRejected())
+                                            <a href="#"  id="badge_status">
+                                                <i class="ki-duotone ki-shield-cross fs-2hx text-danger" >
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                    <span class="path3"></span>
+                                                </i>
+                                            </a>
+                                        @endif
+                                        @if($user->isPending())
+                                            <a href="#"  id="badge_status">
+                                                <i class="ki-duotone ki-watch fs-2hx text-warning" >
                                                     <span class="path1"></span>
                                                     <span class="path2"></span>
                                                 </i>
@@ -263,7 +280,7 @@
                         <!--end::Col-->
                     </div>
                     <!--end::Input group-->
-
+                    @if($user->isPending())
                     <!--begin::Notice-->
                     <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed p-6">
                         <!--begin::Icon-->
@@ -274,7 +291,7 @@
                         </i>
                         <!--end::Icon-->
                         <!--begin::Wrapper-->
-                        @if($user->isPending())
+
                             <div class="d-flex flex-stack flex-grow-1">
                                 <!--begin::Content-->
                                 <div class="fw-semibold">
@@ -283,11 +300,44 @@
                                 </div>
                                 <!--end::Content-->
                             </div>
-                        @endif
+
 
                         <!--end::Wrapper-->
                     </div>
                     <!--end::Notice-->
+                    @endif
+                    @if($user->isRejected())
+                        <!--begin::Notice-->
+                        <div class="notice d-flex bg-light-danger rounded border-danger border border-dashed p-6">
+                            <!--begin::Icon-->
+                            <i class="ki-duotone ki-information fs-2tx text-danager me-4">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                                <span class="path3"></span>
+                            </i>
+                            <!--end::Icon-->
+
+                            <!--begin::Wrapper-->
+                            <div class="d-flex flex-stack flex-grow-1">
+                                <!--begin::Content-->
+                                <div class="fw-semibold">
+                                    <h4 class="text-gray-900 fw-bold">@lang('engineering.We need your attention!')</h4>
+                                    <div class="fs-6 text-gray-700 mb-2">
+                                        @lang('engineering.Your request has been rejected. Please check the reason below.')
+                                    </div>
+
+                                    @if($user->rejection_reason)
+                                        <div class="fs-6 text-danger">
+                                            <strong>@lang('engineering.Rejection Reason'):</strong> {{ $user->rejection_reason }}
+                                        </div>
+                                    @endif
+                                </div>
+                                <!--end::Content-->
+                            </div>
+                            <!--end::Wrapper-->
+                        </div>
+                        <!--end::Notice-->
+                    @endif
                 </div>
                 <!--end::Card body-->
             </div>

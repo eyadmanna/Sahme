@@ -89,7 +89,7 @@
                             <div class="col-md-8">
                                 <label class="form-label required">@lang('admin.Description of the land')</label>
                                 <input id="land_id" type="hidden" name="land_id" value="{{$land->id}}">
-                                <input class="form-control" id="land_description" value="{{$land->land_description}}" name="land_description" type="text">
+                                <input class="form-control" id="land_description" value="{{$land->land_description}}" name="land_description" type="text" placeholder="@lang('admin.Enter land description here')">
                             </div>
                         </div>
                         <div class="row g-4 mb-15">
@@ -132,7 +132,10 @@
                         <div class="row g-4 mb-15">
                             <div class="col-md-3">
                                 <label class="form-label required">@lang('admin.Land area')</label>
-                                <input class="form-control" id="area" value="{{$land->area}}" name="area" type="number" placeholder="@lang('admin.Enter the area')">
+                                <div class="input-group">
+                                    <input class="form-control" id="area" value="{{$land->area}}" name="area" type="number" placeholder="@lang('admin.Enter the area')">
+                                    <span class="input-group-text">م2</span>
+                                </div>
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label">@lang('admin.Plot Number')</label>
@@ -156,16 +159,17 @@
                         <div class="row g-4 mb-15">
                             <div class="col-md-4">
                                 <label class="form-label">@lang('admin.Border')</label>
-                                <textarea class="form-control" rows="3" name="borders">{{$land->borders}}</textarea>
+                                <textarea class="form-control" rows="3" name="borders" placeholder="@lang('admin.Enter borders of the land here')">{{$land->borders}}</textarea>
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label">@lang('admin.Available services')</label>
-                                <textarea class="form-control" rows="3" name="services">{{$land->services}}</textarea>
+                                <textarea class="form-control" rows="3" name="services" placeholder="@lang('admin.Enter services of the land here')">{{$land->services}}</textarea>
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label required">@lang('admin.Asking price')</label>
-                                <div class="d-flex gap-2">
+                                <div class="input-group">
                                     <input type="text" class="form-control number_format" value="{{$land->price}}" name="price" placeholder="@lang('admin.Enter the price')" style="text-align: right; direction: rtl;">
+                                    <span class="input-group-text">$</span>
                                 </div>
                             </div>
                         </div>
@@ -207,7 +211,7 @@
                 <!--begin::Card - Land Details-->
                 <div class="card card-flush mt-5">
                     <div class="card-header pt-8">
-                        <h3>@lang('admin.Attachments')</h3>
+                        <h3>@lang('admin.Attached Documents')</h3>
                     </div>
                     <div class="card-body">
                         <!-- ✅ Existing Attachments Preview -->

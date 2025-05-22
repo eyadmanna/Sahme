@@ -74,10 +74,10 @@ class EngineeringController extends Controller
                 $extra_1 = $user->statusLookup?->extra_1; // اللون
                 $extra_2 = $user->statusLookup?->extra_2; // اسم الأيقونة (مثل ki-check)
 
-                return '<span class="badge badge-' . $extra_1 . ' fw-bold d-inline-flex align-items-center gap-1">'
-                    . ($extra_2 ? '<i class="ki-duotone ' . e($extra_2) . ' fs-5"></i>' : '')
-                    . $status .
-                    '</span>';
+                return '<span class="badge badge-light-'.$extra_1.'">
+                            <i class="la la-' . e($extra_2) . ' text-info"></i>
+                             '.$status.'
+                            </span>';
             })
 
             ->addColumn('created_at', function ($user) {
@@ -100,16 +100,7 @@ class EngineeringController extends Controller
                                                      </div>';
                 }
 
-                if (auth()->user()->can('user delete')) {
-                    $buttonText = $user->status == 1 ? trans('admin.Delete') : trans('admin.Activation');
-
-                    $actions .= '<div class="menu-item px-3">
-                                                        <a href="#" class="menu-link px-3" data-kt-users-table-filter="delete_row" data-user-status="' . $user->status . '" data-user-id="' . $user->id . '">' .
-                        $buttonText .
-                        '</a>
-                                                     </div>';
-                }
-                $actions .= '</div></div>';
+                 $actions .= '</div></div>';
 
                 return $actions;
             })
@@ -297,7 +288,6 @@ class EngineeringController extends Controller
             ], 500);
         }
     }
-
 
     public function update_password(Request $request,$id)
     {
