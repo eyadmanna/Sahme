@@ -89,7 +89,7 @@
                         <div class="row g-4 mb-15">
                             <div class="col-md-8">
                                 <label class="form-label required">@lang('admin.Description of the land')</label>
-                               <input class="form-control" id="land_description" name="land_description" type="text">
+                               <input class="form-control" id="land_description" name="land_description" type="text" placeholder="@lang('admin.Enter land description here')">
                             </div>
                         </div>
                         <div class="row g-4 mb-15">
@@ -164,6 +164,15 @@
                                     <span class="input-group-text">$</span>
                                 </div>
                             </div>
+                            <div class="row g-4 mb-15">
+                                <div class="col-md-12">
+                                    <label class="form-label required">@lang('admin.Land Photos')</label>
+                                    <input type="file" id="land_images" class="form-control" name="land_images[]" multiple accept="image/*">
+                                    <input type="hidden" name="deleted_images" id="deleted_images" value="[]">
+
+                                    <div class="row mt-4" id="preview_images" style="gap: 15px;"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -176,7 +185,7 @@
                 <!--begin::Card - Land Details-->
                 <div class="card card-flush mt-5">
                     <div class="card-header pt-8">
-                        <h5>@lang('admin.Attachments')</h5>
+                        <h5>@lang('admin.Attached Documents')</h5>
                     </div>
                     <div class="card-body">
                         <!--begin::Repeater-->
@@ -241,6 +250,74 @@
     <!--end::Container-->
 @endsection
 @section('js')
+    <style>
+        #preview_images {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+        }
+        .position-relative {
+            position: relative;
+        }
+    </style>
+    <script>
+        let selectedImages = [];
+
+        document.getElementById('land_images').addEventListener('change', function (event) {
+            const newFiles = Array.from(event.target.files);
+
+            // أضف الملفات الجديدة إلى المصفوفة الأصلية
+            selectedImages = selectedImages.concat(newFiles);
+
+            updatePreview();
+        });
+
+        function updatePreview() {
+            const preview = document.getElementById('preview_images');
+            preview.innerHTML = '';
+
+            selectedImages.forEach((file, index) => {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    const col = document.createElement('div');
+                    col.className = 'position-relative'; // إزالة col من bootstrap
+
+                    col.innerHTML = `
+                <div class="card shadow-sm h-100">
+                    <div class="card-body p-2 d-flex align-items-center justify-content-center">
+                        <img src="${e.target.result}" class="img-fluid rounded" style="max-height: 150px; object-fit: cover;" />
+                    </div>
+                    <button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0 m-1 remove-image" data-index="${index}">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+                    preview.appendChild(col);
+                };
+
+                reader.readAsDataURL(file);
+            });
+
+            // تحديث ملفات input
+            const dataTransfer = new DataTransfer();
+            selectedImages.forEach(file => dataTransfer.items.add(file));
+            document.getElementById('land_images').files = dataTransfer.files;
+        }
+
+        // حذف صورة عند الضغط على زر X
+        document.addEventListener('click', function (e) {
+            if (e.target.closest('.remove-image')) {
+                const btn = e.target.closest('.remove-image');
+                const index = parseInt(btn.getAttribute('data-index'));
+
+                selectedImages.splice(index, 1); // حذف من المصفوفة
+                updatePreview(); // إعادة عرض الصور
+            }
+        });
+    </script>
+
+
     @include("admin.Lands.Partial.general_land_js")
     @include("admin.Lands.Partial.addLand_js")
 

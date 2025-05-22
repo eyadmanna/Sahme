@@ -9,6 +9,8 @@ use App\Models\Lands;
 use App\Models\Lookups;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Validator;
 
@@ -25,6 +27,9 @@ class LandsController extends Controller
     {
         $data["provinces"] = Lookups::query()->where([
             "master_key" => "province"
+        ])->whereNot("parent_id", 0)->where("status", 1)->get();
+        $data["ownership_type"] = Lookups::query()->where([
+            "master_key" => "ownership_type_cd"
         ])->whereNot("parent_id", 0)->where("status", 1)->get();
         return view('admin.Lands.list',$data);
     }
@@ -60,6 +65,10 @@ class LandsController extends Controller
             ->where('reference_id_fk', $id)
             ->where('attachment_type_cd', 44)
             ->get();
+        $data['land_image'] = Attachments::query()
+            ->where('reference_type','land_images')
+            ->where('reference_id_fk',$id)
+            ->get();
 
         return view('admin.Lands.editLand',$data);
 
@@ -70,6 +79,8 @@ class LandsController extends Controller
             $validated = $request->validate([
                 'investor_id' => 'required',
             ]);
+            $imagePaths = [];
+
             $land = new Lands();
             $land->investor_id = $request->investor_id;
             $land->land_description = $request->land_description;
@@ -108,6 +119,26 @@ class LandsController extends Controller
 
                 }
             }
+            if ($request->hasFile('land_images')) {
+                foreach ($request->file('land_images') as $image) {
+                    $filename = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+                    $path = $image->storeAs('attachments/lands', $filename, 'public');
+                    $fileType2 = $image->getMimeType();
+                    $originalName2 = $image->getClientOriginalName();
+
+                    $imagePaths[] = $path;
+
+                    Attachments::create([
+                        'reference_type' => 'land_images',
+                        'reference_id_fk' => $land->id,
+                        'created_by' => Auth::id(),
+                        'file_type' => $fileType2,
+                        'file_path' => $path,
+                        'original_name' => $originalName2,
+                    ]);
+                }
+            }
+
 
             return response()->json([
                     'status' => 'success',
@@ -172,12 +203,54 @@ class LandsController extends Controller
 
                 }
             }
+// حذف الصور القديمة المحددة
+            if ($request->filled('deleted_images')) {
+                $deletedIds = explode(',', $request->deleted_images);
+                $images = Attachments::whereIn('id', $deletedIds)->get();
+
+                foreach ($images as $image) {
+                    Storage::disk('public')->delete($image->file_path);
+                    $image->delete();
+                }
+            }
+
+            if ($request->hasFile('land_images')) {
+                foreach ($request->file('land_images') as $image) {
+                    $filename = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+                    $path = $image->storeAs('attachments/lands', $filename, 'public');
+                    $fileType2 = $image->getMimeType();
+                    $originalName2 = $image->getClientOriginalName();
+
+                    $imagePaths[] = $path;
+
+                    Attachments::create([
+                        'reference_type' => 'land_images',
+                        'reference_id_fk' => $land->id,
+                        'created_by' => Auth::id(),
+                        'file_type' => $fileType2,
+                        'file_path' => $path,
+                        'original_name' => $originalName2,
+                    ]);
+                }
+            }
 
             return response()->json([
                     'status' => 'success',
                     'message' => __('admin.Land Updated Successfully'),
                     'redirect' => route('lands.index')
                 ]);
+        } catch (\Throwable $e) {
+            // Log the actual error
+            Log::error('Engineering Consultant Evaluation Error', [
+                'message' => $e->getMessage(),
+                'file'    => $e->getFile(),
+                'line'    => $e->getLine(),
+            ]);
+
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Internal server error. Please check the logs.',
+            ], 500);
         }catch (\Illuminate\Validation\ValidationException $e) {
             // Return validation errors in JSON format
             return response()->json([
@@ -215,6 +288,10 @@ class LandsController extends Controller
             ->where('reference_type', 'land')
             ->where('reference_id_fk', $id)
             ->where('attachment_type_cd', 44)
+            ->get();
+        $data['land_image'] = Attachments::query()
+            ->where('reference_type','land_images')
+            ->where('reference_id_fk',$id)
             ->get();
         return view('admin.Lands.view',$data);
     }
@@ -257,6 +334,10 @@ class LandsController extends Controller
             ]);
         }
 
+        $data['land_image'] = Attachments::query()
+            ->where('reference_type','land_images')
+            ->where('reference_id_fk',$id)
+            ->get();
             return view('admin.Lands.approval_legal_ownership',$data);
     }
     public function upload_legal_attachment(Request $request, $id)
@@ -298,6 +379,10 @@ class LandsController extends Controller
             ->where('reference_id_fk', $id)
             ->where('attachment_type_cd', 44)
             ->get();
+        $data['land_image'] = Attachments::query()
+            ->where('reference_type','land_images')
+            ->where('reference_id_fk',$id)
+            ->get();
 
         if ($request->isMethod('post')){
             $data['land']->valuator_id = auth()->user()->id;
@@ -335,13 +420,14 @@ class LandsController extends Controller
         return response()->json(['message' => 'File not found'], 404);
     }
 
-
     public function getLands(Request $request)
     {
         $lands = Lands::query()->orderBy('id', 'desc');
-
         if ($request->filled('province_cd')) {
             $lands->where('province_cd', 'like', '%' . $request->province_cd . '%');
+        }
+        if ($request->filled('location_cities')) {
+            $lands->where('city_cd', 'like', '%' . $request->location_cities . '%');
         }
         return DataTables::of($lands)
             ->addColumn('investor_name', function ($land) {

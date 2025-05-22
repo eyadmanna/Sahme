@@ -68,7 +68,7 @@ return [
     "Change avatar"  => "تغيير الصورة",
     "View User"  => "عرض المستخدم",
     "User created successfully"  => "تم إنشاء المستخدم بنجاح",
-    "Form has been successfully submitted!"  => "تم إرسال النموذج بنجاح!",
+    "Form has been successfully submitted!"  => "تم الحفظ بنجاح",
     "Sorry, looks like there are some errors detected, please try again."  => "عذراً، يبدو أنه تم اكتشاف بعض الأخطاء، يرجى المحاولة مرة أخرى.",
     "Are you sure you would like to cancel?"  => "هل أنت متأكد أنك تريد الإلغاء؟",
     "Yes, cancel it!"  => "نعم، قم بإلغائه!",
@@ -107,6 +107,7 @@ return [
     "Search"  => "بحث",
     "Reset"  => "إعادة ضبط",
     "Send login data via email"  => "ارسال بيانات الدخول عبر الايميل",
+    "Land Photos"  => "صور الأرض",
 
     /*Land management*/
     'Land management' => 'إدارة الأراضي',
@@ -187,6 +188,10 @@ return [
     'Price must be numeric' => 'يجب أن يكون السعر رقميًا',
     'Error loading data.' => 'حدث خطأ أثناء تحميل البيانات.',
     'No attachments found.' => 'لم يتم العثور على أي مرفقات',
+    'Enter land description here' => 'أدخل وصف الارض هنا',
+    'Enter borders of the land here' => 'مثال- الحد الشمالي: شارع 8 متر، الحد الجنوبي: أرض 500 متر، الحد الشرقي: شارع 16 متر، الحد الغربي: عمارة تجارية، ..الخ ',
+    'Enter services of the land here' => 'مثال - يتوفر خط مياه بلدية، يتوفر تمديد كهرباء، يتوفر شبكة انترنت، ..الخ',
+    'Attached Documents' => 'المستندات المرفقة',
 
     /*Projects*/
     'Projects'=>'المشاريع',

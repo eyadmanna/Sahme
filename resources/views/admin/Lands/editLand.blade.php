@@ -89,7 +89,7 @@
                             <div class="col-md-8">
                                 <label class="form-label required">@lang('admin.Description of the land')</label>
                                 <input id="land_id" type="hidden" name="land_id" value="{{$land->id}}">
-                                <input class="form-control" id="land_description" value="{{$land->land_description}}" name="land_description" type="text">
+                                <input class="form-control" id="land_description" value="{{$land->land_description}}" name="land_description" type="text" placeholder="@lang('admin.Enter land description here')">
                             </div>
                         </div>
                         <div class="row g-4 mb-15">
@@ -132,7 +132,10 @@
                         <div class="row g-4 mb-15">
                             <div class="col-md-3">
                                 <label class="form-label required">@lang('admin.Land area')</label>
-                                <input class="form-control" id="area" value="{{$land->area}}" name="area" type="number" placeholder="@lang('admin.Enter the area')">
+                                <div class="input-group">
+                                    <input class="form-control" id="area" value="{{$land->area}}" name="area" type="number" placeholder="@lang('admin.Enter the area')">
+                                    <span class="input-group-text">م2</span>
+                                </div>
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label">@lang('admin.Plot Number')</label>
@@ -156,17 +159,44 @@
                         <div class="row g-4 mb-15">
                             <div class="col-md-4">
                                 <label class="form-label">@lang('admin.Border')</label>
-                                <textarea class="form-control" rows="3" name="borders">{{$land->borders}}</textarea>
+                                <textarea class="form-control" rows="3" name="borders" placeholder="@lang('admin.Enter borders of the land here')">{{$land->borders}}</textarea>
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label">@lang('admin.Available services')</label>
-                                <textarea class="form-control" rows="3" name="services">{{$land->services}}</textarea>
+                                <textarea class="form-control" rows="3" name="services" placeholder="@lang('admin.Enter services of the land here')">{{$land->services}}</textarea>
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label required">@lang('admin.Asking price')</label>
-                                <div class="d-flex gap-2">
+                                <div class="input-group">
                                     <input type="text" class="form-control number_format" value="{{$land->price}}" name="price" placeholder="@lang('admin.Enter the price')" style="text-align: right; direction: rtl;">
+                                    <span class="input-group-text">$</span>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row g-4 mb-15">
+                            <div class="col-md-12">
+                                <label class="form-label required">@lang('admin.Land Photos')</label>
+                                <input type="file" id="land_images" class="form-control" name="land_images[]" multiple accept="image/*">
+
+                                {{-- عنصر مخفي سيحمل الصور المحذوفة --}}
+                                <input type="hidden" name="deleted_images" id="deleted_images">
+
+                                <div class="row mt-4" id="existing-images">
+                                    <div id="land_images_container" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px;">
+                                        @foreach ($land_image as $image)
+                                            <div id="image-{{ $image->id }}" style="position: relative;">
+                                                <div class="card shadow-sm">
+                                                    <img src="{{ asset('storage/' . $image->file_path) }}" class="card-img-top rounded" style="height: 180px; object-fit: cover;">
+                                                    <button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0 m-2 delete-image-btn" data-id="{{ $image->id }}">
+                                                        &times;
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <div class="row mt-4" id="preview_images" style="gap: 15px;"></div>
+
                             </div>
                         </div>
                     </div>
@@ -181,7 +211,7 @@
                 <!--begin::Card - Land Details-->
                 <div class="card card-flush mt-5">
                     <div class="card-header pt-8">
-                        <h3>@lang('admin.Attachments')</h3>
+                        <h3>@lang('admin.Attached Documents')</h3>
                     </div>
                     <div class="card-body">
                         <!-- ✅ Existing Attachments Preview -->
@@ -274,6 +304,93 @@
     <!--end::Container-->
 @endsection
 @section('js')
+    <style>
+        #preview_images {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+        }
+        .position-relative {
+            position: relative;
+        }
+    </style>
+    <script>
+        let deletedImages = [];
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.delete-image-btn').forEach(button => {
+                button.addEventListener('click', function () {
+                    const imageId = this.dataset.id;
+
+                    // أضف ID للمصفوفة فقط ولا تحذف من قاعدة البيانات
+                    deletedImages.push(imageId);
+                    console.log('imageId',imageId)
+                    console.log('imageId',deletedImages)
+                    // احذف الصورة من العرض
+                    document.getElementById('image-' + imageId).remove();
+
+                    // حدث القيمة المخفية
+                    document.getElementById('deleted_images').value = deletedImages.join(',');
+                });
+            });
+        });
+    </script>
+    <script>
+        let selectedImages = [];
+
+        document.getElementById('land_images').addEventListener('change', function (event) {
+            const newFiles = Array.from(event.target.files);
+
+            // أضف الملفات الجديدة إلى المصفوفة الأصلية
+            selectedImages = selectedImages.concat(newFiles);
+
+            updatePreview();
+        });
+
+        function updatePreview() {
+            const preview = document.getElementById('preview_images');
+            preview.innerHTML = '';
+
+            selectedImages.forEach((file, index) => {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    const col = document.createElement('div');
+                    col.className = 'col position-relative';
+                    col.innerHTML = `
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body p-2 d-flex align-items-center justify-content-center">
+                            <img src="${e.target.result}" class="img-fluid rounded" style="max-height: 150px; object-fit: cover;" />
+                        </div>
+                        <button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0 m-1 remove-image" data-index="${index}">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                `;
+                    preview.appendChild(col);
+                };
+
+                reader.readAsDataURL(file);
+            });
+
+            // إعادة إنشاء ملفات input
+            const dataTransfer = new DataTransfer();
+            selectedImages.forEach(file => dataTransfer.items.add(file));
+            document.getElementById('land_images').files = dataTransfer.files;
+        }
+
+        // حذف صورة عند الضغط على زر X
+        document.addEventListener('click', function (e) {
+            if (e.target.closest('.remove-image')) {
+                const btn = e.target.closest('.remove-image');
+                const index = parseInt(btn.getAttribute('data-index'));
+
+                selectedImages.splice(index, 1); // حذف من المصفوفة
+                updatePreview(); // إعادة عرض الصور
+            }
+        });
+    </script>
+
     @include("admin.Lands.Partial.general_land_js")
     @include("admin.Lands.Partial.editLand_js")
 

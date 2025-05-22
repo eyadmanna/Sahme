@@ -57,13 +57,13 @@
                             <div class="d-flex align-items-center gap-2">
                                 <label class="required form-label">@lang('admin.Choose the land')</label>
                                 <!--begin::Input-->
-                                <select id="land_id" name="land_id" aria-label="Select a Language" data-control="select2" data-placeholder="@lang('admin.Land details')" class="form-select mb-2">
+                                <select id="land_id" name="land_id" aria-label="Select a Language" data-control="select2" data-placeholder="@lang('admin.Choose the land') ( @lang('admin.Investor name') - @lang('admin.Land area') - @lang('admin.Description of the land'))" class="form-select mb-2">
                                     <option></option>
                                     @foreach($lands as $land)
                                         <option  data-lat="{{$land->lat}}"
                                                  data-long="{{$land->long}}" data-investor_id="{{$land->investor_id}}" value="{{$land->id}}" @if($land->id == $land_id) selected @endif>
-                                            {{ Str::words($land->land_description, 3, '...') }}
-                                            - {{$land->area}} - {{$land->investor->full_name}}
+                                            {{$land->investor->full_name}} -  {{$land->area}}م2 - {{ Str::words($land->land_description, 3, '...') }}
+                                            
                                         </option>
                                     @endforeach
                                 </select>
@@ -146,16 +146,6 @@
                     <div class="card-body">
                         <!--begin::Form-->
                             <div class="row g-4 mb-15">
-                                <div class="col-md-6 fv-row">
-                                    <label class="required form-label">@lang('admin.Project name')</label>
-                                    <input class="form-control" name="title">
-                                </div>
-                                <div class="col-md-6 fv-row">
-                                    <label class="form-label">@lang('admin.Project description')</label>
-                                    <textarea  row="3" class="form-control" name="description"></textarea>
-                                </div>
-                            </div>
-                            <div class="row g-4 mb-15">
                                 <div class="col-md-4 fv-row">
                                     <label class="required form-label">@lang('admin.Project type')</label>
                                     <select name="project_type_cd" class="form-select" data-control="select2" data-placeholder="@lang('admin.Project type')">
@@ -180,7 +170,21 @@
                                     </div>
                                 </div>
                             </div>
+                            
                             <div class="row g-4 mb-15">
+                                <div class="col-md-6 fv-row">
+                                    <label class="required form-label">@lang('admin.Project name')</label>
+                                    <input class="form-control" name="title">
+                                </div>
+                            </div>
+                            
+                            <div class="row g-4 mb-15">
+                                <div class="col-md-6 fv-row">
+                                    <label class="form-label">@lang('admin.Project description')</label>
+                                    <textarea  row="3" class="form-control" name="description"></textarea>
+                                </div>
+                            </div>
+                            <!--<div class="row g-4 mb-15">
                                 <div class="col-md-6 fv-row">
                                     <label class="required form-label">@lang('admin.Engineering bid opening date')</label>
                                     <input type="date" name="offers_start_date" class="form-control text-start kt_datepicker">
@@ -189,7 +193,7 @@
                                     <label class="required form-label">@lang('admin.Closing date for engineering bids')</label>
                                     <input type="date" name="offers_end_date" class="form-control text-start kt_datepicker">
                                 </div>
-                            </div>
+                            </div>-->
                             <div class="row g-4 mb-15">
                                 <div class="col-md-9 offset-md-3 text-end fv-row">
                                     <button type="button" class="btn btn-light me-3" data-kt-project-action="cancel">@lang('admin.Discard')</button>

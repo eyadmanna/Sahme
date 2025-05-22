@@ -15,11 +15,6 @@
                         @endforeach
                     </select>
                     <!--end::Input-->
-                    <!--begin::Add Button-->
-                    <a title="@lang('admin.Add a new investor')" href="#" class="btn btn-icon btn-primary rounded-circle">
-                        <i class="ki-duotone ki-plus fs-2"></i>
-                    </a>
-                    <!--end::Add Button-->
                 </div>
             </div>
             <!--end::Col-->
@@ -52,6 +47,7 @@
         <!--begin::Card body-->
         <div class="card-body">
             <!-- Description -->
+            <input type="hidden" value="{{$land->id}}" id="land_id" name="land_id">
             <div class="mb-7">
                 <label class="form-label fw-bold">@lang('admin.Description of the land'):</label>
                 <div class="form-control form-control-solid bg-light">{{ $land->land_description }}</div>
@@ -62,19 +58,19 @@
                 <div class="col-md-3">
                     <label class="form-label fw-bold">@lang('admin.Province'):</label>
                     <div class="form-control form-control-solid bg-light">
-                        {{ getlookup($land->province_cd)->{"name_".app()->getLocale()} ?? '-' }}
+                        {{ getlookup($land->province_cd)->{"name_".app()->getLocale()} ?? '---' }}
                     </div>
                 </div>
                 <div class="col-md-3">
                     <label class="form-label fw-bold">@lang('admin.City'):</label>
                     <div class="form-control form-control-solid bg-light">
-                        {{ getlookup($land->city_cd)->{"name_".app()->getLocale()} ?? '-' }}
+                        {{ getlookup($land->city_cd)->{"name_".app()->getLocale()} ?? '---' }}
                     </div>
                 </div>
                 <div class="col-md-3">
                     <label class="form-label fw-bold">@lang('admin.District'):</label>
                     <div class="form-control form-control-solid bg-light">
-                        {{ getlookup($land->district_cd)->{"name_".app()->getLocale()} ?? '-' }}
+                        {{ getlookup($land->district_cd)->{"name_".app()->getLocale()} ?? '---' }}
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -95,7 +91,7 @@
                 </div>
                 <div class="col-md-3">
                     <label class="form-label fw-bold">@lang('admin.Parcel Number'):</label>
-                    <div class="form-control form-control-solid bg-light">{{ $land->plot_number }}</div>
+                    <div class="form-control form-control-solid bg-light">{{ $land->plot_number ?? '---' }}</div>
                 </div>
                 <div class="col-md-3">
                     <label class="form-label fw-bold">@lang('admin.Type of land ownership'):</label>
@@ -109,17 +105,37 @@
             <div class="row g-4">
                 <div class="col-md-4">
                     <label class="form-label fw-bold">@lang('admin.Border'):</label>
-                    <div class="form-control form-control-solid bg-light">{{ $land->borders }}</div>
+                    <div class="form-control form-control-solid bg-light">{{ $land->borders ?? '---' }}</div>
                 </div>
                 <div class="col-md-4">
                     <label class="form-label fw-bold">@lang('admin.Available services'):</label>
-                    <div class="form-control form-control-solid bg-light">{{ $land->services }}</div>
+                    <div class="form-control form-control-solid bg-light">{{ $land->services ?? '---' }}</div>
                 </div>
                 <div class="col-md-4">
                     <label class="form-label fw-bold">@lang('admin.Asking price'):</label>
                     <input class="form-control form-control-solid bg-light number_format" value="{{ $land->price }} $">
                 </div>
             </div>
+            <div class="row g-4 mt-15">
+                <div class="col-md-12">
+                    <label class="form-label required">@lang('admin.Land Photos')</label>
+
+                    <div class="row mt-4" id="existing-images">
+                        <div id="land_images_container" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px;">
+                            @foreach ($land_image as $image)
+                                <div id="image-{{ $image->id }}" style="position: relative;">
+                                    <div class="card shadow-sm">
+                                        <img src="{{ asset('storage/' . $image->file_path) }}" class="card-img-top rounded" style="height: 180px; object-fit: cover;">
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="row mt-4" id="preview_images" style="gap: 15px;"></div>
+
+                </div>
+            </div>
+
         </div>
         <!--end::Card body-->
     </div>
@@ -189,3 +205,58 @@
     </div>
     <!--end::Card-->
 
+    <script>
+        let selectedImages = [];
+
+        document.getElementById('land_images').addEventListener('change', function (event) {
+            const newFiles = Array.from(event.target.files);
+
+            // أضف الملفات الجديدة إلى المصفوفة الأصلية
+            selectedImages = selectedImages.concat(newFiles);
+
+            updatePreview();
+        });
+
+        function updatePreview() {
+            const preview = document.getElementById('preview_images');
+            preview.innerHTML = '';
+
+            selectedImages.forEach((file, index) => {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    const col = document.createElement('div');
+                    col.className = 'col position-relative';
+                    col.innerHTML = `
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body p-2 d-flex align-items-center justify-content-center">
+                            <img src="${e.target.result}" class="img-fluid rounded" style="max-height: 150px; object-fit: cover;" />
+                        </div>
+                        <button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0 m-1 remove-image" data-index="${index}">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                `;
+                    preview.appendChild(col);
+                };
+
+                reader.readAsDataURL(file);
+            });
+
+            // إعادة إنشاء ملفات input
+            const dataTransfer = new DataTransfer();
+            selectedImages.forEach(file => dataTransfer.items.add(file));
+            document.getElementById('land_images').files = dataTransfer.files;
+        }
+
+        // حذف صورة عند الضغط على زر X
+        document.addEventListener('click', function (e) {
+            if (e.target.closest('.remove-image')) {
+                const btn = e.target.closest('.remove-image');
+                const index = parseInt(btn.getAttribute('data-index'));
+
+                selectedImages.splice(index, 1); // حذف من المصفوفة
+                updatePreview(); // إعادة عرض الصور
+            }
+        });
+    </script>
