@@ -148,6 +148,9 @@ return [
     're_accreditation' => 'اعادة اعتماد',
     'Your request has been rejected. Please check the reason below.' => 'تم رفض طلبك. يرجى مراجعة سبب الرفض أدناه.',
     'Rejection Reason' => 'سبب الرفض',
+    'engineering_partner_added_successfully' => 'تم إضافة الشريك الهندسي بنجاح',
+    'Sign Out' => 'تسجيل الخروج',
+
 
 
 

@@ -184,7 +184,7 @@
                         <!--end::Menu separator-->
                         <!--begin::Menu item-->
                         <div class="menu-item px-5">
-                            <a href="{{route('engineering.profile')}}" class="menu-link px-5">My Profile</a>
+                            <a href="{{route('engineering.profile')}}" class="menu-link px-5">@lang('engineering.profile')</a>
                         </div>
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
@@ -268,7 +268,7 @@
                             <a href="{{ route('engineering.logout') }}" class="menu-link px-5"
                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="ki-outline ki-logout fs-2 me-2"></i>
-                                Sign Out
+                                @lang('engineering.Sign Out')
                             </a>
 
                             <!-- الفورم المخفي لتنفيذ POST -->

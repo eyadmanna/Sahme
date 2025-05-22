@@ -259,6 +259,7 @@
                             saveButton.textContent = '{{ __("engineering.save_changes") }}';
                             if (data.success) {
                                 toastr.success(data.message || '{{ __("engineering.profile_updated_successfully") }}');
+                                window.location='{{route('engineering.profile')}}'
                             } else {
                                 toastr.error(data.message || '{{ __("engineering.error_occurred") }}');
                             }
