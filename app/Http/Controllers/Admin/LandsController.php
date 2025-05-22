@@ -420,7 +420,6 @@ class LandsController extends Controller
         return response()->json(['message' => 'File not found'], 404);
     }
 
-
     public function getLands(Request $request)
     {
         $lands = Lands::query()->orderBy('id', 'desc');
