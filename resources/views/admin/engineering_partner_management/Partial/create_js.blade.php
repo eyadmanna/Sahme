@@ -112,30 +112,30 @@
                         notEmpty: { message: '@lang('engineering.Select district is required')' },
                     }
                 },
-                address: {
-                    validators: {
-                        notEmpty: { message: '@lang('engineering.Address is required')' },
-                    }
-                },
-                experience_years: {
-                    validators: {
-                        notEmpty: { message: '@lang('engineering.Years of experience is required')' },
-                    }
-                },
-                commercial_registration_number: {
-                    validators: {
-                        notEmpty: { message: '@lang('engineering.Commercial registration number is required')' },
-                    }
-                },
-                specializations: {
-                    validators: {
-                        notEmpty: { message: '@lang('engineering.Specializations is required')' },
-                    }
-                },tax_number: {
-                    validators: {
-                        notEmpty: { message: '@lang('engineering.tax number is required')' },
-                    }
-                },
+                {{--address: {--}}
+                {{--    validators: {--}}
+                {{--        notEmpty: { message: '@lang('engineering.Address is required')' },--}}
+                {{--    }--}}
+                {{--},--}}
+                {{--experience_years: {--}}
+                {{--    validators: {--}}
+                {{--        notEmpty: { message: '@lang('engineering.Years of experience is required')' },--}}
+                {{--    }--}}
+                {{--},--}}
+                {{--commercial_registration_number: {--}}
+                {{--    validators: {--}}
+                {{--        notEmpty: { message: '@lang('engineering.Commercial registration number is required')' },--}}
+                {{--    }--}}
+                {{--},--}}
+                {{--specializations: {--}}
+                {{--    validators: {--}}
+                {{--        notEmpty: { message: '@lang('engineering.Specializations is required')' },--}}
+                {{--    }--}}
+                {{--},tax_number: {--}}
+                {{--    validators: {--}}
+                {{--        notEmpty: { message: '@lang('engineering.tax number is required')' },--}}
+                {{--    }--}}
+                {{--},--}}
                 email: {
                     validators: {
                         notEmpty: { message: '@lang('engineering.Email address is required')' },
@@ -155,65 +155,43 @@
                     }
                 },
 
-                'logo': {
-                    validators: {
-                        file: {
-                            extension: 'jpeg,png,jpg',
-                            type: 'image/jpeg,image/png',
-                            message: '{{ __("engineering.allowed_file_types") }}' // تأكد تضيف هذا النص للغة
-                        },
-                        notEmpty: { message: '@lang('engineering.Logo is required')' },
+                {{--'logo': {--}}
+                {{--    validators: {--}}
+                {{--        file: {--}}
+                {{--            extension: 'jpeg,png,jpg',--}}
+                {{--            type: 'image/jpeg,image/png',--}}
+                {{--            message: '{{ __("engineering.allowed_file_types") }}' // تأكد تضيف هذا النص للغة--}}
+                {{--        },--}}
+                {{--        notEmpty: { message: '@lang('engineering.Logo is required')' },--}}
 
-                    }
-                },
-                company_profile: {
-                    validators: {
-                        notEmpty: { message: '@lang('engineering.Company profile is required')' },
-                    }
-                },
-                commercial_registration: {
-                    validators: {
-                        notEmpty: { message: '@lang('engineering.Commercial registration is required')' },
-                    }
-                },
-                liecence: {
-                    validators: {
-                        notEmpty: { message: '@lang('engineering.Licence is required')' },
-                    }
-                },
-                tax_record: {
-                    validators: {
-                        notEmpty: { message: '@lang('engineering.Tax record is required')' },
-                    }
-                },
-                previous_projects: {
-                    validators: {
-                        notEmpty: { message: '@lang('engineering.Previous projects is required')' },
-                    }
-                },
-                password: {
-                    validators: {
-                        notEmpty: { message: '@lang('engineering.The password is required')' },
-                        callback: {
-                            message: '@lang('engineering.Please enter a valid password')',
-                            callback: (input) => input.value.length > 0 ? validatePassword() : false
-                        }
-                    }
-                },
-                "password_confirmation": {
-                    validators: {
-                        notEmpty: { message: '@lang('engineering.Password confirmation is required')' },
-                        identical: {
-                            compare: () => form.querySelector('[name="password"]').value,
-                            message: '@lang('engineering.Passwords do not match')'
-                        }
-                    }
-                },
-                toc: {
-                    validators: {
-                        notEmpty: { message: '@lang('engineering.You must accept the terms and conditions')' }
-                    }
-                }
+                {{--    }--}}
+                {{--},--}}
+                {{--company_profile: {--}}
+                {{--    validators: {--}}
+                {{--        notEmpty: { message: '@lang('engineering.Company profile is required')' },--}}
+                {{--    }--}}
+                {{--},--}}
+                {{--commercial_registration: {--}}
+                {{--    validators: {--}}
+                {{--        notEmpty: { message: '@lang('engineering.Commercial registration is required')' },--}}
+                {{--    }--}}
+                {{--},--}}
+                {{--liecence: {--}}
+                {{--    validators: {--}}
+                {{--        notEmpty: { message: '@lang('engineering.Licence is required')' },--}}
+                {{--    }--}}
+                {{--},--}}
+                {{--tax_record: {--}}
+                {{--    validators: {--}}
+                {{--        notEmpty: { message: '@lang('engineering.Tax record is required')' },--}}
+                {{--    }--}}
+                {{--},--}}
+                {{--previous_projects: {--}}
+                {{--    validators: {--}}
+                {{--        notEmpty: { message: '@lang('engineering.Previous projects is required')' },--}}
+                {{--    }--}}
+                {{--},--}}
+
             },
             plugins: {
                 trigger: new FormValidation.plugins.Trigger(),
@@ -230,6 +208,8 @@
 
             }
         });
+
+
         // تفعيل Select2 وربطها بالفاليديشن
         ['province_cd', 'city_cd', 'district_cd'].forEach(function (field) {
             const $element = $('[name="' + field + '"]');
@@ -268,25 +248,49 @@
                         },
                         success: function (data) {
                             saveButton.disabled = false;
-                            saveButton.textContent = '{{ __("engineering.save_changes") }}';
+                            saveButton.textContent = '{{ __("admin.Sign up") }}';
                             if (data.success) {
-                                toastr.success(data.message || '{{ __("engineering.profile_updated_successfully") }}');
-                                form.reset(); // لتفريغ الحقول العادية
+                                toastr.success(data.message || '{{ __("engineering.engineering_partner_added_successfully") }}');
 
-                                // لتفريغ الحقول select2
-                                ['province_cd', 'city_cd', 'district_cd', 'specializations'].forEach(function (field) {
-                                    const $element = $('[name="' + field + '"]');
-                                    $element.val(null).trigger('change'); // تفريغ Select2
+                                // إعادة ضبط النموذج العادي
+                                form.reset();
+
+                                // الحقول التي تريد تنظيفها
+                                const fieldsToReset = ['province_cd', 'city_cd', 'district_cd'];
+
+                                fieldsToReset.forEach(function (field) {
+                                    const $select = $('[name="' + field + '"]');
+
+                                    // تفريغ Select2
+                                    $select.val(null).trigger('change');
+
+                                    // إزالة كلاس is-invalid من select وواجهة select2
+                                    $select.removeClass('is-invalid');
+                                    $select.siblings('.select2').find('.select2-selection').removeClass('is-invalid');
+
+                                    // إزالة رسالة الخطأ الخاصة بالحقل إن وجدت
+                                    $select.closest('.fv-row')
+                                        .find('.fv-plugins-message-container')
+                                        .empty();
+
+                                    // إعادة ضبط التحقق من الحقل عبر FormValidation
+                                    formValidation.resetField(field, true);
                                 });
-                                // إزالة الحقول التي عليها تنسيقات الفاليديشن
-                                formValidation.resetForm(true); // إزالة جميع رسائل الفاليديشن
-                            } else {
+                                $('.fv-plugins-message-container').remove();
+                                // إعادة تعيين كافة الحقول والتحققات
+                                formValidation.resetForm(true);
+                                window.location='{{route('engineering_partners.index')}}'
+                            }
+
+
+
+                            else {
                                 toastr.error(data.message || '{{ __("engineering.error_occurred") }}');
                             }
                         },
                         error: function (xhr, status, error) {
                             saveButton.disabled = false;
-                            saveButton.textContent = '{{ __("engineering.save_changes") }}';
+                            saveButton.textContent = '{{ __("admin.Sign up") }}';
                             toastr.error('{{ __("engineering.unexpected_error_occurred") }}');
                             console.error(error);
                         }

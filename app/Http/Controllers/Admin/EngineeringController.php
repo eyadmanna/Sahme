@@ -7,6 +7,7 @@ use App\Models\EngineeringPartner;
 use App\Models\Lookups;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
 
 class EngineeringController extends Controller
@@ -47,7 +48,7 @@ class EngineeringController extends Controller
             <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
                 <a href="'.$profileUrl.'">
                     <div class="symbol-label">
-                        <img src="'.$avatar.'" alt="'.e($user->company_name).'" class="w-100">
+                        <img src="'.$avatar.'" alt="'.$avatar.'" class="w-100">
                     </div>
                 </a>
             </div>
@@ -90,7 +91,7 @@ class EngineeringController extends Controller
                     . trans('admin.Actions') . '
                                 <i class="ki-duotone ki-down fs-5 ms-1"></i>
                             </a>
-                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">';
+                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-175px py-4" data-kt-menu="true">';
 
                 if (auth()->user()->can('user view')) {
                     $actions .= '<div class="menu-item px-3">
@@ -116,19 +117,18 @@ class EngineeringController extends Controller
             'province_cd' => 'required',
             'city_cd' => 'required',
             'district_cd' => 'required',
-            'address' => 'required|string|max:255',
-            'experience_years' => 'required|integer|min:0',
-            'commercial_registration_number' => 'required|string|max:255',
-            'specializations' => 'required|string|max:255',
-            'tax_number' => 'required|string|max:255',
+            'address' => 'nullable|string|max:255',
+            'experience_years' => 'nullable|integer|min:0',
+            'commercial_registration_number' => 'nullable|string|max:255',
+            'specializations' => 'nullable|string|max:255',
+            'tax_number' => 'nullable|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'logo' => 'required|file|mimes:jpeg,jpg,png,pdf|max:10240',
-            'company_profile' => 'required|file|mimes:jpeg,jpg,png,pdf|max:10240',
-            'commercial_registration' => 'required|file|mimes:jpeg,jpg,png,pdf|max:10240',
-            'liecence' => 'required|file|mimes:jpeg,jpg,png,pdf|max:10240',
-            'tax_record' => 'required|file|mimes:jpeg,jpg,png,pdf|max:10240',
-            'previous_projects' => 'required|file|mimes:jpeg,jpg,png,pdf|max:10240',
-            'password' => 'required|string|min:8|confirmed',
+            'logo' => 'nullable|file|mimes:jpeg,jpg,png,pdf|max:10240',
+            'company_profile' => 'nullable|file|mimes:jpeg,jpg,png,pdf|max:10240',
+            'commercial_registration' => 'nullable|file|mimes:jpeg,jpg,png,pdf|max:10240',
+            'liecence' => 'nullable|file|mimes:jpeg,jpg,png,pdf|max:10240',
+            'tax_record' => 'nullable|file|mimes:jpeg,jpg,png,pdf|max:10240',
+            'previous_projects' => 'nullable|file|mimes:jpeg,jpg,png,pdf|max:10240',
         ]);
         try {
             $uploadFields = [
@@ -150,8 +150,12 @@ class EngineeringController extends Controller
                     $paths[$field] = "uploads/{$field}/" . $fileName;
                 }
             }
+//            $password = substr(str_shuffle(
+//                str_repeat('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_', 3)
+//            ), 0, 12);
+            $password=123456789;
 
-             EngineeringPartner::create([
+            EngineeringPartner::create([
                 'company_name' => $request->company_name,
                 'mobile' => $request->mobile,
                 'province_cd' => $request->province_cd,
@@ -169,11 +173,11 @@ class EngineeringController extends Controller
                 'liecence' => $paths['liecence'] ?? null,
                 'tax_record' => $paths['tax_record'] ?? null,
                 'previous_projects' => $paths['previous_projects'] ?? null,
-                'password' => Hash::make($request->password),
+                'password' => Hash::make($password),
             ]);
             return response()->json([
                 'success' => true,
-                'message' => __('engineering.profile_updated_successfully')
+                'message' => __('engineering.engineering_partner_added_successfully')
             ]);
         }
         catch (\Exception $e) {
