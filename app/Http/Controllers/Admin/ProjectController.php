@@ -206,12 +206,6 @@ class ProjectController extends Controller
             ->addColumn('awarded_engineering_creator_approval_cd', function ($projects) {
                 return '<div class="badge badge-light-' . $projects->statusLookup?->extra_1 . '"> <i class="la la-' . $projects->statusLookup?->extra_2 . ' text-' . $projects->statusLookup?->extra_1 . ' fw-bold">' . getlookup($projects->awarded_engineering_creator_approval_cd)->{'name_' . app()->getLocale()} ?? '-' . '</div>';
             })
-            ->addColumn('offers_start_date', function ($projects) {
-                return '<div class="badge badge-light fw-bold">' . $projects->offers_start_date . '</div>';
-            })
-            ->addColumn('offers_end_date', function ($projects) {
-                return '<div class="badge badge-light fw-bold">' . $projects->offers_end_date . '</div>';
-            })
             ->addColumn('actions', function ($projects) {
                 $actions = '<div class="text-end">
                         <a href="#" class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">'
@@ -255,6 +249,12 @@ class ProjectController extends Controller
     public function land_filter(Request $request)
     {
         $lands = Lands::with('investor');
+        $lands->whereHas('valuationstatusLookup', function ($q) {
+            $q->where('item_key', 'approved');
+        })->whereHas('statusLookup', function ($q) {
+            $q->where('item_key', 'approved');
+        });
+
         if ($request->filled('province_cd')) {
             $lands->where('province_cd', $request->province_cd);
         }
@@ -273,24 +273,6 @@ class ProjectController extends Controller
 
         if ($request->filled('ownership_type_cd')) {
             $lands->where('ownership_type_cd', $request->ownership_type_cd);
-        }
-
-        if ($request->filled('accreditation_status')) {
-            if ($request->accreditation_status == 'approved') {
-                $lands->whereHas('valuationstatusLookup', function ($q) {
-                    $q->where('item_key', 'approved');
-                })->whereHas('statusLookup', function ($q) {
-                    $q->where('item_key', 'approved');
-                });
-            } else {
-                $lands->where(function ($q) {
-                    $q->whereHas('valuationstatusLookup', function ($q2) {
-                        $q2->where('item_key', '!=', 'approved');
-                    })->orWhereHas('statusLookup', function ($q2) {
-                        $q2->where('item_key', '!=', 'approved');
-                    });
-                });
-            }
         }
 
         if ($request->filled('area_from')) {

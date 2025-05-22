@@ -55,7 +55,7 @@
                         <!--end::Card header-->
                         <div id="kt_land_view_details" class="collapse mb-5">
                             <div class="py-5 px-10">
-                                <form id="filters" class="kt-form kt-form--label-right form-control" method="GET" autocomplete="off">
+                                <div id="filters" class="kt-form kt-form--label-right form-control">
                                     <div class="form-group row">
                                         <div class="col-form-label col-lg-3 col-sm-6">
                                             <label class="form-control-label">@lang('admin.Province')</label>
@@ -94,14 +94,6 @@
                                             </select>
                                         </div>
                                         <div class="col-form-label col-lg-3 col-sm-6">
-                                            <label class="form-label">@lang('admin.Accreditation status')</label>
-                                            <select class="form-select" id="accreditation_status" name="accreditation_status" data-control="select2" data-placeholder="@lang('admin.Choose the land ownership type')">
-                                                <option value="" disabled selected>@lang('admin.Choose the land ownership type')</option>
-                                                <option value="approved">@lang('admin.ِApproved')</option>
-                                                <option value="pending" >@lang('admin.Pending')</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-form-label col-lg-3 col-sm-6">
                                             <label class="form-label">@lang('admin.Area')</label>
                                             <div class="col-md-6 col-sm-12">
                                                 <input class="form-control text-start" id="area_from" name="area_from" type="number" placeholder="@lang('admin.From')">
@@ -131,7 +123,7 @@
                                             <a href="javascript:void(0)" style="width: 100%" class="btn btn-secondary reset_search"><i class="la la-recycle"></i> @lang('admin.Reset')</a>
                                         </div>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
                         <!--begin::Col-->
