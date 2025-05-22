@@ -115,8 +115,6 @@
                             <th class="text-center min-w-125px">@lang('admin.Engineering consultant evaluation status')</th>
                             <th class="text-center min-w-125px">@lang('admin.Engineering Consultant Evaluation Approval Status')</th>
                             <th class="text-center min-w-125px">@lang('admin.Engineering Builder Approval Status')</th>
-                            <th class="text-center min-w-125px">@lang('admin.Engineering bid opening date')</th>
-                            <th class="text-center min-w-125px">@lang('admin.Closing date for engineering bids')</th>
                             <th class="text-end min-w-100px">@lang('admin.Actions')</th>
                         </tr>
                         </thead>

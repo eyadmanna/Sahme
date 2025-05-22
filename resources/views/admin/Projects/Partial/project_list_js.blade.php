@@ -16,8 +16,6 @@
                 { data: 'engineering_consultant_evaluation_status_cd', name: 'engineering_consultant_evaluation_status_cd' },
                 { data: 'approval_status_cd', name: 'approval_status_cd' },
                 { data: 'awarded_engineering_creator_approval_cd', name: 'awarded_engineering_creator_approval_cd' },
-                { data: 'offers_start_date', name: 'offers_start_date' },
-                { data: 'offers_end_date', name: 'offers_end_date' },
                 { data: 'actions', name: 'actions', orderable: false, searchable: false }
             ],
             language: {

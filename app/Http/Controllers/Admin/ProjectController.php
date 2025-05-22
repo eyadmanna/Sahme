@@ -21,6 +21,12 @@ class ProjectController extends Controller
         return view('admin.Projects.list',$data);
     }
     public function add($land_id = null){
+        $data["provinces"] = Lookups::query()->where([
+            "master_key" => "province"
+        ])->whereNot("parent_id", 0)->where("status", 1)->get();
+        $data["ownership_type"] = Lookups::query()->where([
+            "master_key" => "ownership_type_cd"
+        ])->whereNot("parent_id", 0)->where("status", 1)->get();
 
         $data['lands'] = Lands::all()->filter(function($land) {
             return $land->isValuationApproved() && $land->isLegalApproved();
@@ -200,12 +206,6 @@ class ProjectController extends Controller
             ->addColumn('awarded_engineering_creator_approval_cd', function ($projects) {
                 return '<div class="badge badge-light-' . $projects->statusLookup?->extra_1 . '"> <i class="la la-' . $projects->statusLookup?->extra_2 . ' text-' . $projects->statusLookup?->extra_1 . ' fw-bold">' . getlookup($projects->awarded_engineering_creator_approval_cd)->{'name_' . app()->getLocale()} ?? '-' . '</div>';
             })
-            ->addColumn('offers_start_date', function ($projects) {
-                return '<div class="badge badge-light fw-bold">' . $projects->offers_start_date . '</div>';
-            })
-            ->addColumn('offers_end_date', function ($projects) {
-                return '<div class="badge badge-light fw-bold">' . $projects->offers_end_date . '</div>';
-            })
             ->addColumn('actions', function ($projects) {
                 $actions = '<div class="text-end">
                         <a href="#" class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">'
@@ -246,4 +246,64 @@ class ProjectController extends Controller
             ->make(true);
 
     }
+    public function land_filter(Request $request)
+    {
+        $lands = Lands::with('investor');
+        $lands->whereHas('valuationstatusLookup', function ($q) {
+            $q->where('item_key', 'approved');
+        })->whereHas('statusLookup', function ($q) {
+            $q->where('item_key', 'approved');
+        });
+
+        if ($request->filled('province_cd')) {
+            $lands->where('province_cd', $request->province_cd);
+        }
+
+        if ($request->filled('city_cd')) {
+            $lands->where('city_cd', $request->city_cd);
+        }
+
+        if ($request->filled('district_cd')) {
+            $lands->where('district_cd', $request->district_cd);
+        }
+
+        if ($request->filled('address')) {
+            $lands->where('address', 'like', '%' . $request->address . '%');
+        }
+
+        if ($request->filled('ownership_type_cd')) {
+            $lands->where('ownership_type_cd', $request->ownership_type_cd);
+        }
+
+        if ($request->filled('area_from')) {
+            $lands->where('area', '>=', $request->area_from);
+        }
+        if ($request->filled('area_to')) {
+            $lands->where('area', '<=', $request->area_to);
+        }
+
+        if ($request->filled('price_from')) {
+            $lands->where('price', '>=', $request->price_from);
+        }
+        if ($request->filled('price_to')) {
+            $lands->where('price', '<=', $request->price_to);
+        }
+
+        $filtered = $lands->get();
+
+        $response = $filtered->map(function ($land) {
+            return [
+                'id' => $land->id,
+                'lat' => $land->lat,
+                'long' => $land->long,
+                'investor_id' => $land->investor_id,
+                'investor_name' => $land->investor->full_name,
+                'area' => $land->area,
+                'land_description' => \Str::words($land->land_description, 3, '...'),
+            ];
+        });
+
+        return response()->json(['lands' => $response]);
+    }
+
 }

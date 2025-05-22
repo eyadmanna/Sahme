@@ -136,9 +136,13 @@ return [
     'Border' => 'الحدود',
     'Available services' => 'الخدمات المتوفرة',
     'Asking price' => 'السعر المطلوب',
+    'Price' => 'السعر',
     'Enter the price' => 'أدخل السعر',
     'Select currency' => 'اختر العملة',
     'Enter the area' => 'ادخل المساحة',
+    'Area' => 'المساحة',
+    'From' => 'من',
+    'To' => 'الى',
     'Enter the part number' => 'ادخل رقم القطعة',
     'Enter the Voucher number' => 'ادخل رقم القسيمة',
     'Choose the land ownership type' => 'اختر نوع ملكية الأرض',
@@ -192,6 +196,7 @@ return [
     'Enter borders of the land here' => 'مثال- الحد الشمالي: شارع 8 متر، الحد الجنوبي: أرض 500 متر، الحد الشرقي: شارع 16 متر، الحد الغربي: عمارة تجارية، ..الخ ',
     'Enter services of the land here' => 'مثال - يتوفر خط مياه بلدية، يتوفر تمديد كهرباء، يتوفر شبكة انترنت، ..الخ',
     'Attached Documents' => 'المستندات المرفقة',
+    'Accreditation status' => 'حالة الاعتماد',
 
     /*Projects*/
     'Projects'=>'المشاريع',
@@ -222,6 +227,9 @@ return [
     'Modification required'=>' يحتاج لتعديل',
     'Request to modify a project'=>'طلب تعديل مشروع',
     'Modifications required'=>'التعديلات المطلوبة',
+    'ِApproved'=>'معتمد',
+    'Pending'=>'بانتظار الاعتماد',
+    'Advanced search'=>'بحث متقدم',
 
     /*profile page*/
     'Profile Details' => 'تفاصيل الملف الشخصي',

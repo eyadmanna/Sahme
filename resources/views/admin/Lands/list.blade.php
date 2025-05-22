@@ -111,21 +111,48 @@
                                     </select>
                                 </div>
                                 <div class="col-form-label col-lg-3 col-sm-6" id="areas_block">
-                                    <label class="form-label required">@lang('admin.Address in detail')</label>
-                                    <input class="form-control" name="address" placeholder="@lang('admin.Enter detailed address')">
+                                    <label class="form-label">@lang('admin.Address in detail')</label>
+                                    <input class="form-control" name="address" id="address" placeholder="@lang('admin.Enter detailed address')">
 
                                 </div>
                                 <div class="col-form-label col-lg-3 col-sm-6" id="areas_block">
-                                    <label class="form-label required">@lang('admin.Type of land ownership')</label>
-                                    <select class="form-select" name="ownership_type_cd" data-control="select2" data-placeholder="@lang('admin.Choose the land ownership type')">
+                                    <label class="form-label">@lang('admin.Type of land ownership')</label>
+                                    <select class="form-select" id="ownership_type_cd" name="ownership_type_cd" data-control="select2" data-placeholder="@lang('admin.Choose the land ownership type')">
                                         <option value="" disabled selected>@lang('admin.Choose the land ownership type')</option>
                                         @foreach($ownership_type as $ownership_types)
                                             <option value="{{$ownership_types->id}}">{{$ownership_types->{'name_'.app()->getLocale()} }}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                            </div>
+                                <div class="col-form-label col-lg-3 col-sm-6" id="areas_block">
+                                    <label class="form-label">@lang('admin.Accreditation status')</label>
+                                    <select class="form-select" id="accreditation_status" name="accreditation_status" data-control="select2" data-placeholder="@lang('admin.Choose the land ownership type')">
+                                        <option value="" disabled selected>@lang('admin.Choose the land ownership type')</option>
+                                        <option value="approved">@lang('admin.ِApproved')</option>
+                                        <option value="pending" >@lang('admin.Pending')</option>
+                                    </select>
+                                </div>
+                                <div class="col-form-label col-lg-3 col-sm-6" id="areas_block">
+                                    <label class="form-label">@lang('admin.Area')</label>
+                                    <div class="col-md-6 col-sm-12">
+                                        <input class="form-control text-start" id="area_from" name="area_from" type="number" placeholder="@lang('admin.From')">
+                                    </div>
 
+                                    <div class="col-md-6 col-sm-12">
+                                        <input class="form-control text-start" id="area_to" name="area_to" type="number" placeholder="@lang('admin.To')">
+                                    </div>
+                                </div>
+                                <div class="col-form-label col-lg-3 col-sm-6" id="areas_block">
+                                    <label class="form-label">@lang('admin.Price')</label>
+                                    <div class="col-md-6 col-sm-12">
+                                        <input class="form-control text-start" id="price_from" name="price_from" type="number" placeholder="@lang('admin.From')">
+                                    </div>
+
+                                    <div class="col-md-6 col-sm-12">
+                                        <input class="form-control text-start" id="price_to" name="price_to" type="number" placeholder="@lang('admin.To')">
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <div class="col-form-label col-lg-2 col-sm-6">
                                     <a href="javascript:void(0)" style="width: 100%" class="btn btn-info search_btn"><i class="la la-search"></i> @lang('admin.Search')</a>

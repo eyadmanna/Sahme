@@ -85,6 +85,7 @@ Route::group(
         Route::post('/projects/update-project/{id}', [ProjectController::class,'update'])->name('projects.update');
         Route::get('/projects/engineering-consultant-evaluation/{id}', [ProjectController::class,'engineering_consultant_evaluation'])->name('projects.engineering_consultant_evaluation');
         Route::post('/projects/engineering-consultant-evaluation/{id}', [ProjectController::class,'engineering_consultant_evaluation'])->name('projects.engineering_consultant_evaluation');
+        Route::get('/projects/land_filter', [ProjectController::class, 'land_filter'])->name('projects.land_filter');
 
         Route::post('/projects/store-details', [ProjectController::class, 'store'])->name('projects.store');
         Route::get('/land/land-details', [LandsController::class, 'getLandDetails'])->name('land.getLandDetails');
